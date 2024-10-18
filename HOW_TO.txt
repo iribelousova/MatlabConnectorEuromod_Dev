@@ -1,0 +1,90 @@
+TEST LOCAL PROJECT:
+____________________________________________________________________________________
+
+Make sure the Euromod Toolbox is not installed
+1) Go to folder "MatlabIntegration".
+2) From sub-repository "../Euromod/Euromod/test" open the script "test_fancy.m"
+3) Run script "test_fancy.m". It will test for all the main functionalities using the 
+local Euromod project from repository "../Euromod/Euromod"
+
+Warning: If you make any change to the dlls then, in order the changes to be effective, you need to exit and restart matlab. There is no way to clear the memory and re-load the assemblies directly from Matlab. 
+____________________________________________________________________________________
+
+
+BUILD PACKAGE:
+____________________________________________________________________________________
+
+A) Build Mannually: Toolbox packaging:
+	generate a .mltbx installation file, distribute as Add-On, install as Toolbox.
+
+
+A.1) BUILD PACKAGE:
+	
+1) In Matlab Go to Tab "Home" :: "Add-Ons" :: "Package Toolbox"
+2) In the pop-up window "Package a Toolbox":
+
+	____________________________________________________________________________________
+
+	2.a) If you have a .prj file saved, load that clocking on "Open Project" or Click on button "+" to add the new package path.
+		Note: Indicate the full path to the root package folder, for example indicate "...\Connectors\MatlabIntegration\Euromod\Euromod" were all the main codes are located.
+	
+	____________________________________________________________________________________
+
+	2.b) "Toolbox Information" :: fill-in infos.
+
+==========================================================
+Belousova I., Manios K., Serruys H.
+iri.belousova@gmail.com, hannes.serruys@ec.europa.eu
+Joint Research Centre, European Commission
+
+Euromod Connector Toolbox for the microsimulation model EUROMOD.
+
+The Euromod Connector Toolbox facilitates and simplifies the usage
+of the EUROMOD microsimulation model for research purposes. Build
+a class object containing the EUROMOD model for the specified
+countries from the specified folder. The properties of the Euromod
+class object are named by the two-digits country codes.
+
+Realease from 2020a
+==========================================================
+
+	____________________________________________________________________________________
+
+	2.c) "Toolbox Files and Folders" :: "Exclude files and folders" :: exclude files/folders from packaging.
+		Note: delete "%" sign where necessary and/or add new files/folders as direct links, 
+		for example add "test\" to exclude the "test" folder from packaging.
+	
+	____________________________________________________________________________________
+
+	2.d) "Requirements" :: "Analyze toolbox" :: check all requirements are included in packaging.
+	____________________________________________________________________________________
+
+	2.e) "Install Actions" :: "MATLAB Path" :: "Manage the current MATLAB path"
+		In the pop-up window click "Add Folder": add the same folder as in step 2.a) 
+		i.e. the full path the to the root package folder. Save and Close.
+	
+	____________________________________________________________________________________
+
+	2.f) Section "Toolbox Portability" :: fill-in infos (Realease from 2019b).
+	
+	____________________________________________________________________________________
+
+	2.g) Go to Tab "PACKAGER" :: "Package" :: "Package" :: this generates the "Euromod.mltbx" installation file.
+		Note: to build the package, indicate the folder where the package will be built, 
+		for example "\bin". To apply changes on your project, open the .prj file from Matlab.
+		
+		Note: if you don't change the version number, then unisntall Euromod Toolbox before each build:
+		Go to Tab "Home" :: "Add-Ons" :: "Add-On Manager" :: Right-click on "Euromod" :: Uninstall
+
+
+A.2) TEST PACKAGE:
+
+1) Install the Euromod Toolbox: From Matlab open the "Euromod.mltbx" installation file.
+2) Check installation is successfull: Go to Tab "Home" :: "Add-Ons" :: "Add-On Manager" :: check Euromod is present under the "Installed" Tab. Also, Right-click on "Euromod" and check the toolbox is enabled.
+3) Run your code from whatever location typing in console "Euromod(PATH_EUROMODFILES,COUNTRY)".
+
+
+A.3) DISTRIBUTE PACKAGE:
+	
+1) Do steps from 1) to 2.f) in the "BUILD PACKAGE" section, OR load an existing .prj file from Matlab.
+2) Go to Tab "PACKAGER" :: "Package" :: "Package and Share" :: this generates the "Euromod.mltbx" installation file and distributes the package on ..................................
