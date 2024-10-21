@@ -1,4 +1,4 @@
-function x = runSimulation(obj, data, ID_DATASET, NameValueArgs)
+function x = runSimulation(countryInfoHandler, countryName, systemName, data, dataName, NameValueArgs)
 % function run(OBJ, data, ID_DATASET, varargin)
 % Run Simulate the EUROMOD tax-benefit system.
 % If the simulation is successful, the results are stored in
@@ -56,9 +56,13 @@ function x = runSimulation(obj, data, ID_DATASET, NameValueArgs)
 % end
 
 arguments
-    obj
-    data table
-    ID_DATASET
+    % obj
+    countryInfoHandler
+    countryName (1,1) string
+    systemName (1,1) string
+    data (:,:) table
+    dataName (1,1) string
+    % ID_DATASET
 
     NameValueArgs.outputpath = []
     NameValueArgs.nowarnings = false
@@ -78,139 +82,155 @@ arguments
 end
 
 configSettings = struct;
-cobj=obj.getParent("COUNTRY");
-Idx=cobj.index;
-mobj=obj.getParent("MODEL");
+% cobj=obj.getParent("COUNTRY");
+% Idx=cobj.index;
+% mobj=obj.getParent("MODEL");
 
-configSettings.COUNTRY = char(cobj.name);
-configSettings.ID_SYSTEM = char(obj.name);
-configSettings.PATH_EUROMODFILES = char(mobj.modelpath);
-
-for iObj= 1 %:numel(obj)
-    % mdl = obj(iObj);
-    %- Add items to configSettings
-    % configSettings = struct;
-
-    % if isa(mdl,'System')
-    %     configSettings.COUNTRY = char(mdl.country);
-    %     configSettings.ID_SYSTEM = char(mdl.name);
-    %     configSettings.PATH_EUROMODFILES = char(mdl.modelpath);
-    % end
-    patharr = regexp(ID_DATASET,'\','split');
-    configSettings.(char(EM_XmlHandler.TAGS.CONFIG_ID_DATA)) = patharr{end};
-    configSettings.(char(EM_XmlHandler.TAGS.CONFIG_PATH_DATA)) = join(patharr(1:end-1),'\');
-    configSettings.(char(EM_XmlHandler.TAGS.CONFIG_PATH_OUTPUT)) = '';
-
-
-    count=0;
-    if ~isempty(NameValueArgs.switches)
-        NameValueArgs.switches = string(NameValueArgs.switches);
-        for i=1:2:numel(NameValueArgs.switches)
-            count=count+1;
-            switchesfield = [char(EM_XmlHandler.TAGS.CONFIG_EXTENSION_SWITCH), num2str(count)];
-            try
-                if strcmp(NameValueArgs.switches(i+1),"true"),status = 'on'; else, status = 'off'; end
-                configSettings.(switchesfield) = [char(NameValueArgs.switches(i)), ' = ',  status];
-            catch MEx
-                if contains(MEx.message,["No appropriate method, property, or field", switchesfield," for class 'System.Collections.Generic.Dictionary<System*String,System*String>'"])
-                    error('Parameter "switches" must be NameValue pair arguments (Example: addons=["BTA",true,"TCA",1]).')
-                else
-                    throw(MEx)
-                end
-            end
-        end
-    end
-
-    count=0;
-    if ~isempty(NameValueArgs.addons)
-        NameValueArgs.addons = string(NameValueArgs.addons);
-        for i=1:2:numel(NameValueArgs.addons)
-            count=count+1;
-            addonfield = [char(EM_XmlHandler.TAGS.CONFIG_ADDON), num2str(count)];
-            try
-                configSettings.(addonfield) = [char(NameValueArgs.addons(i)), '|',  char(NameValueArgs.addons(i+1))];
-            catch MEx
-                if contains(MEx.message,["No appropriate method, property, or field", addonfield," for class 'System.Collections.Generic.Dictionary<System*String,System*String>'"])
-                    error('Parameter "addons" must be NameValue pair arguments (Example: addons=["LMA","LMA_PL","MTR","MTR_PL"]).')
-                else
-                    throw(MEx)
-                end
-            end
-        end
-    end
-
-    %%% get Csharp objects
-    % data = readtable(ID_DATASET);
-    dataArr = getDataArray(data);
-    configSettingsArr = getConfigsettings(configSettings);
-    variables = getVariables(data.Properties.VariableNames);
-    constantsArr = getConstantsToOverwrite(NameValueArgs.constantsToOverwrite);
-
-    %- run simulation
-    NET.addAssembly(fullfile(utils.configuration.DLL_PATH, utils.configuration.DLL_Executable));
-    Control = EM_Executable.Control;
-    try
-        ts = tic;
-        out= Control.RunFromPython(configSettingsArr, dataArr, variables, NameValueArgs.inputDataString,...
-            NameValueArgs.stringVars, NameValueArgs.surpressOtherOutput, NameValueArgs.newOutput, constantsArr,...
-            NameValueArgs.requestedQueries, NameValueArgs.useLogger, cobj.Info(Idx).Handler);
-        tf = toc(ts);
-
-    catch ME
-        if contains(ME.message, 'with matching signature found')
-            baseException = MException('MATLAB:incorrectType',...
-                [errID, ': Invalid input argument.', ' Please, check that all the Input arguments are correctly specified.']);
-            throw(baseException);
-        else
-            % errorStruct
-            throw(ME);
-        end
-    end
-
-    if out.Item1
-        x = Simulation(out, configSettings);
-        fprintf("\nSimulation %s, system %s, data %s, country %s done in %.2d sec.   \n", ...
-        x.output_filenames, configSettings.ID_SYSTEM,configSettings.ID_DATASET, configSettings.COUNTRY, round(tf,2))
-    else
-        % header = ['> In ',matlab.mixin.CustomDisplay.getClassNameForHeader(obj)];
-        error('No output was produced from simulation of system %s, dataset %s, country %s.',configSettings.ID_SYSTEM,configSettings.ID_DATASET,configSettings.COUNTRY)
-    end
-
-    % % get warnings/errors
-    % Enumerator=out.Item4.GetEnumerator;
-    % errStr = '';
-    % warnStr = '';
-    % while Enumerator.MoveNext
-    %     if Enumerator.Current.isWarning
-    %         warnStr = sprintf('%s\nWarningId: %s\n%s',warnStr,Enumerator.Current.runTimeErrorId, Enumerator.Current.message);
-    % 
-    %     else
-    %         errStr = sprintf('%sErrorId: %s\n%s',errStr,Enumerator.Current.runTimeErrorId, Enumerator.Current.message);
-    % 
-    %     end
-    % end
-    % 
-    % % return output
-    % if  ~out.Item1
-    %     if ~isempty(warnStr)
-    %         warning(warnStr)
-    %     end
-    %     if ~isempty(errStr)
-    %         error(errStr)
-    %     end
-    % else
-    %     if ~isempty(warnStr)
-    %         warning(warnStr)
-    %         configSettings.warnings = warnStr;
-    %     end
-    % 
-    %     sim = Simulation(out, configSettings);
-    % 
-    %     fprintf("\nSimulation %s, System %s, Data %s   .. %.2d sec!   \n", ...
-    %         sim.name, configSettings.ID_SYSTEM,configSettings.ID_DATASET, round(tf,2))
-    % 
-    % end
-
+if ~strcmpi(countryName,string(countryInfoHandler.country))
+    error('InputValueError: Wrong input arguments "countryInfoHandler" or "countryName".')
 end
+
+configSettings.COUNTRY = char(countryName);
+configSettings.ID_SYSTEM = char(systemName);
+
+mp=string(countryInfoHandler.path);
+if contains(mp,'EM3Translation')
+    modelpath=split(mp,'EM3Translation');
+    modelpath=modelpath{1};
+else
+    modelpath=split(mp,'XMLParam');
+    modelpath=modelpath{1};
+end
+configSettings.PATH_EUROMODFILES = modelpath;
+
+% mdl = obj(iObj);
+%- Add items to configSettings
+% configSettings = struct;
+
+% if isa(mdl,'System')
+%     configSettings.COUNTRY = char(mdl.country);
+%     configSettings.ID_SYSTEM = char(mdl.name);
+%     configSettings.PATH_EUROMODFILES = char(mdl.modelpath);
+% end
+
+patharr = split(string(dataName),'\');
+configSettings.(char(EM_XmlHandler.TAGS.CONFIG_ID_DATA)) = patharr{end};
+if numel(patharr)>1
+    configSettings.(char(EM_XmlHandler.TAGS.CONFIG_PATH_DATA)) = char(join(patharr(1:end-1),'\'));
+else
+    configSettings.(char(EM_XmlHandler.TAGS.CONFIG_PATH_DATA)) ='';
+end
+configSettings.(char(EM_XmlHandler.TAGS.CONFIG_PATH_OUTPUT)) = '';
+
+
+count=0;
+if ~isempty(NameValueArgs.switches)
+    NameValueArgs.switches = string(NameValueArgs.switches);
+    for i=1:2:numel(NameValueArgs.switches)
+        count=count+1;
+        switchesfield = [char(EM_XmlHandler.TAGS.CONFIG_EXTENSION_SWITCH), num2str(count)];
+        try
+            if strcmp(NameValueArgs.switches(i+1),"true"),status = 'on'; else, status = 'off'; end
+            configSettings.(switchesfield) = [char(NameValueArgs.switches(i)), ' = ',  status];
+        catch MEx
+            if contains(MEx.message,["No appropriate method, property, or field", switchesfield," for class 'System.Collections.Generic.Dictionary<System*String,System*String>'"])
+                error('Parameter "switches" must be NameValue pair arguments (Example: addons=["BTA","on","TCA","off"]).')
+            else
+                throw(MEx)
+            end
+        end
+    end
+end
+
+count=0;
+if ~isempty(NameValueArgs.addons)
+    NameValueArgs.addons = string(NameValueArgs.addons);
+    for i=1:2:numel(NameValueArgs.addons)
+        count=count+1;
+        addonfield = [char(EM_XmlHandler.TAGS.CONFIG_ADDON), num2str(count)];
+        try
+            configSettings.(addonfield) = [char(NameValueArgs.addons(i)), '|',  char(NameValueArgs.addons(i+1))];
+        catch MEx
+            if contains(MEx.message,["No appropriate method, property, or field", addonfield," for class 'System.Collections.Generic.Dictionary<System*String,System*String>'"])
+                error('Parameter "addons" must be NameValue pair arguments (Example: addons=["LMA","LMA_PL","MTR","MTR_PL"]).')
+            else
+                throw(MEx)
+            end
+        end
+    end
+end
+
+%%% get Csharp objects
+% data = readtable(ID_DATASET);
+dataArr = getDataArray(data);
+configSettingsArr = getConfigsettings(configSettings);
+variables = getVariables(data.Properties.VariableNames);
+constantsArr = getConstantsToOverwrite(NameValueArgs.constantsToOverwrite);
+
+%- run simulation
+NET.addAssembly(fullfile(utils.configuration.DLL_PATH, utils.configuration.DLL_Executable));
+Control = EM_Executable.Control;
+try
+    ts = tic;
+    out= Control.RunFromPython(configSettingsArr, dataArr, variables, NameValueArgs.inputDataString,...
+        NameValueArgs.stringVars, NameValueArgs.surpressOtherOutput, NameValueArgs.newOutput, constantsArr,...
+        NameValueArgs.requestedQueries, NameValueArgs.useLogger, countryInfoHandler);
+    tf = toc(ts);
+
+catch ME
+    if contains(ME.message, 'with matching signature found')
+        baseException = MException('MATLAB:incorrectType',...
+            [errID, ': Invalid input argument.', ' Please, check that all the Input arguments are correctly specified.']);
+        throw(baseException);
+    else
+        % errorStruct
+        throw(ME);
+    end
+end
+
+if out.Item1
+    x = Simulation(out, configSettings);
+    fprintf("\nSimulation %s, system %s, data %s, country %s done in %.2d sec.   \n", ...
+        x.output_filenames, configSettings.ID_SYSTEM,configSettings.ID_DATASET, configSettings.COUNTRY, round(tf,2))
+else
+    % header = ['> In ',matlab.mixin.CustomDisplay.getClassNameForHeader(obj)];
+    error('No output was produced from simulation of system %s, dataset %s, country %s.',configSettings.ID_SYSTEM,configSettings.ID_DATASET,configSettings.COUNTRY)
+end
+
+% % get warnings/errors
+% Enumerator=out.Item4.GetEnumerator;
+% errStr = '';
+% warnStr = '';
+% while Enumerator.MoveNext
+%     if Enumerator.Current.isWarning
+%         warnStr = sprintf('%s\nWarningId: %s\n%s',warnStr,Enumerator.Current.runTimeErrorId, Enumerator.Current.message);
+%
+%     else
+%         errStr = sprintf('%sErrorId: %s\n%s',errStr,Enumerator.Current.runTimeErrorId, Enumerator.Current.message);
+%
+%     end
+% end
+%
+% % return output
+% if  ~out.Item1
+%     if ~isempty(warnStr)
+%         warning(warnStr)
+%     end
+%     if ~isempty(errStr)
+%         error(errStr)
+%     end
+% else
+%     if ~isempty(warnStr)
+%         warning(warnStr)
+%         configSettings.warnings = warnStr;
+%     end
+%
+%     sim = Simulation(out, configSettings);
+%
+%     fprintf("\nSimulation %s, System %s, Data %s   .. %.2d sec!   \n", ...
+%         sim.name, configSettings.ID_SYSTEM,configSettings.ID_DATASET, round(tf,2))
+%
+% end
+
 
 end
