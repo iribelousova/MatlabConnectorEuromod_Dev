@@ -17,7 +17,7 @@ classdef Extension < Core
         % model
         index (:,1) double
         indexArr (:,1) double
-        parent Model
+        parent 
         Info struct
 
     end
@@ -105,7 +105,7 @@ classdef Extension < Core
     
                 obj.indexArr = 1:obj.Info.Handler.Count;
                 obj.index=obj.indexArr;
-            elseif is(Parent,'Country')
+            elseif isa(Parent,'Country')
                 obj.parent.indexArr=obj.parent.index;
                 Idx=obj.parent.index;
     
@@ -137,10 +137,10 @@ classdef Extension < Core
 
         function [values,keys] =getOtherProperties(obj,name,index)
 
-            if isa(obj,'Model')
-                [values,keys] = getOtherPropertiesModel(obj,name,index);
-            elseif isa(obj,'Country')
-                [values,keys] = getOtherPropertiesCountry(obj,name,index);
+            if isa(obj.parent,'Model')
+                [values,keys] = obj.getOtherPropertiesModel(name,index);
+            elseif isa(obj.parent,'Country')
+                [values,keys] = obj.getOtherPropertiesCountry(name,index);
             end
 
         end

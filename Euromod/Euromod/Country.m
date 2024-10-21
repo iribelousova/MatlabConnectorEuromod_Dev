@@ -23,8 +23,9 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
         name (1,1) string % Two-letter country code.
         systems % System % A list of system objects.
         datasets % Dataset % A list with Dataset objects.
-        extensions % LocalExtension % Extension % A list with extension objects.
+        extensions % Model extensions + Country extensions.
         policies % Policy % A list with policy objects.
+        local_extensions % Country extensions.
     end
 
 
@@ -180,17 +181,28 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
             obj=varargin{1};
 
             if size(obj.extensionsClass,1)==0
-                obj.extensionsClass=LocalExtension(obj);
+                obj.extensionsClass=Extension(obj);
                 x=obj.extensionsClass;
             else
                 if obj.extensionsClass.parent.index == obj.index
                     x=obj.extensionsClass;
                     x.index=obj.extensionsClass.indexArr;
                 else
-                    obj.extensionsClass=LocalExtension(obj);
+                    obj.extensionsClass=Extension(obj);
                     x=obj.extensionsClass;
                 end
             end
+        end
+
+        function x=get.local_extensions(obj)
+            % if isempty(obj.datasets)
+            %     x=obj.datasets;
+            %     return;
+            % end
+            x=copy(obj.extensions);
+            idx=1:x.Info.Handler.Count;
+            x.index=idx;
+            x.indexArr=idx;
         end
 
         function x=get.datasets(varargin)

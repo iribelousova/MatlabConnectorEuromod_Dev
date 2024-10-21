@@ -486,7 +486,7 @@ classdef (Abstract) Core < utils.customdisplay & handle & utils.redefinesparen &
                 Props=Props(ismember(Props,strProps));
             
                 if ~isempty(Props)
-                    [v,k]=obj.getOtherProperties(Props);
+                    [v,k]=obj.getOtherProperties(Props,index);
                     for i=1:numel(k)
                         obj.(k(i))=v(ismember(k,k(i)));
                     end
