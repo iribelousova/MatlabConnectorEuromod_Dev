@@ -105,7 +105,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 temp=copy(obj);
                 temp.index=temp.indexArr;
                 strProps=utils.splitproperties(temp);
-                [values,~]=temp.getOtherProperties(strProps);
+                [values,~]=temp.getOtherProperties(strProps,index);
             else
                 [values,~]=utils.getInfo(obj.Info.Handler,':');
             end
@@ -217,7 +217,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
 
                 [strProps,objProps]=utils.splitproperties(obj);
                 if all(ismember(Props,strProps))
-                    [v,k]=obj.getOtherProperties(Props);
+                    [v,k]=obj.getOtherProperties(Props,idx);
                     if numel(Props)==1
                         [varargout{1:nargout}]=v';
 
@@ -234,7 +234,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                     X=struct;
                     strProps=strProps(ismember(strProps,Props));
                     if ~isempty(strProps)
-                        [v,k]=obj.getOtherProperties(strProps);
+                        [v,k]=obj.getOtherProperties(strProps,idx);
                         M=numel(k);
                         for t=1:M
                             X.(k(t))=v(ismember(k,k(t)),:);
@@ -1197,7 +1197,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
 
             else
                 if ismember(propOp,strProps)
-                    [varargout{1:nargout}]=obj.getOtherProperties(propOp);
+                    [varargout{1:nargout}]=obj.getOtherProperties(propOp,obj.index);
                 elseif ismember(propOp,objProps)
                     [varargout{1:nargout}]=obj.(propOp);
                 end
