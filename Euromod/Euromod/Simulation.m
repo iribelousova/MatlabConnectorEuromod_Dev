@@ -36,7 +36,7 @@ classdef (ConstructOnLoad)  Simulation < utils.customdisplay
         %settings structure with simulation configuration information.
         outputs
         settings struct
-        output_filenames (:,1) string
+        output_filenames (1,:) string
         errors (:,1) string
     end
 
@@ -147,10 +147,10 @@ classdef (ConstructOnLoad)  Simulation < utils.customdisplay
                         else
                             errStr='ErrorId';
                         end
-                        errStr = sprintf('%s %s\n%s',errStr,errID, errMess);
+                        errStr = sprintf('%s %s\n%s\n',errStr,errID, errMess);
                         errorsArr(idx)=errStr;
 
-                        warning([errStr,' \n> Simulation %s, system %s, dataset %s, country %s.'],key_,settings.ID_SYSTEM,settings.ID_DATASET,settings.COUNTRY)
+                        warning([errStr,' \n> Simulation %s, system %s, dataset %s, country %s.\n'],key_,settings.ID_SYSTEM,settings.ID_DATASET,settings.COUNTRY)
                     end
 
                     idx = idx +1;

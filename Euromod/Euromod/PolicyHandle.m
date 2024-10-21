@@ -469,6 +469,7 @@ classdef PolicyHandle < Core   %< utils.redefinesparen & utils.CustomDisplay
 
         %==================================================================
         function x=headerComment(obj,varargin)
+            % idx=obj.index;
             idx=find(ismember(obj.indexArr,obj.index));
             if isempty(obj.commentArray)
                 temp=copy(obj);

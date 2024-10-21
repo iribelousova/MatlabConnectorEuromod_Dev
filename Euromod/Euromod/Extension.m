@@ -25,6 +25,7 @@ classdef Extension < Core
     properties (Constant,Hidden) 
         % tag = char(EM_XmlHandler.ReadModelOptions.EXTENSIONS)
         tag = char(EM_XmlHandler.ReadModelOptions.('EXTENSIONS'))
+        tagLocal = char(EM_XmlHandler.ReadCountryOptions.LOCAL_EXTENSION)
     end
 
     properties (Access=public) 
@@ -96,13 +97,26 @@ classdef Extension < Core
                 return;
             end
 
-            obj.parent=Parent;
+            obj.parent=copy(Parent);
 
-            obj.Info(1).Handler = obj.parent.Info.Handler.GetModelInfo(...
-                EM_XmlHandler.ReadModelOptions.(obj.tag));
-
-            obj.indexArr = 1:obj.Info.Handler.Count;
-            obj.index=obj.indexArr;
+            if isa(Parent,'Model')
+                obj.Info(1).Handler = obj.parent.Info.Handler.GetModelInfo(...
+                    EM_XmlHandler.ReadModelOptions.(obj.tag));
+    
+                obj.indexArr = 1:obj.Info.Handler.Count;
+                obj.index=obj.indexArr;
+            elseif is(Parent,'Country')
+                obj.parent.indexArr=obj.parent.index;
+                Idx=obj.parent.index;
+    
+                % set handler
+                Tag=EM_XmlHandler.ReadCountryOptions.(obj.tagLocal);
+                obj.Info(1).Handler = obj.parent.Info(Idx).Handler.GetTypeInfo(Tag);
+         
+                % set index
+                obj.indexArr = 1:obj.Info.Handler.Count+obj.parent.parent.extensions.Info.Handler.Count;
+                obj.index=obj.indexArr;
+            end
 
             % obj.load(Model);
 
@@ -121,9 +135,17 @@ classdef Extension < Core
         %     obj.index=obj.indexArr;
         % end
 
-        
-
         function [values,keys] =getOtherProperties(obj,name,index)
+
+            if isa(obj,'Model')
+                [values,keys] = getOtherPropertiesModel(obj,name,index);
+            elseif isa(obj,'Country')
+                [values,keys] = getOtherPropertiesCountry(obj,name,index);
+            end
+
+        end
+
+        function [values,keys] =getOtherPropertiesModel(obj,name,index)
             name=string(name);
             name = append(upper(extractBefore(name,2))',extractAfter(name,1)');
 
@@ -136,6 +158,63 @@ classdef Extension < Core
             values(strcmp(keys,"look"),:) = [];
             keys(strcmp(keys,"look")) = [];
 
+        end
+
+        function [values,keys]=getOtherPropertiesCountry(obj,name,index)
+            name=string(name);
+            name = append(upper(extractBefore(name,2))',extractAfter(name,1)');
+
+            values=strings(numel(name),size(obj,1));
+            keys=name;
+
+            % get index for local extensions
+            idx=ismember(obj.index,1:obj.Info.Handler.Count);
+            if sum(idx)==obj.Info.Handler.Count
+                idxLocalVal=obj.index(idx);
+                idxLocal=obj.index(idx);
+            elseif sum(idx)<obj.Info.Handler.Count && sum(idx)~=0
+                idxLocal=obj.index(idx);
+                idxLocalVal=1:sum(idx);
+            elseif sum(idx)==0
+                idxLocal=[];
+            end
+
+            % get index for model extensions
+            idx=~ismember(obj.index,idxLocal);
+            if sum(idx)==obj.parent.parent.extensions.Info.Handler.Count
+                idxModelVal=obj.index(idx);
+                idxModel=idxModelVal-double(obj.Info.Handler.Count);
+            elseif sum(idx)<obj.parent.parent.extensions.Info.Handler.Count && sum(idx)~=0
+                idxModelVal=obj.index(idx);
+                idxModel=idxModelVal-double(obj.Info.Handler.Count);
+                if isempty(idxLocal)
+                    ini=0;
+                else
+                    ini=idxLocalVal;
+                end
+                idxModelVal=ini+1:sum(idx)+ini;
+            elseif sum(idx)==0
+                idxModel=[];
+            end
+
+            % try get info from country extensions
+            if ~isempty(idxLocal)
+                [v,k]=utils.getInfo(obj.Info.Handler,idxLocal,name);
+                keys=[keys;k(~ismember(k,keys))];
+                values = utils.setValueByKey(values,keys,v,k,idxLocalVal);
+            end
+
+            % try get info from model extensions
+            if ~isempty(idxModel)
+                [v,k]=utils.getInfo(obj.parent.parent.extensions.Info.Handler,idxModel,name);
+                keys=[keys;k(~ismember(k,keys))];
+                values = utils.setValueByKey(values,keys,v,k,idxModelVal);
+            end
+
+            keys = append(lower(extractBefore(keys,2))',extractAfter(keys,1)');
+            if any(contains(keys,'iD'))
+                keys(contains(keys,'iD'))='ID';
+            end
         end
 
 
