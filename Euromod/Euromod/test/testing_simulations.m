@@ -1,9 +1,9 @@
+clear;
+clc;
+
 PATH_EUROMODFILES = "C:\EUROMOD_RELEASES_I6.0+";
 % PATH_DATA = "C:\Users\iribe\WORK\EUROMOD\All countries";
-PATH_DATA = "C:\EUROMOD_RELEASES_I6.0+\Input\All countries";
-ID_DATASET = "HR_2021_b2.txt";
-
-data = readtable(fullfile(PATH_DATA, ID_DATASET));
+PATH_DATA = "C:\EUROMOD_RELEASES_I6.0+\Input";
 
 alignfun = @(x) num2str(110 - length(x));
 rtWarnCheck = '... warning-Check OK.';
@@ -12,79 +12,250 @@ rtNoOutput = '... has NO output!';
 err=0.9; % margin of error between the Euromod Connector output and the EUROMOD output
 savefig=0;
 
+
+EM=euromod(PATH_EUROMODFILES);
+
+%***************************************************
+ID_DATASET = "SE_2021_b1.txt";                    %*
+data = readtable(fullfile(PATH_DATA, ID_DATASET));%*
+%***************************************************
+
+EM.countries('SE').systems('SE_2021').run(data,ID_DATASET)
+
+EM.countries('SE').run('SE_2021',data,ID_DATASET)
+
+EM.countries('SE').systems('SE_2021').policies(2).info()
+
 %__________________________________________________________________________
+% RUN BASE FROM SYSTEM CLASS 
+try
+
+    obj=EM.countries('SE').systems('SE_2021');
+
+    sim_base_SE=run(obj,data, ID_DATASET);
+    % ss = summaryStatistics(sim_base_SE.outputs{1}, 1);
+
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+%__________________________________________________________________________
+% RUN BASE FROM MODEL CLASS 
+try
+    sim_b=run(EM,'SE','SE_2021',data, ID_DATASET);
+
+    restest = sum(sim_b.outputs{1}{:,'ils_dispy'} - sim_base_SE.outputs{1}{:,'ils_dispy'});
+    assert(restest==0)
+
+    % ss = summaryStatistics(sim_addon_SE.outputs{1}, 1);
+
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+%__________________________________________________________________________
+% RUN BASE FROM COUNTRY CLASS 
+try
+    obj=EM.countries('SE');
+
+    sim_b=run(obj,'SE_2021',data, ID_DATASET);
+
+    restest = sum(sim_b.outputs{1}{:,'ils_dispy'} - sim_base_SE.outputs{1}{:,'ils_dispy'});
+    assert(restest==0)
+
+    % ss = summaryStatistics(sim_addon_SE.outputs{1}, 1);
+
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+%__________________________________________________________________________
+% RUN BASE FROM SYSTEM SUB-CLASS
+try
+    obj=EM.countries('SE').systems('SE_2021').policies;
+
+    sim_b=run(obj,data, ID_DATASET);
+
+    restest = sum(sim_b.outputs{1}{:,'ils_dispy'} - sim_base_SE.outputs{1}{:,'ils_dispy'});
+    assert(restest==0)
+
+    % ss = summaryStatistics(sim_addon_SE.outputs{1}, 1);
+
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+%__________________________________________________________________________
+% RUN BASE FROM COUNTRY-POLICY SUB-CLASS
+try
+    obj=EM.countries('SE').policies(3).functions(2);
+
+    sim_b=run(obj,'SE_2021',data, ID_DATASET);
+
+    restest = sum(sim_b.outputs{1}{:,'ils_dispy'} - sim_base_SE.outputs{1}{:,'ils_dispy'});
+    assert(restest==0)
+
+    % ss = summaryStatistics(sim_addon_SE.outputs{1}, 1);
+
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+%__________________________________________________________________________
+% RUN WITH constantsToOverwrite
+try
+    constants = {["$tinna_rate2",""],'0.4'};
+
+    obj=EM.countries('SE').systems('SE_2021');
+    sim_const_SE=run(obj, data, ID_DATASET, 'constantsToOverwrite', constants);
+
+    restest = sum(sim_const_SE.outputs{1}{:,'ils_dispy'} - sim_base_SE.outputs{1}{:,'ils_dispy'});
+    assert(restest==-1.224777476181829e+07)
+    
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+%__________________________________________________________________________
+% RUN WITH addons
+try
+    addons = ["MTR","MTR"];
+
+    % addons = ["LMA","LMA_SE"]; ??????????????????????????????????????
+
+    obj=EM.countries('SE').systems('SE_2021');
+    sim_addon_SE=run(obj,data, ID_DATASET, 'addons', addons);
+
+    restest = sim_addon_SE.outputs{2}{:,'mtrpc'};
+    assert(mean(restest)==19.419071885518552)
+
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+%__________________________________________________________________________
+% RUN WITH swithces
+try
+    switches = ["MWA","false"];
+
+    obj=EM.countries('SE').systems('SE_2021');
+    sim_switch_SE=run(obj,data, ID_DATASET, 'switches', switches);
+
+    restest=mean(sim_switch_SE.outputs{1}{:,'ils_ben'})-mean(sim_base_SE.outputs{1}{:,'ils_ben'});
+
+    assert(restest==0)
+
+catch ME
+    errStruct = struct('identifier', ME.identifier, ...
+        'message', sprintf('%s', ME.message), ...
+        'stack', ME.stack);
+    error(errStruct)
+end
+
+
+%***************************************************
+ID_DATASET = "HR_2021_b2.txt";                    %*
+data = readtable(fullfile(PATH_DATA, ID_DATASET));%*
+%***************************************************
+
+%__________________________________________________________________________
+% RUN WITH constantsToOverwrite
 try
     constants = {["$ANWPY",""],'1000000#m'};
 
     obj=EM.countries('HR').systems('HR_2023');
-    sim_const=run(obj,data, ID_DATASET, 'constants', constants);
+    sim_const=run(obj,data, ID_DATASET, 'constantsToOverwrite', constants);
     ss = summaryStatistics(sim_const.outputs{1}, 0);
 
     fileName = "data\hr_2023_const_std.txt";
     tru = readtable(fileName);
     ss_true = summaryStatistics(tru, 0);
 
-    if any(abs(ss-ss_true) > err)
+    if any(abs(cell2mat(struct2cell(ss))-cell2mat(struct2cell(ss_true))) > err)
         error('Results from "constantsToOverwrite" estimation discrepancy discrepancy > %0.3f! Check Summary Statistics in %s', err, file_const)
-    else
-        fprintf([lt, ' %', alignfun(lt), 's\n'], rtSimOk)
     end
 
 catch ME
     errStruct = struct('identifier', ME.identifier, ...
-        'message', sprintf('%s\n %s', lt, ME.message), ...
+        'message', sprintf('%s', ME.message), ...
         'stack', ME.stack);
     error(errStruct)
 end
 
 %__________________________________________________________________________
+% RUN BASE
 try
     obj=EM.countries('HR').systems('HR_2023');
     sim_base=run(obj,data, ID_DATASET);
+
+    fprintf('<strong>==============================================</strong>\n');
+    fprintf("<strong>Country 'HR', system 'HR_2023', dataset '%s'</strong>", ID_DATASET);
     ss = summaryStatistics(sim_base.outputs{1}, 1);
 
     fileName = "data\hr_2023_std.txt";
     tru = readtable(fileName);
-    ss_true = summaryStatistics(tru, 1);
+    ss_true = summaryStatistics(tru, 0);
 
-    if any(abs(ss-ss_true) > err)
+    if any(abs(cell2mat(struct2cell(ss))-cell2mat(struct2cell(ss_true))) > err)
         error('Results from "basline" estimation discrepancy > %0.3f! Check Summary Statistics in %s', err, fileName)
-        % else
-        %     fprintf([lt, ' %', alignfun(lt), 's\n'], rtSimOk)
     end
     % plot([ss,ss_true])
 
 catch ME
     errStruct = struct('identifier', ME.identifier, ...
-        'message', sprintf('%s\n %s', lt, ME.message), ...
+        'message', sprintf('%s', ME.message), ...
         'stack', ME.stack);
     error(errStruct)
 end
 
 %__________________________________________________________________________
+% RUN WITH surpressOtherOutput
 try
     obj=EM.countries('HR').systems('HR_2023');
     sim=run(obj, data, ID_DATASET, 'surpressOtherOutput',true);
-    ss = summaryStatistics(sim.outputs{1}, 1);
+    ss = summaryStatistics(sim.outputs{1}, 0);
 
-    if any(abs(ss-ss_true) > err)
+    if any(abs(cell2mat(struct2cell(ss))-cell2mat(struct2cell(ss_true))) > err)
         error('Results from "basline" estimation discrepancy > %0.3f! Check Summary Statistics in %s', err, fileName)
-        % else
-        %     fprintf([lt, ' %', alignfun(lt), 's\n'], rtSimOk)
     end
 
 catch ME
     errStruct = struct('identifier', ME.identifier, ...
-        'message', sprintf('%s\n %s', lt, ME.message), ...
+        'message', sprintf('%s', ME.message), ...
         'stack', ME.stack);
     error(errStruct)
 end
 
 %__________________________________________________________________________
+% RUN WITH setParameter :: CHANGE PARAMETER VALUE
 try
     obj=copy(EM.countries('HR').systems('HR_2023'));
+    ID = "602db41d-12d6-465d-976a-973493859763";
 
     setParameter(obj,"HR_2023", ID, "0");
+    info(obj,"parameters" ,ID)
+
     sim_setpar=run(obj, data, ID_DATASET);
     ss = summaryStatistics(sim_setpar.outputs{1}, 0);
 
@@ -92,15 +263,13 @@ try
     tru = readtable(fileName);
     ss_true = summaryStatistics(tru, 0);
 
-    if any(abs(ss-ss_true) > err)
+    if any(abs(cell2mat(struct2cell(ss))-cell2mat(struct2cell(ss_true))) > err)
         warning('Results from "discrepancy" estimation discrepancy > %0.3f! Check Summary Statistics in %s', err, fileName)
-    % else
-    %     fprintf([lt, ' %', alignfun(lt), 's\n'], rtSimOk)
     end
 
 catch ME
     errStruct = struct('identifier', ME.identifier, ...
-        'message', sprintf('%s\n %s', lt, ME.message), ...
+        'message', sprintf('%s', ME.message), ...
         'stack', ME.stack);
     error(errStruct)
 end
@@ -115,52 +284,6 @@ level = 'idhh';
 
 ann_tot_sum = totalAnnualWeightedSum(out1,out2,'variables',varnames,'level',level);
 
-% level = 'idhh';
-% 
-% % weighted sum formula
-% wsum = @(x,w) sum(x.*w);
-% 
-% % expenditeure side
-% varnames = {'ils_ben', 'ils_b2_penhl', 'ils_b2_bfaed', 'ils_b1_bun'};
-% legendnam = {'Total'; 'Pensions'; 'Fam.&Educ.'; 'Soc.Ass.&House'; 'Unemp.'};
-% ann_tot_sum = zeros(length(varnames),2);
-% 
-% out1=sim_base.outputs{1};
-% out2=sim_const.outputs{1};
-% 
-% % df2_ = out1(:,[level,varnames, "dwt"]);
-% % idxT=df2(:,varnames)>0
-% % df2_pos_ = df2(df2(:,varnames)>0,:);
-% 
-% for i = 1:length(varnames)
-%     varname = varnames{i};
-% 
-%     % take positive data
-%     df2 = out1(:,[level,varname, "dwt"]);
-%     df2_pos = df2(df2.(varname)>0,:);
-% 
-%     df1 = out2(:,[level,varname, "dwt"]);
-%     df1_pos = df1(df1.(varname)>0,:);
-% 
-%     % compute annual weighted total sums
-%     G = findgroups(df2_pos.(level));
-%     sumWeight2 = 12*sum(splitapply(wsum, df2_pos.(varname), df2_pos.dwt, G))/1000000;
-% 
-%     [G,varGroup] = findgroups(df1_pos.(level));
-%     sumWeight1 = 12*sum(splitapply(wsum, df1_pos.(varname), df1_pos.dwt, G))/1000000;
-% 
-%     % store all
-%     ann_tot_sum(i,:) = [sumWeight2, sumWeight1];
-% end
-
-% compute percent diffs
-% ann_perc_diff = 100*(ann_tot_sum(:,2)-ann_tot_sum(:,1))./ann_tot_sum(:,1);
-
-
-% ann_perc_diff = precentDifference(ann_tot_sum);
-
-% legendnam = {'Total'; 'Pensions'; 'Fam.&Educ.'; 'Soc.Ass.&House'; 'Unemp.'};
-
 %..........................................................................
 pTitle={'Government expenditure on social transfers'; '(Yearly, mill. €)'};
 pXlable = 'Expenditures';
@@ -170,26 +293,4 @@ pLegend={'Baseline','Revised'};
 
 plotBar(ann_tot_sum,'title',pTitle,'xlabel',pXlable,'ylabel',pYlable,...
     'xticklabel',pXticklabel,'legend',pLegend);
-
-% fig = figure;
-% hb = bar(ann_tot_sum);
-% for i =1:size(ann_tot_sum,1)
-%     text(i-0.25, max(ann_tot_sum(i,:)) + max(max(ann_tot_sum))*0.044,...
-%         ['\Delta',num2str(round(ann_perc_diff(i),2)),'%'], ...
-%         'FontWeight', 'bold', 'FontSize', 15)
-% end
-% title({'Government expenditure on social transfers'; '(Yearly, mill. €)'}, 'FontSize', 16)
-% xlabel('Expenditures', 'FontSize', 13)
-% ylabel('Millions of euros', 'FontSize', 13)
-% hb(1).FaceColor = 'b';
-% hb(2).FaceColor = 'y';
-% set(gca,'xticklabel',legendnam, 'fontsize', 14, 'color', 'w', 'box','off')
-% currentLabels = get(gca, 'XTickLabel');
-% set(gca, 'XTickLabel', cellfun(@(a) ['\bf{' a '}'], currentLabels, 'UniformOutput',false));
-% legend('Baseline','Revised')
-% fig.Position = [100 100 800 500];
-% if savefig
-%     saveas(gcf,'GovExp.png')
-% end
-
 

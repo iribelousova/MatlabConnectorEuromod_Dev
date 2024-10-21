@@ -102,7 +102,7 @@ mm=euromod(modelPath);
 doSave=0;
 
 %%% CHECK COUNTRY SIDE
-load("testObjects.mat")
+load("data\testObjects.mat")
 
 % c=12;
 % p=51;
@@ -155,6 +155,8 @@ if doSave
 end
 unitTest(0,CPFR,temp,'c',c,'p',p)
 sprintf('COUNTRY %d, POLICY %d: Done',c,p)
+temp=mm.('AT').policies(p);
+unitTest(0,CPFR,temp,'c',c,'p',p)
 
 
 c=1;
@@ -167,6 +169,8 @@ end
 unitTest(0,CPFR,temp,'c',c,'p',p)
 % save("testObjects.mat","CPFR","-append")
 sprintf('COUNTRY %d, POLICY %d: Done',c,p)
+temp=mm.('AT').policies(p);
+unitTest(0,CPFR,temp,'c',c,'p',p)
 
 c=1;
 p=30;
@@ -178,6 +182,8 @@ end
 unitTest(0,CPFR,temp,'c',c,'p',p)
 % save("testObjects.mat","CPFR","-append")
 sprintf('COUNTRY %d, POLICY %d: Done',c,p)
+temp=mm.('AT').policies(p);
+unitTest(0,CPFR,temp,'c',c,'p',p)
 
 c=1;
 p=43;
@@ -188,6 +194,8 @@ if doSave
 end
 unitTest(0,CPFR,temp,'c',c,'p',p)
 sprintf('COUNTRY %d, POLICY %d: Done',c,p)
+temp=mm.('AT').policies(p);
+unitTest(0,CPFR,temp,'c',c,'p',p)
 
 c=9;
 p=3;
@@ -198,6 +206,8 @@ if doSave
 end
 unitTest(0,CPFR,temp,'c',c,'p',p)
 sprintf('COUNTRY %d, POLICY %d: Done',c,p)
+temp=mm.('EL').policies(p);
+unitTest(0,CPFR,temp,'c',c,'p',p)
 
 c=1;
 s=8;
@@ -209,6 +219,8 @@ if doSave
 end
 unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d: Done',c,s,p)
+temp=mm.('AT').('AT_2014').policies(p);
+unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
 
 c=1;
 p=2;
@@ -220,6 +232,8 @@ if doSave
 end
 unitTest(0,CPFR,temp,'c',c,'p',p,'f',f)
 sprintf('COUNTRY %d, POLICY %d, FUNCTION %d: Done',c,p,f)
+temp=mm.('AT').policies(p).functions(f);
+unitTest(0,CPFR,temp,'c',c,'p',p,'f',f)
 
 c=1;
 s=17;
@@ -231,6 +245,8 @@ if doSave
 end
 unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d: Done',c,s,p)
+temp=mm.('AT').('AT_2023').policies(p);
+unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
 
 c=2;
 p=7;
@@ -242,6 +258,8 @@ if doSave
 end
 unitTest(0,CPFR,temp,'c',c,'p',p,'f',f)
 sprintf('COUNTRY %d, POLICY %d, FUNCTION %d: Done',c,p,f)
+temp=mm.('BE').policies(p).functions(f);
+unitTest(0,CPFR,temp,'c',c,'p',p,'f',f)
 
 c=5;
 s=15;
@@ -255,6 +273,8 @@ if doSave
 end
 unitTest(1,CSP,temp,'c',c,'s',s,'p',p,'f',f)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d, FUNCTIONS: Done',c,s,p)
+temp=mm.('CZ').('CZ_2019').policies(p).functions;
+unitTest(1,CSP,temp,'c',c,'s',s,'p',p,'f',f)
 
 c=2;
 p=7;
@@ -267,6 +287,8 @@ if doSave
 end
 unitTest(1,CP,temp,'c',c,'p',p,'f',f)
 sprintf('COUNTRY %d, POLICY %d, FUNCTIONS: Done',c,p)
+temp=mm.('BE').policies(p).functions;
+unitTest(1,CP,temp,'c',c,'p',p,'f',f)
 
 c=1;
 p=10;
@@ -278,6 +300,21 @@ if doSave
 end
 unitTest(0,CPE,temp,'c',c,'p',p,'e',e)
 sprintf('COUNTRY %d, POLICY %d, EXTENSION %d: Done',c,p,e)
+temp=mm.('AT').policies(p).extensions(e);
+unitTest(0,CPE,temp,'c',c,'p',p,'e',e)
+
+c=1;
+s=17;
+p=39;
+temp=mm.countries('AT').systems('AT_2023').policies('bcc00_at');
+if doSave
+    CSPFR=assignTestValues(CSPFR,temp,'c',c,'s',s,'p',p);
+    save("testObjects.mat","CSPFR","-append")
+end
+unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
+sprintf('COUNTRY %d, SYSTEM %d, POLICY %d: Done',c,s,p)
+temp=mm.('AT').('AT_2023').policies(p);
+unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
 
 c=1;
 d=0;
@@ -288,6 +325,8 @@ if doSave
 end
 unitTest(1,CD,temp,'c',c,'d',d)
 sprintf('COUNTRY %d, DATASETS: Done',c)
+temp=mm.('AT').datasets;
+unitTest(1,CD,temp,'c',c,'d',d)
 
 c=25;
 s=16;
@@ -299,16 +338,20 @@ if doSave
 end
 unitTest(0,CSD,temp,'c',c,'s',s,'d',d)
 sprintf('COUNTRY %d, SYSTEM %d, DATASET %d: Done',c,s,d)
+temp=mm.('SE').('SE_2021').datasets(d);
+unitTest(0,CSD,temp,'c',c,'s',s,'d',d)
 
 c=10;
 d=0;
-temp=mm.countries(c).datasets;
+temp=mm.countries('ES').datasets;
 if doSave
     C(c).obj.('datasets').index=temp.index;
     save("testObjects.mat","C","-append")
 end
 unitTest(1,C,temp,'c',c,'d',d)
 sprintf('COUNTRY %d, DATASETS: Done',c)
+temp=mm.('ES').datasets;
+unitTest(1,C,temp,'c',c,'d',d)
 
 c=10;
 d=7;
@@ -319,6 +362,8 @@ if doSave
 end
 unitTest(0,CD,temp,'c',c,'d',d)
 sprintf('COUNTRY %d, DATASET %d: Done',c,d)
+temp=mm.('ES').datasets(d);
+unitTest(0,CD,temp,'c',c,'d',d)
 
 c=3;
 s=7;
@@ -330,6 +375,9 @@ if doSave
 end
 unitTest(1,CS,temp,'c',c,'s',s,'d',d)
 sprintf('COUNTRY %d, SYSTEM %d, DATASETS: Done',c,s)
+temp=mm.('BG').("BG_2013").datasets;
+unitTest(1,CS,temp,'c',c,'s',s,'d',d)
+
 
 c=1;
 p=2;
@@ -341,6 +389,8 @@ if doSave
 end
 unitTest(0,CPFR,temp,'c',c,'p',p,'f',f)
 sprintf('COUNTRY %d, POLICY %d, FUNCTION %d: Done',c,p,f)
+temp=mm.('AT').policies(p).functions(f);
+unitTest(0,CPFR,temp,'c',c,'p',p,'f',f)
 
 c=1;
 s=8;
@@ -351,6 +401,8 @@ if doSave
     CS(c,s).obj.('policies').commentArray=temp.commentArray;
     save("testObjects.mat","CS","-append")
 end
+unitTest(1,CS,temp,'c',c,'s',s,'p',p)
+temp=mm.('AT').('AT_2014').policies;
 unitTest(1,CS,temp,'c',c,'s',s,'p',p)
 
 c=25;
@@ -363,6 +415,8 @@ if doSave
 end
 unitTest(1,C,temp,'c',c,'s',0)
 sprintf('COUNTRY %d, SYSTEMS: Done',c)
+temp=mm.('SE').systems;
+unitTest(1,C,temp,'c',c,'s',0)
 
 c=1;
 p=0;
@@ -375,6 +429,8 @@ if doSave
 end
 unitTest(1,C,temp,'c',c,'p',p)
 sprintf('COUNTRY %d, POLICIES: Done',c)
+temp=mm.('AT').policies;
+unitTest(1,C,temp,'c',c,'p',p)
 
 c=1;
 s=8;
@@ -386,6 +442,8 @@ if doSave
 end
 unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d: Done',c,s,p)
+temp=mm.('AT').('AT_2014').policies(2);
+unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p)
 
 c=25;
 s=14;
@@ -396,6 +454,8 @@ if doSave
 end
 unitTest(0,CSPFR,temp,'c',c,'s',s)
 sprintf('COUNTRY %d, SYSTEM %d: Done',c,s)
+temp=mm.('SE').('SE_2019');
+unitTest(0,CSPFR,temp,'c',c,'s',s)
 
 c=20;
 s=14;
@@ -406,6 +466,8 @@ if doSave
 end
 unitTest(0,CSPFR,temp,'c',c,'s',s)
 sprintf('COUNTRY %d, SYSTEM %d: Done',c,s)
+temp=mm.('MT').('MT_2020');
+unitTest(0,CSPFR,temp,'c',c,'s',s)
 
 c=2;
 p=7;
@@ -418,6 +480,8 @@ if doSave
 end
 unitTest(0,CPFE,temp,'c',c,'p',p,'f',f,'e',e)
 sprintf('COUNTRY %d, POLICY %d, FUNCTION %d, EXTENSION %d: Done',c,p,f,e)
+temp=mm.('BE').policies(p).functions(f).extensions(e);
+unitTest(0,CPFE,temp,'c',c,'p',p,'f',f,'e',e)
 
 c=7;
 p=15;
@@ -430,6 +494,8 @@ if doSave
 end
 unitTest(0,CPFR,temp,'c',c,'p',p,'f',f,'r',r)
 sprintf('COUNTRY %d, POLICY %d, FUNCTION %d, PARAMETER %d: Done',c,p,f,r)
+temp=mm.('DK').policies(p).functions(f).parameters(r);
+unitTest(0,CPFR,temp,'c',c,'p',p,'f',f,'r',r)
 
 c=7;
 s=17;
@@ -442,6 +508,8 @@ if doSave
 end
 unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p,'f',f)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d, FUNCTION %d: Done',c,s,p,f)
+temp=mm.('DK').('DK_2023').policies(p).functions(f);
+unitTest(0,CSPFR,temp,'c',c,'s',s,'p',p,'f',f)
 
 c=9;
 s=7;
@@ -454,6 +522,8 @@ if doSave
 end
 unitTest(1,CS,temp,'c',c,'s',s,'p',p)
 sprintf('COUNTRY %d, SYSTEM %d, POLICIES: done',c,s)
+temp=mm.('EL').('EL_2011').policies;
+unitTest(1,CS,temp,'c',c,'s',s,'p',p)
 
 c=7;
 s=9;
@@ -467,6 +537,8 @@ if doSave
 end
 unitTest(1,CSPF,temp,'c',c,'s',s,'p',p,'f',f,'r',r)
 sprintf('COUNTRY %d, POLICY %d, FUNCTION %d, PARAMETERS: Done',c,s,p,f)
+temp=mm.('DK').('DK_2015').policies(p).functions(f).parameters;
+unitTest(1,CSPF,temp,'c',c,'s',s,'p',p,'f',f,'r',r)
 
 c=9;
 s=7;
@@ -480,6 +552,8 @@ if doSave
 end
 unitTest(1,CSP,temp,'c',c,'s',s,'p',p,'f',f)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d, FUNCTIONS: done',c,s,p)
+temp=mm.('EL').('EL_2011').policies(p).functions;
+unitTest(1,CSP,temp,'c',c,'s',s,'p',p,'f',f)
 
 c=7;
 p=15;
@@ -492,6 +566,8 @@ if doSave
 end
 unitTest(1,CPF,temp,'c',c,'p',p,'f',f,'r',r)
 sprintf('COUNTRY %d, POLICY %d, FUNCTION %d, PARAMETERS: Done',c,p,f)
+temp=mm.('DK').policies(p).functions(f).parameters;
+unitTest(1,CPF,temp,'c',c,'p',p,'f',f,'r',r)
 
 c=1;
 s=8;
@@ -504,6 +580,8 @@ if doSave
 end
 unitTest(0,CSPFR_,temp,'c',c,'s',s,'p',p,'f',f)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d, FUNCTION %d: Done',c,s,p,f)
+temp=mm.('AT').systems('AT_2014').policies(p).functions;
+unitTest(0,CSPFR_,temp,'c',c,'s',s,'p',p,'f',f)
 
 c=25;
 s=16;
@@ -517,6 +595,8 @@ if doSave
 end
 unitTest(0,CSPFR_,temp,'c',c,'s',s,'p',p,'f',f,'r',r)
 sprintf('COUNTRY %d, SYSTEM %d, POLICY %d, FUNCTION %d, PARAMETER %d: Done',c,s,p,f,r)
+temp=mm.countries('SE').('SE_2021').policies(p).functions(f).parameters(r);
+unitTest(0,CSPFR_,temp,'c',c,'s',s,'p',p,'f',f,'r',r)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 return;
