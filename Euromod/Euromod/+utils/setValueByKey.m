@@ -2,11 +2,20 @@ function [values,keys] = setValueByKey(values,keys,valuesIn,keysIn,columnIndex)
 % values - (m,1) string. Values to be updated
 % keys - (1,m) string. Keys of the values to be updated
 
-if size(keys,1)<size(keys,2) || size(keys,1)>size(keys,2) && size(keys,2)==0
-    keys=keys';
+if isempty(keys)
+    keys=strings(0,1);
+else
+    if size(keys,1)<size(keys,2) 
+        keys=keys';
+    end
 end
-if size(keysIn,1)<size(keysIn,2) || size(keysIn,1)>size(keysIn,2) && size(keysIn,2)==0
-    keysIn=keysIn';
+
+if isempty(keysIn)
+    keysIn=strings(0,1);
+else
+    if size(keysIn,1)<size(keysIn,2) 
+        keysIn=keysIn';
+    end
 end
 
 keysAdd=keysIn(~ismember(keysIn,keys));

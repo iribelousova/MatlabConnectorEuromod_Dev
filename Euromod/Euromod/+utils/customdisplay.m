@@ -242,19 +242,89 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                 namesSwitch=strings(N,1);
             end
 
-            tic
-            ss=obj(1:end,'extensions');
-            toc
-            
+            %%%............................................................
+            %%% GET POLICIES EXTENSIONS FOR PRINTING
+            % get tags
+            eTAG=char(EM_XmlHandler.TAGS.EXTENSION);
+            if strcmp(class(obj),'Policy') || strcmp(class(obj),'ReferencePolicy') || strcmp(class(obj),'PolicyInSystem')
+                objTag=Policy.tag;
+            else
+                objTag=obj.tag;
+            end
+            t=[char(eTAG),'_',char(objTag)];
+            x = char(EM_XmlHandler.TAGS.(t));
+            pTAG=EM_XmlHandler.ReadCountryOptions.(x);
+            if contains(class(obj),'InSystem')
+                tagID=[char(lower(objTag)),'ID'];
+            else
+                tagID='ID';
+            end
 
-            namesExt=strings(numel(ss.extensions),1);
+            % get IDs
+            pIDs=obj(1:end).(tagID);
+            pIDs=pIDs.(tagID)';
+            cobj=copy(obj);
+            while ~strcmp(cobj.tag,"COUNTRY")
+                cobj=cobj.parent;
+            end
+            Idx=cobj.index;
+            eInfo=cobj.extensions(1:end,{'ID','shortName'});
+            eIDs=eInfo.ID';
+            eNames=eInfo.shortName';
+
+            tic
             posRefPol=find(idxRefPol);
-            for jj=1:N
-                if ~isempty(ss.extensions{jj}) && ~ismember(jj,posRefPol)
-                    namesExtJoin=strjoin(ss.extensions{jj}(1:end).shortName',',');
-                    namesExt(jj)=sprintf('(with switch set for %s)',namesExtJoin);
+            
+            Ne=numel(eIDs);
+            Np=numel(pIDs);
+            namesExt=cell(Np,1);
+            for i=1:Np
+                if ~ismember(i,posRefPol)
+                    pID=char(pIDs(i));
+                    for j=1:Ne
+                        eID=char(eIDs(j));
+                        ID_=[pID,eID];
+                        x=cobj.Info(Idx).Handler.GetPieceOfInfo(pTAG,ID_);
+                        count_=0;
+                        if x.Count>0
+                            count_=count_+1;
+                            if count_<=3
+                                namesExt{i,1}= strjoin([namesExt{i,1},eNames(j)],', ');
+                            elseif count_==4
+                                namesExt{i,1}= strjoin(namesExt{i,1},'...');
+                            elseif count_>4
+                                continue;
+                            end
+                        end
+                    end
+                    if isempty(namesExt{i,1})
+                        namesExt{i,1}='';
+                    else
+                        namesExt{i,1}=['(with switch set for ',char(namesExt{i,1}),')'];
+                    end
+                else
+                    namesExt{i,1}='';
                 end
             end
+            namesExt=string(namesExt);
+            %%%............................................................
+
+            % 
+            % 
+            % 
+            % tic
+            % ss=obj(1:end,'extensions');
+            % toc
+            % 
+
+            % namesExt=strings(numel(ss.extensions),1);
+            % posRefPol=find(idxRefPol);
+            % for jj=1:N
+            %     if ~isempty(ss.extensions{jj}) && ~ismember(jj,posRefPol)
+            %         namesExtJoin=strjoin(ss.extensions{jj}(1:end).shortName',',');
+            %         namesExt(jj)=sprintf('(with switch set for %s)',namesExtJoin);
+            %     end
+            % end
 
             if any(idxRefPol)
                 comments(idxRefPol)="";

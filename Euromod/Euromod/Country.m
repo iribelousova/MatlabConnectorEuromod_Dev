@@ -1,39 +1,43 @@
+%% Country 
+% The EUROMOD tax-benefit country models.
+%
+%% Syntax:
+%     C = Country(Model)
+%
+%% Description:
+%     C = Country(Model) returns a class array with the EUROMOD tax benefit
+%     country models. Each country object contains properties that are classes
+%     of type System, Policy, Dataset and Extension.
+%
+%% Input Arguments:
+%     Model            - Class with the EUROMOD base model.
+%
+%% Properties:
+%     datasets         - Dataset class with country datasets.
+%     extensions       - Extension class with model and country extensions.
+%     local_extensions - Extension class with country extensions.
+%     name             - Two-letter country code. See the <a href="matlab: web('https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Country_codes')">Eurostat Glossary:Country codes</a>.
+%     parent           - Model base class.
+%     policies         - Policy class with country policies.
+%     systems          - System class with country systems.
+%
+%% Output Arguments:
+%     C                - Country class array containing the EUROMOD country
+%                        models.
+%
+%% Examples:
+%     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
+%     % Display the default countries:
+%     mod.countries
+%     % Display the Country class for Austria.
+%     mod.countries('AT')
+%
+%% See also
+% Model, System, Policy, Dataset, Extension, info, run.
+
 classdef Country < Core
-    % Country
-    %     Country-specific EUROMOD tax-benefit models.
-    %
-    % Syntax:
-    %     C = Country(Model)
-    %
-    % Description:
-    %     C = Country(Model) returns a class array with the EUROMOD tax benefit
-    %     country models. Each country object contains properties that are classes
-    %     of type System, Policy, Dataset and Extension.
-    %
-    % Input Arguments:
-    %     Model            - Class with the EUROMOD base model.
-    %
-    % Properties:
-    %     datasets         - Dataset class with country datasets.
-    %     extensions       - Extension class with model and country extensions.
-    %     local_extensions - Extension class with country extensions.
-    %     name             - Two-letter country code. See the <a href="matlab: web('https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Country_codes')">Eurostat Glossary:Country codes</a>.
-    %     parent           - Model base class.
-    %     policies         - Policy class with country policies.
-    %     systems          - System class with country systems.
-    %
-    % Output Arguments:
-    %     C                - Country class array containing the EUROMOD country
-    %                        models.
-    %
-    % Examples:
-    %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
-    %     % Display the default countries:
-    %     mod.countries
-    %     % Display the Country class for Austria.
-    %     mod.countries('AT')
-    %
-    % See also Model, System, Policy, Dataset, Extension, info, run.
+    % Country - The EUROMOD tax-benefit country models.
+
     properties (Access=public)
         datasets Dataset % Dataset class with country datasets.
         extensions Extension % Extension class with model and country extensions.
