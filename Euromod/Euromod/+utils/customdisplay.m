@@ -1,128 +1,91 @@
 classdef customdisplay < matlab.mixin.CustomDisplay & handle
-    methods (Hidden, Sealed, Access = protected)
+    % customdisplay - Superclass of the Core class.
+    %
+    % Description:
+    %     This superclass is used in all the main Euromod Connector
+    %     classes. It contains functions that are common to these
+    %     subclasses.
+    %
+    %  Country Properties:
+    %     appendComment            - Create a uniform string array of 
+    %                                comments.
+    %     commentElement           - Create a uniform comment row appending
+    %                                header to comment.
+    %     customExtensionDisplay   - Customize the display of the 
+    %                                Extension class array.
+    %     customPropertyDisplay    - Customize the display of specific
+    %                                property of a class.
+    %     getHeader                - Matlab built-in function customizing 
+    %                                the display of the header of a class.
+    %     getFooter                - Matlab built-in function customizing
+    %                                the display of the footer of a class.
+    %     getPropertyGroups        - Matlab built-in function retrieving 
+    %                                the class specific properties for 
+    %                                custom display.
+    %     headerComment_Type1      - Create header comment for classes.
+    %     headerComment_Type2      - Create header comments for classes
+    %                                that display the extension switches.
+    %
+    % See also Model, Country, System, Policy, Dataset, Extension.
 
-        function header = getHeader(obj)
-            % callerIsBaseWorkspace = length(dbstack) == 1;
-            % if callerIsBaseWorkspace && obj.isNew
-            %     obj.index=obj.indexArr;
-            % end
-            % sprintf('"%s"',strjoin(string(obj.index),'","'))
-            % obj.update(1);
-            % if isa(obj,'Model')
-            %     header = obj;
-            %     return;
-            % end
-            % if isa(obj,'Simulation')
-            %     header = obj;
-            %     return;
-            % end
+    methods (Static,Sealed,Access=protected,Hidden)
+        %==================================================================
+        function header=commentElement(header,coms)
+            % commentElement - Create a uniform comment row appending
+            % header to comment.
 
-            N=size(obj,1);
-            if N>1 && ~isa(obj,'Simulation') && ~isa(obj,'Model') % || N==1 && numel(obj.indexArr)==1
-                % if isa(obj,'Country') || isa(obj,'DatasetInSystem') ||...
-                %         isa(obj,'Extension') || isa(obj,'ExtensionSwitch') ||...
-                %         isa(obj,'Function') || isa(obj,'FunctionInSystem') || ...
-                %         isa(obj,'LocalExtension') || isa(obj,'ParameterInSystem') ||...
-                %         isa(obj,'Policy') || isa(obj,'ReferencePolicy') ||...
-                %         isa(obj,'System') 
-                % 
-                %     comm=obj.headerComment();
-                % 
-                % else
-                %     % % Dataset, parameter, PolicyInSystem, System
-                %     % [v,k]=obj.getOtherProperties({'name','comment'},1:N);
-                %     % nams=v(ismember(k,'name'),:)';
-                %     % coms=v(ismember(k,'comment'),:)';
-                %     % if size(coms,2)==N
-                %     %     coms=coms';
-                %     % end
-                %     % comm=[nams,coms];
-                %     % % coms(ismember(coms,""))=[];
-                %     % 
-                %     % if isa(obj,'DatasetInSystem')
-                %     %     [bm,k]=obj.getOtherProperties('bestMatch',1:N);
-                %     %     % bm= obj(:).bestMatch';
-                %     %     % coms(strcmp(coms,"no"))="";
-                %     %     coms(strcmp(bm,"yes"))="best match";
-                %     % end
-                % end
-
-                comm=obj.headerComment();
-
-                header = obj.appendComment(comm);
-                % idx=1:numel(nams);
-                % idx=string(num2str(idx'));
-                % if size(nams,2)==N
-                %     nams=nams';
-                % end
-                % header = append(idx,': ',nams);
-                % if ~isempty(coms) && ~all(strcmp("",coms))
-                %     coms=arrayfun(@(t) char(EM_XmlHandler.XmlHelpers.RemoveCData(t)),coms,'UniformOutput',false);
-                %     coms=string(coms);
-                %     bk = arrayfun(@(t) numel(char(t)),header);
-                %     bk=string(arrayfun(@(t) blanks(t), max(bk)-bk+1,'UniformOutput',false));
-                %     header = append(header, bk, '| ',coms);
-                % end
-                % 
-                % dimStr=matlab.mixin.CustomDisplay.convertDimensionsToString(obj);
-                % headerStr = [dimStr, ' ', matlab.mixin.CustomDisplay.getClassNameForHeader(obj), ' array:'];
-                % headerStr = string(headerStr);
-                % header=[headerStr;header];
-                % header = sprintf('%s\n',header);
-            else
-                dimStr=matlab.mixin.CustomDisplay.convertDimensionsToString(obj);
-                header = [dimStr, ' ', matlab.mixin.CustomDisplay.getClassNameForHeader(obj), ' with properties:'];
-                header = string(header);
-                header = sprintf('%s\n',header);
+            NrBlanks=1;
+            if ~isempty(coms) && ~all(strcmp("",coms))
+                coms=arrayfun(@(t) char(EM_XmlHandler.XmlHelpers.RemoveCData(t)),coms,'UniformOutput',false);
+                coms=string(coms);
+                bk = arrayfun(@(t) numel(char(t)),header);
+                bk=string(arrayfun(@(t) blanks(t), max(bk)-bk+NrBlanks,'UniformOutput',false));
+                header = append(header, bk, '| ',coms);
             end
         end
+    end
+    methods (Sealed,Access=protected,Hidden)
+        %==================================================================
+        function header = appendComment(obj,COMM)
+            % appendComment - Create a uniform string array of comments.
+            %
+            % Description:
+            %   This function is used to create the header of a class
+            %   array.
+            %
+            % Input Arguments:
+            %   COMM -(N,M) string. First column is string of names. Second
+            %         column is string of middle comments. Third column is
+            %         string of last comments.
 
-        %------------------------------------------------------------------
-
-        function propgrp = getPropertyGroups(obj)
-            % callerIsBaseWorkspace = length(dbstack) == 1;
-            % if callerIsBaseWorkspace && obj.isNew
-            %     obj.index=obj.indexArr;
-            % end
-            if numel(obj.index)>1
-                propgrp='';
-            else
-                % [~,objProps]=utils.splitproperties(obj);
-                % for i=1:numel(objProps)
-                %     obj.(objProps(i)).index=obj.(objProps(i)).indexArr;
-                % end
-                
-                propgrp = getPropertyGroups@matlab.mixin.CustomDisplay(obj);
-                maxDisp=7;
-                propName="parameters";
-                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
-                propName="functions";
-                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
-                propName="policies";
-                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
-                propName="datasets";
-                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
-                propName="bestmatchDatasets";
-                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
-                maxDisp=2;
-                propName="extensions";
-                propgrp=obj.customExtensionDisplay(propgrp,propName,maxDisp);
-                % if isfield(propgrp.PropertyList,propName)
-                %     N=size(propgrp.PropertyList.(propName),1);
-                %     if N<=maxDisp && N>0
-                %         namNum='%s';
-                %         for i=2:N
-                %             namNum=[namNum,', %s'];
-                %         end
-                %         propgrp.PropertyList.(propName)=string(sprintf(namNum,propgrp.PropertyList.(propName)(1:end).name'));
-                %     end
-                % end
+            [N,M]=size(COMM);
+            idx=1:N;
+            idx=string(num2str(idx'));
+            nams=COMM(:,1);
+            header = append(idx,': ',nams);
+            if M>1
+                coms=COMM(:,2);
+                header=obj.commentElement(header,coms);
+            end
+            if M>2
+                coms=COMM(:,3);
+                header=obj.commentElement(header,coms);
             end
 
-            % obj.isNew=1;
-        end
+            % get the name of class from metaclass object
+            dimStr=matlab.mixin.CustomDisplay.convertDimensionsToString(obj);
+            headerStr = [dimStr, ' ', matlab.mixin.CustomDisplay.getClassNameForHeader(obj), ' array:'];
+            headerStr = string(headerStr);
 
+            % combine name of class with header comment array
+            header=[headerStr;header];
+            header = sprintf('%s\n',header);
+        end
+        %==================================================================
         function propgrp=customExtensionDisplay(obj,propgrp,propName,maxDisp)
+            % customExtensionDisplay - Customize the display of the
+            % Extension class array.
+
             if isfield(propgrp.PropertyList,propName)
                 
                 N=size(propgrp.PropertyList.(propName),1);
@@ -142,8 +105,10 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                 end
             end
         end
-
+        %==================================================================
         function propgrp=customPropertyDisplay(obj,propgrp,propName,maxDisp)
+            % customPropertyDisplay - Customize the display of specific
+            % property of a class.
             if isfield(propgrp.PropertyList,propName)
                 N=size(propgrp.PropertyList.(propName),1);
                 if N<=maxDisp && N>0
@@ -155,32 +120,35 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                 end
             end
         end
+        %==================================================================
+        function header = getHeader(obj)
+            % getHeader - Matlab built-in function customizing the display 
+            % of the header of a class.
 
-        % function displayNonScalarObject(obj)
-        %     for i=1:numel(obj)
-        %         disp(get_header(obj(i)))
-        %         disp(get_footer(obj(i)))
-        %     end
-        % end
-
+            N=size(obj,1);
+            if N>1 && ~isa(obj,'Simulation') && ~isa(obj,'Model') 
+                comm=obj.headerComment();
+                header = obj.appendComment(comm);
+            else
+                dimStr=matlab.mixin.CustomDisplay.convertDimensionsToString(obj);
+                header = [dimStr, ' ', matlab.mixin.CustomDisplay.getClassNameForHeader(obj), ' with properties:'];
+                header = string(header);
+                header = sprintf('%s\n',header);
+            end
+        end
+        %==================================================================
         function footer = getFooter(obj)
-
+            % getFooter - Matlab built-in function customizing the display 
+            % of the footer of a class.
+            % 
+            % This function is used for the Simulation class only.
+            
             footer='';
             if isa(obj,'Simulation')
                 if numel(obj)>10
-                    
-                    % dimStr = matlab.mixin.CustomDisplay.convertDimensionsToString(mdl);
-                    % cName = matlab.mixin.CustomDisplay.getClassNameForHeader(mdl);
-                    % headerStr = [dimStr,' ',cName,' array with properties:'];
-                    % disp(header)
                 else
-                    for iObj = 1 %:numel(obj)
-                        mdl=obj(iObj);
-        
-                        % propnam = cellstr(properties(mdl));
-                        % propgrp = matlab.mixin.util.PropertyGroup(propnam);
-                        % matlab.mixin.CustomDisplay.displayPropertyGroups(mdl,propgrp);
-                        
+                    for iObj = 1
+                        mdl=obj(iObj);                        
                         N=length(mdl.outputs)*(length(mdl.outputs)<=2)+2*(length(mdl.outputs)>2);
                         for i = 1:N
                             out = mdl.outputs{i}(1:6,1:10);
@@ -193,12 +161,116 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                             fprintf(1, '\n')
                         end
                         fprintf(1, '\n')
-                        % disp(mdl.settings)
                     end
                 end                
             end
 
 
+        end
+        %==================================================================
+        function propgrp = getPropertyGroups(obj)
+            % getPropertyGroups - Matlab built-in function retrieving the 
+            % class specific properties for custom display.
+            
+            if numel(obj.index)>1
+                propgrp='';
+            else                
+                propgrp = getPropertyGroups@matlab.mixin.CustomDisplay(obj);
+                maxDisp=7;
+                propName="parameters";
+                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
+                propName="functions";
+                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
+                propName="policies";
+                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
+                propName="datasets";
+                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
+                propName="bestmatchDatasets";
+                propgrp=obj.customPropertyDisplay(propgrp,propName,maxDisp);
+                maxDisp=2;
+                propName="extensions";
+                propgrp=obj.customExtensionDisplay(propgrp,propName,maxDisp);
+            end
+            obj.index=obj.indexArr;
+        end
+        %==================================================================
+        function x=headerComment_Type1(obj,varargin)
+            % headerComment_Type1 - Create header comment for classes.
+
+            N=size(obj,1);
+            if nargin>1
+                try
+                    propertynames= cellstr(string(varargin{:}));
+                catch
+                    propertynames= cellstr(string(varargin));
+                end
+            else
+                propertynames={'name','Switch','comment'};
+            end
+            x=obj.getOtherProperties(propertynames,1:N);
+            if size(x,2)==N
+                x=x';
+            end
+        end
+        %==================================================================
+        function x=headerComment_Type2(obj)
+            % headerComment_Type2 - Create the header comments for classes
+            % that show the extension switches.
+
+            N=size(obj,1);
+
+            % get index of reference policies
+            idxRefPol=obj.index>obj.Info.Handler.Count;
+
+            temp=copy(obj);
+            temp.index=temp.indexArr;
+            if contains(class(obj),'InSystem')
+            [ss,keys]=temp.getOtherProperties(["name","comment","Switch"],temp.index);
+            else
+                [ss,keys]=temp.getOtherProperties(["name","comment"],temp.index);
+            end
+            % ss=temp(1:end,["name","comment","Switch","extensions"]);
+            names=ss(ismember(keys,'name'),:)';
+            if any(ismember(keys,'comment') )
+                comments=ss(ismember(keys,'comment'),:)';
+            else
+                comments=strings(N,1);
+            end
+            if any(ismember(keys,'Switch')) 
+                namesSwitch=ss(ismember(keys,'Switch'),:)';
+            else
+                namesSwitch=strings(N,1);
+            end
+
+            tic
+            ss=obj(1:end,'extensions');
+            toc
+            
+
+            namesExt=strings(numel(ss.extensions),1);
+            posRefPol=find(idxRefPol);
+            for jj=1:N
+                if ~isempty(ss.extensions{jj}) && ~ismember(jj,posRefPol)
+                    namesExtJoin=strjoin(ss.extensions{jj}(1:end).shortName',',');
+                    namesExt(jj)=sprintf('(with switch set for %s)',namesExtJoin);
+                end
+            end
+
+            if any(idxRefPol)
+                comments(idxRefPol)="";
+            end
+
+            if any(idxRefPol) && strcmp(class(obj),'Policy') ||...
+                    any(idxRefPol) && strcmp(class(obj),'ReferencePolicy')
+                namesExt(idxRefPol)="Reference policy";
+            end
+
+            middlecom=append(namesSwitch,' ', namesExt);
+            if all(strcmp(middlecom," "))
+                x=[names,comments];
+            else
+                x=[names,middlecom,comments];
+            end
         end
     end
 

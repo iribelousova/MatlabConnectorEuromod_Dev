@@ -1,23 +1,56 @@
-classdef DatasetInSystem < Dataset 
-    properties (Access=public,Hidden=true) %(Access={?utils.redefinesparen,?utils.dict2Prop}) 
-        % model
-        % index (:,1) double
-        % orderArr (:,1) string
-        % paren struct
-    end
+classdef DatasetInSystem < Dataset
+    % DatasetInSystem - Datasets available in a system model.
+    %
+    % Syntax:
+    %
+    %     D = DatasetInSystem(System);
+    %
+    % Description:
+    %     This class contains the relevant information about the system-
+    %     specific datasets.
+    %
+    %     This class is a subclass of the Dataset class.
+    %
+    % Dataset Arguments:
+    %     System          - A country-specific class.
+    %
+    %  Dataset Properties:
+    %     bestMatch        - If yes, the current dataset is a best match for the specific system.
+    %     coicopVersion    - COICOP version.
+    %     comment          - Comment about the dataset.
+    %     currency         - Currency of the monetary values in the dataset.
+    %     dataID           - Identifier number of the reference dataset at the country level.
+    %     decimalSign      - Decimal delimiter.
+    %     ID               - Dataset identifier number.
+    %     listStringOutVar - Names of
+    %     name             - Name of the dataset.
+    %     parent           - The system-specific class.
+    %     private          - Access type.
+    %     readXVariables   - Read variables.
+    %     sysID            - Identifier number of the reference system.
+    %     useCommonDefault - Use default.
+    %     yearCollection   - Year of the dataset collection.
+    %     yearInc          - Reference year for the income variables.
+    %
+    %  Example:
+    %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
+    %     % Display the default datasets in system "AT_2023".
+    %     mod.('AT').systems(end).datasets
+    %     % Display the dataset "AT_2021_b1" in system "AT_2023".
+    %     mod.AT.AT_2023.datasets(3)
+    %
+    % See also Model, Country, DatasetInSystem, bestmatchDatasets, info, run.
 
-    % properties (Constant,Hidden)
-    %     tag = char(EM_XmlHandler.TAGS.SYS_DATA)
-    % end
-
-    properties (Access=public) 
-        bestMatch (1,1) string
-        dataID (1,1) string
-        sysID (1,1) string
+    properties (Access=public)
+        bestMatch (1,1) string % If yes, the current dataset is a best match for the specific system.
+        dataID (1,1) string % Identifier number of the reference dataset at the country level.
+        sysID (1,1) string % Identifier number of the reference system.
     end
 
     methods (Static, Access = public)
+        %==================================================================
         function obj = empty(varargin)
+            % empty - Re-assaign an empty DatasetInSystem class.
             %
             % Example:
             %
@@ -37,17 +70,16 @@ classdef DatasetInSystem < Dataset
             end
         end
     end
-
     methods
-
+        %==================================================================
         function varargout = size(obj,varargin)
             [varargout{1:nargout}] = size(obj.index,varargin{:});
         end
-
+        %==================================================================
         function varargout = ndims(obj,varargin)
             [varargout{1:nargout}] = ndims(obj.index,varargin{:});
         end
-
+        %==================================================================
         function ind = end(obj,m,n)
             S = numel(obj.indexArr);
             if m < n
@@ -56,8 +88,9 @@ classdef DatasetInSystem < Dataset
                 ind = prod(S(m:end));
             end
         end
-        
+        %==================================================================
         function obj = DatasetInSystem(System)
+            % DatasetInSystem - Datasets available in a system model.
 
             obj = obj@Dataset;
 
@@ -70,13 +103,12 @@ classdef DatasetInSystem < Dataset
             end
 
             obj.load(System);
-
         end
-
-        %------------------------------------------------------------------
+        %==================================================================
         function obj = load(obj, parent)
+            % load - Load the DatasetInSystem class array objects.
 
-            obj = obj.load@Dataset(parent);  
+            obj = obj.load@Dataset(parent);
 
             % set PieceOfInfo handler
             TAG=EM_XmlHandler.ReadCountryOptions.(obj.tag_s_(System.tag,obj.tag));
@@ -86,93 +118,26 @@ classdef DatasetInSystem < Dataset
 
             [obj,out]=obj.getPieceOfInfo(IDs,parentID,TAG,"order");
 
-            % sobj=copy(obj.parent.getParent("SYS"));
-
-            % % get country handler
-            % if isa(parent,'Country')
-            %     cobj=copy(parent);
-            % else
-            %     cobj=copy(parent.getParent("COUNTRY"));
-            % end
-            % 
-            % % load super class 
-            % obj = obj.load@Dataset(cobj);  
-            % 
-            % % set parent
-            % obj.parent=copy(parent);
-            % obj.parent.indexArr=obj.parent.index;
-            % 
-            % % set PieceOfInfo handler
-            % TAG=EM_XmlHandler.ReadCountryOptions.(obj.tag_s_(System.tag,obj.tag));
-            % % parentID=obj.parent()
-            % obj.getPieceOfInfo(obj.parent,TAG);
-            % 
-            % set index
             obj.indexArr=1:numel(obj.Info.PieceOfInfo);
             obj.index=obj.indexArr;
         end
-
-        %------------------------------------------------------------------
+        %==================================================================
         function x = getID(obj)
+            % getID - Get the IDs of all datasets in the system.
 
-            % parentID = obj.parent.ID;
             [IDs,~] = utils.getInfo(obj.Info.Handler,obj.index,'ID');
             if size(IDs,2)==obj.Info.Handler.Count
                 IDs=IDs';
             end
-            % x = append(parentID,IDs);
             x=IDs;
-
-            %  % [parenID,~] = utils.getInfo(m.handler,m.index,'ID');
-            % % parenID=char(parenID);
-            % % [IDs,~] = utils.getInfo(obj.handler,':','ID');
-            % 
-            % cobj=obj.getParent("COUNTRY");
-            % 
-            % ID1=cobj.extensions(:).ID;
-            % % ID2=cobj.parent.extensions(:).ID;
-            % % IDp=obj.parent.ID;
-            % % if strcmp("",IDp)
-            % %     IDp=obj.paren(1).ID;
-            % % end
-            % 
-            % % x=[ID1;ID2];
-            % % x=append(IDp,x);
-            % x=ID1;
-            % 
-            % 
-            % % x=utils.getInfo(obj.parent.parent.extensions.Info.Handler,':',"ID");
-            % % x=[x,utils.getInfo(obj.parent.parent.parent.extensions.Info.Handler,':',"ID")];
-            % % x=x';
         end
-
+        %==================================================================
         function x=headerComment(obj,varargin)
+            % headerComment - Get the comment of the class array.
 
             x=obj.headerComment_Type1({'name','bestMatch','comment'});
             x(ismember(x(:,2),"no"),2) = "";
             x(ismember(x(:,2),"yes"),2) = "best match";
-
-            % N=size(obj,1);
-            % % get object comment property value
-            % x=getOtherProperties(obj,{'name','Switch','comment'},obj.index);
-            % if size(x,2)==N
-            %     x=x';
-            % end
-            % 
-            % % nams=obj.getOtherProperties('name',1:N)';
-            % % 
-            % % middlecom =  obj.getOtherProperties('Switch',obj.index)';
-            % 
-            % % bk = arrayfun(@(t) numel(char(t)),com_p);
-            % % bk=string(arrayfun(@(t) blanks(t), max(bk)-bk+1,'UniformOutput',false));
-            % 
-            % % x = append(com_p(:,1), bk(:,1), '| ',com_p(:,2), bk(:,2), '| ',com_p(:,2), bk(:,2));
-            % % 
-            % % % cut text if too long
-            % % l=arrayfun(@(t) numel(char(t)),x);
-            % % x=arrayfun(@(t) extractBefore(x(t), min(l(t),133)),1:N)';    
-
         end
-
     end
 end

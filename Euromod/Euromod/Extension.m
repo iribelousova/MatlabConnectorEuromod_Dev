@@ -1,41 +1,55 @@
-% mod=struct()
-% mod.model=struct();
-% mod.model.CIH=EM_XmlHandler.CountryInfoHandler("C:\EUROMOD_RELEASES_I6.0+", 'BE')
-% mod.tag=char(EM_XmlHandler.TAGS.POL)
-% ff=Function(mod,'ba790a98-7346-4ab3-806b-d944ca5ca77e')
-% ID='008745fd-3c9b-4ff3-9ce2-e34ab93dae36';
+classdef Extension < Core
+    % Extension - EUROMOD extensions.
+    %
+    % Syntax:
+    %
+    %     E = Extension(Parent);
+    %
+    % Description:
+    %     This class instantiates the EUROMOD extensions (Model and/or ...
+    %     Country extensions). Class instances are automatically generated
+    %     and stored in the attribute extensions of the base class Model
+    %     (including the Model extensions only), as well as of the Country
+    %     class (including both the Model and Country-specific extensions).
+    %
+    % Extension Arguments:
+    %     Parent    - The Model base class or the Country class.
+    %
+    %  Extension Properties:
+    %     ID        - Identifier number of the extension.
+    %     name      - Long name of the extension.
+    %     parent    - The model base class or the Country class.
+    %     shortName - Short name of the extension.
+    %
+    %  Example:
+    %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
+    %     mod.('AT').extensions % displays the default model and country extensions for Austria.
+    %     mod.('AT').extensions(3) % displays the specific Extension for Austria.
+    %
+    % See also Model, Country, ExtensionSwitch, local_extensions, info, run.
 
-% modelpath= "C:\EUROMOD_RELEASES_I6.0+";
-% mod = struct();
-% mod.modelpath=modelpath;
-% mod.modelInfoHandler = EM_XmlHandler.ModelInfoHandler(modelpath);
-% mod.emCommon = EM_Common.EMPath(modelpath, true);
-% cc=Country(mod,'BE')
+    properties (Access=public)
+        % ID (1,1) string % Identifier number of the extension.
+        name (1,1) string % Long name of the extension.
+        parent % The model base class or the Country class.
+        shortName (1,1) string % Short name of the extension.
+    end
 
-classdef Extension < Core 
-    properties (Access=public,Hidden) %(Access={?utils.redefinesparen,?utils.dict2Prop}) 
-        % model
-        index (:,1) double
-        indexArr (:,1) double
-        parent 
-        Info struct
+    properties (Hidden)
+        indexArr (:,1) double % Index array of the class.
+        index (:,1) double % Index of the element in the class.
+        Info struct % Contains the 'Handler' field to the 'CountryInfoHandler.GetTypeInfo' output.
+        tag (1,1) string
 
     end
 
-    properties (Constant,Hidden) 
-        % tag = char(EM_XmlHandler.ReadModelOptions.EXTENSIONS)
-        tag = char(EM_XmlHandler.ReadModelOptions.('EXTENSIONS'))
-        tagLocal = char(EM_XmlHandler.ReadCountryOptions.LOCAL_EXTENSION)
-    end
-
-    properties (Access=public) 
-        ID (1,1) string
-        name (1,1) string
-        shortName (1,1) string
+    properties (Constant,Hidden)
+        tagLocal = char(EM_XmlHandler.ReadCountryOptions.LOCAL_EXTENSION) % Country extension tag
     end
 
     methods (Static, Access = public)
         function obj = empty(varargin)
+            % empty - Re-assaign an empty Extension class.
             %
             % Example:
             %
@@ -59,15 +73,15 @@ classdef Extension < Core
 
 
     methods
-
+        %==================================================================
         function varargout = size(obj,varargin)
             [varargout{1:nargout}] = size(obj.index,varargin{:});
         end
-
+        %==================================================================
         function varargout = ndims(obj,varargin)
             [varargout{1:nargout}] = ndims(obj.index,varargin{:});
         end
-
+        %==================================================================
         function ind = end(obj,m,n)
             S = numel(obj.indexArr);
             if m < n
@@ -76,18 +90,9 @@ classdef Extension < Core
                 ind = prod(S(m:end));
             end
         end
-        
+        %==================================================================
         function obj = Extension(Parent)
-
-            % obj.comment = 'Comment about the specific policy.';
-            % obj.extensions = 'A list of policy-specific Extension objects.';
-            % % obj.parameters = 'A list with FunctionInSystem objects specific to the system.';
-            % obj.ID = 'Identifier number';
-            % obj.name = 'Long name';
-            % obj.order = 'Order in the policy spine.';
-            % obj.polID = 'Short name';
-            % obj.spineOrder = 'Order of the policy in the spine.';
-
+            % Extension - EUROMOD extensions.
 
             if nargin == 0
                 return;
@@ -100,52 +105,125 @@ classdef Extension < Core
             obj.parent=copy(Parent);
 
             if isa(Parent,'Model')
+                obj.tag = char(EM_XmlHandler.ReadModelOptions.('EXTENSIONS')); % Model extension tag
+
+                P=obj.addprop('ID');
+                P.NonCopyable = false;
+
                 obj.Info(1).Handler = obj.parent.Info.Handler.GetModelInfo(...
                     EM_XmlHandler.ReadModelOptions.(obj.tag));
-    
+
                 obj.indexArr = 1:obj.Info.Handler.Count;
                 obj.index=obj.indexArr;
             elseif isa(Parent,'Country')
+                obj.tag = char(EM_XmlHandler.ReadModelOptions.('EXTENSIONS')); % Country extension tag
+                P=obj.addprop('ID');
+                P.NonCopyable = false;
+
                 obj.parent.indexArr=obj.parent.index;
                 Idx=obj.parent.index;
-    
+
                 % set handler
                 Tag=EM_XmlHandler.ReadCountryOptions.(obj.tagLocal);
                 obj.Info(1).Handler = obj.parent.Info(Idx).Handler.GetTypeInfo(Tag);
-         
+
                 % set index
                 obj.indexArr = 1:obj.Info.Handler.Count+obj.parent.parent.extensions.Info.Handler.Count;
                 obj.index=obj.indexArr;
+                if numel(obj.indexArr)==1
+                    obj.update(obj.index);
+                end
+            else
+                obj.tag = char(EM_XmlHandler.TAGS.EXTENSION); % EXTENSION Switch tag
+
+                P=obj.addprop('baseOff');
+                P.NonCopyable = false;
+
+                P=obj.addprop('extensionID');
+                P.NonCopyable = false;
+
+                % add the dynamic property to class ExtensionSwitch
+                newProp=Parent.tag_s_(Parent.tag,'ID');
+                newProp=[lower(newProp(1)),newProp(2:end)];
+
+                P=obj.addprop(newProp);
+                P.NonCopyable = false;
+
+                % set parent
+                obj.parent.indexArr=obj.parent.index;
+                obj.parent=obj.parent.update(obj.parent.index);
+
+                % add the dynamic property to class ExtensionSwitch
+                newProp=obj.tag_s_(Parent.tag,'ID');
+                newProp=[lower(newProp(1)),newProp(2:end)];
+                props=string(properties(obj));
+                if ~ismember(newProp,props)
+                    P=obj.addprop(newProp);
+                    P.NonCopyable = false;
+                    % obj.(newProp) = string;
+                end
+
+                % define tag
+                if isa(Parent,'Policy') || isa(Parent,'ReferencePolicy') || isa(Parent,'PolicyInSystem')
+                    TAG=EM_XmlHandler.ReadCountryOptions.(obj.tag_s_(obj.tag,Policy.tag));
+                else
+                    TAG=EM_XmlHandler.ReadCountryOptions.(obj.tag_s_(obj.tag,Parent.tag));
+                end
+
+                % get current object and parent object IDs
+                IDs=obj.getID();
+                if contains(class(obj.parent),'InSystem')
+                    tagID=obj.tag_s_(obj.parent.tag,'ID');
+                    tagID=[lower(tagID(1)),tagID(2:end)];
+                else
+                    tagID='ID';
+                end
+                parentID=obj.parent.(tagID);
+
+                % set handler
+                [obj,out]=obj.getPieceOfInfo(IDs,parentID,TAG);
+
+                % set index
+                if  numel(fieldnames(obj.Info.PieceOfInfo))==0
+                    obj=Extension;
+                else
+                    obj.indexArr = 1:numel(obj.Info.PieceOfInfo);
+                    obj.index=obj.indexArr;
+
+                    if numel(obj.indexArr)==1
+                        obj.update(obj.index);
+                    end
+                end
             end
-
-            % obj.load(Model);
-
         end
+    end
 
+    methods (Hidden)
+        %==================================================================
+        function x = getID(obj)
 
-        % function obj = load(obj, parent)
-        % 
-        %     obj.parent=copy(parent);
-        %     obj.parent.indexArr=obj.parent.index;
-        % 
-        %     obj.Info(1).Handler = obj.parent.Info.Handler.GetModelInfo(...
-        %         EM_XmlHandler.ReadModelOptions.(obj.tag));
-        % 
-        %     obj.indexArr = 1:obj.Info.Handler.Count;
-        %     obj.index=obj.indexArr;
-        % end
+            cobj=copy(obj.getParent("COUNTRY"));
 
+            ID1=cobj.extensions(1:end).ID;
+            x=ID1;
+        end
+        %==================================================================
         function [values,keys] =getOtherProperties(obj,name,index)
+            % getOtherProperties - Get the properties of type string.
 
             if isa(obj.parent,'Model')
                 [values,keys] = obj.getOtherPropertiesModel(name,index);
             elseif isa(obj.parent,'Country')
                 [values,keys] = obj.getOtherPropertiesCountry(name,index);
+            else
+                [values,keys]=obj.getOtherPropertiesSubClass(name,index);
             end
 
         end
-
+        %==================================================================
         function [values,keys] =getOtherPropertiesModel(obj,name,index)
+            % getOtherPropertiesModel - Get the properties of type string
+            % from Model extensions.
             name=string(name);
             name = append(upper(extractBefore(name,2))',extractAfter(name,1)');
 
@@ -159,11 +237,14 @@ classdef Extension < Core
             keys(strcmp(keys,"look")) = [];
 
         end
-
+        %==================================================================
         function [values,keys]=getOtherPropertiesCountry(obj,name,index)
+            % getOtherPropertiesCountry - Get the properties of type string
+            % from Country extensions.
             name=string(name);
             name = append(upper(extractBefore(name,2))',extractAfter(name,1)');
 
+            % initialize
             values=strings(numel(name),size(obj,1));
             keys=name;
 
@@ -216,17 +297,60 @@ classdef Extension < Core
                 keys(contains(keys,'iD'))='ID';
             end
         end
+        %==================================================================
+        function [values,keys]=getOtherPropertiesSubClass(obj,name,index)
 
+            N=size(obj,1);
+            name=string(name);
+            name = append(upper(extractBefore(name,2))',extractAfter(name,1)');
+            keys=name;
+            values=strings(numel(name),N);
 
-        function x=headerComment(obj)
-            x=obj.headerComment_Type1(["shortName","name"]);
+            IDs = strings(1,N);
+
+            cobj=obj.getParent('COUNTRY');
+            for i=1:N
+                idx=obj.index(i);
+                [v,k]=utils.getInfo(obj.Info.PieceOfInfo(idx).Handler,name);
+                if ismember('ID',k)
+                    % IDs(i)=v(ismember(k,'ID'),:);
+                    ID=v(ismember(k,'ID'),:);
+                else
+                    % IDs(i)=utils.getInfo(obj.Info.PieceOfInfo(idx).Handler,'ExtensionID');
+                    ID=utils.getInfo(obj.Info.PieceOfInfo(idx).Handler,'ExtensionID');
+                end
+                % keys=[keys;k(~ismember(k,keys))];
+                values = utils.setValueByKey(values,keys,v,k,i);
+
+                try
+                    [v,k]=utils.getInfo(cobj.extensions.Info.Handler,ID,name);
+                    values = utils.setValueByKey(values,keys,v,k);
+                catch
+                end
+                try
+                    [v,k]=utils.getInfo(cobj.parent.extensions.Info.Handler,ID,name);
+                    values = utils.setValueByKey(values,keys,v,k,i);
+                catch
+                end
+            end
+
+            keys = append(lower(extractBefore(keys,2))',extractAfter(keys,1)');
+            if any(contains(keys,'iD'))
+                keys(contains(keys,'iD'))='ID';
+            end
         end
-
-        % function x=headerComment(obj)
-        %     x=obj.headerComment_Type1();
-        % end
-
-       
+        %==================================================================
+        function x=headerComment(obj)
+            % headerComment - Get the comment of the class array.
+            if isa(obj.parent,'Model') || isa(obj.parent,'Country')
+                x=obj.headerComment_Type1(["shortName","name"]);
+            else
+                N=size(obj,1);
+                x=obj.getOtherProperties({'name','baseOff','comment'},1:N)';
+                % x=obj(:).baseOff;
+                x(strcmp(x,'true'))='off';
+                x(strcmp(x,'false'))='on';
+            end
+        end
     end
-
 end

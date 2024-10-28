@@ -1,33 +1,46 @@
-classdef Model < Core 
+classdef Model < Core
+    % Model - Base class of the Euromod Connector.
+    %
+    % Syntax:
+    %
+    %     mod = euromod(model_path);
+    %
+    % Description:
+    %     This class instantiates the microsimulation model EUROMOD.
+    %
+    % Model Arguments:
+    %     model_path - Path to the EUROMOD project.
+    %
+    % Model Properties:
+    %     countries  - The Country class array with country elements.
+    %     extensions - The Extension class array with Model extension elements.
+    %     modelpath  - Path to the EUROMOD project.
+    %
+    % See also Country, Extension, info, run.
 
-    properties
-        extensions 
-        countries 
-        modelpath (1,1) string
-        
+    properties (Access=public) 
+        extensions Extension % The Extension class with Model extension elements.
+        countries Country % The Country class with country elements.
+        modelpath (1,1) string % Path to the EUROMOD project.
+
         % model
     end
 
-    properties (Dependent=true)
-         
-    end
-
     properties (Hidden)
-        Info
-        countryClass 
-        extensionsClass 
-        % userCountries (:,1) string
-        % defaultCountries
+        Info struct % Contains the 'Handler' field to the 'ModelInfoHandler'.
+        countryClass Country % The Country class with country elements.
+        extensionsClass Extension % The Extension class with Model extension elements.
     end
 
-    properties (Constant)
+    properties (Constant,Hidden)
         tag = 'MODEL'
         indexArr = 1
         index = 1
     end
 
-    methods (Static, Access = public)
+    methods (Static, Access = public,Hidden)
         function obj = empty(varargin)
+            % empty - Re-assaign an empty Model class.
             %
             % Example:
             %
@@ -49,132 +62,66 @@ classdef Model < Core
         end
     end
 
-    methods 
-        
-        function obj=Model(modelPath)
+    methods
 
-            % mm=Model("C:\EUROMOD_RELEASES_I6.0+", {'BE',"AT"});
+        function obj=Model(model_path)
+            % Base class of the Euromod Connector.
 
             if nargin == 0
                 return;
             end
 
-            % obj.load(varargin{:});
-
             % user Model Path
-            modelPath=string(modelPath);
-            obj.Info(1).Handler = EM_XmlHandler.ModelInfoHandler(modelPath);
-            obj.modelpath=modelPath;
-
-            % % user Model Countires
-            % countryNames = varargin{2};
-            % if ~isstring(countryNames)
-            %     countryNames=string(countryNames);
-            % end
-            % countryNames=sort(countryNames);
-            % countryNames=upper(countryNames);
-            % 
-            % % check the country exists in EUROMOD 
-            % notCountry = ~contains(countryNames,obj.defaultCountries);
-            % if any(notCountry)
-            %     ME=struct();
-            %     ME.message=sprintf('Unrecognized country name(s) .. "%s".',strjoin(countryNames(notCountry),'","'));
-            %     ME.indetifier='MATLAB:ValueError';
-            %     error(ME)
-            % else
-            %     obj.userCountries=countryNames;
-            % end
-            
-
-            % 
-            % obj(1);
-
-            % if nargin == 0
-            %     return;
-            % end
-            % 
-            % % user inputs
-            % modelPath=string(varargin{1});
-            % countryNames = varargin{2};
-            % 
-            % 
-            % if ~isstring(countryNames)
-            %     countryNames=string(countryNames);
-            % end
-            % countryNames=sort(countryNames);
-            % countryNames=upper(countryNames);
-            % 
-            % % set model handler
-            % obj.Info(1).Handler = EM_XmlHandler.ModelInfoHandler(modelPath);
-            % 
-            % % set public attributes
-            % obj.modelpath=string(modelPath);
-            % obj.extensions=Extension(obj);
-            % 
-            % notCountry = ~contains(countryNames,obj.defaultCountries);
-            % if any(notCountry)
-            %     ME=struct();
-            %     ME.message=sprintf('Unrecognized country name(s) .. "%s".',strjoin(countryNames(notCountry),'","'));
-            %     ME.indetifier='MATLAB:ValueError';
-            %     error(ME)
-            % else
-            %     obj.userCountries=countryNames;
-            % end
-            % obj.countries=Country(obj);
-            
+            model_path=string(model_path);
+            obj.Info(1).Handler = EM_XmlHandler.ModelInfoHandler(model_path);
+            obj.modelpath=model_path;
         end
 
-        % %------------------------------------------------------------------
-        % function obj = load(obj, varargin)
-        % 
-        %     % obj.parent=[];
-        % 
-        %     % % user inputs
-        %     % modelPath=string(varargin{1});
-        %     % countryNames = varargin{2};
-        %     % 
-        %     % 
-        %     % if ~isstring(countryNames)
-        %     %     countryNames=string(countryNames);
-        %     % end
-        %     % countryNames=sort(countryNames);
-        %     % countryNames=upper(countryNames);
-        % 
-        %     % set model handler
-        %     % obj.Info(1).Handler = EM_XmlHandler.ModelInfoHandler(obj.modelPath);
-        % 
-        %     % % check the country exists in EUROMOD 
-        %     % notCountry = ~contains(countryNames,obj.defaultCountries);
-        %     % if any(notCountry)
-        %     %     ME=struct();
-        %     %     ME.message=sprintf('Unrecognized country name(s) .. "%s".',strjoin(countryNames(notCountry),'","'));
-        %     %     ME.indetifier='MATLAB:ValueError';
-        %     %     error(ME)
-        %     % else
-        %     %     obj.userCountries=countryNames;
-        %     % end
-        % 
-        %     % set public properties
-        %     % obj.modelpath=string(modelPath);
-        %     % obj.extensions=Extension(obj);
-        %     % obj.countries=Country(obj);
-        % 
-        % end
+        function x=get.countries(varargin)
+            % countries - Get the model Country class array.
+            obj=varargin{1};
 
-        % function [values,keys]=getOtherProperties(obj,name,index)
-        %     name=string(name);
-        % 
-        %     if strcmp("modelpath",name)
-        %         values=obj.modelpath;
-        %     else
-        %         error('AttributeError: Unrecognized property name "%s".', name)
-        %     end
-        %     % values=string(arrayfun(@(t) char(obj.Info(t).Handler.country),obj.index,UniformOutput=false))';
-        %     keys=name;
-        % end
+            if size(obj.countryClass,1)==0
+                obj.countryClass=Country(obj);
+                x=obj.countryClass;
+            else
+                x=obj.countryClass;
+                x.index=obj.countryClass.indexArr;
+            end
+        end
 
-        % 
+        function x=get.extensions(varargin)
+            % extensions - Get the model Extension class array.
+            obj=varargin{1};
+
+            if size(obj.extensionsClass,1)==0
+                obj.extensionsClass=Extension(obj);
+                x=obj.extensionsClass;
+            else
+                x=obj.extensionsClass;
+                x.index=obj.extensionsClass.indexArr;
+            end
+
+        end
+
+    end
+
+    methods (Hidden)
+        %==================================================================
+        function [values,keys]=getOtherProperties(obj,name,index)
+            % getOtherProperties - Get the properties of type string.
+            name=string(name);
+
+            if ismember('modelpath',name)
+                values=obj.modelpath;
+            else
+                error('Unrecognized property or function for class Model.')
+            end
+
+            keys=name;
+        end
         function x=defaultCountries(varargin)
+            % defaultCountries - Get the Model default countries.
             obj=varargin{1};
             if nargin==1
                 idx=1:obj.Info.Handler.countries.Count;
@@ -188,87 +135,6 @@ classdef Model < Core
                 x(i) = char(obj.Info.Handler.countries.Item(i-1));
             end
         end
-
-        function x=get.countries(varargin)
-            obj=varargin{1};
-
-            if size(obj.countryClass,1)==0
-                obj.countryClass=Country(obj);
-                x=obj.countryClass;
-            else
-                x=obj.countryClass;
-                x.index=obj.countryClass.indexArr;
-            end
-
-            % x=obj.defaultCountries;
-            % idxArr=1:obj.Info.Handler.countries.Count;
-            % if nargin==1
-            %     idx=1:obj.Info.Handler.countries.Count;
-            % else
-            %     idx=varargin{2};
-            % end
-            % x=copy(obj.countryClass);
-            % x.index=idx;
-        end
-
-        function x=get.extensions(varargin)
-            obj=varargin{1};
-
-            if size(obj.extensionsClass,1)==0
-                obj.extensionsClass=Extension(obj);
-                x=obj.extensionsClass;
-            else
-                x=obj.extensionsClass;
-                x.index=obj.extensionsClass.indexArr;
-            end
-
-        end
-
-
-        % function set(obj,prop,value)
-        %     obj.(prop) = value;
-        % end
-
-        % function x = get(obj,prop,index)
-        % 
-        %     % obj.(prop).load(obj);
-        % 
-        %     if nargin == 2
-        %         x = obj.(prop);
-        %     elseif nargin == 3
-        %         objIdx = obj.(prop).index;
-        %         if all(ismember(index,objIdx)) && numel(objIdx) == numel(index)
-        %             x = obj.(prop)(index);
-        %         else
-        %             obj.(prop).index = obj.(prop).index(index);
-        %             % obj.(prop).update();
-        %             x = obj.(prop)(index);
-        %         end
-        %     end
-        % end
-
-        % function x = get.extensions(obj)
-        %     if isempty(obj.extensions)
-        %         obj.extensions.load(obj);
-        %     end
-        % 
-        %     obj.extensions.index = obj.extensions.indexArr;
-        %     x = obj.extensions;
-        % end
-        % 
-        % function x = get.countries(obj)
-        %     if isempty(obj.countries)
-        %         obj.countries.load(obj);
-        %     end
-        % 
-        %     obj.countries.index = obj.countries.indexArr;
-        %     x = obj.countries;
-        % end
-
-
     end
-
-
-
 
 end

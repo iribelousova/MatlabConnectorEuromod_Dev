@@ -40,15 +40,22 @@ meta=metaclass(obj);
 % 
 % end
 allprops=unique([string({meta.PropertyList.Name}),string(properties(obj))']);
+allobjprops=["systems","policies","datasets","extensions","parameters",...
+    "local_extensions","parent","countries","functions","bestmatchDatasets"];
 for i=1:numel(allprops)
     m = findprop(obj,allprops(i));
     if ~m.Hidden
         if isempty(m.Validation) 
-            if contains(m.Name,"ID")
-                strProps=[strProps,string(m.Name)];
-            else
+            if ismember(m.Name,allobjprops)
                 objProps=[objProps,string(m.Name)];
+            else
+                strProps=[strProps,string(m.Name)];
             end
+            % if contains(m.Name,"ID")
+            %     strProps=[strProps,string(m.Name)];
+            % else
+            %     objProps=[objProps,string(m.Name)];
+            % end
         else
             if strcmp("string",m.Validation.Class.Name)
                 strProps=[strProps,string(m.Name)];

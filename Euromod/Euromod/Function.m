@@ -1,51 +1,78 @@
-% mod=struct()
-% mod.model=struct();
-% mod.model.CIH=EM_XmlHandler.CountryInfoHandler("C:\EUROMOD_RELEASES_I6.0+", 'BE')
-% mod.tag=char(EM_XmlHandler.TAGS.POL)
-% ff=Function(mod,'ba790a98-7346-4ab3-806b-d944ca5ca77e')
-% ID='008745fd-3c9b-4ff3-9ce2-e34ab93dae36';
-
-% modelpath= "C:\EUROMOD_RELEASES_I6.0+";
-% mod = struct();
-% mod.modelpath=modelpath;
-% mod.modelInfoHandler = EM_XmlHandler.ModelInfoHandler(modelpath);
-% mod.emCommon = EM_Common.EMPath(modelpath, true);
-% cc=Country(mod,'BE')
-
 classdef Function < Core
-    properties (Access=public,Hidden) %(Access={?utils.redefinesparen,?utils.dict2Prop}) 
-        index (:,1) double
-        indexArr (:,1) double
-        commentArray (:,:) string
-        parent 
+    % Function - A class with the functions implemented in a country policy.
+    %
+    % Syntax:
+    %
+    %     F = Function(Policy);
+    %
+    % Description:
+    %     This class contains the policy-specific functions. It is
+    %     stored in the property 'functions' of the Policy class.
+    %
+    %     This class contains subclasses of type PolicyInSystem and
+    %     DatasetInSystem.
+    %
+    %     This class serves also as a superclass for the FunctionyInSystem
+    %     subclass.
+    %
+    % Function Arguments:
+    %     Policy     - A class containing the country-specific policy.
+    %
+    % Function Properties:
+    %     comment    - Comment specific to the function.
+    %     extensions - Extension class with function extensions.
+    %     ID         - Identifier number of the function.
+    %     name       - Name of the function.
+    %     order      - Order of the function in the specific spine.
+    %     parameters - Parameter class with function parameters.
+    %     parent     - A class of the country-specific policy.
+    %     polID      - Identifier number of the policy.
+    %     private    - Access type.
+    %     spineOrder - Order of the function in the spine.
+    %
+    %  Example:
+    %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
+    %     % Display the default functions for policy "uprate_at":
+    %     mod.('AT').policies(2).functions
+    %     % Display the functions "Uprate" for policy "uprate_at":
+    %     mod.('AT').policies(2).functions("Uprate")
+    %
+    % See also Model, Country, Policy, FunctionInSystem, info, run.
+
+    properties (Access=public)
+        comment (1,1) string % Comment specific to the function.
+        extensions Extension % Extension class with function extensions.
+        ID (1,1) string % Identifier number of the function.
+        name (1,1) string % Name of the function.
+        order (1,1) string % Order of the function in the specific spine.
+        parameters Parameter % Parameter class with function parameters.
+        parent % A class of the country-specific policy.
+        polID (1,1) string % Identifier number of the policy.
+        private (1,1) string % Access type.
+        spineOrder (1,1) string % Order of the function in the spine.
+    end
+
+    properties (Hidden)
+        indexArr (:,1) double % Index array of the class.
+        index (:,1) double % Index of the element in the class.
+        commentArray (:,:) string % Comment for the class header.
+        % Info - Contains information from the c# objects.
+        % The 'Handler' field stores the 'CountryInfoHandler.GetTypeInfo'
+        % output. The 'PieceOfInfo.Handler' stores the
+        % 'CountryInfoHandler.GetPieceOfInfo' output.
         Info struct
-        parametersClass
-        extensionsClass
+        parametersClass Parameter % Parameter class with function parameters.
+        extensionsClass Extension % Extension class with function extensions.
     end
 
     properties (Constant,Hidden)
-        % tag = char(EM_XmlHandler.ReadCountryOptions.FUN)
-        tag = char(EM_XmlHandler.TAGS.FUN)
+        tag = char(EM_XmlHandler.TAGS.FUN) % Function class tag.
     end
-
-    properties (Access=public) 
-        comment (1,1) string
-        extensions ExtensionSwitch
-        ID (1,1) string
-        name (1,1) string
-        order (1,1) string
-        parameters 
-        polID (1,1) string
-        private (1,1) string
-        spineOrder (1,1) string
-    end
-
-    % properties (GetAccess={?ExtensionSwitch})
-    %     funID (1,1) string
-    % end
 
     methods (Static, Access = public)
+        %==================================================================
         function obj = empty(varargin)
+            % empty - Re-assaign an empty Function class.
             %
             % Example:
             %
@@ -66,18 +93,16 @@ classdef Function < Core
 
         end
     end
-
-
     methods
-
+        %==================================================================
         function varargout = size(obj,varargin)
             [varargout{1:nargout}] = size(obj.index,varargin{:});
         end
-
+        %==================================================================
         function varargout = ndims(obj,varargin)
             [varargout{1:nargout}] = ndims(obj.index,varargin{:});
         end
-        
+        %==================================================================
         function ind = end(obj,m,n)
             S = numel(obj.indexArr);
             if m < n
@@ -86,19 +111,9 @@ classdef Function < Core
                 ind = prod(S(m:end));
             end
         end
-        
+        %==================================================================
         function obj = Function(Policy)
-
-            % modelpath = "C:\EUROMOD_RELEASES_I6.0+";
-
-            % obj.comment = 'Comment about the specific policy.';
-            % obj.extensions = 'A list of policy-specific Extension objects.';
-            % % obj.parameters = 'A list with FunctionInSystem objects specific to the system.';
-            % obj.ID = 'Identifier number';
-            % obj.name = 'Long name';
-            % obj.order = 'Order in the policy spine.';
-            % obj.polID = 'Short name';
-            % obj.spineOrder = 'Order of the policy in the spine.';
+            % Function - A class with the policy-specific functions.
 
             if nargin == 0
                 return;
@@ -109,45 +124,76 @@ classdef Function < Core
             end
 
             obj.load(Policy);
-
-            disp('Function')
         end
+        %==================================================================
+        function x=get.extensions(varargin)
+            % extensions - Get the function Extension class array.
 
+            obj=varargin{1};
+
+            if size(obj.extensionsClass,1)==0
+                obj.extensionsClass=Extension(obj);
+                x=obj.extensionsClass;
+            else
+                if all(obj.extensionsClass.parent.index == obj.index)
+                    x=obj.extensionsClass;
+                    x.index=obj.extensionsClass.indexArr;
+                else
+                    obj.extensionsClass=Extension(obj);
+                    x=obj.extensionsClass;
+                end
+            end
+        end
+        %==================================================================
+        function x=get.parameters(varargin)
+            % parameters - Get the function Parameter class array.
+
+            obj=varargin{1};
+
+            if size(obj.parametersClass,1)==0
+                if strcmp(class(obj),'Function')
+                    obj.parametersClass=Parameter(obj);
+                elseif strcmp(class(obj),'FunctionInSystem')
+                    obj.parametersClass=ParameterInSystem(obj);
+                end
+                x=obj.parametersClass;
+            else
+                if all(obj.parametersClass.parent.index == obj.index)
+                    x=obj.parametersClass;
+                    x.index=obj.parametersClass.indexArr;
+                else
+                    if strcmp(class(obj),'Function')
+                        obj.parametersClass=Parameter(obj);
+                    elseif strcmp(class(obj),'FunctionInSystem')
+                        obj.parametersClass=ParameterInSystem(obj);
+                    end
+                    x=obj.parametersClass;
+                end
+            end
+        end
+    end
+    methods (Hidden)
+        %==================================================================
         function x=getID(obj)
+            % getID - Get the IDs of all functions.
+
             Tag=EM_XmlHandler.ReadCountryOptions.(obj.tag);
             subTag=EM_XmlHandler.TAGS.('POL_ID');
 
             if contains(class(obj),'InSystem')
-                % tagID=obj.tag_s_(obj.tag,'ID');
-                % tagID=[lower(tagID(1)),tagID(2:end)];
                 tagID=char(EM_XmlHandler.TAGS.('POL_ID'));
                 tagID=[lower(tagID(1)),tagID(2:end)];
             else
                 tagID='ID';
             end
 
-            % obj.parent=obj.parent.update(obj.parent.index)
-
             id=obj.parent.(tagID);
 
             x=obj.getPiecesOfInfo(Tag, subTag, id, [], 'ID');
-
-            % % parenID = utils.getInfo(obj.parent.Info.Handler,obj.parent.index,'ID');
-            % parenID=obj.parent.getID;
-            % parenID=char(parenID(obj.parent.index));
-            % 
-            % % Tag=char(lower(obj.parent.tag));
-            % Tag=[obj.parent.tag,'_ID'];
-            % Tag=char(EM_XmlHandler.TAGS.(Tag));
-            % 
-            % [parenIDs,~] = utils.getInfo(obj.Info.Handler,':',Tag);
-            % in = find(ismember(parenIDs,string(parenID)));
-            % 
-            % x=utils.getInfo(obj.Info.Handler,in,'ID');
         end
-
-        %------------------------------------------------------------------
+        %==================================================================
         function obj = load(obj, parent)
+            % load - Load the Function class array objects.
 
             % set parent
             obj.parent=copy(parent);
@@ -167,7 +213,7 @@ classdef Function < Core
             else
                 sobj=copy(cobj.systems);
             end
-            
+
             % set system object
             if size(sobj,1)>1
                 sysIdx=1;
@@ -180,36 +226,15 @@ classdef Function < Core
             Tag=EM_XmlHandler.ReadCountryOptions.(obj.tag);
             obj.Info(1).Handler=cobj.Info(Idx).Handler.GetTypeInfo(Tag);
 
-            % subTag=EM_XmlHandler.TAGS.('POL_ID');
-            % id=obj.parent(1).ID;
-            % obj.Info(1).PiecesOfInfo
-            % [v,k]=obj.getPiecesOfInfo(Tag,subTag,id)
-            % out=cobj.Info(Idx).Handler.GetPiecesOfInfoInList(Tag,subTag,id);
-
             % set PieceOfInfo handler
             TAG=EM_XmlHandler.ReadCountryOptions.(obj.tag_s_(System.tag,obj.tag));
 
             % get current object and parent object IDs
             IDs=obj.getID();
-            % if contains(class(obj.parent),'InSystem')
-            %     tagID=obj.tag_s_(obj.parent.tag,'ID');
-            %     tagID=[lower(tagID(1)),tagID(2:end)];
-            % else
-            %     tagID='ID';
-            % end
             tagID='ID';
             parentID=sobj.(tagID);
 
-            % if strcmp(class(obj),'Function') 
-            %     tagID='ID';
-            % else
-            %     tagID=obj.tag_s_(sobj.tag,'ID');
-            %     tagID=[lower(tagID(1)),tagID(2:end)];
-            % end
-            % tagID='ID';
-            
             [obj,out]=obj.getPieceOfInfo(IDs,parentID,TAG,"order");
-            % [obj,out]=obj.getPieceOfInfo(cobj.systems,TAG,"Order");
 
             % set index
             Order = str2double(string({out(:).Order}));
@@ -218,15 +243,15 @@ classdef Function < Core
             obj.index=idxArr;
 
         end
-
+        %==================================================================
         function [values,keys]=getOtherProperties(obj,name,index)
+            % getOtherProperties - Get the properties of type string.
+
             name=string(name);
             name = append(upper(extractBefore(name,2))',extractAfter(name,1)');
 
-
             Tag=EM_XmlHandler.ReadCountryOptions.(obj.tag);
             subTag=EM_XmlHandler.TAGS.('POL_ID');
-            % id=obj.parent(1).ID;
             if contains(class(obj),'InSystem')
                 tagID=char(EM_XmlHandler.TAGS.('POL_ID'));
                 tagID=[lower(tagID(1)),tagID(2:end)];
@@ -256,31 +281,6 @@ classdef Function < Core
                 values(idxID,:)=append(values(ismember(keys,tagID),:),values(idxID,:));
             end
 
-            % if ismember("order",name)
-            %     % orn="order";
-            %     % if ismember("spineOrder",name)
-            %     %     orn(end+1)="spineOrder";
-            %     % end
-            %     % TAG=EM_XmlHandler.ReadCountryOptions.(obj.tag_s_(System.tag,obj.tag));
-            % 
-            %     Order=strings(1,0);
-            %     Spine = strings(1,0);
-            %     for i=1:numel(obj.index)
-            %         i_=obj.index(i);
-            %         Order(1,end+1)=string(obj.Info.PieceOfInfo(i_).Handler.Item("Order"));
-            %         if ismember("spineOrder",name)
-            %             Spine(1,end+1)=string([char(obj.parent(1).spineOrder),'.',char(Order(i))]);
-            %         end
-            %     end
-            % 
-            %     keys(end+1)="order";
-            %     values(end+1,:)=Order;
-            %     if ismember("spineOrder",name)
-            %         keys(end+1)="spineOrder";
-            %         values(end+1,:)=Spine;
-            %     end
-            % end
-
             keys = append(lower(extractBefore(keys,2))',extractAfter(keys,1)');
             if any(contains(keys,'iD'))
                 keys(contains(keys,'iD'))='ID';
@@ -294,11 +294,10 @@ classdef Function < Core
                 idx = ismember(values(idxKey,:),"");
                 values(idxKey,idx)="no";
             end
-            
-            % [values,keys]=obj.getOtherProperties_Type1(name);
         end
-
+        %==================================================================
         function x=headerComment(obj,varargin)
+            % headerComment - Get the comment of the class array.
 
             idx=find(ismember(obj.indexArr,obj.index));
             if isempty(obj.commentArray)
@@ -310,113 +309,8 @@ classdef Function < Core
                 x=x(idx,:);
             else
                 x=obj.commentArray(idx,:);
-                % x=obj.commentArray;
-            end
-
-            % % idx=ismember(obj.indexArr,obj.index);
-            % 
-            % if isempty(obj.commentArray)
-            % 
-            % 
-            % 
-            %     % % x=obj.headerComment_Type2();
-            %     % 
-            %     % [x,~]=getOtherProperties(obj,["name","comment"]);
-            %     % x=x';
-            %     % obj.commentArray=x;
-            % 
-            %     % [~,b]=sort(obj.indexArr);
-            %     % obj.commentArray=x(b,:);
-            %     % 
-            %     % x=x(b,:);
-            %     % x=x(idx,:);
-            % 
-            %     % N=numel(obj.indexArr);
-            %     % middlecom=strings(N,1);
-            %     % 
-            %     % idxRefPol=obj.indexArr>obj.Info.Handler.Count;
-            %     % 
-            %     % temp=copy(obj);
-            %     % [strProps,~]=utils.splitproperties(temp);
-            %     % comel=cell(N,1);
-            %     % names=strings(N,1);
-            %     % comm=strings(N,1);
-            %     % for jj=1:N
-            %     %     temp.update(jj,{strProps;"extensions"});
-            %     %     comel{jj}=temp.extensions(':',{'shortName','baseOff'});
-            %     %     names(jj)=temp.name;
-            %     %     comm(jj)=temp.comment;
-            %     % end
-            %     % 
-            %     % idxExt =~cellfun(@isempty,comel);
-            %     % extName=cellfun(@(t) string({t(:).shortName})',comel(idxExt),'UniformOutput',false);
-            %     % extName=cellfun(@(t) strjoin(t(1:numel(t)*(numel(t)<=3)+3*(numel(t)>3)),','),extName);
-            %     % 
-            %     % if ~isempty(extName)
-            %     %     extCom=append("(with switch set for ",extName,")");
-            %     %     middlecom(idxExt)=extCom;
-            %     % end
-            %     % 
-            %     % % reference policy middle comment
-            %     % if any(idxRefPol)
-            %     %     refPolCom=obj.refPols.headerComment();
-            %     %     middlecom(idxRefPol)=refPolCom;
-            %     % end
-            %     % 
-            %     % x=[names,middlecom,comm];
-            %     % 
-            %     % [~,b]=sort(obj.indexArr);
-            %     % obj.commentArray=x(b,:);
-            %     % 
-            %     % x=x(b,:);
-            %     % x=x(obj.index,:);
-            % else
-            %     x=obj.commentArray();
-            % end
-        end
-
-        function x=get.extensions(varargin)
-            obj=varargin{1};
-
-            if size(obj.extensionsClass,1)==0
-                obj.extensionsClass=ExtensionSwitch(obj);
-                x=obj.extensionsClass;
-            else
-                if all(obj.extensionsClass.parent.index == obj.index)
-                    x=obj.extensionsClass;
-                    x.index=obj.extensionsClass.indexArr;
-                else
-                    obj.extensionsClass=ExtensionSwitch(obj);
-                    x=obj.extensionsClass;
-                end
             end
         end
-
-        function x=get.parameters(varargin)
-            obj=varargin{1};
-
-            if size(obj.parametersClass,1)==0
-                if strcmp(class(obj),'Function')
-                    obj.parametersClass=Parameter(obj);
-                elseif strcmp(class(obj),'FunctionInSystem')
-                    obj.parametersClass=ParameterInSystem(obj);
-                end
-                x=obj.parametersClass;
-            else
-                if all(obj.parametersClass.parent.index == obj.index)
-                    x=obj.parametersClass;
-                    x.index=obj.parametersClass.indexArr;
-                else
-                    if strcmp(class(obj),'Function')
-                    obj.parametersClass=Parameter(obj);
-                elseif strcmp(class(obj),'FunctionInSystem')
-                    obj.parametersClass=ParameterInSystem(obj);
-                end
-                    x=obj.parametersClass;
-                end
-            end
-        end
-       
     end
 
 end

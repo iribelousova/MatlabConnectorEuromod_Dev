@@ -1,8 +1,8 @@
 function values=convert2E(obj)
 % c# class 'EM_XmlHandler.CountryInfoHandler+<GetSysYearCombinations>d__34'
 
-IEnumerable = NET.explicitCast(obj,'System.Collections.IEnumerable');
-IEnumerable.GetEnumerator;
+% IEnumerable = NET.explicitCast(obj,'System.Collections.IEnumerable');
+% IEnumerable.GetEnumerator;
 IEnumerator = NET.explicitCast(obj,'System.Collections.IEnumerator');
 
 values="";

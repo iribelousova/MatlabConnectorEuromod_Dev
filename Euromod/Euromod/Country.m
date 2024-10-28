@@ -1,36 +1,66 @@
-classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
-    properties (Access=public,Hidden)
-        % model 
-        % index (:,1) double
-        indexArr (:,1) double
-        parent Model
-        Info struct
-        index (:,1) double
-        systemsClass % System 
-        datasetsClass % Dataset
-        extensionsClass
-        policiesClass
-        % countryList (:,1) string
-        % paren
+classdef Country < Core
+    % Country
+    %     Country-specific EUROMOD tax-benefit models.
+    %
+    % Syntax:
+    %     C = Country(Model)
+    %
+    % Description:
+    %     C = Country(Model) returns a class array with the EUROMOD tax benefit
+    %     country models. Each country object contains properties that are classes
+    %     of type System, Policy, Dataset and Extension.
+    %
+    % Input Arguments:
+    %     Model            - Class with the EUROMOD base model.
+    %
+    % Properties:
+    %     datasets         - Dataset class with country datasets.
+    %     extensions       - Extension class with model and country extensions.
+    %     local_extensions - Extension class with country extensions.
+    %     name             - Two-letter country code. See the <a href="matlab: web('https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Country_codes')">Eurostat Glossary:Country codes</a>.
+    %     parent           - Model base class.
+    %     policies         - Policy class with country policies.
+    %     systems          - System class with country systems.
+    %
+    % Output Arguments:
+    %     C                - Country class array containing the EUROMOD country
+    %                        models.
+    %
+    % Examples:
+    %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
+    %     % Display the default countries:
+    %     mod.countries
+    %     % Display the Country class for Austria.
+    %     mod.countries('AT')
+    %
+    % See also Model, System, Policy, Dataset, Extension, info, run.
+    properties (Access=public)
+        datasets Dataset % Dataset class with country datasets.
+        extensions Extension % Extension class with model and country extensions.
+        local_extensions Extension % Extension class with country extensions.
+        name (1,1) string % Two-letter country code.
+        parent % Model base class.
+        policies Policy % Policy class with country policies.
+        systems System % System class with country systems.
+    end
+
+    properties (Hidden)
+        indexArr (:,1) double % Index array of the class.
+        index (:,1) double % Index of the element in the class.
+        Info struct % Contains the 'Handler' field to the 'CountryInfoHandler'.
+        systemsClass System % System class with country systems.
+        datasetsClass Dataset % Dataset class with country datasets.
+        extensionsClass Extension % Extension class with model and country extensions.
+        policiesClass Policy % Policy class with country policies.
     end
 
     properties (Constant,Hidden)
-        % tag = char(EM_XmlHandler.TAGS.COUNTRY)
-        tag = char(EM_XmlHandler.TAGS.('COUNTRY'))
+        tag = char(EM_XmlHandler.TAGS.('COUNTRY')) % Country tag.
     end
 
-    properties (Access=public) 
-        name (1,1) string % Two-letter country code.
-        systems % System % A list of system objects.
-        datasets % Dataset % A list with Dataset objects.
-        extensions % Model extensions + Country extensions.
-        policies % Policy % A list with policy objects.
-        local_extensions % Country extensions.
-    end
-
-
-    methods (Static, Access = public)
+    methods (Static, Access = public, Hidden)
         function obj = empty(varargin)
+            % empty - Re-assaign an empty Country class.
             %
             % Example:
             %
@@ -51,16 +81,18 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
         end
     end
 
-    methods
-
+    methods (Hidden)
+        %==================================================================
         function varargout = size(obj,varargin)
             [varargout{1:nargout}] = size(obj.index,varargin{:});
         end
 
+        %==================================================================
         function varargout = ndims(obj,varargin)
             [varargout{1:nargout}] = ndims(obj.index,varargin{:});
         end
 
+        %==================================================================
         function ind = end(obj,m,n)
             S = numel(obj.indexArr);
             if m < n
@@ -69,21 +101,24 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
                 ind = prod(S(m:end));
             end
         end
-        
-        function obj = Country(Model)
+    end
+    methods
+        %==================================================================
+        function obj = Country(model)
+            % Country - Country-specific EUROMOD tax-benefit models.
 
             if nargin == 0
                 return;
             end
 
-            if isempty(Model)
+            if isempty(model)
                 return;
             end
 
-            obj.parent=Model;
+            obj.parent=model;
 
-            modelPath = Model.modelpath;
-            userCountries=Model.defaultCountries();
+            modelPath = model.modelpath;
+            userCountries=model.defaultCountries();
 
             obj.Info(1).Handler = EM_XmlHandler.CountryInfoHandler(modelPath, userCountries(1));
 
@@ -97,53 +132,11 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
                 obj.indexArr=1;
             end
             obj.index=obj.indexArr;
-
-
-            % obj.load(Model);
-
         end
 
-        % %------------------------------------------------------------------
-        % function obj = load(obj, parent)
-        % 
-            % obj.parent=parent;
-            % 
-            % modelPath = parent.modelpath;
-            % userCountries=parent.defaultCountries();
-            % 
-            % obj.Info(1).Handler = EM_XmlHandler.CountryInfoHandler(modelPath, userCountries(1));
-            % 
-            % N=numel(userCountries);
-            % if N>1
-            %     for i=2:N
-            %         obj.Info(i).Handler = EM_XmlHandler.CountryInfoHandler(modelPath, userCountries(i));
-            %     end
-            %     obj.indexArr=1:N;
-            % else
-            %     obj.indexArr=1;
-            % end
-            % obj.index=obj.indexArr;
-        % 
-        % end
-
-        % function set.systems(obj,value)
-        % 
-        %     N=obj.index;
-        %     if size(obj.systems,1)==0
-        %         obj.systems=System(obj);
-        %         % x=obj.systemsClass;
-        %     else
-        %         if obj.systems.parent.index == N
-        %             x=obj.systems;
-        %             x.index=obj.systems.indexArr;
-        %         else
-        %             obj.systems=System(obj);
-        %             x=obj.systems;
-        %         end
-        %     end
-        % end
-
+        %==================================================================
         function x=get.policies(varargin)
+            % policies - Get the country Policy class array.
             obj=varargin{1};
 
             if size(obj.policiesClass,1)==0
@@ -160,7 +153,10 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
             end
         end
 
+        %==================================================================
         function x=get.systems(varargin)
+            % systems - Get the country System class array.
+
             obj=varargin{1};
 
             if size(obj.systemsClass,1)==0
@@ -177,7 +173,10 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
             end
         end
 
+        %==================================================================
         function x=get.extensions(varargin)
+            % extensions - Get the country and model Extension class array.
+
             obj=varargin{1};
 
             if size(obj.extensionsClass,1)==0
@@ -194,18 +193,20 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
             end
         end
 
+        %==================================================================
         function x=get.local_extensions(obj)
-            % if isempty(obj.datasets)
-            %     x=obj.datasets;
-            %     return;
-            % end
+            % local_extensions - Get the country Extension class array.
+
             x=copy(obj.extensions);
             idx=1:x.Info.Handler.Count;
             x.index=idx;
             x.indexArr=idx;
         end
 
+        %==================================================================
         function x=get.datasets(varargin)
+            % datasets - Get the country Dataset class array.
+
             obj=varargin{1};
 
             if size(obj.datasetsClass,1)==0
@@ -221,19 +222,99 @@ classdef Country < Core  % < Core  %< utils.redefinesparen & utils.CustomDisplay
                 end
             end
         end
+        %==================================================================
+        function X = get_switch_value(obj, NameValueArgs)
 
-        %------------------------------------------------------------------
+            arguments
+                obj
+                NameValueArgs.ext_name string = []
+                NameValueArgs.dataset_name string = []
+                NameValueArgs.sys_name string = []
+            end
+
+            keys=string;
+            patterns=string;
+
+            if ~isempty(NameValueArgs.ext_name)
+                keys=[keys,EM_XmlHandler.TAGS.EXTENSION_ID];
+                patterns=[patterns,obj.extensions(string(NameValueArgs.ext_name)).ID];
+            end
+            if ~isempty(NameValueArgs.dataset_name)
+                keys=[keys,EM_XmlHandler.TAGS.DATA_ID];
+                patterns=[patterns,obj.datasets(string(NameValueArgs.dataset_name)).ID];
+            end
+            if ~isempty(NameValueArgs.sys_name)
+                keys=[keys,EM_XmlHandler.TAGS.SYS_ID];
+                patterns=[patterns,obj.systems(string(NameValueArgs.sys_name)).ID];
+            end
+
+            if isempty(keys)
+                M=numel(keys);
+                Idx=obj.index;
+                for i=1:M
+                    out=obj.Info(Idx).Handler.GetPiecesOfInfo(EM_XmlHandler.ReadCountryOptions.EXTENSION_SWITCH,keys(i),patterns(i))
+
+
+                    %                     IEnumerable = NET.explicitCast(obj,'System.Collections.IEnumerable');
+                    % % IEnumerable.GetEnumerator;
+                    %
+                    % patterns = SystemCs.Collections.Generic.List[SystemCs.String]()
+                    % keys = SystemCs.Collections.Generic.List[SystemCs.String]()
+                    %
+                    % m = length(1);
+                    % keys = NET.createGeneric('System.Collections.Generic.List',{'System.String'}, m);
+                    % keys.Add(string(EM_XmlHandler.TAGS.SYS_ID))
+                    % patterns = NET.createGeneric('System.Collections.Generic.List',{'System.String'}, m);
+                    % patterns.Add("AT_2016")
+                    %
+                    % keys=string(EM_XmlHandler.TAGS.SYS_ID);
+                    % patterns="AT_2016";
+                    % %%%%%%%%%%%%%%%%%
+                    % out=ch.GetPiecesOfInfo(EM_XmlHandler.ReadCountryOptions.EXTENSION_SWITCH,keys,patterns)
+                    % IEnumerator = NET.explicitCast(out,'System.Collections.IEnumerator')
+                    %
+                    % IEnumerable = NET.explicitCast(out,'System.Collections.IEnumerable');
+                    % x=IEnumerable.GetEnumerator
+                    % x = IEnumerable.GetEnumerator;
+                    % xIEnumerable = NET.explicitCast(x,'System.Collections.IEnumerable');
+                    % x1=xIEnumerable.GetEnumerator;
+                    %
+                    % IEnumerator = NET.explicitCast(x,'System.Collections.IEnumerator');
+                    % IEnumerator = NET.explicitCast(out,'System.Collections.IEnumerator');
+                    % IEnumerator = NET.explicitCast(x1,'System.Collections.IEnumerator');
+                    % %%%%%%
+                    %
+                    % % IEnumerable = NET.explicitCast(out,'System.Collections.IEnumerable');
+                    % x = IEnumerable.GetEnumerator;
+                    % IEnumerator = NET.explicitCast(x,'System.Collections.IEnumerator');
+                    %
+                    % values = "";
+                    % while (IEnumerator.MoveNext)
+                    %     values(end+1) = string(IEnumerator.Current);
+                    % end
+                    % values=values(2:end)';
+                    %
+                    %                     [v,k]=utils.getInfo(out)
+                end
+            end
+
+        end
+    end
+
+    methods (Hidden)
+        %==================================================================
         function [values,keys]=getOtherProperties(obj,name,index)
+            % getOtherProperties - Get the properties of type string.
             name=string(name);
 
             values=string(arrayfun(@(t) char(obj.Info(t).Handler.country),obj.index,UniformOutput=false))';
             keys=name;
         end
 
+        %==================================================================
         function x=headerComment(obj)
+            % headerComment - Get the comment of the class array.
             x=obj.headerComment_Type1("name");
         end
-
     end
-
 end
