@@ -324,7 +324,7 @@ classdef Extension < Core
 
                 try
                     [v,k]=utils.getInfo(cobj.extensions.Info.Handler,ID,name);
-                    values = utils.setValueByKey(values,keys,v,k);
+                    values = utils.setValueByKey(values,keys,v,k,i);
                 catch
                 end
                 try

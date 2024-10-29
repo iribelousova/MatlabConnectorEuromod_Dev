@@ -1,29 +1,29 @@
-classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.indexing.RedefinesDot & utils.customdisplay & handle 
+classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.indexing.RedefinesDot & utils.customdisplay & handle
     % redefinesparen - Superclass for all the Euromod Connector main classes.
     %
     % Description:
     %     This superclass is used in all the main Euromod Connector
     %     classes. It contains functions that are common to these
-    %     subclasses. 
+    %     subclasses.
     %
     %     This class inherits methods and properties from other Matlab
     %     built-in classes.
     %
     %  Country Properties:
     %     getOtherProperties_Type1 - Retrieve infos from the main object
-    %                                handler and from the 
+    %                                handler and from the
     %                                'obj.Info.PieceOfInfo.Handler'.
     %     getParent                - Get a specific class object.
     %     getPieceOfInfo           - Get info from the c# function
-    %                                'CountryInfoHandler.GetPieceOfInfo' 
+    %                                'CountryInfoHandler.GetPieceOfInfo'
     %                                and append the handler to
     %                                'obj.Info.PieceOfInfo.Handler'.
     %     getPiecesOfInfo          - Get info from the c# function
     %                                'CountryInfoHandler.getPiecesOfInfo'.
-    %     setParent                - Set the new 'obj.Info.Handler' in the 
+    %     setParent                - Set the new 'obj.Info.Handler' in the
     %                                Country class.
-    %     tag_s_                   - Get a composed tag name.    
-    %     update                   - Update the values of properties of a 
+    %     tag_s_                   - Get a composed tag name.
+    %     update                   - Update the values of properties of a
     %                                specific class.
     %
     % See also Model, Country, System, Policy, Dataset, Extension.
@@ -99,7 +99,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 index=1:numel(obj.indexArr);
                 return;
             end
-            
+
             % Transform cell values to strings
             if iscell(index)
                 isNumeric=cellfun(@isnumeric,index);
@@ -115,7 +115,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
             % [values,~]=temp.getOtherProperties(strProps,index);
             if isa(obj,'Country')
                 values = obj.parent.defaultCountries;
-            elseif isa(obj,'Policy') 
+            elseif isa(obj,'Policy')
                 [values,~]=utils.getInfo(obj.Info.Handler,':');
             else
                 temp=copy(obj);
@@ -159,7 +159,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
 
             if numel(idx)==1
                 obj=obj.update(idx);
-  
+
                 if N==1
                     [varargout{1:nargout}]=obj;
                     return;
@@ -340,6 +340,30 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
         end
         %==================================================================
         function obj = parenAssign(obj,indexOp,varargin)
+            N=numel(indexOp);
+            flag=1;
+            for i=1:N
+                if strcmp(indexOp(i).Type,'Dot')
+                    p=string(indexOp(i).Name);
+                else
+                    p=string(indexOp(i).Indices);
+                end
+                if strcmp(p,'index')
+                    flag=0;
+                end
+            end
+            [idx,Props]=obj.convertIndexOperator(indexOp(1:2));
+
+            if flag
+                out=copy(obj(idx).(indexOp(2:end)));
+                sobj=out.getParent('SYS');
+    
+                if isa(out,'ParameterInSystem')
+                    out.setParameter(sobj.name, out.parID, string(varargin{1}));
+                end
+            % else
+            %     out=obj;
+            end
 
         end
         %==================================================================
@@ -408,34 +432,38 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 values=temp(1:end).name;
             end
 
-                if ismember(propOp,[strProps,objProps])
-                    % case 1: index is the object property
-                    a1 = 1;
-                elseif ismember(propOp,values)
-                    % case 4: index is the object name
-                    Idx=find(ismember(values,propOp));
-                    a1=4;
-                elseif ismember(propOp,'parent')
-                    a1=5;
-                else
-                    if size(obj,1)==1
-                        atemp=1;
-                        count=1;
-                        objProps(ismember(objProps,'parent'))=[];
-                        while atemp
+            if ismember(propOp,[strProps,objProps])
+                % case 1: index is the object property
+                a1 = 1;
+            elseif ismember(propOp,values)
+                % case 4: index is the object name
+                Idx=find(ismember(values,propOp));
+                a1=4;
+            elseif ismember(propOp,'parent')
+                a1=5;
+            else
+                if size(obj,1)==1
+                    atemp=1;
+                    count=1;
+                    objProps(ismember(objProps,'parent'))=[];
+                    while atemp
+                        if count>numel(objProps) && atemp==1
+                            error('Unrecognized propery, method or value "%s".',propOp)
+                        end
+                        if ~isempty(obj.(objProps(count))(1:end))
                             values=obj.(objProps(count))(1:end).name;
                             if ismember(objProps(count),'countries')
                                 values=upper(values);
                             end
                             a1=double(ismember(propOp,values));
-                            % case 2: index is the property "name" of a 
+                            % case 2: index is the property "name" of a
                             % property of type class
                             if any(a1)
                                 a1=2;
                                 atemp=0;
                                 propertyName=objProps(count);
-                            % case 3: index is a property of a property of
-                            % type class
+                                % case 3: index is a property of a property of
+                                % type class
                             else
                                 a1=double(ismember(propOp,properties(objProps(count))));
                                 if any(a1)
@@ -444,298 +472,112 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                                     propertyName=objProps(count);
                                 end
                             end
-                            count=count+1;
                         end
+                        count=count+1;
                     end
                 end
-                
-                if a1==1
-                    % index is a property of the object
-                    out=obj(1:end).(propOp);
-                    % if isa(obj,'ExtensionSwitch')
-                    %     out=obj(1:end).(propOp);
-                    % else
-                    %     out=obj.(propOp);
-                    % end
-                elseif a1==2
-                    % index is the property "name" of a property of type
-                    % class of the object
-                    out=obj.(propertyName)(propOp);
-                elseif a1==3
-                    % index is a property of a property of type
-                    % class of the object
-                    out=obj.(propertyName).(propOp);
-                elseif a1==4
-                    % index is the object name
-                    out=obj(propOp);
-                elseif a1==5
-                    % index property is "parent" property
-                    out=obj.(propOp);
-                    % index is a property of type string
-                    % out=obj.getOtherProperties(propOp,obj.index);
-                else
-                    % index is something else
-                    error("Unrecognized method or property '%s' for object '%s'.", propOp,class(obj))
-                end
-                if M>1
-                    out=out.(indexOp(2:end));
-                end
-                [varargout{1:nargout}]=out;
-                return;
+            end
 
-            % if isa(obj,'Model')
-            % 
-            %     % take countries' names
-            %     values = obj.defaultCountries;
-            %     [a1,~]=ismember(values,propOp);
-            % 
-            %     % when index is country name
-            %     if any(a1)
-            %         out=obj.countries(propOp);
-            %     else
-            %         % when index is the Model object property
-            %         if ismember(propOp,[strProps,objProps])
-            %             out=obj.(propOp);
-            %         else
-            %             error("Unrecognized method or property '%s' for object '%s'.", propOp,class(obj))
-            %         end
-            %     end
-            % 
-            %     % If requested, get the system object
-            %     if M>=2
-            %         propOp2=indexOp(2).Name;
-            % 
-            %         % get systems' names
-            %         values=out.systems(1:end).name;
-            %         [a1,~]=ismember(values,propOp2);
-            % 
-            %         % when second index is system name 
-            %         if any(a1)
-            %             if M==2
-            %                 out=out.systems(propOp2);
-            %             else
-            %                 out=out.systems(propOp2).(indexOp(3:end));
-            %             end
-            %         else
-            %             % when second index is the Country object property
-            %             if ismember(propOp2,properties(out))
-            %                 if M==2
-            %                     out=out.(propOp2);
-            %                 else
-            %                     [idx,~]=out.convertIndexOperator(indexOp(3));
-            %                     if M==3
-            %                         out=out.(propOp2)(idx);
-            %                     else
-            %                         out=out.(propOp2)(idx).(indexOp(4:end));
-            %                     end
-            %                 end
-            %             else
-            %                 % when second index is something else
-            %                 try
-            %                     if M==1
-            %                         out=out.systems(propOp2);
-            %                     else
-            %                         out=out.systems(propOp2).(indexOp(3:end));
-            %                     end
-            %                 catch
-            %                     error("Unrecognized method or property '%s' for object '%s'.", propOp2,class(out))
-            %                 end
-            %             end
-            %         end
-            % 
-            %     end
-            %     [varargout{1:nargout}]=out;
-            %     return;
-            % 
-            % elseif isa(obj,'Country')
-            % 
-            %     % take systems' names
-            %     % case 1: index is the Country property
-            %     if ismember(propOp,[strProps,objProps])
-            %         a1 = 1;
-            %     else
-            %     % case 2: index is the System name
-            %         if size(obj,1)==1
-            %             values=obj.systems(1:end).name;
-            %             a1=double(ismember(propOp,values));
-            %             if any(a1)
-            %                 a1(a1==1)=2;
-            %     % case 3: index is the System property
-            %             else
-            %                 a1=double(ismember(propOp,properties(obj.systems)));
-            %                 a1(a1==1)=3;
-            %             end
-            %         else
-            %     % case 4: index is the Country name
-            %             values=obj(1:end).name;
-            %             a1=double(ismember(propOp,values));
-            %             a1(a1==1)=4;
-            %         end
-            %     end
-            % 
-            %     if a1==1
-            %         % index is the Country property
-            %         out=obj.(propOp);
-            %     elseif a1==2
-            %         % index is the System name
-            %         out=obj.systems(propOp);
-            %     elseif a1==3
-            %         % index is the System property
-            %         out=obj.systems(propOp);
-            %     elseif a1==4
-            %         % index is the Country name
-            %         out=obj(propOp);
-            %     else
-            %         % index is something else
-            %         error("Unrecognized method or property '%s' for object '%s'.", propOp,class(obj))
-            %     end
-            %     if M>1
-            %         out=out.(indexOp(2:end));
-            %     end
-            % 
-            %     % if any(a1)
-            %     %     % when index is the system name
-            %     %     if M==1
-            %     %         out=obj.systems(propOp);
-            %     %     else
-            %     %         out=obj.systems(propOp).(indexOp(2:end));
-            %     %     end
-            %     % else
-            %     %     % when index is the Country object property
-            %     %     if ismember(propOp,[strProps,objProps])
-            %     %         out=obj.(indexOp(1:end));
-            %     %     % when index is the Country name
-            %     %     elseif ismember(propOp,countryNames)
-            %     %         out=obj(propOp);
-            %     %     else
-            %     %         % when index is something else
-            %     %         try
-            %     %             if M==1
-            %     %                 out=obj.systems(propOp);
-            %     %             else
-            %     %                 out=obj.systems(propOp).(indexOp(2:end));
-            %     %             end
-            %     %         catch
-            %     %             error("Unrecognized method or property '%s' for object '%s'.", propOp,class(obj))
-            %     %         end
-            %     %     end
-            %     % end
-            %     [varargout{1:nargout}]=out;
-            %     return;
-            % 
-            % elseif isa(obj,'System')
-            % 
-            %     % take object name property
-            %     values=obj(1:end).name;
-            % 
-            %     if ismember(propOp,[strProps,objProps])
-            %         % case 1: index is the object property
-            %         a1 = 1;
-            %     elseif ismember(propOp,values)
-            %         % case 4: index is the object name
-            %         a1=4;
-            %     % elseif ismember(propOp,strProps)
-            %     %     a1=5;
-            %     else
-            %         if size(obj,1)==1
-            %             atemp=1;
-            %             count=1;
-            %             while atemp
-            %                 values=obj.(objProps(count))(1:end).name;
-            %                 a1=double(ismember(propOp,values));
-            %                 % case 2: index is the property "name" of a 
-            %                 % property of type class
-            %                 if any(a1)
-            %                     a1=2;
-            %                     count=0;
-            %                     propertyName=objProps(count);
-            %                 % case 3: index is a property of a property of
-            %                 % type class
-            %                 else
-            %                     a1=double(ismember(propOp,properties(objProps(count))));
-            %                     if any(a1)
-            %                         a1=3;
-            %                         count=0;
-            %                         propertyName=objProps(count);
-            %                     end
-            %                 end
-            %                 count=count+1;
-            %             end
-            %         end
-            %     end
-            % 
-            %     if a1==1
-            %         % index is a property of type class
-            %         out=obj.(propOp);
-            %     elseif a1==2
-            %         % index is the System name
-            %         out=obj.(propertyName)(propOp);
-            %     elseif a1==3
-            %         % index is the System property
-            %         out=obj.(propertyName).(propOp);
-            %     elseif a1==4
-            %         % index is the Country name
-            %         out=obj(propOp);
-            %     % elseif a1==5
-            %     %     % index is a property of type string
-            %     %     out=obj.getOtherProperties(propOp,obj.index);
-            %     else
-            %         % index is something else
-            %         error("Unrecognized method or property '%s' for object '%s'.", propOp,class(obj))
-            %     end
-            %     if M>1
-            %         out=out.(indexOp(2:end));
-            %     end
-            % 
-            %     % if any(a1)
-            %     %     % when index is the system name
-            %     %     if M==1
-            %     %         out=obj.systems(propOp);
-            %     %     else
-            %     %         out=obj.systems(propOp).(indexOp(2:end));
-            %     %     end
-            %     % else
-            %     %     % when index is the Country object property
-            %     %     if ismember(propOp,[strProps,objProps])
-            %     %         out=obj.(indexOp(1:end));
-            %     %     % when index is the Country name
-            %     %     elseif ismember(propOp,countryNames)
-            %     %         out=obj(propOp);
-            %     %     else
-            %     %         % when index is something else
-            %     %         try
-            %     %             if M==1
-            %     %                 out=obj.systems(propOp);
-            %     %             else
-            %     %                 out=obj.systems(propOp).(indexOp(2:end));
-            %     %             end
-            %     %         catch
-            %     %             error("Unrecognized method or property '%s' for object '%s'.", propOp,class(obj))
-            %     %         end
-            %     %     end
-            %     % end
-            %     [varargout{1:nargout}]=out;
-            %     return;
-            % 
-            % else
-            %     if ismember(propOp,strProps)
-            %         [varargout{1:nargout}]=obj.getOtherProperties(propOp,obj.index);
-            %     elseif ismember(propOp,objProps)
-            %         [varargout{1:nargout}]=obj.(propOp);
-            %     end
-            %     return;
-            % 
-            % end
+            if a1==1
+                % index is a property of the object
+                out=obj(1:end).(propOp);
+            elseif a1==2
+                % index is the property "name" of a property of type
+                % class of the object
+                out=obj.(propertyName)(propOp);
+            elseif a1==3
+                % index is a property of a property of type
+                % class of the object
+                out=obj.(propertyName).(propOp);
+            elseif a1==4
+                % index is the object name
+                out=obj(propOp);
+            elseif a1==5
+                % index property is "parent" property
+                out=obj.(propOp);
+            else
+                % index is something else
+                error("Unrecognized method or property '%s' for object '%s'.", propOp,class(obj))
+            end
+            if M>1
+                out=out.(indexOp(2:end));
+            end
+            [varargout{1:nargout}]=out;
+            return;          
         end
         %==================================================================
-        function obj = dotAssign(obj,indexOp,varargin)
-            c=0;
+        function out = dotAssign(obj,indexOp,varargin)
+            N=numel(indexOp);
+            flag=1;
+            for i=1:N
+                if strcmp(indexOp(i).Type,'Dot')
+                    p=string(indexOp(i).Name);
+                else
+                    p=string(indexOp(i).Indices);
+                end
+                if strcmp(p,'index')
+                    flag=0;
+                end
+            end
+
+            if flag
+                out=copy(obj.(indexOp(1:end)));
+                sobj=out.getParent('SYS');
+    
+                if isa(out,'ParameterInSystem')
+                    out.setParameter(sobj.name, out.parID, string(varargin{1}));
+                end
+            else
+                out=obj;
+            end
+            % 
+            % c=0;
+
+            
             % [obj.AddedFields.(indexOp)] = varargin{:};
         end
         %==================================================================
         function n = dotListLength(obj,indexOp,indexContext)
             n = 1;
             % n = listLength(obj.AddedFields,indexOp,indexContext);
+        end
+        %==================================================================
+        function obj=setParent(obj,ch)
+            % setParent - Set the new obj.Info.Handler in the Country
+            % class.
+            %
+            % Input Arguments:
+            %
+            %   ch - EM_XmlHandler.CountryInfoHandler. The new C#
+            %        'EM_XmlHandler.CountryInfoHandler' function with
+            %        modified parameter value.
+
+            if isa(obj,'Country')
+                obj.Info(obj.index).Handler=ch;
+            else
+                t=copy(obj);
+                count='';
+                while ~strcmp(t.tag,"COUNTRY")
+                    t=t.parent;
+                    count=[count,'.parent'];
+                    Idx=t.index;
+                end
+                eval(['obj',count,'.Info(',char(num2str(Idx)),').Handler=ch']);
+            end
+        end
+        %==================================================================
+        function t=getParent(obj,tag)
+            % getParent - Get a specific class object.
+            %
+            % Input Arguments:
+            %
+            %   tag - (1,1) string. Value of the tag property of the class
+            %         to be retrieved.
+
+            t=copy(obj);
+            while ~strcmp(t.tag,tag)
+                t=t.parent;
+            end
         end
         %==================================================================
         function obj=update(obj,index,props)
@@ -777,6 +619,69 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                     end
                 end
             end
+        end
+        %==================================================================
+        function cobj=setParameter(obj, system, id, value)
+            % setSysParInfo - Modify values of EUROMOD system-parameters.
+            %
+            % Syntax:
+            %
+            %   [X, ch] = setParameter(system, id, value)
+            %
+            % Input Arguments:
+            %   system      :string or char. Name of the system. Must
+            %                be a valid EUROMOD system name.
+            %   id          :string or char. The identifier of the Euromod
+            %                model parameter.
+            %   value       :string or char. The new value of the parameter.
+            %
+            % Oputput Arguments:
+            %   X           : struct. Structure with modified parameter values.
+            %   ch          : C# object. The Euromod model Country handler.
+            %                 Can be passed as optional Input argument to
+            %                 method "run".
+            %
+            % Example:
+            %    id = "8c6835a7-5048-4624-aa91-520479b8fe7e";
+            %    SysParInfo = GetSysParInfo('HR_2023', id);
+            %    [v,k]=utils.getInfo(cobj.Info(Idx).Handler.GetSysParInfo(system,id))
+            %    %
+            %    System.setParameter('HR_2023', id, '2');
+            %    info(System,"parameters" ,id)
+            %
+            % See also getSysParInfo, getInfo, getSysYearInfo, loadSystem,
+            % TaxSystem
+
+            % arguments
+            %     OBJ
+            %     system {utils.MExcept.isCharOrStringAndIsSystem(OBJ,'', 'system',system)} % char or string. The Euromod model tax-system name.
+            %     id {utils.MExcept.isCharOrString('id',id)} % char or string. The Euromod model parameter identifier.
+            %     value {utils.MExcept.isCharOrString('value',value)} % string or char. The new value/expression of the parameter.
+            % end
+
+            arguments
+                obj
+                system (1,1) string % char or string. The Euromod model parameter identifier.
+                id (1,1) string
+                value (1,1) string % string or char. The new value/expression of the parameter.
+            end
+
+            %- Get country info handler
+            if isa(obj,'Country')
+                cobj=copy(obj);
+            elseif isa(obj,'Model')
+                if size(obj.countries)>1
+                    error('Index exceeds array elements. Can not set the parameter')
+                end
+                cobj=obj.countries(1);
+            else
+                cobj=copy(obj.getParent("COUNTRY"));
+            end
+            Idx=cobj.index;
+           
+            % set new value
+            cobj.Info(Idx).Handler.SetSysParValue(system, id, value);
+            % obj=obj.setParent(cobj);
         end
     end
 

@@ -56,13 +56,11 @@ function x = runSimulation(countryInfoHandler, countryName, systemName, data, da
 % end
 
 arguments
-    % obj
     countryInfoHandler
     countryName (1,1) string
     systemName (1,1) string
     data (:,:) table
     dataName (1,1) string
-    % ID_DATASET
 
     NameValueArgs.outputpath = []
     NameValueArgs.nowarnings = false
@@ -131,7 +129,7 @@ if ~isempty(NameValueArgs.switches)
         switchesfield = [char(EM_XmlHandler.TAGS.CONFIG_EXTENSION_SWITCH), num2str(count)];
         try
             if strcmp(NameValueArgs.switches(i+1),"true"),status = 'on'; else, status = 'off'; end
-            configSettings.(switchesfield) = [char(NameValueArgs.switches(i)), ' = ',  status];
+            configSettings.(switchesfield) = [char(NameValueArgs.switches(i)), '=',  status];
         catch MEx
             if contains(MEx.message,["No appropriate method, property, or field", switchesfield," for class 'System.Collections.Generic.Dictionary<System*String,System*String>'"])
                 error('Parameter "switches" must be NameValue pair arguments (Example: addons=["BTA","on","TCA","off"]).')
@@ -189,12 +187,15 @@ catch ME
 end
 
 if out.Item1
+    if ~isempty(NameValueArgs.constantsToOverwrite)
+        configSettings.constantsToOverwrite=NameValueArgs.constantsToOverwrite;
+    end
     x = Simulation(out, configSettings);
-    fprintf("\nSimulation %s, system %s, data %s, country %s done in %.2d sec.   \n", ...
-        x.output_filenames, configSettings.ID_SYSTEM,configSettings.ID_DATASET, configSettings.COUNTRY, round(tf,2))
+    fprintf("\nSimulation %s, system %s, data %s, country %s finished.\n", ...
+        x.output_filenames, configSettings.ID_SYSTEM,configSettings.ID_DATASET, configSettings.COUNTRY)
 else
     % header = ['> In ',matlab.mixin.CustomDisplay.getClassNameForHeader(obj)];
-    error('No output was produced from simulation of system %s, dataset %s, country %s.',configSettings.ID_SYSTEM,configSettings.ID_DATASET,configSettings.COUNTRY)
+    error('\nNo output was produced from simulation of system %s, dataset %s, country %s.\n',configSettings.ID_SYSTEM,configSettings.ID_DATASET,configSettings.COUNTRY)
 end
 
 % % get warnings/errors
