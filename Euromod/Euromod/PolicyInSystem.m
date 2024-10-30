@@ -48,7 +48,7 @@ classdef PolicyInSystem < Policy
         sysID (1,1) string % Identifier number of the reference system.
     end
 
-    methods (Static, Access = public)
+    methods (Static, Access = public,Hidden)
         %==================================================================
         function obj = empty(varargin)
             % empty - Re-assaign an empty PolicyInSystem class.
@@ -73,23 +73,6 @@ classdef PolicyInSystem < Policy
     end
     methods
         %==================================================================
-        function varargout = size(obj,varargin)
-            [varargout{1:nargout}] = size(obj.index,varargin{:});
-        end
-        %==================================================================
-        function varargout = ndims(obj,varargin)
-            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
-        end
-        %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
-        %==================================================================
         function obj = PolicyInSystem(System)
             % PolicyInSystem - A class with the policy rules modeled in a 
             % system.
@@ -105,6 +88,25 @@ classdef PolicyInSystem < Policy
             end
 
             obj.load(System);
+        end
+    end
+    methods (Hidden)
+        %==================================================================
+        function varargout = size(obj,varargin)
+            [varargout{1:nargout}] = size(obj.index,varargin{:});
+        end
+        %==================================================================
+        function varargout = ndims(obj,varargin)
+            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
+        end
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
         end
     end
 end

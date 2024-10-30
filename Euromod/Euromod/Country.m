@@ -84,28 +84,6 @@ classdef Country < Core
             end
         end
     end
-
-    methods (Hidden)
-        %==================================================================
-        function varargout = size(obj,varargin)
-            [varargout{1:nargout}] = size(obj.index,varargin{:});
-        end
-
-        %==================================================================
-        function varargout = ndims(obj,varargin)
-            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
-        end
-
-        %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
-    end
     methods
         %==================================================================
         function obj = Country(model)
@@ -341,6 +319,9 @@ classdef Country < Core
         end
         %==================================================================
         function X = get_switch_value(obj, NameValueArgs)
+            %     E = mod.AT.get_switch_value('sys_name','AT_2021')
+    %     E = mod.AT.get_switch_value('sys_name','AT_2021',dataset_name='AT_2020_b2')
+    %     E = mod.AT.get_switch_value('sys_name','AT_2021',dataset_name='AT_2020_b2',)
 
             arguments
                 obj
@@ -349,76 +330,90 @@ classdef Country < Core
                 NameValueArgs.sys_name string = []
             end
 
-            keys=string;
-            patterns=string;
+            error("Method 'get_switch_value' is not implemented in the current version.")
 
-            if ~isempty(NameValueArgs.ext_name)
-                keys=[keys,EM_XmlHandler.TAGS.EXTENSION_ID];
-                patterns=[patterns,obj.extensions(string(NameValueArgs.ext_name)).ID];
-            end
-            if ~isempty(NameValueArgs.dataset_name)
-                keys=[keys,EM_XmlHandler.TAGS.DATA_ID];
-                patterns=[patterns,obj.datasets(string(NameValueArgs.dataset_name)).ID];
-            end
-            if ~isempty(NameValueArgs.sys_name)
-                keys=[keys,EM_XmlHandler.TAGS.SYS_ID];
-                patterns=[patterns,obj.systems(string(NameValueArgs.sys_name)).ID];
-            end
+            % keys=string;
+            % patterns=string;
+            % 
+            % 
+            % eID="abfb2064-9189-43e7-9f61-f3886ae327b1";
+            % sID="52f8bbcb-9974-4a16-a5bc-4919ec0658b8";
+            % sID="ca63e8ca-db68-4f4c-9b90-b5717e7a3776"
+            % k=EM_XmlHandler.TAGS.EXTENSION_ID
+            % k=EM_XmlHandler.TAGS.SYS_ID
+            % 
+            % keys=k;
+            % keys = NET.createGeneric('System.Collections.Generic.List',{'System.String'}, 1);
+            % keys.Add(string(k))
+            % 
+            % patterns=eID;
+            % patterns = NET.createGeneric('System.Collections.Generic.List',{'System.String'}, 1);
+            % patterns.Add(string(p))
+            % 
+            % s=cc.Info(cc.index).Handler.GetPiecesOfInfoInList(EM_XmlHandler.ReadCountryOptions.EXTENSION_SWITCH,keys,patterns)
+            % 
+            % s=cc.Info(cc.index).Handler.GetPiecesOfInfoInList(EM_XmlHandler.ReadCountryOptions.EXTENSION_SWITCH,EM_XmlHandler.TAGS.SYS_ID,"ca63e8ca-db68-4f4c-9b90-b5717e7a3776")
+            % s=cc.Info(cc.index).Handler.GetPiecesOfInfoInList(EM_XmlHandler.ReadCountryOptions.EXTENSION_SWITCH,k,sID)
+            % 
+            % %%%
+            % x=cc.Info(cc.index).Handler.GetPiecesOfInfoInList(EM_XmlHandler.ReadCountryOptions.FUN,EM_XmlHandler.TAGS.POL_ID,"efbb7384-0d77-4252-9292-8cffdb82f3cc")
+            % %%%
+            % 
+            % % convert1E
+            % IEnumerable = NET.explicitCast(s,'System.Collections.IEnumerable')
+            % x = IEnumerable.GetEnumerator
+            % IEnumerator = NET.explicitCast(x,'System.Collections.IEnumerator')
+            % IEnumerator.MoveNext
+            % IEnumerator.Current
+            % 
+            % % convert2E
+            % IEnumerator = NET.explicitCast(s,'System.Collections.IEnumerator')
+            % IEnumerator.MoveNext
+            % IEnumerator.Current
+            % 
+            % 
+            % IEnumerator = NET.explicitCast(s,'System.Collections.IEnumerator')
+            % x = IEnumerable.IEnumerable
+            % IEnumerable1 = NET.explicitCast(x,'System.Collections.IEnumerator')
+            % IEnumerable1.MoveNext
+            % x1=IEnumerable1.GetEnumerator
+            % IEnumerator = NET.explicitCast(x1,'System.Collections.IEnumerable')
+            % x2=IEnumerator.GetEnumerator
+            % x2.MoveNext
+            % 
+            % utils.getInfo(s)
 
-            if isempty(keys)
-                M=numel(keys);
-                Idx=obj.index;
-                for i=1:M
-                    out=obj.Info(Idx).Handler.GetPiecesOfInfo(EM_XmlHandler.ReadCountryOptions.EXTENSION_SWITCH,keys(i),patterns(i))
+            % mm.AT.get_switch_value('sys_name','AT_2021')
+            % mm.AT.get_switch_value('sys_name','AT_2021',dataset_name='AT_2020_b2')
 
-
-                    %                     IEnumerable = NET.explicitCast(obj,'System.Collections.IEnumerable');
-                    % % IEnumerable.GetEnumerator;
-                    %
-                    % patterns = SystemCs.Collections.Generic.List[SystemCs.String]()
-                    % keys = SystemCs.Collections.Generic.List[SystemCs.String]()
-                    %
-                    % m = length(1);
-                    % keys = NET.createGeneric('System.Collections.Generic.List',{'System.String'}, m);
-                    % keys.Add(string(EM_XmlHandler.TAGS.SYS_ID))
-                    % patterns = NET.createGeneric('System.Collections.Generic.List',{'System.String'}, m);
-                    % patterns.Add("AT_2016")
-                    %
-                    % keys=string(EM_XmlHandler.TAGS.SYS_ID);
-                    % patterns="AT_2016";
-                    % %%%%%%%%%%%%%%%%%
-                    % out=ch.GetPiecesOfInfo(EM_XmlHandler.ReadCountryOptions.EXTENSION_SWITCH,keys,patterns)
-                    % IEnumerator = NET.explicitCast(out,'System.Collections.IEnumerator')
-                    %
-                    % IEnumerable = NET.explicitCast(out,'System.Collections.IEnumerable');
-                    % x=IEnumerable.GetEnumerator
-                    % x = IEnumerable.GetEnumerator;
-                    % xIEnumerable = NET.explicitCast(x,'System.Collections.IEnumerable');
-                    % x1=xIEnumerable.GetEnumerator;
-                    %
-                    % IEnumerator = NET.explicitCast(x,'System.Collections.IEnumerator');
-                    % IEnumerator = NET.explicitCast(out,'System.Collections.IEnumerator');
-                    % IEnumerator = NET.explicitCast(x1,'System.Collections.IEnumerator');
-                    % %%%%%%
-                    %
-                    % % IEnumerable = NET.explicitCast(out,'System.Collections.IEnumerable');
-                    % x = IEnumerable.GetEnumerator;
-                    % IEnumerator = NET.explicitCast(x,'System.Collections.IEnumerator');
-                    %
-                    % values = "";
-                    % while (IEnumerator.MoveNext)
-                    %     values(end+1) = string(IEnumerator.Current);
-                    % end
-                    % values=values(2:end)';
-                    %
-                    %                     [v,k]=utils.getInfo(out)
-                end
+            if size(obj,1)>1
+                error("Unrecognized method 'get_switch_value' for class arrays. Please specify a country.")
             end
 
+            X = ExtensionSwitch(obj,NameValueArgs);
         end
     end
 
     methods (Hidden)
+        %==================================================================
+        function varargout = size(obj,varargin)
+            [varargout{1:nargout}] = size(obj.index,varargin{:});
+        end
+
+        %==================================================================
+        function varargout = ndims(obj,varargin)
+            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
+        end
+
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
+        end
         %==================================================================
         function [values,keys]=getOtherProperties(obj,name,index)
             % getOtherProperties - Get the properties of type string.

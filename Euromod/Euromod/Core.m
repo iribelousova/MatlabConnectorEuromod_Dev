@@ -1,4 +1,4 @@
-classdef (Abstract) Core < utils.customdisplay & handle & utils.redefinesparen & matlab.mixin.Copyable & utils.DynPropHandle
+classdef (Abstract) Core < utils.redefinesparen %utils.customdisplay & handle & utils.DynPropHandle
     % Core - Superclass for all the Euromod Connector main classes.
     %
     % Description:

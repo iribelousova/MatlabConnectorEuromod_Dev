@@ -48,7 +48,7 @@ classdef FunctionInSystem < Function
         sysID (1,1) string % Identifier number of the reference policy.
     end
 
-    methods (Static, Access = public)
+    methods (Static, Access = public,Hidden)
         %==================================================================
         function obj = empty(varargin)
             % empty - Re-assaign an empty FunctionInSystem class.
@@ -73,23 +73,6 @@ classdef FunctionInSystem < Function
     end
     methods
         %==================================================================
-        function varargout = size(obj,varargin)
-            [varargout{1:nargout}] = size(obj.index,varargin{:});
-        end
-        %==================================================================
-        function varargout = ndims(obj,varargin)
-            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
-        end
-        %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
-        %==================================================================
         function obj = FunctionInSystem(PolicyInSystem)
             % FunctionInSystem - A class with the system-policy-specific  
             % functions.
@@ -108,6 +91,23 @@ classdef FunctionInSystem < Function
         end
     end
     methods (Hidden)
+        %==================================================================
+        function varargout = size(obj,varargin)
+            [varargout{1:nargout}] = size(obj.index,varargin{:});
+        end
+        %==================================================================
+        function varargout = ndims(obj,varargin)
+            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
+        end
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
+        end
         %==================================================================
         function obj = load(obj, parent)
             % load - Load the FunctionInSystem class array objects.

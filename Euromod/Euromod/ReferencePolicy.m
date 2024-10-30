@@ -46,7 +46,7 @@ classdef ReferencePolicy < PolicyHandle
             x=char(EM_XmlHandler.TAGS.REFPOL);
         end
     end
-    methods (Static, Access = public)
+    methods (Static, Access = public,Hidden)
         %==================================================================
         function obj = empty(varargin)
             % empty - Re-assaign an empty ReferencePolicy class.
@@ -71,15 +71,6 @@ classdef ReferencePolicy < PolicyHandle
     end
     methods
         %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
-        %==================================================================
         function obj = ReferencePolicy(Country)
             % ReferencePolicy - A class with the reference policy rules.
 
@@ -97,6 +88,15 @@ classdef ReferencePolicy < PolicyHandle
         end
     end
     methods (Hidden)
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
+        end
         %==================================================================
         function initialize(obj,super)
             % initialize - Copy the objects from the super class.

@@ -47,7 +47,7 @@ classdef Extension < Core
         tagLocal = char(EM_XmlHandler.ReadCountryOptions.LOCAL_EXTENSION) % Country extension tag
     end
 
-    methods (Static, Access = public)
+    methods (Static,Access = public,Hidden)
         function obj = empty(varargin)
             % empty - Re-assaign an empty Extension class.
             %
@@ -71,25 +71,7 @@ classdef Extension < Core
         end
     end
 
-
     methods
-        %==================================================================
-        function varargout = size(obj,varargin)
-            [varargout{1:nargout}] = size(obj.index,varargin{:});
-        end
-        %==================================================================
-        function varargout = ndims(obj,varargin)
-            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
-        end
-        %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
         %==================================================================
         function obj = Extension(Parent)
             % Extension - EUROMOD extensions.
@@ -198,7 +180,24 @@ classdef Extension < Core
         end
     end
 
-    methods (Hidden)
+    methods (Access = public,Hidden)
+        %==================================================================
+        function varargout = size(obj,varargin)
+            [varargout{1:nargout}] = size(obj.index,varargin{:});
+        end
+        %==================================================================
+        function varargout = ndims(obj,varargin)
+            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
+        end
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
+        end
         %==================================================================
         function x = getID(obj)
 
@@ -218,8 +217,23 @@ classdef Extension < Core
             else
                 [values,keys]=obj.getOtherPropertiesSubClass(name,index);
             end
-
         end
+        %==================================================================
+        function x=headerComment(obj)
+            % headerComment - Get the comment of the class array.
+            if isa(obj.parent,'Model') || isa(obj.parent,'Country')
+                x=obj.headerComment_Type1(["shortName","name"]);
+            else
+                N=size(obj,1);
+                x=obj.getOtherProperties({'name','baseOff','comment'},1:N)';
+                % x=obj(:).baseOff;
+                x(strcmp(x,'true'))='off';
+                x(strcmp(x,'false'))='on';
+            end
+        end
+    end
+
+    methods (Access=protected,Hidden)
         %==================================================================
         function [values,keys] =getOtherPropertiesModel(obj,name,index)
             % getOtherPropertiesModel - Get the properties of type string
@@ -337,19 +351,6 @@ classdef Extension < Core
             keys = append(lower(extractBefore(keys,2))',extractAfter(keys,1)');
             if any(contains(keys,'iD'))
                 keys(contains(keys,'iD'))='ID';
-            end
-        end
-        %==================================================================
-        function x=headerComment(obj)
-            % headerComment - Get the comment of the class array.
-            if isa(obj.parent,'Model') || isa(obj.parent,'Country')
-                x=obj.headerComment_Type1(["shortName","name"]);
-            else
-                N=size(obj,1);
-                x=obj.getOtherProperties({'name','baseOff','comment'},1:N)';
-                % x=obj(:).baseOff;
-                x(strcmp(x,'true'))='off';
-                x(strcmp(x,'false'))='on';
             end
         end
     end

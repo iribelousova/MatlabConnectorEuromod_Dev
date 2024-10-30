@@ -17,6 +17,10 @@ function out=euromod(varargin)
 % 
 % See also Model, Country, System, Policy, info, run.
 
+if nargin ==0
+    out=Model;
+    return;
+end
 
 NET.addAssembly(fullfile(utils.configuration.DLL_PATH, utils.configuration.DLL_XmlHandler));
 NET.addAssembly(fullfile(utils.configuration.DLL_PATH, utils.configuration.DLL_Common));

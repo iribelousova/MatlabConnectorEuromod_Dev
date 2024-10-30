@@ -3,7 +3,7 @@ classdef (ConstructOnLoad)  Simulation < utils.customdisplay
     %
     % Syntax:
     %
-    %     S = Simulation(obj, settings);
+    %     S = Simulation();
     %
     % Description:
     %     This is a class containing the results from the simulation run()
@@ -11,10 +11,6 @@ classdef (ConstructOnLoad)  Simulation < utils.customdisplay
     %
     %     This class is returned by the method run() and should not be used by
     %     the user as a stand-alone tool.
-    %
-    % Simulation Arguments:
-    %     obj              - A c# object returned from the simulation.
-    %     settings         - A struct with the simulation configuration settings.
     %
     %  Simulation Properties:
     %     outputs          - A cell array with the table-type simulation results.
@@ -48,9 +44,34 @@ classdef (ConstructOnLoad)  Simulation < utils.customdisplay
     end
 
     %======================================================================
-    methods
-        function S = Simulation(obj, settings)
-            % Simulation - A class storing the simulation results.
+    methods (Static, Sealed, Hidden)
+        function S = load(S, obj, settings)
+            % load - Load simulation results in the class.
+            %
+            % Syntax:
+            %
+            %     S = load(obj, settings);
+            %
+            % Description:
+            %     Returns the Simulation class populated with simulation
+            %     output from run().
+            %
+            % load Input Arguments:
+            %     obj      - A c# object returned from the simulation.
+            %     settings - A struct with the simulation configuration settings.
+            % 
+            % load Output Arguments:
+            %     S        - Simulation class.
+            %
+            %  Example:
+            %     % Load the Euromod model and the data:
+            %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
+            %     ID_DATASET = "SE_2021_b1.txt";
+            %     data = readtable(ID_DATASET);
+            %     % Run the default simulation on system "SE_2021":
+            %     sim=mod.countries('SE').systems('SE_2021').run(data,ID_DATASET)
+            %
+            % See also Model, Country, System, info, run.
 
             if nargin == 0
                 return
@@ -135,4 +156,23 @@ classdef (ConstructOnLoad)  Simulation < utils.customdisplay
             S.output_filenames = output_filenamesArr;
         end
     end
+    % methods (Static, Access = public,Hidden=true)
+    %     %==================================================================
+    %     function varargout = size(obj,varargin)
+    %         [varargout{1:nargout}] = size(obj.index,varargin{:});
+    %     end
+    %     %==================================================================
+    %     function varargout = ndims(obj,varargin)
+    %         [varargout{1:nargout}] = ndims(obj.index,varargin{:});
+    %     end
+    %     %==================================================================
+    %     function ind = end(obj,m,n)
+    %         S = numel(obj.indexArr);
+    %         if m < n
+    %             ind = S(m);
+    %         else
+    %             ind = prod(S(m:end));
+    %         end
+    %     end
+    % end
 end

@@ -56,7 +56,7 @@ classdef Policy < PolicyHandle
         end
     end
 
-    methods (Static, Access = public)
+    methods (Static, Access = public,Hidden)
         %==================================================================
         function obj = empty(varargin)
             % empty - Re-assaign an empty Policy class.
@@ -80,23 +80,6 @@ classdef Policy < PolicyHandle
         end
     end
     methods
-        %==================================================================
-        function varargout = size(obj,varargin)
-            [varargout{1:nargout}] = size(obj.index,varargin{:});
-        end
-        %==================================================================
-        function varargout = ndims(obj,varargin)
-            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
-        end
-        %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
         %==================================================================
         function obj = Policy(Country)
             % Policy - A class with the policy rules modeled in a country.
@@ -149,6 +132,23 @@ classdef Policy < PolicyHandle
         end
     end
     methods (Hidden)
+        %==================================================================
+        function varargout = size(obj,varargin)
+            [varargout{1:nargout}] = size(obj.index,varargin{:});
+        end
+        %==================================================================
+        function varargout = ndims(obj,varargin)
+            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
+        end
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
+        end
         %==================================================================
         function initialize(obj,super)
             % initialize - Copy the objects from the super class.

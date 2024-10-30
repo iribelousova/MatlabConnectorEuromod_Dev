@@ -65,7 +65,7 @@ classdef Parameter < Core
         tag = char(EM_XmlHandler.TAGS.PAR) % Parameter class tag.
     end
 
-    methods (Static, Access = public)
+    methods (Static, Access = public,Hidden)
         function obj = empty(varargin)
             % empty - Re-assaign an empty Parameter class.
             %
@@ -89,23 +89,6 @@ classdef Parameter < Core
         end
     end
     methods
-        %==================================================================
-        function varargout = size(obj,varargin)
-            [varargout{1:nargout}] = size(obj.index,varargin{:});
-        end
-        %==================================================================
-        function varargout = ndims(obj,varargin)
-            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
-        end
-        %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
         %==================================================================
         function obj = Parameter(Function)
             % Parameter - A class with the parameters set up in a function.
@@ -140,6 +123,23 @@ classdef Parameter < Core
         end
     end
     methods (Hidden)
+        %==================================================================
+        function varargout = size(obj,varargin)
+            [varargout{1:nargout}] = size(obj.index,varargin{:});
+        end
+        %==================================================================
+        function varargout = ndims(obj,varargin)
+            [varargout{1:nargout}] = ndims(obj.index,varargin{:});
+        end
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
+        end
         %==================================================================
         function x=getID(obj)
             % getID - Get the IDs of all parameters.

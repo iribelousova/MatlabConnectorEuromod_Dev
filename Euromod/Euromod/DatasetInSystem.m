@@ -70,7 +70,7 @@ classdef DatasetInSystem < Dataset
             end
         end
     end
-    methods
+    methods (Hidden)
         %==================================================================
         function varargout = size(obj,varargin)
             [varargout{1:nargout}] = size(obj.index,varargin{:});
@@ -89,20 +89,22 @@ classdef DatasetInSystem < Dataset
             end
         end
         %==================================================================
-        function obj = DatasetInSystem(System)
-            % DatasetInSystem - Datasets available in a system model.
+        function x = getID(obj)
+            % getID - Get the IDs of all datasets in the system.
 
-            obj = obj@Dataset;
-
-            if nargin == 0
-                return;
+            [IDs,~] = utils.getInfo(obj.Info.Handler,obj.index,'ID');
+            if size(IDs,2)==obj.Info.Handler.Count
+                IDs=IDs';
             end
+            x=IDs;
+        end
+        %==================================================================
+        function x=headerComment(obj,varargin)
+            % headerComment - Get the comment of the class array.
 
-            if isempty(System)
-                return;
-            end
-
-            obj.load(System);
+            x=obj.headerComment_Type1({'name','bestMatch','comment'});
+            x(ismember(x(:,2),"no"),2) = "";
+            x(ismember(x(:,2),"yes"),2) = "best match";
         end
         %==================================================================
         function obj = load(obj, parent)
@@ -121,23 +123,23 @@ classdef DatasetInSystem < Dataset
             obj.indexArr=1:numel(obj.Info.PieceOfInfo);
             obj.index=obj.indexArr;
         end
+    end
+    methods
         %==================================================================
-        function x = getID(obj)
-            % getID - Get the IDs of all datasets in the system.
+        function obj = DatasetInSystem(System)
+            % DatasetInSystem - Datasets available in a system model.
 
-            [IDs,~] = utils.getInfo(obj.Info.Handler,obj.index,'ID');
-            if size(IDs,2)==obj.Info.Handler.Count
-                IDs=IDs';
+            obj = obj@Dataset;
+
+            if nargin == 0
+                return;
             end
-            x=IDs;
-        end
-        %==================================================================
-        function x=headerComment(obj,varargin)
-            % headerComment - Get the comment of the class array.
 
-            x=obj.headerComment_Type1({'name','bestMatch','comment'});
-            x(ismember(x(:,2),"no"),2) = "";
-            x(ismember(x(:,2),"yes"),2) = "best match";
+            if isempty(System)
+                return;
+            end
+
+            obj.load(System);
         end
     end
 end

@@ -46,7 +46,7 @@ classdef ParameterInSystem < Parameter
         sysID (1,1) string % Identifier number of the reference system.
     end
 
-    methods (Static, Access = public)
+    methods (Static, Access = public,Hidden)
         %==================================================================
         function obj = empty(varargin)
             % empty - Re-assaign an empty ParameterInSystem class.
@@ -71,15 +71,6 @@ classdef ParameterInSystem < Parameter
     end
     methods
         %==================================================================
-        function ind = end(obj,m,n)
-            S = numel(obj.indexArr);
-            if m < n
-                ind = S(m);
-            else
-                ind = prod(S(m:end));
-            end
-        end
-        %==================================================================
         function obj = ParameterInSystem(FunctionInSystem)
             % ParameterInSystem - A class with the system-policy-function-
             % specific parameters.
@@ -98,6 +89,15 @@ classdef ParameterInSystem < Parameter
         end
     end
     methods (Hidden)
+        %==================================================================
+        function ind = end(obj,m,n)
+            S = numel(obj.indexArr);
+            if m < n
+                ind = S(m);
+            else
+                ind = prod(S(m:end));
+            end
+        end
         %==================================================================
         function obj = load(obj, parent)
             % load - Load the ParameterInSystem class array objects.

@@ -68,7 +68,7 @@ classdef Dataset < Core
         tag = char(EM_XmlHandler.TAGS.DATA); % Dataset class tag.
     end
 
-    methods (Static, Access = public)
+    methods (Static,Access = public,Hidden)
         function obj = empty(varargin)
             % empty - Re-assaign an empty Dataset class.
             %
@@ -91,7 +91,7 @@ classdef Dataset < Core
         end
     end
 
-    methods
+    methods (Access = public,Hidden)
         %==================================================================
         function varargout = size(obj,varargin)
             [varargout{1:nargout}] = size(obj.index,varargin{:});
@@ -109,6 +109,8 @@ classdef Dataset < Core
                 ind = prod(S(m:end));
             end
         end
+    end
+    methods
         %==================================================================
         function obj = Dataset(Country)
             % Dataset - Datasets available in a country model.

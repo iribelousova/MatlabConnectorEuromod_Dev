@@ -1,11 +1,12 @@
 %% Model 
+% <a href="matlab:disp('Hello World')">Hello!</a>
 % Base class of the Euromod Connector.
 %
-%% Syntax:
+%% Model Syntax:
 %
 %     mod = euromod(model_path);
 %
-%% Description:
+%% Model Description:
 %     This class instantiates the microsimulation model EUROMOD.
 %
 %% Model Arguments:
@@ -70,6 +71,9 @@ classdef Model < Core
     end
 
     methods
+        function x=info(obj,varargin)
+            error("Unrecognized method 'info' for class 'Model'.")
+        end
 
         function obj=Model(model_path)
             % Base class of the Euromod Connector.
@@ -86,7 +90,13 @@ classdef Model < Core
 
         function x=get.countries(varargin)
             % countries - Get the model Country class array.
+
             obj=varargin{1};
+
+            if strcmp(obj.modelpath,"") 
+                x=Country;
+                return;
+            end
 
             if size(obj.countryClass,1)==0
                 obj.countryClass=Country(obj);
@@ -100,6 +110,11 @@ classdef Model < Core
         function x=get.extensions(varargin)
             % extensions - Get the model Extension class array.
             obj=varargin{1};
+
+            if strcmp(obj.modelpath,"") 
+                x=Extension;
+                return;
+            end
 
             if size(obj.extensionsClass,1)==0
                 obj.extensionsClass=Extension(obj);
