@@ -17,6 +17,9 @@ elseif contains(class(obj),'EM_XmlHandler.CountryInfoHandler+<GetPiecesOfInfo>')
     % [values,keys]=utils.convert1D(obj,varargin{:});
     % values=utils.convert1E(obj,varargin{:});
     % keys=[];
+elseif isa(obj,'System.Collections.Generic.List<System*Collections*Generic*Dictionary<System*String,System*String>>')
+    values=utils.convert2E(obj,varargin{:});
+    keys=[];
 end
 
 end

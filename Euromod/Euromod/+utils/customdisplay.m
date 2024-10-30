@@ -28,6 +28,20 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
     %
     % See also Model, Country, System, Policy, Dataset, Extension.
 
+    methods (Access=protected,Hidden)
+        function displayScalarObject(varargin)
+            displayScalarObject@matlab.mixin.CustomDisplay(varargin{:});
+            varargin{:}.index=varargin{:}.indexArr;
+        end
+        function displayNonScalarObject(varargin)
+            displayNonScalarObject@matlab.mixin.CustomDisplay(varargin{:});
+            varargin{:}.index=varargin{:}.indexArr;
+        end
+        function displayEmptyObject(varargin)
+            displayEmptyObject@matlab.mixin.CustomDisplay(varargin{:});
+        end
+    end
+
     methods (Static,Sealed,Access=protected,Hidden)
         %==================================================================
         function header=commentElement(header,coms)
@@ -98,9 +112,7 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                     fullName(1:2:end)=Name';
                     fullName(2:2:end)=BaseOff';
                     namNum='%s: %s';
-                    for i=2:N
-                        namNum=[namNum,', %s: %s'];
-                    end
+                    namNum = [namNum,repmat(', %s: %s',1,N-1)];
                     propgrp.PropertyList.(propName)=string(sprintf(namNum,fullName));
                 end
             end
@@ -113,9 +125,7 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                 N=size(propgrp.PropertyList.(propName),1);
                 if N<=maxDisp && N>0
                     namNum='%s';
-                    for i=2:N
-                        namNum=[namNum,', %s'];
-                    end
+                    namNum = [namNum,repmat(', %s',1,N-1)];
                     propgrp.PropertyList.(propName)=string(sprintf(namNum,propgrp.PropertyList.(propName)(1:end).name'));
                 end
             end
@@ -131,7 +141,10 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                 header = obj.appendComment(comm);
             else
                 dimStr=matlab.mixin.CustomDisplay.convertDimensionsToString(obj);
-                header = [dimStr, ' ', matlab.mixin.CustomDisplay.getClassNameForHeader(obj), ' with properties:'];
+                className=class(obj);
+                objHL= ['<a href="matlab:help ' className '">' className '</a>'];
+                % objHL=matlab.mixin.CustomDisplay.getClassNameForHeader(obj);
+                header = [dimStr, ' ', objHL, ' with properties:'];
                 header = string(header);
                 header = sprintf('%s\n',header);
             end
@@ -191,7 +204,6 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
                 propName="extensions";
                 propgrp=obj.customExtensionDisplay(propgrp,propName,maxDisp);
             end
-            obj.index=obj.indexArr;
         end
         %==================================================================
         function x=headerComment_Type1(obj,varargin)
@@ -246,7 +258,7 @@ classdef customdisplay < matlab.mixin.CustomDisplay & handle
             %%% GET POLICIES EXTENSIONS FOR PRINTING
             % get tags
             eTAG=char(EM_XmlHandler.TAGS.EXTENSION);
-            if strcmp(class(obj),'Policy') || strcmp(class(obj),'ReferencePolicy') || strcmp(class(obj),'PolicyInSystem')
+            if isa(obj,'Policy') || isa(obj,'ReferencePolicy') || isa(obj,'PolicyInSystem')
                 objTag=Policy.tag;
             else
                 objTag=obj.tag;

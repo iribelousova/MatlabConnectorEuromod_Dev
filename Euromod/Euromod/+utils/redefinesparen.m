@@ -1,4 +1,6 @@
-classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.indexing.RedefinesDot & utils.customdisplay & handle
+classdef redefinesparen < utils.customdisplay  & matlab.mixin.indexing.RedefinesParen & ...
+        matlab.mixin.indexing.RedefinesDot & utils.dynamicpropshandle & ...
+        utils.copyable & handle
     % redefinesparen - Superclass for all the Euromod Connector main classes.
     %
     % Description:
@@ -28,6 +30,85 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
     %
     % See also Model, Country, System, Policy, Dataset, Extension.
 
+
+    methods (Static, Access = public,Hidden=true)
+        %==================================================================
+        function cat(varargin)
+            error("Model:ConcatenationNotSupported",...
+                "Concatenation is not supported.");
+        end
+    end
+
+    methods (Sealed,Hidden)
+        % function p=isvalid(varargin)
+        %     p=isvalid@handle(varargin{:});
+        % end
+        % function copy(varargin)
+        %     copy@utils.copyable(varargin{:});
+        % end
+    end
+
+    methods (Access=public,Hidden)
+        function notify(varargin)
+            notify@handle(varargin{:});
+        end
+        function delete(varargin)
+            delete@utils.dynamicpropshandle(varargin{:});
+        end
+        function transpose(varargin)
+            % p=transpose@handle(varargin{:});
+            error("Model:TransposeNotSupported",...
+                [char("Unrecognized method 'trasnpose' for class '"),class(varargin{:}),char("'.")]);
+        end
+        function reshape(varargin)
+            % p=transpose@handle(varargin{:});
+            error("Model:ReshapeNotSupported",...
+                [char("Unrecognized method 'reshape' for class '"),class(varargin{:}),char("'.")]);
+        end
+        function ctranspose(varargin)
+            % p=transpose@handle(varargin{:});
+            error("Model:TransposeNotSupported",...
+                "Concatenation is not supported.");
+        end
+        function horzcat(varargin)
+            % p=horzcat@handle(varargin{:});
+            error("Model:ConcatenationNotSupported",...
+                "Concatenation is not supported.");
+        end
+        function vertcat(varargin)
+            % p=vertcat@handle(varargin{:});
+            error("Model:ConcatenationNotSupported",...
+                "Concatenation is not supported.");
+        end
+        function p=length(varargin)
+            p=length@matlab.mixin.indexing.RedefinesParen(varargin{:});
+        end
+        function p=numel(varargin)
+            p=numel@matlab.mixin.indexing.RedefinesParen(varargin{:});
+        end
+        function p=isempty(varargin)
+            p=isempty@matlab.mixin.indexing.RedefinesParen(varargin{:});
+        end
+        function p=addlistener(varargin)
+            p=addlistener@handle(varargin{:});
+        end
+        function p=listener(varargin)
+            p=listener@handle(varargin{:});
+        end
+    end
+
+    methods (Access=protected,Hidden)
+        function p = parenDotAssign(varargin)
+            p = parenDotAssign@matlab.mixin.indexing.RedefinesParen(varargin{:});
+        end
+        function p=parenDotListLength(varargin)
+            p=parenDotListLength@matlab.mixin.indexing.RedefinesParen(varargin{:});
+        end
+        function p = copyElement(varargin)
+            p = copyElement@matlab.mixin.Copyable(varargin{:});
+        end
+    end
+
     methods (Static, Access = public,Hidden=true)
         %==================================================================
         function varargout = size(obj,varargin)
@@ -36,11 +117,6 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
         %==================================================================
         function varargout = ndims(obj,varargin)
             [varargout{1:nargout}] = ndims(obj.index,varargin{:});
-        end
-        %==================================================================
-        function cat(varargin)
-            error("Model:ConcatenationNotSupported",...
-                "Concatenation is not supported.");
         end
         %==================================================================
         function ind = end(obj,m,n)
@@ -109,14 +185,11 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
             end
 
             % Get string properties of the object
-            % temp=copy(obj);
-            % temp.index=temp.indexArr;
-            % strProps=utils.splitproperties(temp);
-            % [values,~]=temp.getOtherProperties(strProps,index);
             if isa(obj,'Country')
                 values = obj.parent.defaultCountries;
-            elseif isa(obj,'Policy')
-                [values,~]=utils.getInfo(obj.Info.Handler,':');
+                values=values';
+                % elseif isa(obj,'Policy')
+                %     [values,~]=utils.getInfo(obj.Info.Handler,':');
             else
                 temp=copy(obj);
                 temp.index=temp.indexArr;
@@ -129,18 +202,14 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 error('Unrecognized property value(s) "%s".',strjoin(string(indexStr),'","'))
             end
 
-            if size(a1,2)>1
-                [~,b]=find(a1);
-            else
-                b=find(a1);
-            end
+            [~,b]=find(a1);
 
-            if isa(obj,'Policy') || isa(obj,'ReferencePolicy')
-                index=find(ismember(obj.indexArr,b));
-            else
-                index=b;
-            end
-
+            % if size(a1,2)>1
+            %     [~,b]=find(a1);
+            % else
+            %     b=find(a1);
+            % end
+            index=b;
         end
         %==================================================================
         function varargout=getOutput(obj,idx,Props)
@@ -296,7 +365,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                         out=out.getOutput(idx);
                         if N>=Ni+2
                             [varargout{1:nargout}]=out.(Props).(indexOp(Ni+2:end));
-                        else
+                        else  
                             [varargout{1:nargout}]=out.(Props);
                         end
                         return;
@@ -337,6 +406,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 Ni=Ni+2;
 
             end
+            [varargout{1:nargout}]=out;
         end
         %==================================================================
         function obj = parenAssign(obj,indexOp,varargin)
@@ -352,17 +422,17 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                     flag=0;
                 end
             end
-            [idx,Props]=obj.convertIndexOperator(indexOp(1:2));
+            [idx,~]=obj.convertIndexOperator(indexOp(1:2));
 
             if flag
                 out=copy(obj(idx).(indexOp(2:end)));
                 sobj=out.getParent('SYS');
-    
+
                 if isa(out,'ParameterInSystem')
                     out.setParameter(sobj.name, out.parID, string(varargin{1}));
                 end
-            % else
-            %     out=obj;
+                % else
+                %     out=obj;
             end
 
         end
@@ -437,7 +507,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 a1 = 1;
             elseif ismember(propOp,values)
                 % case 4: index is the object name
-                Idx=find(ismember(values,propOp));
+                % Idx=find(ismember(values,propOp));
                 a1=4;
             elseif ismember(propOp,'parent')
                 a1=5;
@@ -491,7 +561,8 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 out=obj.(propertyName).(propOp);
             elseif a1==4
                 % index is the object name
-                out=obj(propOp);
+                out=copy(obj);
+                out=out(propOp);
             elseif a1==5
                 % index property is "parent" property
                 out=obj.(propOp);
@@ -503,7 +574,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 out=out.(indexOp(2:end));
             end
             [varargout{1:nargout}]=out;
-            return;          
+            return;
         end
         %==================================================================
         function out = dotAssign(obj,indexOp,varargin)
@@ -523,23 +594,22 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
             if flag
                 out=copy(obj.(indexOp(1:end)));
                 sobj=out.getParent('SYS');
-    
+
                 if isa(out,'ParameterInSystem')
                     out.setParameter(sobj.name, out.parID, string(varargin{1}));
                 end
             else
                 out=obj;
             end
-            % 
+            %
             % c=0;
 
-            
+
             % [obj.AddedFields.(indexOp)] = varargin{:};
         end
         %==================================================================
         function n = dotListLength(obj,indexOp,indexContext)
             n = 1;
-            % n = listLength(obj.AddedFields,indexOp,indexContext);
         end
         %==================================================================
         function obj=setParent(obj,ch)
@@ -583,14 +653,14 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
         function obj=update(obj,index,props)
             % update - Update the values of properties of a specific class.
 
-            if strcmp(class(obj),'Policy')
+            if isa(obj,'Policy') % strcmp(class(obj),'Policy')
                 if all(index>obj.Info.Handler.Count)
                     cc=ReferencePolicy;
                     cc.initialize(obj);
                     obj=cc;
                 end
             end
-            if strcmp(class(obj),'ReferencePolicy')
+            if isa(obj,'ReferencePolicy') % strcmp(class(obj),'ReferencePolicy')
                 Order=zeros(1,0);
                 for i=1:numel(obj.Info.PieceOfInfo)
                     Order(i)=str2double(utils.getInfo(obj.Info.PieceOfInfo(i).Handler,'Order'));
@@ -678,7 +748,7 @@ classdef redefinesparen < matlab.mixin.indexing.RedefinesParen & matlab.mixin.in
                 cobj=copy(obj.getParent("COUNTRY"));
             end
             Idx=cobj.index;
-           
+
             % set new value
             cobj.Info(Idx).Handler.SetSysParValue(system, id, value);
             % obj=obj.setParent(cobj);
