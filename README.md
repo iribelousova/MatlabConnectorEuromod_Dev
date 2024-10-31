@@ -1,158 +1,210 @@
+# About Euromod
+_euromod_ is an object oriented toolbox providing user-friendly tools for easily navigating and running simulations of the tax-benefit
+microsimulation model [EUROMOD](https://euromod-web.jrc.ec.europa.eu "https://euromod-web.jrc.ec.europa.eu").
+
+See the Euromod Connector [documentation](./doc/GettingStarted.mlx) for more readings.
+
+The hierarchical design of the _euromod_ classes mimics the **EUROMOD** model structure. 
+
+Load EUROMOD by passing the path to the EUROMOD project to `euromod`:
+
+```
+mod =euromod("C:\EUROMOD_RELEASES_I6.0+");
+mod
+	1×1 Model with properties:
+     
+  extensions: [11×1 Extension]
+   countries: [28×1 Country]
+   modelpath: "C:\EUROMOD_RELEASES_I6.0+"
+```
+
+This returns a base class `Model` with default EUROMOD `countries` and
+`extensions` stored in the respective class properties: 
+```
+mod.extensions
+	11×1 Extension array:
+		1: BTA      | Benefit Take-up Adjustments
+		2: TCA      | Tax Compliance Adjustments
+		3: FYA      | Full Year Adjustments
+		4: UAA      | Uprating by Average Adjustment
+		5: EPS      | Extended Policy Simulation
+		6: PBE      | Parental leave benefits
+		7: MWA      | Minimum Wage Adjustments
+		8: HHoT_un  | HHoT unemployment extension
+		9: WEB      | EUROMOD JRC-Interface
+	   10: HHoT_ext | HHoT - Extended Simulation
+	   11: HHoT_ncp | HHoT - Non Compulsory Payments
+```
+
+**Note:** All the class array-type objects in _euromod_ can be accessed
+by indexing the object either with an integer, or with a string
+defining any value of the object string-type property.
+
+Get a specific `Country` of the model, for example Austria, with any
+of the following commands:
+```
+% at = mod.countries(1);
+% at = mod.countries('AT');
+at = mod.AT;
+at
+	1×1 Country with properties:
+
+            datasets: [27×1 Dataset]
+          extensions: [13×1 Extension]
+    local_extensions: [2×1 Extension]
+                name: "AT"
+              parent: [1×1 Model]
+            policies: [54×1 Policy]
+             systems: [17×1 System]
+```
+
+Similarly, we can get information about a policy, for example the _income tax_, configured for Austria:
+```
+% pol = at.policies(1);
+% pol = at.policies('setdefault_at');
+% pol = at.policies.setdefault_at;
+pol = at.setdefault_at;
+pol
+	1×1 Policy with properties:
+
+       comment: "DEF: SET DEFAULT VALUES"
+     functions: "SetDefault, InitVars, InitVars, SetDefault, InitVars, DefVar, SetDefault"
+       private: "no"
+    extensions: [0×1 Extension]
+            ID: "41c9d331-d155-4a39-9ff9-16c8243c50d0"
+          name: "setdefault_at"
+         order: "1"
+        parent: [1×1 Country]
+    spineOrder: "1"
+```
+
+**Note:** Indexing a class array with the value of a string-type
+class property, returns all the elements that match the exact expression.
+```
+% at.policies('tin_at');
+% at.policies.tin_at;
+at.tin_at
+
+	3×1 Policy array:
+		1: tin_at |                   | TAX: income tax (Einkommenssteuer)
+		2: tin_at |  Reference policy | 
+		3: tin_at |  Reference policy | 
+```
+
+```
+at.tin_at(2)
+
+	1×1 ReferencePolicy with properties:
+
+      refPolID: "978f7d95-06d9-472f-a167-d0ae5b52d0f2"
+    extensions: [0×1 Extension]
+            ID: "c0c8e298-1242-439a-97b5-95ba746eebbd"
+          name: "tin_at"
+         order: "28"
+        parent: [1×1 Country]
+    spineOrder: "28"
+```
+
+We can similarly access any class array-type property in the model.
+Below is another example for the Austrian tax-benefit default systems:
+```
+at.systems
+
+	17×1 System array:
+	 1: AT_2007
+	 2: AT_2008
+	 3: AT_2009
+	 4: AT_2010
+	 5: AT_2011
+	 6: AT_2012
+	 7: AT_2013
+	 8: AT_2014
+	 9: AT_2015
+	10: AT_2016
+	11: AT_2017
+	12: AT_2018
+	13: AT_2019
+	14: AT_2020
+	15: AT_2021
+	16: AT_2022
+	17: AT_2023
+```
+
+And if we are interested in a specific system:
+```
+% at.systems(15);
+% at.systems('AT_2021');
+% at.systems.AT_2021;
+at.AT_2021
+
+	1×1 System with properties:
+
+    bestmatchDatasets: "AT_2021_b1"
+              comment: ""
+       currencyOutput: "euro"
+        currencyParam: "euro"
+             datasets: "training_data, AT_2019_b2, AT_2021_hhot, AT_2020_b2, AT_2021_b1"
+                   ID: "ca63e8ca-db68-4f4c-9b90-b5717e7a3776"
+           headDefInc: "ils_origy"
+                 name: "AT_2021"
+               parent: [1×1 Country]
+             policies: [54×1 PolicyInSystem]
+              private: "no"
+                order: "16"
+                 year: "2021"
+```
+# Simulation
+
+Simulations of the EUROMOD tax-beneif systems can be `run`
+from the `Model`, a `Country`, or a `System` class. The default 
+input arguments are the country name, the system name, a table-type dataset,
+and the dataset name. All are required when running simulations from the `Model`
+while, for example, only the last 2 when running from a `System`. Other optional
+Name-Value input arguments can set up, for example, the use of Addons, of extension
+switches, or change the values of constants in the system. 
+
+**Note:** The input datasets used in the simulations must follow the
+EUROMOD configuration criteria. For more information please read the section **DATA** following
+the [link](https://euromod-web.jrc.ec.europa.eu/download-euromod "https://euromod-web.jrc.ec.europa.eu/download-euromod")
+
+In the information above, displayed for the Austrian system <i>AT_2021</i>,
+we can see which datasets can be used for simulations, and which one is the best-match
+for the specific system.
+
+
+Let us `run` a simulation using the best-match dataset and the default simulation configuration
+options: (note that the following commands are equivalent)
+```
+% Load the data as a table
+data = readtable("AT_2021_b1.txt");
+
+% Run simulation
+% sim = mod.run('AT','AT_2021',data,'AT_2021_b1')
+% sim = mod.countries('AT').run('AT_2021',data,'AT_2021_b1')
+% sim = mod.countries('AT').systems('AT_2021').run(data,'AT_2021_b1')
+sim = mod.AT.AT_2021.run(data, 'AT_2021_b1');
+sim
+	1×1 Simulation with properties:
+		 outputs: {[12305×445 table]}
+		settings: [1×1 struct]
+		  errors: [0×1 string]
+output_filenames: "at_2021_std"
+```
+The table-type simulation results are stored under the
+the property `outputs` as a cell array.
+
+
 # Installation
 
+**Download** and install the Euromod Connector toolbox from the Matlab
+[File Exchange](https://it.mathworks.com/matlabcentral/fileexchange/174595-euromod?s_tid=srchtitle "https://it.mathworks.com/matlabcentral/fileexchange/174595-euromod?s_tid=srchtitle")
+web page.
+
 ## Requirements
-This package requires that the microsimulation model **EUROMOD** is installed on your computer.
-Download the latest releases from 
+This toolbox requires the microsimulation model **EUROMOD**.
+Download the latest release from 
 [EUROMOD](https://euromod-web.jrc.ec.europa.eu/download-euromod "https://euromod-web.jrc.ec.europa.eu/download-euromod")
-
-**Download** and install the _Euromod Connector_ package for Python using _pip_:
-```
-pip install euromod
-```
-
-**Import** the module _euromod_:
-```
-from euromod import Euromod
-```
-
-**Note:** If the module _euromod_ is not found, 
-add to %SYSTEMPATH the root folder where the _euromod_ package is installed (for example, `r"C:\Users\YOUR_USER_NAME\AppData\Roaming\Python\PythonXXX\site-packages"`) then retry:
-```
-import sys
-sys.path.insert(0, ROOT_PATH_TO_EUROMOD_PACKAGE)
-```
-
-**Note:** If you encope in an error from the _clr_ module for a missing Attribute, probably a different _clr_ package installed on your device conflicts with the _clr_ module from the _pythonnet_ package. 
-Uninstall _clr_ package then retry:
-```
-pip uninstall clr
-```
-
-If necessary, re-install the _pythonnet_ package:
-```
-pip install pythonnet
-```
-
-Equivalent commands in **cmd**:
-```
-pip install euromod
-py -m euromod
-set PATH=%PATH%; "C:\...\AppData\Roaming\Python\PythonXXX\site-packages"
-py -m pip uninstall clr
-py -m pip install pythonnet
-```
-
-**Note:** On multiple import runs the _clr_ module from _pythonnet_ can crash. The error message looks like:
-```
-RuntimeError: Failed to initialize Python.Runtime.dll
-
-Failed to initialize pythonnet: System.InvalidOperationException: This property must be set before runtime is initialized
-   at Python.Runtime.Runtime.set_PythonDLL(String value)
-   at Python.Runtime.Loader.Initialize(IntPtr data, Int32 size)
-   at Python.Runtime.Runtime.set_PythonDLL(String value)
-   at Python.Runtime.Loader.Initialize(IntPtr data, Int32 size)
-```
-For a one-time solution start a new console window. 
-To solve the problem temporarely (or permanently) for a specific console, disable the option **User Module Reloader (UMR)** in the `Tools` bar 
-(this prevents python/spyder from automatically reloading modules whenever they are re-imported).
-Depending on Python/Spyder editor version, go to:
- * Tools -> Preferences -> Python Interpreter, OR
- * Tools -> Console -> Advaned setting
- 
- Disable the User Module Reloader (UMR) option then press `Apply` and `Ok`. Start a new Console window. Note: this console will load properly the _clr_ module even if the UMR option has been reactivated in the meantime. However, if you open a new console the UMR option must be again disabled and the console re-stared.
-
-# Simulation
-In order to simulate the _euromod_ model:
-
-1. Load the **EUROMOD Connector**. The first Input, of type _char_ or _str_, is the  full path to the root directory where the [EUROMOD](https://euromod-web.jrc.ec.europa.eu/download-euromod "https://euromod-web.jrc.ec.europa.eu/download-euromod") model is located. The second Input is optional of type _char_, _str_, or _list_, and represents the two-digits country codes. 
-```
-PATH_EUROMODFILES = r"C:\...\EUROMOD_RELEASES_I6.0+"
-EM =Euromod(PATH_EUROMODFILES, countries = 'PL')
-```
-_Note_: If the second Input is omitted, the **EUROMOD Connector** uploads all the available countries from the **Euromod** model into the `Country` class objects. These objects can be accessed using either notation `EM['PL']` or `EM.countries['PL']`. Display the **Euromod** model countries using command `EM.countries`.
-
-2. Load the **Euromod** model country-specific systems into the `System` class objects of the **EUROMOD Connector** using the method `load_system`. The method takes on one Input, the name(s) of the **Euromod** model system(s), as a _char_, _str_, or _list_.
-```
-EM['PL'].load_system(['PL_2021', 'PL_2022'])
-```
-The `System` objects can be accessed using either notation `EM['PL']['PL_2022']` or `EM['PL'].systems['PL_2022']`. To display all the systems loaded in the **EUROMOD Connector** use `EM['PL'].systems`.
-
-3. Run the simulations of the **Euromod** model systems using the method `run`, which requires two inputs: **Input 1** is the dataset of type _pandas.DataFrame_ and **Input 2**, of type _char_ or _str_, is the name (with extension) of this dataset. _Note_ that the name of the dataset must be a valid **Euromod** model name (i.e. `"training_data.txt"` or, for example for Poland,`"PL_2019_b3.txt"`).
-```
-import pandas as pd
-
-df = pd.read_csv("PL_2019_b3.txt", sep="\t")
-
-EM['PL']['PL_2022'].run(df, "PL_2019_b3.txt")
-```
-The simulation results are stored into the `simulations` class objects with _default_ names _Sim1_, _Sim2_,... . In order to rename the simulations, use the method `rename_simulations` either with one Input of type _dict_ (**keys** are old names, **values** are new names), or with two Inputs of type _char_ or _str_ (**first** input is oldname, **second** input is new name). 
-```
-print(EM['PL']['PL_2022'].simulations.keys())
-EM['PL']['PL_2022'].rename_simulations('Sim1', 'mySim')
-
-print(EM['PL']['PL_2022'].simulations.keys())
-EM['PL']['PL_2022'].rename_simulations({'mySim':'yourSim'})
-
-print(EM['PL']['PL_2022'].simulations['yourSim'])
-```
-
-The `simulations` class objects contain the following information:
- * `name` of type _char_ : name of the simulation,
- * `configSettings` of type _dict_ : configuration settings specific to the simulation run,
- * `output` of type _dict_ : **keys** are the names of the _Input datasets_, **values** are the datasets resulting from the simulation run,
- * `constantsToOverwrite`of type _dict_ : only if the _User_ modified any values of the **Euromod** model constants.
-```
-sim_PL_2022 = list(EM.countries['PL'].systems['PL_2022'].simulations.values())[-1]
-print(sim_PL_2022)
-print(list(sim_PL_2022.output.values())[-1])
-``` 
-
-4. In order to change the values of constants in the **Euromod** model, use the _optional_ Input argument `constantsToOverwrite` in the method `run`:
-```
-EM.countries['PL'].systems['PL_2022'].run(df, "PL_2019_b3.txt", constantsToOverwrite = {("$f_h_cpi","2022"):'1000'})
-```
-
-
 
 
 # License
-&copy;European Union, Institute for Social and Economic Research, University of Essex
-
-The EUROMOD model is licensed under the Creative Commons Attribution 4.0 International 
-(CC BY 4.0) [licence](https://creativecommons.org/licenses/by/4.0/ "https://creativecommons.org/licenses/by/4.0/"). Reuse is allowed provided appropriate credit is given and any changes are indicated. 
-
-We kindly ask you to acknowledge the use of EUROMOD in any publications or other outputs
-(such as conference presentations). A recommended wording for acknowledgement is provided below: 
-
-	'The results presented here are based on EUROMOD version I5.0+. Originally 
-	maintained, developed and managed by the Institute for Social and Economic
-	Research (ISER), since 2021 EUROMOD is maintained, developed and managed by
-	the Joint Research Centre (JRC) of the European Commission, in collaboration
-	with EUROSTAT and national teams from the EU countries. We are indebted to the
-	many people who have contributed to the development of EUROMOD. The results
-	and their interpretation are the author’s(’) responsibility'
-
-This package includes one icon ('\XMLParam\AddOns\MTR\MTR.png'),
-adapted from [LibreICONS](https://diemendesign.github.io/LibreICONS/, "https://diemendesign.github.io/LibreICONS/"), under : 
-
-	MIT License
-
-	Copyright (c) 2018 Diemen Design
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy
-	of this software and associated documentation files (the "Software"), to deal
-	in the Software without restriction, including without limitation the rights
-	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-	copies of the Software, and to permit persons to whom the Software is
-	furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in all
-	copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-	SOFTWARE.
+©[EUPL-EUROPEAN UNION PUBLIC LICENCE v. 1.2. The European Union 2007, 2016.](License.txt)
