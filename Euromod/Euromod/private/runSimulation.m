@@ -190,7 +190,8 @@ if out.Item1
     if ~isempty(NameValueArgs.constantsToOverwrite)
         configSettings.constantsToOverwrite=NameValueArgs.constantsToOverwrite;
     end
-    x = Simulation(out, configSettings);
+    S=Simulation;
+    x = Simulation.load(S, out, configSettings);
     fprintf("\nSimulation %s, system %s, data %s, country %s finished.\n", ...
         x.output_filenames, configSettings.ID_SYSTEM,configSettings.ID_DATASET, configSettings.COUNTRY)
 else
