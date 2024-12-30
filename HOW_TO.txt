@@ -1,17 +1,381 @@
+MATLAB Toolbox for Euromod:
+
+____________________________________________________________________________________
+How the toolbox works:
+	*All the classes inherit from the MATLAB "handle" class! So if you change a value
+	 in an object, this value is updated everywhere. If you do not want this behavior,
+	 use the MATLAB built-in function "copy" to create a copy of a class.
+
+	*The fastest way to work in MATLAB is to use doubles or strings. If you use cells,
+	 structures, classes ect. the operations may take longer. For this reason, where
+	 possible, the internal functions of the toolbox work with strings. 
+
+	*The main toolbox component is the function "euromod.m". It loads the C#
+	  assemblies in the MATLAB base workspace, which are then accessible to all the
+	  toolbox classes, and returns the base class "Model.m". 
+	  For example: mod=euromod(PATH_TO_PROJECT)
+
+	*"Model" is a (1,1) class by default. The size of all the other toolbox classes
+	  depends on the number of the elements of the given class.
+
+	*All the objects that are (N,1) class arrays can be accessed in the following ways:
+	 - indexing with an integer e.g. mod.countries(1)
+	 - indexing using dot notation and the value of the property "name" of the class
+	    e.g. mod.countries.AT, mod.AT, mod.AT.systems.AT_2021, mod.AT.AT_2021, 
+            mod.AT.AT_2021.policies.tin_y, mod.AT.AT_2021.tin_y ...
+	   Note: the fastest way to retrieve objects is still using the full notation and
+	   and integers, that is mod.countries(1).systems(1).
+	 - indexing with a value of any property of the class array e.g. mod.systems('euro')
+	    returns all the systems that contain 'euro' in any property of the system. 
+	   Note: the toolbox searches for the exact expression so, for example if you 
+	   search by the value of property "comment" you must respect all the spaces, 
+	   capital or small letters ...
+
+	 *Specific properties in class arrays can also be accessed with multiple indexation
+	   e.g. mod.countries(1,["name","system"])
+
+	 *Given the default MATLAB behavior, the user can also call the classes directly,
+	   instead of using concatenating expressions, e.g. Country(mod).
+	  Note: This returns by default a class array (e.g. not one specific country but
+	   all the countries).    
+
+	 *In order to save on memory, ALL the toolbox public classes (except "ExtensionSwitch")
+	   save only basic information, which is thereafter used to retrieve the objects
+	   requested by the user. This basic information consists of the following hidden
+	   properties:
+
+	  - Info.Handler : where Info is a structure or a structure array, and Handle is a
+	     C# object. For example, in the "Model" class Info is a structure and Handle is
+	     the C# "EM_XmlHandler.ModelInfoHandler" object. In the "Country" class Info is
+	     a structure array and Handle is the C# "EM_XmlHandler.CountryInfoHandler" object
+	     for a specific country. In the "Policy" class Info is a structure, Handler is also
+	     a structure containing the field "GetPieceOfInfo" with the same C# object. The "Policy"
+	     class also contains a hanlder to the reference policies in the property "Info.HandlerRef".
+           Note: this property is never updated lik the indexArr. That is, it always stores the entire C# 
+	   object.
+
+	  - index : (1,1) double. This is an integer indicating the position of the object
+	     requested by the user in the C# "Info.Handler" property.
+	    Note: This "index" is used to determine the size of the object returned to the user.
+	    It is also used when retrieving the properties of type string that is, when a class
+	    calls the method "getOtherProperties" (See next *star point).
+
+	  - indexArr : array of doubles. This is the ordered index of ALL the elements in a
+	     class array. This "indexArr" is used to retrieve the elements from the "Info.Handler"
+	     C# object. The index provided by the user, indeed, is used to find the position of  
+	     the C# element in the "indexArr". Then, the same property "index" of the class array
+	     is updated given its position in "indexArr".
+	    Note: this property is only updated when the user requests an output variable. 
+            For example, if you call mod.countries(3:6) the "indexArr" is not updated;  
+	    if you call OUT=mod.countries(3:6) the "indexArr" is updated to correspond to the 
+	    user index [3,4,5,6], so when the user calls OUT(1) it picks up the correct element 
+	    from the "Info.Handler" property which always stores the C# object as a whole.
+
+	 *In all the public classes, the public properties consist of two main groups: 1) those
+	    of type string, 2) those of type class array. The first type is obtained using the 
+	    hidden class method "getOtherProperties" which searches in the hidden property 
+	    "Info.Handler" using property "index" of the class. The second type is obtained using
+	    the Matlab default "get" method. This method is called by default by Matlab every time 
+	    this type of properties must be displayed.
+
+	  *All the toolbox objects consume 8 Bytes of memory.
+
+
+____________________________________________________________________________________
+Internal steps of the toolbox:
+	1) The user calls an object.
+		2.a) The toolbox calls "utils.redefinesparen.m" if the requested object
+	             is called using the parenthesis notation or the dot notation. In 
+		     this case it means that the user is asking for a specific element
+		     from the class array. The following steps are:
+
+utils.redefinesparen.parenReference -> utils.redefinesparen.convertIndexOperator
+			            -> utils.redefinesparen.convertIndex 
+				    -> utils.redefinesparen.getOutput -> utils.redefinesparen.update
+								      -> utils.splitproperties.m
+								      -> Class.getOtherProperties
+								      -> utils.customdisplay.m 
+
+		2.b) The toolbox calls "utils.customdisplay.m" if none of the above notation
+	             is used. In this case it means that the user asked for an object of type
+		     class array without any type of indexation.
+
+____________________________________________________________________________________
+Private classes in repository "utils":
+
+Note: all the classes inherit from the MATLAB default class "handle"! Because of this,
+in order to be able to copy a class or the class objects, all the classes also inherit
+from the MATLAB default class "matlab.mixin.Copyable".
+
+	- configuration.m : set up the path to C# assemblies and defines the names of dlls.
+
+	- customdisplay.m : inherits from the MATLAB class "matlab.mixin.CustomDisplay". 	 			 
+			    Contains methods customizing how the objects are displayed in 
+			    the command window:
+
+				- headerComment_Type1 : this method is shared by several (public)
+				  classes. It is called by the hidden method "headerComment" of these 
+			          (public) classes and is used to display a class array (and not a
+				  just a single element of the class array).
+
+				- headerComment_Type2 : this method is shared by the public "Policy" class,
+				   "PolicyInSystem" class, and the "ReferencePolicy" class. It is called by 
+				   the hidden method "headerComment" of these classes.
+
+				- commentElement : attaches strings inserting blanks to display uniformally.
+
+				- appendComment : creates array of strings to be displayed for the class arrays.
+				   Calls the method "commentElement".
+
+				- customPropertyDisplay : used to display the names of child class arrays
+				  when there are less than 7 elements (instead of showing e.g.
+				   [3x1 ParameterInSystem]).
+
+				- customExtensionDisplay : same as "customPropertyDisplay" but including the 
+				  value of property "baseOff".
+
+				- getHeader : MATLAB built-in function used to display a class header text.
+				   Calls the method "appendComment".
+
+				- getPropertyGroups : MATLAB built-in function used to display a class 
+				   properties. Calls the methods "customPropertyDisplay" and
+				   "customExtensionDisplay".
+
+	- dynamicpropshandle.m : inherits from the MATLAB class "dynamicprops". This class
+			       is useful in order to add new properties to a class, that 
+			       are not defined in the constructor (for example, because
+			       you don't know the name of the property, so you cannot
+			       declare it in the "porperties" block).
+
+	- redefinesparen.m : inhertits from "customdisplay.m" and "dynamicpropshandle.m"
+			     and from the MATLAB classes
+			     "matlab.mixin.indexing.RedefinesParen", "matlab.mixin.indexing.RedefinesDot",
+			     and " utils.copyable".
+
+			     1) Contains methods determining which object is requested by the user
+			        given the user index. In this case the useful methods are:
+
+				- convertIndexOperator : parses the user index in an index array 
+				  and a property array of the class.
+
+				- convertIndex : converts the index array obtained from "convertIndexOperator"
+				  in case it is a string (i.e. the value of a property like country name).
+
+				- getOutput : determines which type of output must be returned to the user and 
+				  compiles it. Types of output returned to the user are: class array, class,
+				  structure (when only some properties are requested), string (when only one
+				  property is requested).
+
+				- Other built-in MATLAB inherited methods like "dotReference", "parenReference"
+				  and related. Possibly, "dotReference" makes use of "parenReference" and 
+				  viceversa. The method "parenReference" also updates the hidden property 
+				  "indexArr" when the user specifies an output argument. 
+	
+			     2) Contains methods that deal with the parent objects:
+
+				- getParent : retrieves a parent object given the class tag.
+
+				- setParent : NOT USED ANYMORE! 
+
+			     3) Contains methods that assign the new values provided by the user to properties. 
+				 Useful methods are:
+				 
+				 - setParameter : makes use of the C# function "SetSysParValue". Called in 
+				   "dotAssign".
+
+				 -  dotAssign : built-in MATLAB function. Current implementation is only for the
+				    "ParameterInSystem" class. This method updates the C# "Info.Handler" property
+				     of the "Country" class with the new value of the system parameter provided
+				     by the user. It calls the method "setParameter".	
+
+			     4) Contains methods for updating the class public properties:
+
+				  - update : updates the property "index" of a class and, if the user asks for a  
+				             specific element from a class, the public properties.
+	 
+
+____________________________________________________________________________________
+Private functions in repository "utils":
+
+	- convert1D.m : get in MATLAB a C# 1-dimensional dictionary. Called by "getInfo.m"
+
+	- convert2D.m : get in MATLAB a C# 2-dimensional dictionary. Called by "getInfo.m"
+
+	- convert1E.m : get in MATLAB a C# 1-dimensional enumerable array. Called by "getInfo.m"
+
+	- convert1E.m : get in MATLAB a C# 2-dimensional enumerable array. Called by "getInfo.m"
+
+	- getInfo.m : parses the functions above. This function is typically used to get
+		      the information from a C# object contained in the hidden property "Info.Handler".
+	
+	- setValueByKey.m : combines arrays of strings in a consistent way so that the position 
+			    of elements in the arrays correspond to their keys. This function is
+			    typically used after different calls to "getInfo.m". 
+
+	- splitproperties.m : this function is used to determine the type of the properties of a 
+			      class. We are interested to detect which public properties are of type
+			      string and which ones are of type class array. For this to work, it is 
+			      important to define validators in the "properties" block of the public
+			      classes. Once the toolbox knows which properties are of type string, it
+			      calls the class method "getOtherProperties" to retrieve the values of 
+			      these properties from the class hidden property "Info.Handler".
+
+____________________________________________________________________________________
+Private functions in repository "private":
+
+	- getConfigsettings.m : Called by "runSimulation.m"
+
+	- getConstantsToOverwrite.m : Called by "runSimulation.m"
+
+	- getDataArray.m : Called by "runSimulation.m"
+
+	- getVariables.m : Called by "runSimulation.m"
+
+	- runSimulation.m : Called by method "run" in classes "Model", "Country", and "System".  
+
+
+____________________________________________________________________________________
+Private .m files in the Euromod repository:
+
+- Contents.m : list of all the classes, methods and properties of the 
+	toolbox. This is displayed in the command window when typing "help euromod".
+
+- Core.m : A super class for all the euromod toolbox classes. This class inherits from the
+	   class "utils.redefinesparen".
+
+	   1) Public methods in the class:
+		 
+		- info : uses different C# functions to get information of different type.
+
+	   2) Private methods in this class:
+
+		- tag_s_ : creates a tag with underscore.
+		
+		- getOtherProperties_Type1 : this method retrieves properties' values from
+		   classes that have two different C# information objects: 1) "Info.Handler"
+		   and 2) "Info.PieceOfInfo.Handler". This method is called in the private method
+		   "getOtherProperties" of these classes.
+
+		- getPieceOfInfo : this method retrieves information from the C# funcion
+		   "Country.Info(Country.index).Handler.GetPieceOfInfo" of a specific "Country" 
+		   class. The returned C# object is then sored in the property "Info.PieceOfInfo.Handler"
+		   of the class that uses this type of information. This method is typically called in the 
+		   constructor of the class.
+
+		- getPiecesOfInfo : this method retrieves information from the C# funcion
+		   "Country.Info(Country.index).Handler.GetPiecesOfInfoInList" of a specific "Country" 
+		   class. The returned C# object is not stored.
+
+- PolicyHandle.m : this is a super class for the classes "Policy" and "ReferencePolicy"
+	   
+____________________________________________________________________________________
+Public classes:
+	- Country.m
+	- Dataset.m
+	- DatasetInSystem.m
+	- Extension.m
+	- ExtensionSwitch.m
+	- Function.m
+	- FunctionInSystem.m
+	- Model.m
+	- Parameter.m
+	- ParameterInSystem.m
+	- Policy.m
+	- PolicyInSystem.m
+	- ReferencePolicy.m
+	- Simulation.m
+	- System.m
+
+*All these classes inherit from the superclass Core.m. 
+
+*Classes named "..InSystem" inherit properties and methods from their respective
+  parent classes (e.g. DatasetInSystem inherits from Dataset, FunctionInSystem
+  inherits from Function,...)
+
+*Characteristics that all these classes must have:
+	*All their properties, except the property "parent" and the properties that are
+	  constants (e.g. the property "tag" in most classes) must contain in the 
+	  "properties" block a validator declaring the type of the property ("string",
+	  "double", "struct", a class name, etc.). This is important for the toolbox in 
+	  order to know how to update the properties of the classes and which type of 
+	  object to return for the user. 
+	  For example, if the user calls "mod.countries" it returns a class array; if the
+	  user calls "mod.countries(2)" it returns a class; if the user calls mod.countries(2).name
+	  it returns a string; if the user calls mod.countries(2,{'name','systenms'}) it 
+	  returns a structure.
+
+	*All these classes MUST have the following **hidden properties**: 
+
+	  - index, indexArr, Info, tag.
+
+	*All these classes MUST have the following **hidden methods**: 
+
+	  - end, empty, ndims, size : These are the same for all. Just copy and paste them if you
+	    want to create a new public class, and make sure to change the name of the class in the
+	    method "empty".
+
+	  - getOtherProperties : retrieves the properties of type string of the class from the 
+	    hidden property "Info.Handler".
+
+	  - headerComment : creates a (N,M) string which is then used to display in the command
+	    window the elements of a class array. 
+
+
+*"getID" method : Some classes, especially the ones containing the C# object "Info.GetPieceOfInfo.Handler",
+or those that contain IDs in different C# objects, define this hidden method to return all the IDs of the
+class array elements. 
+
+
+________________________________________________________________________________________________________
+
+
+See in repository "templates" examples of how to build classes.
+
+________________________________________________________________________________________________________
+
+Other Content in the toolbox:
+
+- *********** Euromod.prj ******** the project file. Open this to build a new release.
+
+- buildEuromodPackage.m : trying to automatize the build process. Most of these functionalities have been 
+   introduced few years ago.
+
+- doc.m : public function. It points to this toolbox classes and should not conflict with classes
+  with the same name in other toolboxes of MATLAB.
+
+- README.md : tis s for git
+
+- info.xml : this points to the toolbox documentation stored in repository "doc"
+
+- doc : repository storing documentation files. This contains over 1000 files with matlab style css for html.
+
+- demos.xml : this is generated by MATLAB automatically when you include .mlx with examples when packaging.
+
+ 
+
+
+=========================================================================================================
+
+
+
+
+
 TEST LOCAL PROJECT:
 ____________________________________________________________________________________
 
-Make sure the Euromod Toolbox is not installed
-1) Go to folder "MatlabIntegration".
-2) From sub-repository "../Euromod/Euromod/test" open the script "test_fancy.m"
-3) Run script "test_fancy.m". It will test for all the main functionalities using the 
-local Euromod project from repository "../Euromod/Euromod"
+-test/TESTING.m : this is for testing different toolbox objects. Their content and how they are displayed.
+  the testing file must be located in a sub-folder "data" and named "testObjects.mat". If you do not have
+  such a file, set "doSave=1" and there will be created one. The next time you test, do not forget to reset
+  "doSave=0", so that your previous test file is used. 
 
-Warning: If you make any change to the dlls then, in order the changes to be effective, you need to exit and restart matlab. There is no way to clear the memory and re-load the assemblies directly from Matlab. 
-____________________________________________________________________________________
+- test/testing_simulations.m tests some simulation results. See test/README.txt for more info.
 
 
 BUILD PACKAGE:
+
+htmlProjectFolder = "C:\..\MatlabConnectorEuromod\Euromod\Euromod\doc"
+builddocsearchdb(htmlProjectFolder);
+
 ____________________________________________________________________________________
 
 A) Build Mannually: Toolbox packaging:
@@ -77,7 +441,7 @@ A.2) TEST PACKAGE:
 
 1) Install the Euromod Toolbox: From Matlab open the "Euromod.mltbx" installation file.
 2) Check installation is successfull: Go to Tab "Home" :: "Add-Ons" :: "Add-On Manager" :: check Euromod is present under the "Installed" Tab. Also, Right-click on "Euromod" and check the toolbox is enabled.
-3) Run your code from whatever location typing in console "Euromod(PATH_EUROMODFILES,COUNTRY)".
+3) Run your code from whatever location typing in console "euromod(PATH_EUROMODFILES)".
 
 
 A.3) DISTRIBUTE PACKAGE:
