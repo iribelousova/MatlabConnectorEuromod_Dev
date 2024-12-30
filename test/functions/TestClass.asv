@@ -1,0 +1,687 @@
+classdef TestClass
+    properties (Access=private)
+        temp
+        propsObj
+        systemObj
+        modelPath
+    end
+
+    properties
+        warnMessage
+        trueModel struct
+        MH
+        CH
+    end
+
+    methods
+        %------------------------------------------------------------------
+        function obj=TestClass(modelPath,testObj)
+            obj.temp=copy(testObj);
+            obj.propsObj=properties(obj.temp);
+            obj.modelPath=modelPath;
+
+            obj.MH = EM_XmlHandler.ModelInfoHandler(modelPath);
+
+            if isa(obj.temp,'Country')
+                obj.systemObj = copy(obj.temp.systems(1));
+                countryObj=copy(obj.temp);
+            elseif isa(obj.temp,'System')
+                obj.systemObj = copy(obj.temp);
+                countryObj=obj.systemObj.parent;
+            elseif contains(class(obj.temp),'InSystem')
+                systemObj = copy(obj.temp);
+                while ~strcmp(systemObj.tag,'SYS')
+                    systemObj=systemObj.parent;
+                end
+                obj.systemObj=systemObj;
+                countryObj = systemObj.parent;
+            else
+                countryObj=copy(obj.temp);
+                while ~strcmp(countryObj.tag,'COUNTRY')
+                    countryObj=countryObj.parent;
+                end
+                systemObj=countryObj.systems(1);
+                obj.systemObj=systemObj;
+            end
+
+            for i=1:obj.MH.countries.Count
+                if strcmpi(char(obj.MH.countries.Item(i-1)),countryObj.name)
+                    obj.CH=EM_XmlHandler.CountryInfoHandler(modelPath, obj.MH.countries.Item(i-1));
+                end
+            end
+
+            %-
+            obj.propsObj=setdiff(obj.propsObj, 'parent', 'stable');
+
+            if all(size(obj.temp)==[1,1])
+                N=numel(obj.propsObj);
+                f=obj.propsObj;
+                for i=1:N
+                    if isstring(obj.temp.(obj.propsObj{i}))
+                        if isempty(char(obj.temp.(obj.propsObj{i})))
+                            f=setdiff(f, obj.propsObj{i}, 'stable');
+                        end
+                    end
+                end
+                obj.propsObj=f;
+            end
+
+            %-
+            className = class(testObj);
+            obj=obj.(['test',className]);
+
+            if isempty(obj.propsObj)
+                fprintf('%s (tag %s): properties done.\n', class(obj.temp),obj.temp.tag)
+            else
+                obj.warnMessage=warning('%s (tag %s): unchecked properties: %s.\n', class(obj.temp),obj.temp.tag,strjoin(obj.propsObj,','));
+            end
+
+        end
+
+        %------------------------------------------------------------------
+        function obj=testCountry(obj)
+
+            assert(isequal(string(obj.CH.country),obj.temp.("name")))
+            obj.propsObj=setdiff(obj.propsObj, 'name', 'stable');
+
+            obj=checkClassIDs_extension(obj);
+
+            obj=checkClassIDs_2(obj,"datasets");
+            obj=checkClassIDs_2(obj,"systems");
+            obj=checkClassIDs_2(obj,"local_extensions");
+
+            obj=checkClassIDs_3(obj,"policies");
+        end
+
+        %------------------------------------------------------------------
+        function obj=testSystem(obj)
+
+            if all(size(obj.temp)==[1,1])
+                ID=obj.temp.ID;
+                ID_=ID;
+                objTag=obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                obj=obj.checkClassIDs_3("datasets");
+                obj=obj.checkClassIDs_3("policies");
+
+                bestDataset = copy(obj.temp.bestmatchDatasets);
+                c=TestClass(obj.modelPath, bestDataset);
+                obj.propsObj=setdiff(obj.propsObj, 'bestmatchDatasets', 'stable');
+            else
+
+                obj=obj.checkIDsList_1("systems","ID");
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testBestmatchDatasets(obj)
+
+            ID=obj.temp.ID;
+            ID_=ID;
+            objTag=obj.temp.tag;
+            obj=obj.getTypeInfo(ID_,ID,objTag);
+        end
+
+        %------------------------------------------------------------------
+        function obj=testDataset(obj)
+
+            if all(size(obj.temp)==[1,1])
+
+                ID=obj.temp.ID;
+                ID_=ID;
+                objTag=obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+            else
+
+                obj=obj.checkIDsList_1("datasets","ID");
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testDatasetInSystem(obj)
+            if all(size(obj.temp)==[1,1])
+
+                Tag=[char(lower(obj.temp.tag)),'ID'];
+                ID=obj.temp.([lower(obj.temp.tag),'ID']);
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.(Tag))];
+                ID_=SYSID;
+
+                objTag=obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.tag]);
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+            else
+
+                obj=obj.checkIDsList_1("datasets","ID");
+
+                % msg=[class(obj.temp),' properties IDs failed.\n'];
+                % new=TestClass(obj.modelPath,obj.temp.parent);
+                % [new,values]=new.checkClassIDs_3("datasets");
+                % assert(isequal(values, obj.temp(:).ID),msg)
+                % obj.propsObj={};
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testExtension(obj)
+
+            if all(size(obj.temp)==[1,1])
+                if isprop(obj.temp,'extensionID')
+                    IDtag='extensionID';
+                else
+                    IDtag='ID';
+                end
+
+                % testObj=obj.CH.GetTypeInfo(EM_XmlHandler.ReadCountryOptions.LOCAL_EXTENSION);
+                % try
+                %     testObj.Item(obj.temp.(IDtag));
+                % catch
+                %     testObj=obj.MH.GetModelInfo(EM_XmlHandler.ReadModelOptions.EXTENSIONS);
+                % end
+
+                ID=obj.temp.(IDtag);
+                ID_=ID;
+
+                try
+                    objTag='LOCAL_EXTENSION';
+                    obj=obj.getTypeInfo(ID_,ID,objTag);
+                catch
+                    objTag='EXTENSIONS';
+                    obj=obj.getModelInfo(ID_,ID,objTag);
+                end
+
+                if ~isempty(obj.propsObj)
+                    EXTENSION_TAG= EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.parent.tag)]);
+                    ID_=[char(obj.temp.parent.ID),char(ID)];
+                    obj=obj.getPieceOfInfo(ID_,EXTENSION_TAG);
+                end
+            else
+                error('not implemented');
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testPolicy(obj)
+
+            if all(size(obj.temp)==[1,1])
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.ID)];
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.tag]);
+                ID_=obj.temp.ID;
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+
+                ID=obj.temp.ID;
+                objTag=obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                %-
+                Tag=EM_XmlHandler.ReadCountryOptions.(obj.temp.("functions").tag);
+                subTag=EM_XmlHandler.TAGS.('POL_ID');
+                obj=obj.getPiecesOfInfoInList("functions",Tag,subTag,ID);
+
+                %-
+                EXTENSION_TAG= {EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.tag)])};
+                obj=obj.checkClassIDs_extension(EXTENSION_TAG);
+            else
+
+                obj=obj.checkIDsList_1("policies","ID");
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testReferencePolicy(obj)
+
+            if all(size(obj.temp)==[1,1])
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.ID)];
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',Policy.tag]);
+                ID_=obj.temp.ID;
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+
+                ID=obj.temp.ID;
+                objTag = ReferencePolicy.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                testObj=obj.CH.GetTypeInfo(EM_XmlHandler.ReadCountryOptions.(objTag));
+                d=testObj.Item(ID);
+                RefPolID=d.Item("RefPolID");
+                objTag = Policy.tag;
+                obj=obj.getTypeInfo(ID,RefPolID,objTag);
+
+                %-
+                obj.propsObj=setdiff(obj.propsObj, 'extensions', 'stable');
+                % EXTENSION_TAG= {EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(Policy.tag)])};
+                % obj=obj.checkClassIDs_extension(EXTENSION_TAG);
+            else
+                error('not implemented')
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testPolicyInSystem(obj)
+
+            if all(size(obj.temp)==[1,1])
+
+                Tag=[char(lower(obj.temp.tag)),'ID'];
+                ID=obj.temp.([lower(obj.temp.tag),'ID']);
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.(Tag))];
+                ID_=SYSID;
+
+                objTag = obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.tag]);
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+
+                %-
+                Tag=EM_XmlHandler.ReadCountryOptions.(obj.temp.("functions").tag);
+                subTag=EM_XmlHandler.TAGS.('POL_ID');
+                obj=obj.getPiecesOfInfoInList("functions",Tag,subTag,ID);
+
+                %-
+                EXTENSION_TAG= {EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.tag)])};
+                obj=obj.checkClassIDs_extension(EXTENSION_TAG);
+            else
+
+                obj=obj.checkIDsList_1("policies","ID");
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testFunction(obj)
+
+            if all(size(obj.temp)==[1,1])
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.ID)];
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.tag]);
+                ID_=obj.temp.ID;
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+
+                ID=obj.temp.ID;
+                objTag = obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                %-
+                Tag=EM_XmlHandler.ReadCountryOptions.('PAR');
+                subTag=EM_XmlHandler.TAGS.('FUN_ID');
+                obj=obj.getPiecesOfInfoInList("parameters",Tag,subTag,ID);
+
+                %-
+                EXTENSION_TAG= {EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.tag)])};
+                obj=obj.checkClassIDs_extension(EXTENSION_TAG);
+
+            else
+
+                parentID=obj.temp.parent.('ID');
+                TAG='POL_ID';
+                prop="functions";
+                IDtag="ID";
+                obj=obj.checkIDsList_2(prop,TAG,IDtag,parentID);
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testFunctionInSystem(obj)
+            if all(size(obj.temp)==[1,1])
+
+                Tag=[char(lower(obj.temp.tag)),'ID'];
+                ID=obj.temp.([lower(obj.temp.tag),'ID']);
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.(Tag))];
+                ID_=SYSID;
+
+                objTag = obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.tag]);
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+
+                %-
+                Tag=EM_XmlHandler.ReadCountryOptions.(obj.temp.("parameters").tag);
+                subTag=EM_XmlHandler.TAGS.('FUN_ID');
+                obj=obj.getPiecesOfInfoInList("parameters",Tag,subTag,ID);
+
+                %-
+                EXTENSION_TAG= {EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.tag)])};
+                obj=obj.checkClassIDs_extension(EXTENSION_TAG);
+            else
+
+                %----------
+                parentID=obj.temp.parent.([lower(obj.temp.parent.tag),'ID']);
+                TAG='POL_ID';
+                prop="functions";
+                IDtag="ID";
+                obj=obj.checkIDsList_2(prop,TAG,IDtag,parentID);
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testParameter(obj)
+
+            if all(size(obj.temp)==[1,1])
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.ID)];
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.tag]);
+                ID_=obj.temp.ID;
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+
+                ID=obj.temp.ID;
+                objTag = obj.temp.tag;
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                EXTENSION_TAG= {EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.tag)])};
+                obj=obj.checkClassIDs_extension(EXTENSION_TAG);
+            else
+
+                parentID=obj.temp.parent.('ID');
+                TAG='FUN_ID';
+                prop="parameters";
+                IDtag="ID";
+                obj=obj.checkIDsList_2(prop,TAG,IDtag,parentID);
+            end
+        end
+
+        %------------------------------------------------------------------
+        function obj=testParameterInSystem(obj)
+
+            if all(size(obj.temp)==[1,1])
+
+                objTag = obj.temp.tag;
+
+                Tag=[char(lower(obj.temp.tag)),'ID'];
+                ID=obj.temp.([lower(obj.temp.tag),'ID']);
+                SYSID=[char(obj.systemObj.ID),char(obj.temp.(Tag))];
+                ID_=SYSID;
+
+                obj=obj.getTypeInfo(ID_,ID,objTag);
+
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.tag]);
+                obj=obj.getPieceOfInfo(SYSID,TAG);
+
+                EXTENSION_TAG= {EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.tag)])};
+                obj=obj.checkClassIDs_extension(EXTENSION_TAG);
+            else
+
+                parentID=obj.temp.parent.([lower(obj.temp.parent.tag),'ID']);
+                TAG='FUN_ID';
+                prop="parameters";
+                IDtag="ID";
+                obj=obj.checkIDsList_2(prop,TAG,IDtag,parentID);
+            end
+        end
+    end
+
+    methods 
+        function obj=checkClassIDs_extension(obj,EXTENSION_TAG)
+
+            msg=[class(obj.temp),' property "','extensions','" failed.\n'];
+
+            testObj=obj.CH.GetTypeInfo(EM_XmlHandler.ReadCountryOptions.LOCAL_EXTENSION);
+            % try
+            %     testObj.Item(obj.temp.ID);
+            % catch
+            %     testObj=obj.MH.GetModelInfo(EM_XmlHandler.ReadModelOptions.EXTENSIONS);
+            % end
+            d=testObj.dictionary;
+            keys = d.keys('cell');
+            keys=cellfun(@string,keys);
+            testObj=obj.MH.GetModelInfo(EM_XmlHandler.ReadModelOptions.EXTENSIONS);
+            d=testObj.dictionary;
+            keysadd=d.keys('cell');
+            keys = [keys; cellfun(@string,keysadd)];
+
+            if nargin >1
+                x1=[];
+                if contains(class(obj.temp),'InSystem')
+                    t=obj.temp.tag;
+                    IDtag=[char(lower(t)),'ID'];
+                else
+                    IDtag='ID';
+                end
+                % EXTENSION_TAG= EM_XmlHandler.ReadCountryOptions.([char(EM_XmlHandler.TAGS.EXTENSION),'_',char(obj.temp.tag)]);
+                for j=1:numel(keys)
+                    ID_=[char(obj.temp.(IDtag)),char(keys(j))];
+                    try
+                        c=obj.CH.GetPieceOfInfo(EXTENSION_TAG{1},ID_);
+                        x1=vertcat(x1,string(c.Item('ExtensionID')));
+                    catch
+                    end
+                end
+                keys=x1;
+            end
+
+            if ~isempty(keys)
+                if isprop(obj.temp.("extensions")(1),'extensionID')
+                    x=obj.temp.("extensions")(:).extensionID;
+                else
+                    x=obj.temp.("extensions")(:).ID;
+                end
+                assert(isequal(keys, x),msg)
+            end
+
+            obj.propsObj=setdiff(obj.propsObj, "extensions", 'stable');
+        end
+
+        function [obj, outValues]=checkClassIDs_3(obj,prop)
+            msg=[class(obj.temp),' property "',char(prop),'" failed.\n'];
+
+            testObj=obj.CH.GetTypeInfo(EM_XmlHandler.ReadCountryOptions.(obj.temp.(prop).tag));
+            d=testObj.dictionary;
+            keys = d.keys('cell');
+            keys=cellfun(@string,keys);
+
+            if isa(obj.temp.(prop),'Policy')
+                TagRef=EM_XmlHandler.ReadCountryOptions.(ReferencePolicy.tag);
+                testObj=obj.CH.GetTypeInfo(TagRef);
+                d=testObj.dictionary;
+                k = d.keys('cell');
+                k=cellfun(@string,k);
+                keys=vertcat(keys, k);
+            end
+
+            keysInSys=[];
+
+            order=[];
+            TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.(prop).tag]);
+            for i=1:numel(keys)
+                ID_=[char(obj.systemObj.ID),char(keys(i))];
+                x=obj.CH.GetPieceOfInfo(TAG,ID_);
+                if x.Count>0
+                    try
+                        order=vertcat(order,string(x.Item('Order')));
+                    catch
+                    end
+                    if contains(class(obj.temp.(prop)),'InSystem')
+                        tag=obj.temp.(prop).tag;
+                        TagObj=[char(tag(1)),lower(tag(2:end)),'ID'];
+                        TagSys='SysID';
+                        keysInSys=vertcat(keysInSys,string([char(x.Item(TagSys)),char(x.Item(TagObj))]));
+                    end
+                end
+            end
+            if isempty(order) && isempty(keysInSys)
+                b=[];
+            elseif ~isempty(order)
+                [a,b] = sort(str2double(order));
+            elseif ~isempty(keysInSys)
+                b=1:numel(keysInSys);
+            end
+            if ~isempty(keysInSys)
+                assert(isequal(keysInSys(b), obj.temp.(prop)(:).ID),msg)
+                outValues=keysInSys(b);
+            elseif ~isempty(keys)
+                assert(isequal(keys(b), obj.temp.(prop)(:).ID),msg)
+                outValues=keys(b);
+            else
+                assert(size(obj.temp.(prop),1)==0,msg)
+                outValues=keysInSys;
+            end
+
+            obj.propsObj=setdiff(obj.propsObj, prop, 'stable');
+            obj.trueModel(1).(prop)=outValues;
+        end
+
+        function [obj,keys]=checkClassIDs_2(obj,prop)
+            msg=[class(obj.temp),' property "',char(prop),'" failed.\n'];
+
+            testObj=obj.CH.GetTypeInfo(EM_XmlHandler.ReadCountryOptions.(obj.temp.(prop).tag));
+            d=testObj.dictionary;
+            keys = d.keys('cell');
+            keys=cellfun(@string,keys);
+            if isempty(keys)
+                assert(size(obj.temp.(prop),1)==0,msg)
+            else
+                assert(isequal(keys, obj.temp.(prop)(:).ID),msg)
+            end
+
+            obj.propsObj=setdiff(obj.propsObj, prop, 'stable');
+            obj.trueModel(1).(prop)=keys;
+        end
+
+        function [obj,values]=getPiecesOfInfoInList(obj,prop,Tag,subTag,ID)
+            testObj=obj.CH.GetPiecesOfInfoInList(Tag,subTag,ID);
+            values=[];
+
+            if testObj.Count>0
+                msg=[class(obj.temp),' property "',char(prop),'" failed.\n'];
+                i_=0;
+                index=1:testObj.Count;
+                order=[];
+                TAG=EM_XmlHandler.ReadCountryOptions.([System.tag,'_',obj.temp.(prop).tag]);
+                for j=1:numel(index)
+                    idx=index(j);
+                    i_=i_+1;
+                    d=testObj.Item(idx-1).dictionary;
+                    keys_ = d.keys('cell');
+                    keys_=cellfun(@string,keys_);
+                    values_ = d.values('cell');
+                    values_=cellfun(@string,values_);
+                    values_=arrayfun(@(t) string(EM_XmlHandler.XmlHelpers.RemoveCData(t)),values_);
+                    values_=values_(ismember(keys_,'ID'));
+                    values=vertcat(values, values_);
+                    ID_=[char(obj.systemObj.ID),char(values_)];
+                    x=obj.CH.GetPieceOfInfo(TAG,ID_);
+                    order=vertcat(order,string(x.Item('Order')));
+                end
+                [a,b] = sort(str2double(order));
+                values=values(b);
+                if isempty(values)
+                    assert(size(obj.temp.(prop),1)==0,msg)
+                else
+                    assert(isequal(values, obj.temp.(prop)(:).ID),msg)
+                end
+
+            end
+
+            obj.propsObj=setdiff(obj.propsObj, prop, 'stable');
+            obj.trueModel(1).(prop)=values;
+        end
+
+        function obj=getPieceOfInfo(obj,SYSID,TAG)
+            testObjadd=obj.CH.GetPieceOfInfo(TAG,SYSID);
+
+            d=testObjadd.dictionary;
+            keys = d.keys('cell');
+            keys=cellfun(@string,keys);
+            values = d.values('cell');
+            values=cellfun(@string,values);
+
+            for i = 1:numel(keys)
+                if strcmp(keys(i),'ID')
+                    k='ID';
+                elseif strcmp(keys(i),'Switch')
+                    k=keys(i);
+                else
+                    k=char(keys(i));
+                    k=[lower(k(1)), k(2:end)];
+                end
+                if isprop(obj.temp,k)
+                    msg=[class(obj.temp),' property "',k,'" failed.\n'];
+                    trueVal=string(EM_XmlHandler.XmlHelpers.RemoveCData(values(i)));
+                    assert(isequal(trueVal,obj.temp.(k)),msg)
+                    obj.propsObj=setdiff(obj.propsObj, k, 'stable');
+                    obj.trueModel(1).(k)=trueVal;
+                end
+            end
+            if isprop(obj.temp,'spineOrder')
+                obj.propsObj=setdiff(obj.propsObj, 'spineOrder', 'stable');
+            end
+        end
+
+        function obj=getTypeInfo(obj,ID_,ID,objTag)
+            testObj=obj.CH.GetTypeInfo(EM_XmlHandler.ReadCountryOptions.(objTag));
+
+            obj=obj.convertDict(ID_,ID,testObj);
+        end
+
+        function obj=getModelInfo(obj,ID_,ID,objTag)
+            testObj=obj.MH.GetModelInfo(EM_XmlHandler.ReadModelOptions.(objTag));
+
+            obj=obj.convertDict(ID_,ID,testObj);
+        end
+
+        function obj=convertDict(obj,ID_,ID,testObj)
+
+            % testObj=obj.CH.GetTypeInfo(EM_XmlHandler.ReadCountryOptions.(objTag));
+
+            d=testObj.Item(ID).dictionary;
+            keys = d.keys('cell');
+            keys=cellfun(@string,keys);
+            values = d.values('cell');
+            values=cellfun(@string,values);
+
+            for i = 1:numel(keys)
+                if ~strcmp(keys(i),'ID')
+                    k=char(keys(i));
+                    k=[lower(k(1)), k(2:end)];
+                    if isprop(obj.temp,k)
+                        msg=[class(obj.temp),' property "',k,'" failed.\n'];
+                        trueVal=string(EM_XmlHandler.XmlHelpers.RemoveCData(values(i)));
+                        assert(isequal(trueVal,obj.temp.(k)),msg)
+                        obj.propsObj=setdiff(obj.propsObj, k, 'stable');
+                        obj.trueModel(1).(k)=trueVal;
+                    end
+                end
+            end
+
+            if isprop(obj.temp,'extensionID')
+                IDtag='extensionID';
+            else
+                IDtag='ID';
+            end
+
+            msg=[class(obj.temp), ' property "','ID','" failed.\n'];
+            assert(isequal(ID_,obj.temp.(IDtag)),msg)
+            obj.propsObj=setdiff(obj.propsObj, 'ID', 'stable');
+        end
+
+        function obj=checkIDsList_1(obj,prop,IDtag)
+
+            msg=[class(obj.temp),' properties IDs failed.\n'];
+
+            new=TestClass(obj.modelPath,obj.temp.parent);
+            if strcmp(prop,"policies")
+                [new,values]=new.checkClassIDs_3(prop);
+            elseif any(strcmp(prop,["datasets","systems"])) && ~contains(class(obj.temp),'InSystem')
+                [new,values]=new.checkClassIDs_2(prop);
+            else
+                [new,values]=new.checkClassIDs_3(prop);
+            end
+
+            assert(isequal(values, obj.temp(:).(IDtag)),msg)
+            obj.propsObj={};
+
+        end
+
+        function obj=checkIDsList_2(obj,prop,TAG,IDtag,parentID)
+
+            msg=[class(obj.temp),' properties IDs failed.\n'];
+
+            Tag=EM_XmlHandler.ReadCountryOptions.(obj.temp.tag);
+            subTag=EM_XmlHandler.TAGS.(TAG);
+            new=TestClass(obj.modelPath,obj.temp.parent);
+            [new,values]=new.getPiecesOfInfoInList(prop,Tag,subTag,parentID);
+            assert(isequal(values, obj.temp(:).(IDtag)),msg)
+            obj.propsObj={};
+
+        end
+    end
+
+end
