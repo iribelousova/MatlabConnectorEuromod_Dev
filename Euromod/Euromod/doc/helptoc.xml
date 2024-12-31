@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<toc version="2.0">
+<!-- First tocitem specifies top level in Help browser Contents pane -->
+<!-- This can be a roadmap page, as shown below, or a content page -->
+    <tocitem target="index.html" image="HelpIcon.GETTING_STARTED">
+			Euromod Connector Toolbox
+        <!-- Nest tocitems to create hierarchical entries in  Contents-->
+        <!-- To include icons, use the following syntax for tocitems: -->
+        <!-- <tocitem target="foo.html" image="HelpIcon.NAME"> -->
+        <!-- Title-of-Section </tocitem> -->
+        <!-- where NAME is one of the following (use capital letters): -->
+        <!-- FUNCTION, USER_GUIDE, EXAMPLES, BLOCK, GETTING_STARTED, -->
+        <!-- DEMOS, RELEASE_NOTES --> 
+        <!-- Icon images used for these entries are also stored in -->
+        <!-- matlabroot/toolbox/matlab/icons -->
+        <!-- A Getting Started Guide usually comes first -->
+        <tocitem target="euromod/Examples.html" image="HelpIcon.EXAMPLES">
+            Examples
+			<!-- 2nd and lower TOC levels usually have anchor IDs -->
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub1">Load and navigate the model
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub2">Run simulation with default configurations
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub3">Run simulation with changing constants
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub4">Run simulation with add-ons
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub5">Run simulation with extensions
+			</tocitem>
+        </tocitem>
+        <!-- User Guide comes next -->
+        <tocitem target="euromod/UserGuide.html" image="HelpIcon.USER_GUIDE">
+			User Guide
+            <tocitem target="euromod/UserGuide.html#expand_panel_heading-BLOCK-1">
+			Installation
+				<tocitem target="euromod/UserGuide.html#BLOCK-1-sub1">Requirements
+                </tocitem>
+            </tocitem>
+            <tocitem target="euromod/UserGuide.html#BLOCK-2">Run and navigate the model
+                <tocitem target="euromod/UserGuide.html#BLOCK-2-sub1">Run a simulation
+                </tocitem>
+				<tocitem target="euromod/UserGuide.html#BLOCK-2-sub2">Navigate the model
+                </tocitem>
+            </tocitem>
+			<tocitem target="euromod/UserGuide.html#BLOCK-3">Other Important EUROMOD Objects
+            </tocitem>
+        </tocitem>
+        <!-- Function reference next -->
+        <!-- First item is page describing function categories, if any -->
+        <tocitem target="euromod/APIreference.html" 
+                 image="HelpIcon.FUNCTION">API Reference
+			 <tocitem target="euromod/cla/Country.html">Country
+				 <tocitem target="euromod/cla/Country.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-FUNCTIONS">Functions</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Dataset.html">Dataset
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Dataset.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/DatasetInSystem.html">DatasetInSystem
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/DatasetInSystem.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/euromod.html">euromod
+				<tocitem target="euromod/cla/euromod.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/euromod.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/euromod.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/euromod.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/euromod.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/euromod.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/euromod.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Extension.html">Extension
+				<tocitem target="euromod/cla/Extension.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Extension.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/ExtensionSwitch.html">ExtensionSwitch
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/ExtensionSwitch.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Function.html">Function
+				<tocitem target="euromod/cla/Function.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Function.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>	 
+			 <tocitem target="euromod/cla/FunctionInSystem.html">FunctionInSystem
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/FunctionInSystem.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Model.html">Model
+				<tocitem target="euromod/cla/Model.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Model.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Parameter.html">Parameter
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Parameter.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/ParameterInSystem.html">ParameterInSystem
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/ParameterInSystem.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Policy.html">Policy
+				<tocitem target="euromod/cla/Policy.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Policy.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/PolicyInSystem.html">PolicyInSystem
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/ReferencePolicy.html">ReferencePolicy
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/PolicyInSystem.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Run.html">run
+				<tocitem target="euromod/cla/Run.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-EXAMPLES">Examples
+					<tocitem target="euromod/cla/Run.html#BLOCK-EXAMPLES-sub1">Run simulation from the Model class</tocitem>
+					<tocitem target="euromod/cla/Run.html#BLOCK-EXAMPLES-sub2">Run simulation from a Country class</tocitem>
+					<tocitem target="euromod/cla/Run.html#BLOCK-EXAMPLES-sub3">Run simulation from a System class</tocitem>
+					<tocitem target="euromod/cla/Run.html#BLOCK-EXAMPLES-sub4">Run simulation with optional input arguments</tocitem>
+				</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-NAME_VALUE_ARGUMENTS">Name-Value Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Run.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/Simulation.html">Simulation
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Simulation.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+			 <tocitem target="euromod/cla/System.html">System
+				<tocitem target="euromod/cla/System.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-INPUT_ARGUMENTS">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-PROPERTIES">Properties</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-FUNCTIONS">Functions</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/System.html#BLOCK-SEE_ALSO">See Also</tocitem>
+			 </tocitem>
+            <!-- First category, with link to anchor in above page -->
+            <tocitem target="euromod/ref/functionlist.html">Methods and Properties by Category
+                <!-- Inside category, list its functions alphabetically -->
+                <tocitem target="euromod/ref/methodlist.html">Methods</tocitem>
+                <tocitem target="euromod/ref/propertylist.html">Properties</tocitem>
+                <!-- ... -->
+            </tocitem>
+            <!-- Second category, with link to anchor in above page -->
+            <tocitem target="euromod/ref/functionlist-alpha.html">Methods and Properties Alphabetically
+                <!-- Inside category, list its functions alphabetically -->
+                <tocitem target="euromod/ref/methodlist-alpha.html">Methods</tocitem>
+                <tocitem target="euromod/ref/propertylist-alpha.html">Properties</tocitem>
+                <!-- ... -->
+             </tocitem>
+        </tocitem>
+        
+    </tocitem>
+	
+	<!-- Optional List of Examples, with hyperlinks to examples in other files -->
+        <tocitem target="euromod/License.html">License
+        </tocitem>
+        <!-- Optional link or links to your or other Web sites -->
+        <tocitem target="https://euromod-web.jrc.ec.europa.eu/" 
+                 image="$toolbox/matlab/icons/webicon.gif">
+        EUROMOD Documentation
+        </tocitem>
+</toc>
