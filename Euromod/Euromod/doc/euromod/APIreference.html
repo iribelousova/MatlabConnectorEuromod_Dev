@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage">
+<head>
+<meta xmlns="http://www.w3.org/1999/xhtml" charset="utf-8"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>Euromod classes and methods</title>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+  <meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="cat"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="list"></meta>
+
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/product/scripts/jquery/jquery-latest.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_offcanvas_v2.css" rel="stylesheet" type="text/css"></link>
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/l10n.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/f1help.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/mw.imageanimation.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/jquery.highlight.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/underscore-min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/examples.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/use_platform_screenshots.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/suggest.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/overload.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/helpservices.js"></script>
+
+
+
+
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/bootstrap.min.js" type="text/javascript"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/global.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_base.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_installed.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_print.css" rel="stylesheet" type="text/css" media="print"></link>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/shared/equationrenderer/release/MathRenderer.js"></script>
+</head>
+
+<!--START.BODY-->
+<body id="responsive_offcanvas">
+<div xmlns="http://www.w3.org/1999/xhtml" id="doc_header_spacer" class="header"></div>
+  
+<div class="row-offcanvas row-offcanvas-left">
+  
+<!--START.CLASS sidebar-offcanvas-->
+<div xmlns="http://www.w3.org/1999/xhtml" class="sidebar-offcanvas" id="sidebar">
+
+
+<script src="../includes/product/scripts/offcanvas_v2.js"></script></div>
+<!--END.CLASS sidebar-offcanvas-->
+
+<!--BEGIN.HORIZONTAL_UPPER_BAR-->
+<div xmlns="http://www.w3.org/1999/xhtml">
+    <div class="horizontal_nav"><div class="horizontal_nav_container"><div class="offcanvas_horizontal_nav"><div class="container-fluid"><div class="row">
+    <div class="col-sm-12 hidden-xs">
+        <nav class="navbar navbar-default" role="navigation" id="subnav">
+            <div>
+                <ul class="nav navbar-nav crux_browse">
+                    <li id="crux_nav_documentation" class="crux_resource">
+                        <a href="../index.html">All</a></li>
+                    <li id="crux_nav_example" class="crux_resource">
+                        <a href="Examples.html">Examples</a></li>
+                    <li id="crux_nav_function" class="crux_resource active">
+                        <a href="ref/functionlist.html">Functions</a></li>
+                    <li id="crux_nav_app" class="crux_resource">
+                        <a href="ref/functionlist.html">Apps</a></li>
+                    <li role="presentation" class="dropdown" id="topnav_more" style="display:none;">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                             More <span class="caret"></span></a>
+                             <ul class="dropdown-menu"></ul></li>
+                </ul></div></nav>
+    </div>
+    <div class="visible-xs"><div class="container-fluid"><div class="row">
+        <div class="col-xs-9"><div class="mobile_crux_nav_trigger"><div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources<span class="icon-arrow-down icon_16"></span></button>
+        <ul class="dropdown-menu">
+            <li id="crux_nav_mobile_documentation" class="crux_resource"><a href="../index.html">All</a></li>
+            <li id="crux_nav_mobile_example" class="crux_resource"><a href="Examples.html">Examples</a></li>
+            <li id="crux_nav_mobile_function" class="crux_resource active"><a href="APIreference.html">Functions</a></li>
+            <li id="crux_nav_mobile_app" class="crux_resource"><a href="APIreference.html">Apps</a></li>
+        </ul></div></div></div><div class="col-xs-3"><div class="translate_placeholder"></div></div>
+    </div></div></div>
+</div></div></div></div></div>
+</div><!--END.HORIZONTAL_UPPER_BAR-->
+
+<div id="content_container" itemprop="content">
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-12">
+
+<section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" lang="en">
+  <h1 itemprop="title" class="R2023a">Euromod classes and methods</h1>
+
+  <p>
+    This reference guide lists the main public objects of the Euromod Connector toolbox. 
+    It provides useful functionalities that allow the user to 
+    interact with <a href="https://euromod-web.jrc.ec.europa.eu/download-euromod">EUROMOD</a> and run simulations. 
+  </p>
+  <p>
+    Please, refer to the <a href="UserGuide.html">User Guide</a> and <a href="Examples.html">Examples</a> for futher readings.
+  </p>
+
+<!--START.DESCRIPTION_BLOCK-1-->
+<div class="doc_functionsgroup_container"><div class="doc_function_block">
+<table class="table tablecondensed">
+    <tr><td class="term notranslate"><a href="cla/Country.html"><code class="function">Country</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Countries with EUROMOD tax-benefit systems.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/Dataset.html"><code class="function">Dataset</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Datasets configured in a country.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/DatasetInSystem.html"><code class="function">DatasetInSystem</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Datasets configured in a system.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/euromod.html"><code class="function">euromod</code></a></td>
+        <td class="term notranslate"><tt>method</tt></td><td class="description">Method instantiating the base class <a href="cla/Model.html"> Model</a>.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/Extension.html"><code class="function">Extension</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">EUROMOD model extensions.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/ExtensionSwitch.html"><code class="function">ExtensionSwitch</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Extension switches of an object.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/Function.html"><code class="function">Function</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Functions in a policy.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/FunctionInSystem.html"><code class="function">FunctionInSystem</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Functions configured in a system.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/Model.html"><code class="function">Model</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Base class returned by method <a href="cla/euromod.html"> euromod()</a>.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/Parameter.html"><code class="function">Parameter</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Parameters in a function.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/ParameterInSystem.html"><code class="function">ParameterInSystem</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Parameters configured in a system.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/Policy.html"><code class="function">Policy</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Policy rules in a country.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/PolicyInSystem.html"><code class="function">PolicyInSystem</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Policy rules configured in a system.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/ReferencePolicy.html"><code class="function">ReferencePolicy</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Reference policies in a country.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/run.html"><code class="function">run</code></a></td>
+        <td class="term notranslate"><tt>method</tt></td><td class="description">Method for running simulations of a EUROMOD tax-benefit system.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/Simulation.html"><code class="function">Simulation</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Simulation results returned by <a href="cla/run.html"> run</a>.</td></tr>
+    <tr><td class="term notranslate"><a href="cla/System.html"><code class="function">System</code></a></td>
+        <td class="term notranslate"><tt>class</tt></td><td class="description">Tax-benefit systems in a country.</td></tr>
+</table></div>
+</div>
+<!--END.DESCRIPTION_BLOCK-1-->
+   
+
+</div>
+</div>
+</div>
+</div><!--END.ENTIRE_PAGE--> 
+
+  </div>
+
+</body>
+</html>

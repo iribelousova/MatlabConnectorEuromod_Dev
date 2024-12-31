@@ -1,0 +1,1014 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage">
+<head>
+<meta xmlns="http://www.w3.org/1999/xhtml" charset="utf-8"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>Examples</title>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement":
+    [{
+        "@type": "ListItem",
+        "position": 1,
+
+        "item": {
+        "@id": "index.html",
+        "name": "Examples class"
+        }
+    } 
+    ,
+    {
+        "@type": "ListItem",
+        "position": 2,
+
+        "item": {
+        "@id": "ExamplesClass.html",
+        "name": "Examples"
+        }
+    }
+    ,
+    {
+        "@type": "ListItem",
+        "position": 3,
+
+        "item": {
+        "@id": "TaxSystemClass.html",
+        "name": "TaxSystem"
+        }
+    }]
+}</script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "ItemList",
+    "name": "VisibleBreadcrumbs",
+
+    "itemListElement":
+        [
+        "getting-started-with-EuromodConnector-toolbox"
+        ],
+    "itemListOrder": "http://schema.org/ItemListOrderAscending"
+}</script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "ItemList",
+    "name": "ExtendedCapabilities",
+
+    "itemListElement":
+    [
+    {
+        "@type": "ListItem",
+        "position": 1,
+        "item": 
+    {
+        "@context": "http://schema.org",
+        "@type": "PropertyValue",
+            "name": "codegen",
+            "value": "limited"
+    }
+    }
+    ]
+}</script>
+        <meta xmlns="http://www.w3.org/1999/xhtml" name="chunktype" content="refpage"></meta><meta xmlns="http://www.w3.org/1999/xhtml" name="refentity" itemprop="refentity" content="function:Euromod"></meta><link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="fcn"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="ref/function"></meta>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" name="description" itemprop="description" content="This MATLAB class loads the EUROMOD countries."></meta><script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/product/scripts/jquery/jquery-latest.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_offcanvas_v2.css" rel="stylesheet" type="text/css"></link>
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/l10n.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/f1help.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/mw.imageanimation.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/jquery.highlight.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/underscore-min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/examples.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/use_platform_screenshots.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/suggest.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/overload.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/helpservices.js"></script>
+
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/bootstrap.min.js" type="text/javascript"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/global.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_base.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_installed.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_print.css" rel="stylesheet" type="text/css" media="print"></link>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/shared/equationrenderer/release/MathRenderer.js"></script>
+</head>
+
+<body id="responsive_offcanvas">
+
+<!--BEGIN.ENTIRE_PAGE-->
+<div class="row-offcanvas row-offcanvas-left">
+
+<!--BEGIN.HORIZONTAL_UPPER_BAR-->
+<div xmlns="http://www.w3.org/1999/xhtml">
+    <div class="horizontal_nav"><div class="horizontal_nav_container"><div class="offcanvas_horizontal_nav"><div class="container-fluid"><div class="row">
+    <div class="col-sm-12 hidden-xs">
+        <nav class="navbar navbar-default" role="navigation" id="subnav">
+            <div>
+                <ul class="nav navbar-nav crux_browse">
+                    <li id="crux_nav_documentation" class="crux_resource">
+                        <a href="../index.html">All</a></li>
+                    <li id="crux_nav_example" class="crux_resource active">
+                        <a href="Examples.html">Examples</a></li>
+                    <li id="crux_nav_function" class="crux_resource">
+                        <a href="ref/functionlist.html">Functions</a></li>
+                    <li id="crux_nav_app" class="crux_resource">
+                        <a href="ref/functionlist.html">Apps</a></li>
+                    <li role="presentation" class="dropdown" id="topnav_more" style="display:none;">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                             More <span class="caret"></span></a>
+                             <ul class="dropdown-menu"></ul></li>
+                </ul></div></nav>
+    </div>
+    <div class="visible-xs"><div class="container-fluid"><div class="row">
+        <div class="col-xs-9"><div class="mobile_crux_nav_trigger"><div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources<span class="icon-arrow-down icon_16"></span></button>
+        <ul class="dropdown-menu">
+            <li id="crux_nav_mobile_documentation" class="crux_resource"><a href="../index.html"></a>All</li>
+            <li id="crux_nav_mobile_example" class="crux_resource active"><a href="examples.html?category=getting-started-with-EuromodConnector-toolbox">Examples</a></li>
+            <li id="crux_nav_mobile_function" class="crux_resource"><a href="APIreference.html?type=function&amp;getting-started-with-EuromodConnector-toolbox">Functions</a></li>
+            <li id="crux_nav_mobile_app" class="crux_resource"><a href="APIreference.html?type=app&amp;getting-started-with-EuromodConnector-toolbox">Apps</a></li>
+        </ul></div></div></div><div class="col-xs-3"><div class="translate_placeholder"></div></div>
+    </div></div></div>
+</div></div></div></div></div>
+</div><!--END.HORIZONTAL_UPPER_BAR-->
+
+<!--BEGIN.MAIN_CONTENT_CONTAINER-->
+<div id="content_container" itemprop="content"><div class="container-fluid"><div class="row"><div class="col-xs-12">
+<section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" lang="en">
+    
+<!--BEGIN.MAIN_CONTENT-->
+<div id="pgtype-ref-function">
+  <div class="expandableContent" id="expandableExamples">
+    <p class="switch"><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true3">collapse all</a>
+    </p>
+
+<div class="function_ref"><span id="OBJ" class="anchor_target"></span>
+            
+    <!--EXAMPLE-->
+    <div class="examples">
+      <h1 itemprop="title content">Examples</h1>
+    <!--BEGIN.PANEL_GROUP-->
+    <!--BEGIN.EXAMPLE 1-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-EXAMPLES-sub1">
+    <div class="panel panel-default ">
+        <div role="tab" data-toggle="collapse" 
+        id="expand_panel_heading-BLOCK-EXAMPLES-sub1" 
+        data-target="#expand_panel_body-BLOCK-EXAMPLES-sub1" 
+        aria-controls="expand_panel_body-BLOCK-EXAMPLES-sub1" 
+        class="panel-heading add_cursor_pointer" aria-expanded="true">
+         <h3 class="panel-title" id="BLOCK-EXAMPLES-sub1">
+            Load and navigate the model<br/>
+         </h3><span class="icon-arrow-open-down icon_24"></span>
+         <span class="icon-arrow-open-right icon_24"></span>
+        </div>
+    <div role="tabpanel" id="expand_panel_body-BLOCK-EXAMPLES-sub1" 
+    aria-labelledby="expand_panel_heading-BLOCK-EXAMPLES-sub1" 
+    class="panel-collapse collapse in">
+    <!--BEGIN.PANEL_BODY-->
+    <div class="panel-body">
+        <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+            <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+            <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+            <div class="row"><div class="col-xs-12">
+                <a class="btn btn_secondary btn-block" href="matlab:openExample('Euromod.EXAMPLE_1')">Open Live Script</a>
+        </div></div></div></div></div>
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "DigitalDocument",
+          "headline": "Simulate Tax-Benefit System",
+          "description": "Run the simulation of the EUROMOD for a given Examples-system model.",
+          "thumbnailURL": "../includes/product/images/doc_center/DefaultImage.png",
+          "genre": "Live Script",
+          "isBasedOn": {
+          "@type": "Product",
+          "name": "MATLAB"
+
+        },
+          "isPartOf": {
+          "@type": "CreativeWork",
+          "url": "Euromod.html"
+
+        },
+          "identifier": "Euromod.EXAMPLE_1",
+          "name": "EXAMPLE_1",
+          "url": "Euromod.html#BLOCK-EXAMPLES-sub1"
+
+        }</script><script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "PropertyValue",
+          "name": "open_command",
+          "value": "matlab:openExample('Euromod/EXAMPLE_1')"
+
+        }</script><script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "ItemList",
+          "name": "ExampleSourceFiles",
+
+        "itemListElement":
+        [
+        "EXAMPLE_1.mlx"
+        ],
+        "itemListOrder": "http://schema.org/ItemListOrderAscending"
+        }
+        </script>
+        
+   <p class="shortdesc">
+      We start with loading the euromod toolbox and creating a <a href="cla/Model.html">Model</a> object from a EUROMOD model.
+      See the <a href="UserGuide.html#OBJ-Installation">installation guide</a> on how to download and install the toolbox and its dependencies.
+   </p>
+    
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeinput"><pre>
+mod = euromod(<span class="string">"C:\EUROMOD_RELEASES_I6.0+"</span>);
+mod
+</pre></div></div></div>
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeoutput"><pre>1×1 <a href="cla/Euromod.html"><tt>Model</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+
+  extensions: [11×1 Extension]
+   countries: [28×1 Country]
+   modelpath: "C:\EUROMOD_RELEASES_I6.0+"
+    </pre></div></div></div><div class="procedure"></div>
+
+    <p>
+      Note that every object that is related to the EUROMOD project comes 
+      with an informative description. Here we can see that the model has 
+      3 relevant attributes to the user:
+      <ul style="list-style-type:circle;">
+         <li>countries</li>
+         <li>extensions</li>
+         <li>modelpath</li>
+      </ul>
+   </p>
+   <p>
+      The <a href="cla/Euromod.html#OBJ_Properties-1">countries</a> and <a href="cla/Euromod.html#OBJ_Properties-2">extensions</a> attributes contain elements of the respective 
+      objects. If we take a look at <tt>countries</tt>:
+   </p>
+    
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeinput"><pre>
+mod.countries </pre></div></div></div>
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeoutput"><pre>28×1 <a href="cla/Country.html"><tt>Country</tt></a><span class="emphasis"><mod> array:</mod></span>
+
+      1: AT
+      2: BE
+      3: BG
+      4: CY
+      5: CZ
+      6: DE
+      7: DK
+      8: EE
+      9: EL
+     10: ES
+     11: FI
+     12: FR
+     13: HR
+     14: HU
+     15: IE
+     16: IT
+     17: LT
+     18: LU
+     19: LV
+     20: MT
+     21: NL
+     22: PL
+     23: PT
+     24: RO
+     25: se
+     26: SI
+     27: SK
+     28: SL
+    </pre></div></div></div><div class="procedure"></div>
+
+    <p>
+      We see indeed that the euromod model contains 28 countries. 
+      In a similar fashion we can look what kind of extensions are stored 
+      in the model. The countries class array can be indexed by both the 
+      number of the element and the country shortcode. Let us take a look 
+      at Sweden:
+    </p>
+
+    <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>)  </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>1×1 <a href="cla/Country.html"><tt>Country</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+  
+        datasets: [27×1 Dataset]
+      extensions: [12×1 Extension]
+local_extensions: COVID
+            name: "SE"
+          parent: [1×1 Model]
+        policies: [26×1 Policy]
+         systems: [18×1 System]
+      </pre></div></div></div><div class="procedure"></div>
+
+      <p>
+         Here we see again an informative representation of the <a href="cla/Country.html">Country</a> class, 
+         which contains several properties that can be accessed. We can for example take a look at the first 
+         10 policies that are stored in the country:
+      </p>
+      <!--code-->
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).policies(1:10)  </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput"><pre>10×1 <a href="cla/Policy.html"><tt>Policy</tt></a><span class="emphasis"><mod> array:</mod></span>
+     
+   1: setdefault_se |                            | DEF: SET DEFAULT
+   2: uprate_se     |                            | DEF: UPRATING FACTORS
+   3: ConstDef_se   |                            | DEF: CONSTANTS
+   4: IlsDef_se     |                            | DEF: INCOME CONCEPTS (standardized)
+   5: IlsUDBdef_se  |                            | DEF: INCOME CONCEPTS (UDB)
+   6: ildef_se      |                            | DEF: INCOME CONCEPTS (non-standardized)
+   7: random_se     |                            | DEF: Random assignment
+   8: TransLMA_se   |                            | DEF: Modelling labour market transitions (DO NOT SWITCH ON; ONLY WORKS WITH THE LMA ADD-ON)
+   9: tudef_se      |                            | DEF: ASSESSMENT UNITS
+  10: yem_se        |  (with switch set for MWA) | DEF: minimum wage
+         </pre></div></div></div><div class="procedure"></div>
+    
+    <!--END.PANEL_BODY-->
+    <!--END.PANEL_GROUP-->
+    </div></div></div></div><!--END.EXAMPLE 1-->
+
+    <!--BEGIN.PANEL_GROUP-->
+    <!--BEGIN.EXAMPLE 2-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-EXAMPLES-sub2">
+      <div class="panel panel-default ">
+          <div role="tab" data-toggle="collapse" 
+          id="expand_panel_heading-BLOCK-EXAMPLES-sub2" 
+          data-target="#expand_panel_body-BLOCK-EXAMPLES-sub2" 
+          aria-controls="expand_panel_body-BLOCK-EXAMPLES-sub2" 
+          class="panel-heading add_cursor_pointer" aria-expanded="true">
+           <h3 class="panel-title" id="BLOCK-EXAMPLES-sub2">
+            Run with default configurations<br/>
+           </h3><span class="icon-arrow-open-down icon_24"></span>
+           <span class="icon-arrow-open-right icon_24"></span>
+          </div>
+      <div role="tabpanel" id="expand_panel_body-BLOCK-EXAMPLES-sub2" 
+      aria-labelledby="expand_panel_heading-BLOCK-EXAMPLES-sub2" 
+      class="panel-collapse collapse in">
+      <!--BEGIN.PANEL_BODY-->
+      <div class="panel-body">
+          <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+              <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+              <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+              <div class="row"><div class="col-xs-12">
+                  <a class="btn btn_secondary btn-block" href="matlab:openExample('../Examples/Examples')">Open Live Script</a>
+          </div></div></div></div></div>
+      <script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "DigitalDocument",
+            "headline": "Simulate Tax-Benefit System",
+            "description": "Run the simulation of the EUROMOD for a given Examples-system model.",
+            "thumbnailURL": "../includes/product/images/doc_center/DefaultImage.png",
+            "genre": "Live Script",
+            "isBasedOn": {
+            "@type": "Product",
+            "name": "MATLAB"
+  
+          },
+            "isPartOf": {
+            "@type": "CreativeWork",
+            "url": "Euromod.html"
+  
+          },
+            "identifier": "Euromod.EXAMPLE_1",
+            "name": "EXAMPLE_1",
+            "url": "Euromod.html#BLOCK-EXAMPLES-sub2"
+  
+          }</script><script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "PropertyValue",
+            "name": "open_command",
+            "value": "matlab:openExample('Euromod/EXAMPLE_1')"
+  
+          }</script><script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "ItemList",
+            "name": "ExampleSourceFiles",
+  
+          "itemListElement":
+          [
+          "EXAMPLE_1.mlx"
+          ],
+          "itemListOrder": "http://schema.org/ItemListOrderAscending"
+          }
+          </script>
+          
+     <p class="shortdesc">
+      Say that we are interested in running the tax system for the year 2021 
+      of Sweden. Building further on the previous example we can look at the 
+      tax-systems contained in the model for Sweden:
+     </p>
+      
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.SE.systems
+  </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>18×1 <a href="cla/System.html"><tt>System</tt></a><span class="emphasis"><mod> array:</mod></span>
+  
+    1: SE_2006
+    2: SE_2007
+    3: SE_2008
+    4: SE_2009
+    5: SE_2010
+    6: SE_2011
+    7: SE_2012
+    8: SE_2013
+    9: SE_2014
+   10: SE_2015
+   11: SE_2016
+   12: SE_2017
+   13: SE_2018
+   14: SE_2019
+   15: SE_2020
+   16: SE_2021
+   17: SE_2022
+   18: SE_2023
+      </pre></div></div></div><div class="procedure"></div>
+
+     <p>
+        In order to <a href="cla/run.html">run</a> the tax system we need a 
+        dataset that fits the requirement to use. The model however provides 
+        us with a list of datasets that are configured already:
+     </p>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.SE.SE_2021.datasets </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>5×1 <a href="cla/DatasetInSystem.html"><tt>DatasetInSystem</tt></a><span class="emphasis"><mod> array:</mod></span>
+  
+   1: training_data | 
+   2: SE_2019_a1    | 
+   3: SE_2020_b1    | 
+   4: SE_2021_hhot  | 
+   5: SE_2021_b1    | best match
+      </pre></div></div></div><div class="procedure"></div>
+  
+      <p>
+         Here we see that there are multiple datasets configured, but that <tt>PL_2021_b1</tt> 
+         is set as the best match dataset for this taxsystem. Provided that you 
+         have the microdata stored somewhere, you can then load it as a <tt>table</tt> and run 
+         the model in the following way:
+      </p>
+  
+      <div class="code_responsive"><div class="programlisting">
+        <div class="codeinput"><pre>
+data = readtable(<span class="string">"SE_2021_b1.txt"</span>);
+S=mod.(<span class="string">"SE"</span>).(<span class="string">"SE_2021"</span>).run(data,<span class="string">"SE_2021_b1"</span>);
+S
+</pre></div></div></div>
+        <div class="code_responsive"><div class="programlisting">
+        <div class="codeoutput"><pre>1×1 <a href="cla/Simulation.html"><tt>Simulation</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+    
+          outputs: {[21671×240 table]}
+         settings: [1×1 struct]
+ output_filenames: "se_2021_std"
+           errors: [0×1 string]
+
+output 1 : [21671x240 table]
+   idhh   idperson   idmother   idfather   idpartner   idorighh   idorigperson   dag   dgn   dec
+    200     20001          0        0            0        200         20001       45    1     0
+    300     30001          0        0        30002        300         30001       26    1     0
+    300     30002          0        0        30001        300         30002       26    0     0
+    500     50001          0        0        50002        500         50001       37    1     0
+    500     50002          0        0        50001        500         50002       33    0     0
+    500     50003      50002    50001            0        500         50003        4    1     1
+   ...
+        </pre></div></div></div><div class="procedure"></div>
+  
+        <p>
+         This returns a <a href="cla/Simulation.html">Simulation</a> object with multiple properties. 
+         The one of interest here is <a href="cla/Simulation.html#OBJ_Properties-1">outputs</a>, 
+         which contains the output dataset(s) of type <tt>table</tt> returned by the microsimulation model.
+        </p>
+        <!--code-->
+        <div class="code_responsive"><div class="programlisting">
+           <div class="codeinput"><pre>
+outputdata_baseline = S.outputs{1};
+outputdata_baseline(1:10,1:10)     </pre></div></div></div>
+           <div class="code_responsive"><div class="programlisting">
+           <div class="codeoutput"><pre>10×10 <a href="https://it.mathworks.com/help/matlab/ref/table.html"><tt>table</tt></a><span class="emphasis"><mod> array:</mod></span>
+       
+   idhh    idperson    idmother    idfather    idpartner    idorighh    idorigperson    dag    dgn    dec
+   ____    ________    ________    ________    _________    ________    ____________    ___    ___    ___
+
+      200      20001          0           0             0        200          20001       45      1      0 
+      300      30001          0           0         30002        300          30001       26      1      0 
+      300      30002          0           0         30001        300          30002       26      0      0 
+      500      50001          0           0         50002        500          50001       37      1      0 
+      500      50002          0           0         50001        500          50002       33      0      0 
+      500      50003      50002       50001             0        500          50003        4      1      1 
+      600      60001          0           0             0        600          60001       44      1      0 
+      700      70001          0           0             0        700          70001       28      0      6 
+      900      90001          0           0             0        900          90001       77      1      0 
+     1300    1.3e+05          0           0       1.3e+05       1300        1.3e+05       54      0      0 
+           </pre></div></div></div><div class="procedure"></div>
+      
+      <!--END.PANEL_BODY-->
+      <!--END.PANEL_GROUP-->
+      </div></div></div></div><!--END.EXAMPLE 2-->
+
+
+   <!--BEGIN.PANEL_GROUP-->
+    <!--BEGIN.EXAMPLE 3-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-EXAMPLES-sub3">
+      <div class="panel panel-default ">
+          <div role="tab" data-toggle="collapse" 
+          id="expand_panel_heading-BLOCK-EXAMPLES-sub3" 
+          data-target="#expand_panel_body-BLOCK-EXAMPLES-sub3" 
+          aria-controls="expand_panel_body-BLOCK-EXAMPLES-sub3" 
+          class="panel-heading add_cursor_pointer" aria-expanded="true">
+           <h3 class="panel-title" id="BLOCK-EXAMPLES-sub3">
+            Run with changing constants<br/>
+           </h3><span class="icon-arrow-open-down icon_24"></span>
+           <span class="icon-arrow-open-right icon_24"></span>
+          </div>
+      <div role="tabpanel" id="expand_panel_body-BLOCK-EXAMPLES-sub3" 
+      aria-labelledby="expand_panel_heading-BLOCK-EXAMPLES-sub3" 
+      class="panel-collapse collapse in">
+      <!--BEGIN.PANEL_BODY-->
+      <div class="panel-body">
+          <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+              <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+              <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+              <div class="row"><div class="col-xs-12">
+                  <a class="btn btn_secondary btn-block" href="matlab:openExample('Euromod.EXAMPLE_1')">Open Live Script</a>
+          </div></div></div></div></div>
+      <script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "DigitalDocument",
+            "headline": "Simulate Tax-Benefit System",
+            "description": "Run the simulation of the EUROMOD for a given Examples-system model.",
+            "thumbnailURL": "../includes/product/images/doc_center/DefaultImage.png",
+            "genre": "Live Script",
+            "isBasedOn": {
+            "@type": "Product",
+            "name": "MATLAB"
+  
+          },
+            "isPartOf": {
+            "@type": "CreativeWork",
+            "url": "Euromod.html"
+  
+          },
+            "identifier": "Euromod.EXAMPLE_3",
+            "name": "EXAMPLE_1",
+            "url": "Euromod.html#BLOCK-EXAMPLES-sub3"
+  
+          }</script><script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "PropertyValue",
+            "name": "open_command",
+            "value": "matlab:openExample('Euromod/EXAMPLE_1')"
+  
+          }</script><script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "ItemList",
+            "name": "ExampleSourceFiles",
+  
+          "itemListElement":
+          [
+          "EXAMPLE_1.mlx"
+          ],
+          "itemListOrder": "http://schema.org/ItemListOrderAscending"
+          }
+          </script>
+          
+     <p class="shortdesc">
+      One of the advantages of using the Matlab Connectors is the ability to run many 
+      counterfactual scenario’s for the EUROMOD model. One can for example change the 
+      Tax Free income limit in Poland. There are multiple ways to do this via the 
+      euromod toolbox in Matlab, but one very straightforward way is to use the 
+      <a href="cla/run.html#OBJ-Name-Value-Input-Argument-constantsToOverwrite">constantsToOverwrite</a>
+      Name-Value input argument:
+     </p>
+      
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+S=mod.(<span class="string">'SE'</span>).(<span class="string">'SE_2021'</span>).run(data,<span class="string">"SE_2021_b1"</span>,constantsToOverwrite={[<span class="string">"$tinna_rate2"</span>,<span class="string">""</span>],<span class="string">'0.4'</span>});</pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput">
+   Simulation SE_2021_std, system SE_2021, data SE_2021_b1, country SE: finished.   
+      </div></div></div><div class="procedure"></div>
+
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+outputdata_changed= S.outputs{1};
+sum(outputdata_changed.ils_dispy - outputdata_baseline.ils_dispy)  </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput">   
+      -1.2248e+07
+         </div></div></div><div class="procedure"></div>
+
+     <p>
+      The Name-Value input argument <tt>constantsToOverwrite</tt> specifies which constants 
+      to overwrite in the policy spline. It is a <tt>N×1 cell</tt> array of strings. The first 
+      element is itself a <tt>1×2 string</tt> indicating the targetted 
+      constant and the <tt>order</tt> (leave an empty string if it is <tt>NaN</tt>), and 
+      the second element is the value of type <tt>string</tt> to overwrite with.
+      The default is [].
+     </p>
+      
+      <!--END.PANEL_BODY-->
+      <!--END.PANEL_GROUP-->
+      </div></div></div></div><!--END.EXAMPLE 3-->
+
+
+    <!--BEGIN.PANEL_GROUP-->
+    <!--BEGIN.EXAMPLE 4-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-EXAMPLES-sub4">
+      <div class="panel panel-default ">
+          <div role="tab" data-toggle="collapse" 
+          id="expand_panel_heading-BLOCK-EXAMPLES-sub4" 
+          data-target="#expand_panel_body-BLOCK-EXAMPLES-sub4" 
+          aria-controls="expand_panel_body-BLOCK-EXAMPLES-sub4" 
+          class="panel-heading add_cursor_pointer" aria-expanded="true">
+           <h3 class="panel-title" id="BLOCK-EXAMPLES-sub4">
+            Run with add-ons<br/>
+           </h3><span class="icon-arrow-open-down icon_24"></span>
+           <span class="icon-arrow-open-right icon_24"></span>
+          </div>
+      <div role="tabpanel" id="expand_panel_body-BLOCK-EXAMPLES-sub4" 
+      aria-labelledby="expand_panel_heading-BLOCK-EXAMPLES-sub4" 
+      class="panel-collapse collapse in">
+      <!--BEGIN.PANEL_BODY-->
+      <div class="panel-body">
+          <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+              <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+              <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+              <div class="row"><div class="col-xs-12">
+                  <a class="btn btn_secondary btn-block" href="matlab:openExample('Euromod.EXAMPLE_4')">Open Live Script</a>
+          </div></div></div></div></div>
+      <script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "DigitalDocument",
+            "headline": "Simulate Tax-Benefit System",
+            "description": "Run the simulation of the EUROMOD for a given Examples-system model.",
+            "thumbnailURL": "../includes/product/images/doc_center/DefaultImage.png",
+            "genre": "Live Script",
+            "isBasedOn": {
+            "@type": "Product",
+            "name": "MATLAB"
+  
+          },
+            "isPartOf": {
+            "@type": "CreativeWork",
+            "url": "Euromod.html"
+  
+          },
+            "identifier": "Euromod.EXAMPLE_4",
+            "name": "EXAMPLE_4",
+            "url": "Euromod.html#BLOCK-EXAMPLES-sub4"
+  
+          }</script><script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "PropertyValue",
+            "name": "open_command",
+            "value": "matlab:openExample('Euromod/EXAMPLE_4')"
+  
+          }</script><script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "ItemList",
+            "name": "ExampleSourceFiles",
+  
+          "itemListElement":
+          [
+          "EXAMPLE_4.mlx"
+          ],
+          "itemListOrder": "http://schema.org/ItemListOrderAscending"
+          }
+          </script>
+          
+     <p class="shortdesc">
+      <a href="cla/run.html">Run</a> the simulation for the Swedish system <tt>SE_2021</tt> 
+      including the Marginal Tax-Rate add-on, using optional Name-Value input argument
+      <a href="cla/run.html#OBJ-Name-Value-Input-Argument-addons">addons</a>:
+     </p>
+      
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+S=mod.(<span class="string">'SE'</span>).(<span class="string">'SE_2021'</span>).run(data,<span class="string">"SE_2021_b1"</span>,addons=[<span class="string">"MTR"</span>,<span class="string">"MTR"</span>]);</pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput">
+   Simulation SE_2021_base_mtr, system se_2021_mtr, data SE_2021, country SE_2021_b1: finished.   
+      </div></div></div><div class="procedure"></div>
+
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+S  </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput"><pre>1×1 <a href="cla/Simulation.html"><tt>Simulation</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+         
+         outputs: {[21671×246 table]  [21671×39 table]}
+        settings: [1×1 struct]
+output_filenames: ["se_2021_base_mtr"    "se_2021_mtr"]
+          errors: [0×1 string]
+
+output 1 : [21671x246 table]
+      idhh   idperson   idmother   idfather   idpartner   idorighh   idorigperson   dag   dgn   dec
+       200     20001          0        0            0        200         20001       45    1     0
+       300     30001          0        0        30002        300         30001       26    1     0
+       300     30002          0        0        30001        300         30002       26    0     0
+       500     50001          0        0        50002        500         50001       37    1     0
+       500     50002          0        0        50001        500         50002       33    0     0
+       500     50003      50002    50001            0        500         50003        4    1     1
+      ...
+output 2 : [21671x39 table]
+      idhh   idperson        dwt yem_backup ils_earns_backup ils_earns_mtr_base1 ils_dispy_mtr_base1 ils_pen_mtr_base1 ils_benmt_mtr_base1 ils_bennt_mtr_base1
+       200     20001 9.200411e+02 5.634323e+04 5.634323e+04 5.634323e+04  6.499764e+04        0    0 7.019343e+03
+       300     30001 8.892741e+02 4.004048e+04 4.089143e+04 4.089143e+04  3.055700e+04        0    0     0
+       300     30002 8.892741e+02 2.400465e+04 2.448169e+04 2.448169e+04  1.974766e+04        0    0     0
+       500     50001 9.082533e+02 4.805374e+04 4.805374e+04 4.805374e+04  3.600150e+04        0    0 1.675232e+03
+       500     50002 9.082533e+02        0            0          0  2.794360e+03        0    0 2.794360e+03
+       500     50003 9.082533e+02        0            0          0             0        0    0     0
+      ...
+         </pre></div></div></div><div class="procedure"></div>
+
+     <p>
+      As one can see there are two datasets returned by the model. Both of them can 
+      be accessed. The average marginal tax rate for example can be 
+      straightforwardly computed as:
+     </p>
+     <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mean(S.outputs{2}{:,<span class="string">'mtrpc'</span>});</pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput">
+   19.4191  
+      </div></div></div><div class="procedure"></div>
+
+   <p>
+      The optional parameter <tt>addons</tt> that we passed to the <tt>run</tt> 
+      command is a <tt>string</tt> array of Name-Value arguments, with EUROMOD 
+      Addons to be integrated in the spine. For each Addon, specify the name of
+      the Addon and the name of the system in the Addon to be integrated (typically, 
+      it is the  <i>name of Addon_two-letter country code</i> e.g. LMA_AT). 
+      Default is [].
+   </p>      
+      <!--END.PANEL_BODY-->
+      <!--END.PANEL_GROUP-->
+      </div></div></div></div><!--END.EXAMPLE 4-->
+
+    <!--BEGIN.PANEL_GROUP-->
+    <!--BEGIN.EXAMPLE 5-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-EXAMPLES-sub5">
+        <div class="panel panel-default ">
+            <div role="tab" data-toggle="collapse" 
+            id="expand_panel_heading-BLOCK-EXAMPLES-sub5" 
+            data-target="#expand_panel_body-BLOCK-EXAMPLES-sub5" 
+            aria-controls="expand_panel_body-BLOCK-EXAMPLES-sub5" 
+            class="panel-heading add_cursor_pointer" aria-expanded="true">
+             <h3 class="panel-title" id="BLOCK-EXAMPLES-sub5">
+                Run with extensions<br/>
+             </h3><span class="icon-arrow-open-down icon_24"></span>
+             <span class="icon-arrow-open-right icon_24"></span>
+            </div>
+        <div role="tabpanel" id="expand_panel_body-BLOCK-EXAMPLES-sub5" 
+        aria-labelledby="expand_panel_heading-BLOCK-EXAMPLES-sub5" 
+        class="panel-collapse collapse in">
+        <!--BEGIN.PANEL_BODY-->
+        <div class="panel-body">
+            <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+                <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+                <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+                <div class="row"><div class="col-xs-12">
+                    <a class="btn btn_secondary btn-block" href="matlab:openExample('Euromod.EXAMPLE_4')">Open Live Script</a>
+            </div></div></div></div></div>
+        <script type="application/ld+json">
+            {
+            "@context": "http://schema.org",
+            "@type": "DigitalDocument",
+              "headline": "Simulate Tax-Benefit System",
+              "description": "Run the simulation of the EUROMOD for a given Examples-system model.",
+              "thumbnailURL": "../includes/product/images/doc_center/DefaultImage.png",
+              "genre": "Live Script",
+              "isBasedOn": {
+              "@type": "Product",
+              "name": "MATLAB"
+    
+            },
+              "isPartOf": {
+              "@type": "CreativeWork",
+              "url": "Euromod.html"
+    
+            },
+              "identifier": "Euromod.EXAMPLE_5",
+              "name": "EXAMPLE_5",
+              "url": "Euromod.html#BLOCK-EXAMPLES-sub5"
+    
+            }</script><script type="application/ld+json">
+            {
+            "@context": "http://schema.org",
+            "@type": "PropertyValue",
+              "name": "open_command",
+              "value": "matlab:openExample('Euromod/EXAMPLE_5')"
+    
+            }</script><script type="application/ld+json">
+            {
+            "@context": "http://schema.org",
+            "@type": "ItemList",
+              "name": "ExampleSourceFiles",
+    
+            "itemListElement":
+            [
+            "EXAMPLE_5.mlx"
+            ],
+            "itemListOrder": "http://schema.org/ItemListOrderAscending"
+            }
+            </script>
+            
+       <p class="shortdesc">
+        <a href="cla/run.html">Run</a> the simulation for the Swedish system <tt>SE_2021</tt> 
+        switching <tt>on</tt> the Benefit Take-up Adjustment extension ‘BTA’ using the optional 
+        Name-Value input argument <a href="cla/run.html#OBJ-Name-Value-Input-Argument-switches">switches</a>:
+       </p>
+        
+        <div class="code_responsive"><div class="programlisting">
+        <div class="codeinput"><pre>
+  S_BTA=mod.(<span class="string">'SE'</span>).(<span class="string">'SE_2021'</span>).run(data,<span class="string">"SE_2021_b1"</span>,switches=[<span class="string">"BTA"</span>,true]);</pre></div></div></div>
+        <div class="code_responsive"><div class="programlisting">
+        <div class="codeoutput">
+     Simulation SE_2021_base_mtr, system se_2021_mtr, data SE_2021, country SE_2021_b1: finished.   
+        </div></div></div><div class="procedure"></div>
+  
+        <div class="code_responsive"><div class="programlisting">
+           <div class="codeinput"><pre>
+  S  </pre></div></div></div>
+           <div class="code_responsive"><div class="programlisting">
+           <div class="codeoutput"><pre>1×1 <a href="cla/Simulation.html"><tt>Simulation</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+           
+           outputs: {[21671×246 table]  [21671×39 table]}
+          settings: [1×1 struct]
+  output_filenames: ["se_2021_base_mtr"    "se_2021_mtr"]
+            errors: [0×1 string]
+  
+  output 1 : [21671x246 table]
+        idhh   idperson   idmother   idfather   idpartner   idorighh   idorigperson   dag   dgn   dec
+         200     20001          0        0            0        200         20001       45    1     0
+         300     30001          0        0        30002        300         30001       26    1     0
+         300     30002          0        0        30001        300         30002       26    0     0
+         500     50001          0        0        50002        500         50001       37    1     0
+         500     50002          0        0        50001        500         50002       33    0     0
+         500     50003      50002    50001            0        500         50003        4    1     1
+        ...
+  output 2 : [21671x39 table]
+        idhh   idperson        dwt yem_backup ils_earns_backup ils_earns_mtr_base1 ils_dispy_mtr_base1 ils_pen_mtr_base1 ils_benmt_mtr_base1 ils_bennt_mtr_base1
+         200     20001 9.200411e+02 5.634323e+04 5.634323e+04 5.634323e+04  6.499764e+04        0    0 7.019343e+03
+         300     30001 8.892741e+02 4.004048e+04 4.089143e+04 4.089143e+04  3.055700e+04        0    0     0
+         300     30002 8.892741e+02 2.400465e+04 2.448169e+04 2.448169e+04  1.974766e+04        0    0     0
+         500     50001 9.082533e+02 4.805374e+04 4.805374e+04 4.805374e+04  3.600150e+04        0    0 1.675232e+03
+         500     50002 9.082533e+02        0            0          0  2.794360e+03        0    0 2.794360e+03
+         500     50003 9.082533e+02        0            0          0             0        0    0     0
+        ...
+           </pre></div></div></div><div class="procedure"></div>
+    
+     <p>
+        The optional parameter <tt>switches</tt> is a <tt>string</tt> array of Name-Value 
+        arguments, which define the EUROMOD extensions to be switched <tt>on</tt> or <tt>off</tt> in the simulation.
+        For each extension specify the short name of the <a href="cla/Extension.html">Extension</a>
+        and a <tt>logical</tt> value. Default is [].
+     </p>      
+        <!--END.PANEL_BODY-->
+        <!--END.PANEL_GROUP-->
+        </div></div></div></div><!--END.EXAMPLE 5-->
+    
+    <div itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/Example" itemprop="example" class="em_example">
+    <meta itemprop="exampleid" content="EXAMPLES"></meta>
+    <meta itemprop="exampletitle" content="OBJ-EXAMPLES"></meta>
+    </div>
+</div></div>
+
+<!--BEGIN.REFERENCES-->
+<div class="bibliography"><h2 id="BLOCK-REFERENCES">References</h2><div id="OBJ_References" class="bibliomixed">
+    <p>[1] <span><a href="https://euromod-web.jrc.ec.europa.eu/resources/model-documentation"> Documentation EUROMOD</a> - Tax-benefit microsimulation model for the European Union.</span></p></div>
+</div><!--END.REFERENCES-->
+
+<!--BEGIN.EXTENDED_CAPABILITIES-->
+<div class="ref_sect"><h2 id="BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</h2>
+<div class="expand_collapse" id="accordion_BLOCK-EXTENDED_CAPABILITIES" role="tablist" aria-multiselectable="true">
+    <span id="OBJ_ATS1" class="anchor_target"></span>
+    <span id="OBJ" class="anchor_target"></span>
+    <h3 class="expand_trigger collapsed" id="OBJ_codegen" aria-expanded="false" data-toggle="collapse" data-target="#expand_body_OBJ_codegen" aria-controls="expand_body_OBJ_codegen">
+        <span class="icon-arrow-open-down"></span>
+        <span class="icon-arrow-open-right"></span>C/C++ Code Generation<br/> 
+        <span class=" remove_bold add_font_color_general">Generate C and C++ code using MATLAB&#174; Coder&#8482;.</span>
+    </h3></div>
+</div><!--END.EXTENDED_CAPABILITIES-->
+
+<!--BEGIN.SEE_ALSO-->
+<div class="ref_sect"><h2 id="BLOCK-SEE_ALSO">See Also</h2>
+    <ul class="list-unstyled margined_10">
+    <li>
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/Euromod.html"><span itemprop="name">
+                <code class="function">Model</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/Country.html"><span itemprop="name">
+                <code class="function">Country</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/System.html"><span itemprop="name">
+                <code class="function">System</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/Policy.html"><span itemprop="name">
+                <code class="function">Policy</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/Dataset.html"><span itemprop="name">
+                <code class="function">Dataset</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/Extension.html"><span itemprop="name">
+                <code class="function">Extension</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/info.html"><span itemprop="name">
+                <code class="function">info</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="cla/run.html"><span itemprop="name">
+                <code class="function">run</code></span></a>
+        </span>
+    </li></ul>
+    </div>
+    <!--END.SEE_ALSO-->
+
+<div class="release_introduced"><h4>Introduced in R2023a</h4></div>
+    
+<!--END.NAME_OF_FUNCTION--> 
+</div></div><!--END.MAIN_CONTENT--> 
+
+<div class="modal fade" id="open-example-dialog" 
+tabindex="-1" role="dialog" aria-labelledby="openExampleDialogLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Open Example</h4>
+    </div>
+    <div class="modal-body" id="dialog-body">
+        <p>You have a modified version of this example. Do you want to open this example with your edits?</p>
+    </div>
+    <div class="modal-footer"><a id="open-example-dialog-replace" class="btn btn_color_blue companion_btn" data-dismiss="modal">
+        No, open this example and discard my edits</a>
+        <a id="open-example-dialog-continue" class="btn btn_color_blue" data-dismiss="modal">Yes</a>
+    </div>
+    </div>
+</div>
+</div>
+
+
+<div class="clearfix"></div>
+<div align="center" class="feedbackblock"><iframe id="doc_survey"></iframe></div>
+<script src="../includes/shared/scripts/docsurvey.js"></script>
+
+<script>initDocSurvey();</script></section>
+
+
+</div>
+</div>
+</div>
+</div><!--END.MAIN_CONTENT_CONTAINER-->
+
+
+</div><!--END.ENTIRE_PAGE-->
+</body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<toc version="2.0">
+<!-- First tocitem specifies top level in Help browser Contents pane -->
+<!-- This can be a roadmap page, as shown below, or a content page -->
+    <tocitem target="index.html" image="HelpIcon.GETTING_STARTED">
+			Euromod Connector Toolbox
+        <!-- Nest tocitems to create hierarchical entries in  Contents-->
+        <!-- To include icons, use the following syntax for tocitems: -->
+        <!-- <tocitem target="foo.html" image="HelpIcon.NAME"> -->
+        <!-- Title-of-Section </tocitem> -->
+        <!-- where NAME is one of the following (use capital letters): -->
+        <!-- FUNCTION, USER_GUIDE, EXAMPLES, BLOCK, GETTING_STARTED, -->
+        <!-- DEMOS, RELEASE_NOTES --> 
+        <!-- Icon images used for these entries are also stored in -->
+        <!-- matlabroot/toolbox/matlab/icons -->
+        <!-- A Getting Started Guide usually comes first -->
+        <tocitem target="euromod/Examples.html" image="HelpIcon.EXAMPLES">
+            Examples
+			<!-- 2nd and lower TOC levels usually have anchor IDs -->
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub1">Load and navigate the model
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub2">Run simulation with default configurations
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub3">Run simulation with changing constants
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub4">Run simulation with add-ons
+			</tocitem>
+			<tocitem target="euromod/Examples.html#BLOCK-EXAMPLES-sub5">Run simulation with extensions
+			</tocitem>
+        </tocitem>
+        <!-- User Guide comes next -->
+        <tocitem target="euromod/UserGuide.html" image="HelpIcon.USER_GUIDE">
+			User Guide
+            <tocitem target="euromod/UserGuide.html#expand_panel_heading-BLOCK-1">
+			Installation
+				<tocitem target="euromod/UserGuide.html#BLOCK-1-sub1">Requirements
+                </tocitem>
+            </tocitem>
+            <tocitem target="euromod/UserGuide.html#BLOCK-2">Run and navigate the model
+                <tocitem target="euromod/UserGuide.html#BLOCK-2-sub1">Run a simulation
+                </tocitem>
+				<tocitem target="euromod/UserGuide.html#BLOCK-2-sub2">Navigate the model
+                </tocitem>
+            </tocitem>
+			<tocitem target="euromod/UserGuide.html#BLOCK-3">Other Important EUROMOD Objects
+            </tocitem>
+        </tocitem>
+        <!-- Function reference next -->
+        <!-- First item is page describing function categories, if any -->
+        <tocitem target="euromod/APIreference.html" 
+                 image="HelpIcon.FUNCTION">API Reference
+			 <tocitem target="euromod/cla/Country.html">Country
+				<tocitem target="euromod/cla/Country.html#BLOCK-SYNTAX">Syntax</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-DESCRIPTION">Description</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-EXAMPLES">Examples</tocitem>
+				<tocitem target="euromod/cla/Country.html#inputarg_NR1">Input Arguments</tocitem>
+				<tocitem target="euromod/cla/Country.html#defaultproperties">Properties</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-FUNCTIONS">Functions</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-OUTPUT_ARGUMENTS">Output Arguments</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-REFERENCES">References</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</tocitem>
+				<tocitem target="euromod/cla/Country.html#BLOCK-SEE_ALSO">See Also</tocitem></tocitem>
+            <!-- First category, with link to anchor in above page -->
+            <tocitem target="euromod/ref/functionlist.html">Functions by Category
+                <!-- Inside category, list its functions alphabetically -->
+                <tocitem target="euromod/ref/methodlist.html">Methods</tocitem>
+                <tocitem target="euromod/ref/propertylist.html">Properties</tocitem>
+                <!-- ... -->
+            </tocitem>
+            <!-- Second category, with link to anchor in above page -->
+            <tocitem target="euromod/ref/functionlist-alpha.html">Functions Alphabetically
+                <!-- Inside category, list its functions alphabetically -->
+                <tocitem target="euromod/ref/methodlist-alpha.html">Methods</tocitem>
+                <tocitem target="euromod/ref/propertylist-alpha.html">Properties</tocitem>
+                <!-- ... -->
+             </tocitem>
+        </tocitem>
+        <!-- Optional List of Examples, with hyperlinks to examples in other files -->
+        <tocitem target="euromod/License.html">License
+        </tocitem>
+        <!-- Optional link or links to your or other Web sites -->
+        <tocitem target="https://euromod-web.jrc.ec.europa.eu/" 
+                 image="$toolbox/matlab/icons/webicon.gif">
+        EUROMOD Documentation
+        </tocitem>
+    </tocitem>
+</toc>

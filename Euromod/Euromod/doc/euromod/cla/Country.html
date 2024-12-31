@@ -1,0 +1,716 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage">
+<head>
+<meta xmlns="http://www.w3.org/1999/xhtml" charset="utf-8"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>Country</title>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement":
+    [{
+        "@type": "ListItem",
+        "position": 1,
+
+        "item": {
+        "@id": "index.html",
+        "name": "Country class"
+        }
+    } 
+    ,
+    {
+        "@type": "ListItem",
+        "position": 2,
+
+        "item": {
+        "@id": "CountryClass.html",
+        "name": "Country"
+        }
+    }
+    ,
+    {
+        "@type": "ListItem",
+        "position": 3,
+
+        "item": {
+        "@id": "TaxSystemClass.html",
+        "name": "TaxSystem"
+        }
+    }]
+}</script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "ItemList",
+    "name": "VisibleBreadcrumbs",
+
+    "itemListElement":
+        [
+        "getting-started-with-EuromodConnector-toolbox"
+        ],
+    "itemListOrder": "http://schema.org/ItemListOrderAscending"
+}</script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "ItemList",
+    "name": "ExtendedCapabilities",
+
+    "itemListElement":
+    [
+    {
+        "@type": "ListItem",
+        "position": 1,
+        "item": 
+    {
+        "@context": "http://schema.org",
+        "@type": "PropertyValue",
+            "name": "codegen",
+            "value": "limited"
+    }
+    }
+    ]
+}</script>
+        <meta xmlns="http://www.w3.org/1999/xhtml" name="chunktype" content="refpage"></meta><meta xmlns="http://www.w3.org/1999/xhtml" name="refentity" itemprop="refentity" content="function:Euromod"></meta><link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="fcn"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="ref/function"></meta>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" name="description" itemprop="description" content="This MATLAB class loads the EUROMOD countries."></meta><script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../../includes/product/scripts/jquery/jquery-latest.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_offcanvas_v2.css" rel="stylesheet" type="text/css"></link>
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/l10n.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/f1help.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/mw.imageanimation.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/jquery.highlight.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/underscore-min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/examples.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/use_platform_screenshots.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/suggest.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/overload.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/helpservices.js"></script>
+
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/bootstrap.min.js" type="text/javascript"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/global.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/doc_center_base.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/doc_center_installed.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/doc_center_print.css" rel="stylesheet" type="text/css" media="print"></link>
+</head>
+
+<body id="responsive_offcanvas">
+
+<!--BEGIN.ENTIRE_PAGE-->
+<div class="row-offcanvas row-offcanvas-left">
+        
+    <!--BEGIN.HORIZONTAL_UPPER_BAR-->
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <div class="horizontal_nav"><div class="horizontal_nav_container"><div class="offcanvas_horizontal_nav"><div class="container-fluid"><div class="row">
+        <div class="col-sm-12 hidden-xs"><nav class="navbar navbar-default" role="navigation" id="subnav"><div><ul class="nav navbar-nav crux_browse">
+            <li id="crux_nav_documentation" class="crux_resource">
+                <a href="../index.html">All</a></li>
+            <li id="crux_nav_example" class="crux_resource">
+                <a href="../Examples.html">Examples</a></li>
+            <li id="crux_nav_function" class="crux_resource active">
+                <a href="../ref/functionlist.html">Functions</a></li>
+            <li id="crux_nav_app" class="crux_resource">
+                <a href="../ref/functionlist.html">Apps</a></li>
+            <li role="presentation" class="dropdown" id="topnav_more" style="display:none;">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> More <span class="caret"></span></a><ul class="dropdown-menu"></ul></li>
+        </ul></div></nav></div>
+        <div class="visible-xs"><div class="container-fluid"><div class="row">
+            <div class="col-xs-9"><div class="mobile_crux_nav_trigger"><div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources<span class="icon-arrow-down icon_16"></span></button>
+            <ul class="dropdown-menu">
+                <li id="crux_nav_mobile_documentation" class="crux_resource active"><a href="../index.html">All</a></li>
+                <li id="crux_nav_mobile_example" class="crux_resource"><a href="../Examples.html">Examples</a></li>
+                <li id="crux_nav_mobile_function" class="crux_resource"><a href="../ref/functionlist.html">Functions</a></li>
+                <li id="crux_nav_mobile_app" class="crux_resource"><a href="../ref/functionlist.html">Apps</a></li>
+            </ul></div></div></div><div class="col-xs-3"><div class="translate_placeholder"></div></div>
+        </div></div></div>
+    </div></div></div></div></div>
+    </div><!--END.HORIZONTAL_UPPER_BAR-->
+
+<!--BEGIN.MAIN_CONTENT_CONTAINER-->
+<div itemprop="content"><div class="container-fluid"><div class="row"><div class="col-xs-12">
+<section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" lang="en">
+    
+<!--BEGIN.MAIN_CONTENT-->
+<div id="pgtype-ref-function">
+
+<!--BEGIN.NAME_OF_FUNCTION-->
+<div class="function_ref"><span id="OBJ" class="anchor_target"></span>
+    <h1 class="r2023a notranslate" itemprop="title"><span class="refname">Country</span></h1>
+        <div class="doc_topic_desc"><div class="purpose_container"><p itemprop="purpose">country-specific <a href="https://euromod-web.jrc.ec.europa.eu/">EUROMOD</a> tax-benefit models</p>
+            <div class="switch"><a href="javascript:void(0);" id="expandAllPage" data-allexpanded="true1">collapse all in page</a>
+        </div></div></div>
+    <!--SYNTAX-->
+    <span id="BLOCK-SYNTAX" class="anchor_target"></span>
+        <div class="ref_sect"><h2 id="BLOCK-SYNTAX">Syntax</h2>
+            <div class="syntax_signature"><div class="syntax_signature_module"><div class="code_responsive">
+            <code class="synopsis"><a href="#BLOCK-SYNTAX-sub1" class="intrnllnk">C = Country(Model)</a></code></div>
+            </div></div>
+        </div><div class="clear"></div>
+    <!--DESCRIPTION-->
+    <span id="classEuromod.DescriptionAnchorTarget" class="anchor_target"></span>
+    <h2 id="BLOCK-DESCRIPTION">Description</h2><div class="descriptions">
+        <div class="description_module">
+        <div class="description_element">
+            <p class="syntax_example"><a href="Country.html#BLOCK-EXAMPLES-sub1" class="intrnllnk">example</a></p>
+        <div class="code_responsive">
+            <p><span id="BLOCK-SYNTAX-sub1" itemprop="syntax">                
+                <code class="synopsis"><a href="#BLOCK-OUTPUT_ARGUMENTS-sub1" class="intrnllnk">
+                <code class="argument">C</code></a> = Country(<a href="#panel-BLOCK-INPUT_ARGUMENTS-sub1" class="intrnllnk"><code class="argument">Model</code></a>)
+                </code></span> return a class array with the EUROMOD default country models.
+            </p>
+            <p>
+                This class is instantiated authomatically when loading the <a href="Euromod.html">Model</a> and is stored there under attribute <a href="Model.html">countries</a>.
+            </p>
+        </div>
+        </div></div>
+    </div><div class="clear"></div>
+    <!--EXAMPLE-->
+    <div class="examples"><h2 id="BLOCK-EXAMPLES">Examples</h2>
+    <div class="expandableContent" id="expandableExamples"><p class="switch"><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true3">collapse all</a></p>
+    <!--BEGIN.PANEL_GROUP-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-EXAMPLES-sub1">
+    <div class="panel panel-default ">
+        <div role="tab" data-toggle="collapse" id="expand_panel_heading-BLOCK-EXAMPLES-sub1" data-target="#expand_panel_body-BLOCK-EXAMPLES-sub1" aria-controls="expand_panel_body-BLOCK-EXAMPLES-sub1" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <h3 class="panel-title" id="BLOCK-EXAMPLES-sub1">Load EUROMOD countries<br/></h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+        </div>
+    <div role="tabpanel" id="expand_panel_body-BLOCK-EXAMPLES-sub1" aria-labelledby="expand_panel_heading-BLOCK-EXAMPLES-sub1" class="panel-collapse collapse in">
+    <!--BEGIN.PANEL_BODY-->
+    <div class="panel-body">
+        <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+            <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+            <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+            <div class="row"><div class="col-xs-12">
+                <a class="btn btn_secondary btn-block" href="matlab:openExample('Country.BLOCK-EXAMPLES-sub1')">Open Live Script</a>
+        </div></div></div></div></div>
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "DigitalDocument",
+          "headline": "Simulate Tax-Benefit System",
+          "description": "Run the simulation of the EUROMOD for a given country-system model.",
+          "thumbnailURL": "../../includes/product/images/doc_center/DefaultImage.png",
+          "genre": "Live Script",
+          "isBasedOn": {
+          "@type": "Product",
+          "name": "MATLAB"
+
+        },
+          "isPartOf": {
+          "@type": "CreativeWork",
+          "url": "Country.html"
+
+        },
+          "identifier": "Country.BLOCK-EXAMPLES-sub1",
+          "name": "BLOCK-EXAMPLES-sub1",
+          "url": "Country.html#BLOCK-EXAMPLES-sub1"
+
+        }</script><script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "PropertyValue",
+          "name": "open_command",
+          "value": "matlab:openExample('Country/BLOCK-EXAMPLES-sub1')"
+
+        }</script><script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "ItemList",
+          "name": "ExampleSourceFiles",
+
+        "itemListElement":
+        [
+        "Examples.mlx"
+        ],
+        "itemListOrder": "http://schema.org/ItemListOrderAscending"
+        }
+        </script><p class="shortdesc"><tt>Country</tt> loads all the countries configured in EUROMOD by default.</p>
+    
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeinput"><pre>
+mod = euromod(<span class="string">"C:\EUROMOD_RELEASES_I6.0+"</span>);
+C=Country(mod);
+C  </pre></div></div></div>
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeoutput"><pre>28×1 <a href="Country.html"><tt>Country</tt></a><span class="emphasis"><mod> array:</mod></span>
+
+        1: AT
+        2: BE
+        3: BG
+        4: CY
+        5: CZ
+        6: DE
+        7: DK
+        8: EE
+        9: EL
+       10: ES
+       11: FI
+       12: FR
+       13: HR
+       14: HU
+       15: IE
+       16: IT
+       17: LT
+       18: LU
+       19: LV
+       20: MT
+       21: NL
+       22: PL
+       23: PT
+       24: RO
+       25: SE
+       26: SI
+       27: SK
+       28: SL
+    </pre></div></div></div><div class="procedure"></div>
+
+    <p class="shortdesc">Display a specific country in the <tt>Model</tt>.</p>
+    
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeinput"><pre>
+C(<span class="string">"AT"</span>)  </pre></div></div></div>
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeoutput"><pre>1×1 <a href="Country.html"><tt>Country</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+
+          datasets: [27×1 Dataset]
+        extensions: [13×1 Extension]
+  local_extensions: [2×1 Extension]
+              name: "AT"
+            parent: [1×1 Model]
+          policies: [54×1 Policy]
+           systems: [17×1 System]
+    </pre></div></div></div><div class="procedure"></div>
+    
+    <!--END.PANEL_BODY-->
+    <!--END.PANEL_GROUP-->
+    </div></div></div></div>
+    
+    <div itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/Example" itemprop="example" class="em_example">
+    <meta itemprop="exampleid" content="Country-Load-Euromod-Countries"></meta>
+    <meta itemprop="exampletitle" content="Simulate Tax Benefit System"></meta>
+    </div>
+</div></div>
+
+<!--START.INPUT_ARGUMENTS-->
+<div class="ref_sect"><h2 id="BLOCK-INPUT_ARGUMENTS">Input Arguments</h2>
+    <div class="expandableContent"><p class="switch "><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true">collapse all</a></p>
+    <div class="panel-group" id="BLOCK-INPUT_ARGUMENTS_panel-group" role="tablist" aria-multiselectable="true">
+    <div class="ref_sect"><div class="expandableContent">
+    <div class="panel-group" id="BLOCK_IA-tablist_panel-group" role="tablist" aria-multiselectable="true">
+    <!--INPUT.#1-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <span id="panel-BLOCK-INPUT_ARGUMENTS-sub1" class="anchor_target"></span><span id="BLOCK_IA-span" class="anchor_target"></span>
+        <div itemscope="" itemprop="inputargument" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-INPUT_ARGUMENTS-sub1">
+            <div role="tab" data-toggle="collapse" id="expand_panel_heading-BLOCK-INPUT_ARGUMENTS-sub1" data-target="#expand_panel_body-BLOCK-INPUT_ARGUMENTS-sub1" aria-controls="expand_panel_body-BLOCK-INPUT_ARGUMENTS-sub1" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <span id="inputarg_NR1" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-INPUT_ARGUMENTS-sub1">
+                <code itemprop="name">Model</code> &#8212; 
+                    <span itemprop="purpose">Euromod base class <tt>Model</tt>.</span><br/> <span class="add_font_color_general remove_bold">
+                    <span class="example_desc">
+                    <span itemprop="inputvalue"><code class="literal">class</code></span> 
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" id="expand_panel_body-BLOCK-INPUT_ARGUMENTS-sub1" aria-labelledby="expand_panel_heading-BLOCK-INPUT_ARGUMENTS-sub1" class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>The <tt>Model</tt> class returned by <a href="Euromod.html">euromod</a>.</p><p></p>
+            <p class="datatypelist"><strong>Data Types: </strong>
+                <code itemprop="datatype">class</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    </div></div></div></div></div>
+</div> <!--END.INPUT_ARGUMENTS-->
+
+<!--BEGIN.PROPERTIES-->
+<div class="ref_sect"><h2 id="BLOCK-PROPERTIES">Properties</h2>
+    <div class="expandableContent"><p class="switch "><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true">collapse all</a></p>
+    <div class="panel-group" id="BLOCK-PROPERTIES_panel-group" role="tablist" aria-multiselectable="true">
+        <span id="defaultproperties" class="anchor_target"></span><span id="BLOCK-PROPERTIES-span" class="anchor_target"></span>
+    <div class="ref_sect"><div class="expandableContent">
+    <div class="panel-group" id="BLOCK-PROPERTIES-tablist_panel-group" role="tablist" aria-multiselectable="true">
+    <!--PROPERTY.#1-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-datasets">
+            <div role="tab" data-toggle="collapse" id="expand_panel_heading-BLOCK-PROPERTIES-datasets" data-target="#expand_panel_body-BLOCK-PROPERTIES-datasets" aria-controls="expand_panel_body-BLOCK-PROPERTIES-datasets" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-datasets">
+                <code itemprop="name">datasets</code> &#8212; 
+                    <span itemprop="purpose">Dataset class</span><br/> 
+                    <span class="add_font_color_general remove_bold">
+                        <span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">class array</code></span> 
+                        </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" id="expand_panel_body-BLOCK-PROPERTIES-datasets" aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-datasets" class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns a <a href="Dataset.html"><tt>Dataset</tt></a> class array with country datasets.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">C.datasets</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#2-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-extensions">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-extensions" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-extensions" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-extensions" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-extensions">
+                <code itemprop="name">extensions</code> &#8212; 
+                    <span itemprop="purpose">Extension class</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">class array</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-extensions" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-extensions" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns an <a href="Extension.html"><tt>Extension</tt></a> class array with the <tt>Model</tt> and <tt>Country</tt> extensions.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">C.extensions</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#3-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-local_extensions">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-local_extensions" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-local_extensions" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-local_extensions" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-local_extensions">
+                <code itemprop="name">local_extensions</code> &#8212; 
+                    <span itemprop="purpose">Extension class</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">class array</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-local_extensions" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-local_extensions" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns an <a href="Extension.html"><tt>Extension</tt></a> class array with the <tt>Country</tt> extensions.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">C.local_extensions</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#4-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-name">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-name" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-name" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-name" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-name">
+                <code itemprop="name">name</code> &#8212; 
+                    <span itemprop="purpose">Two-letter country code</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-name" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-name" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Two-letter country code. See the <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Country_codes">Eurostat Glossary:Country codes</a>.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">C.name</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#5-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-parent">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-parent" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-parent" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-parent" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-parent">
+                <code itemprop="name">parent</code> &#8212; 
+                    <span itemprop="purpose">Model base class</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">class</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-parent" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-parent" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the <a href="Euromod.html"><tt>Model</tt></a> base class.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">C.parent</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#6-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-policies">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-policies" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-policies" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-policies" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-policies">
+                <code itemprop="name">policies</code> &#8212; 
+                    <span itemprop="purpose">Policy class</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">class array</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-policies" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-policies" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns a <a href="Policy.html"><tt>Policy</tt></a> class array with the <tt>Country</tt> policies.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">C.policies</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#7-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-systems">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-systems" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-systems" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-systems" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-systems">
+                <code itemprop="name">systems</code> &#8212; 
+                    <span itemprop="purpose">System class</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">class array</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-systems" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-systems" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns a <a href="System.html"><tt>System</tt></a> class array with the <tt>Country</tt> systems.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">C.systems</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    </div></div></div></div></div>
+</div> <!--END.PROPERTIES-->
+
+<!--BEGIN.FUNCTIONS-->
+<div class="ref_sect"><h2 id="BLOCK-FUNCTIONS"> Object Functions</h2>
+    <div class="expandableContent mwExpandToggle1" id="expandableFunctions">
+    <p class="switch"><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true">expand all</a></p>
+    <div class="panel-group" id="BLOCK-FUNCTIONS_panel-group" role="tablist" aria-multiselectable="true">
+    <!--Expander Element: START-->
+    <div class="panel panel-default">
+        <div class="panel-heading add_cursor_pointer collapsed" 
+             role="tab" 
+             id="BLOCK-FUNCTIONS-info" 
+             data-toggle="collapse" 
+             data-target="#BLOCK-FUNCTIONS_expand_panel_body_1" 
+             aria-expanded="true" 
+             aria-controls="BLOCK-FUNCTIONS_expand_panel_body_1"><h4 class="panel-title">info</h4>
+        <span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span></div>
+    <div id="BLOCK-FUNCTIONS_expand_panel_body_1" 
+        class="panel-collapse collapse" 
+        role="tabpanel" 
+        aria-labelledby="BLOCK-FUNCTIONS-info">
+        <div class="panel-body"><!--Expander Content: START-->
+        <p><a href="info.html"><code class="function">info</code></a> returns basic information on <tt>Country</tt> properties of type <tt>class</tt>.</p>
+        <p class="datatypelist"><strong>Example: </strong>
+            <code itemprop="datatype">mod.countries('AT').info('systems')</code></p>
+    </div></div>
+    </div> <!--Expander Element: END-->
+    <!--Expander Element: START-->
+    <div class="panel panel-default">
+        <div class="panel-heading add_cursor_pointer collapsed" 
+             role="tab" 
+             id="BLOCK-FUNCTIONS-run" 
+             data-toggle="collapse" 
+             data-target="#BLOCK-FUNCTIONS_expand_panel_body_2" 
+             aria-expanded="true" 
+             aria-controls="BLOCK-FUNCTIONS_expand_panel_body_2"><h4 class="panel-title">run</h4>
+        <span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span></div>
+    <div id="BLOCK-FUNCTIONS_expand_panel_body_2" 
+        class="panel-collapse collapse" 
+        role="tabpanel" 
+        aria-labelledby="BLOCK-FUNCTIONS-run">
+        <div class="panel-body"><!--Expander Content: START-->
+        <div class="table-responsive">
+            <p><a href="run.html"><code class="function">Run</code></a> simulation of a EUROMOD tax-benefit system.
+                This method returns a <a href="cla/Simulation.html"><code class="function">Simulation</code></a> class
+                containing simulation datasets and other simulation information.
+                Run simulations specifying 3 required input arguments: the system name, the dataset, and the dataset name.
+            </p>
+            <p class="datatypelist"><strong>Example: </strong>
+            <code itemprop="datatype">mod.countries('SE').run('SE_2021',data,'SE_2021_b1')</code></p>
+        </div></div></div>
+    </div> <!--Expander Element: END-->
+    </div></div>
+</div> <!--END.FUNCTIONS-->
+
+<!--BEGIN.OUTPUT_ARGUMENTS-->
+<div class="ref_sect"><h2 id="BLOCK-OUTPUT_ARGUMENTS">Output Arguments</h2>
+<div class="expandableContent"><p class="switch "><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true">collapse all</a></p>
+    <div class="panel-group" id="BLOCK-OUTPUT_ARGUMENTS_panel-group" role="tablist" aria-multiselectable="true">
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div role="tab" data-toggle="collapse" id="expand_panel_heading_BLOCK-OUTPUT_ARGUMENTS-sub1" data-target="#expand_panel_body_BLOCK-OUTPUT_ARGUMENTS-sub1" aria-controls="expand_panel_body_BLOCK-OUTPUT_ARGUMENTS-sub1" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <span id="outputarg_ind" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-OUTPUT_ARGUMENTS-sub1">
+                <code class="name">C</code> &#8212; Country class<br/> 
+                <span class="add_font_color_general remove_bold"><span class="example_desc">class array</span></span>
+            </h3>
+            <span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+        </div>
+        <div role="tabpanel" id="expand_panel_body_BLOCK-OUTPUT_ARGUMENTS-sub1" aria-labelledby="expand_panel_heading_BLOCK-OUTPUT_ARGUMENTS-sub1" 
+            class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>A class array with the EUROMOD default countries.</p><p></p>
+            </div>
+        </div></div>
+    </div></div></div>
+</div> <!--END.OUTPUT_ARGUMENTS-->
+
+<!--BEGIN.REFERENCES-->
+<div class="bibliography"><h2 id="BLOCK-REFERENCES">References</h2><div id="OBJ_References" class="bibliomixed">
+    <p>[1] <span><a href="https://euromod-web.jrc.ec.europa.eu/resources/model-documentation"> Documentation EUROMOD</a> - Tax-benefit microsimulation model for the European Union.</span></p></div>
+</div><!--END.REFERENCES-->
+
+<!--BEGIN.EXTENDED_CAPABILITIES-->
+<div class="ref_sect"><h2 id="BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</h2>
+<div class="expand_collapse" id="accordion_BLOCK-EXTENDED_CAPABILITIES" role="tablist" aria-multiselectable="true">
+    <span id="OBJ_ATS1" class="anchor_target"></span>
+    <span id="OBJ" class="anchor_target"></span>
+    <h3 class="expand_trigger collapsed" id="OBJ_codegen" aria-expanded="false" data-toggle="collapse" data-target="#expand_body_OBJ_codegen" aria-controls="expand_body_OBJ_codegen">
+        <span class="icon-arrow-open-down"></span>
+        <span class="icon-arrow-open-right"></span>C/C++ Code Generation<br/> 
+        <span class=" remove_bold add_font_color_general">Generate C and C++ code using MATLAB&#174; Coder&#8482;.</span>
+    </h3></div>
+</div><!--END.EXTENDED_CAPABILITIES-->
+
+<!--BEGIN.SEE_ALSO-->
+<div class="ref_sect"><h2 id="BLOCK-SEE_ALSO">See Also</h2>
+    <ul class="list-unstyled margined_10">
+    <li>
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="Euromod.html"><span itemprop="name">
+                <code class="function">Model</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="System.html"><span itemprop="name">
+                <code class="function">System</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="Policy.html"><span itemprop="name">
+                <code class="function">Policy</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="Dataset.html"><span itemprop="name">
+                <code class="function">Dataset</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="Extension.html"><span itemprop="name">
+                <code class="function">Extension</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="info.html"><span itemprop="name">
+                <code class="function">info</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="run.html"><span itemprop="name">
+                <code class="function">run</code></span></a>
+        </span>
+    </li></ul>
+    </div>
+    <!--END.SEE_ALSO-->
+
+<div class="release_introduced"><h4>Introduced in R2023a</h4></div>
+    
+<!--END.NAME_OF_FUNCTION--> 
+</div></div><!--END.MAIN_CONTENT--> 
+
+<div class="modal fade" id="open-example-dialog" tabindex="-1" role="dialog" aria-labelledby="openExampleDialogLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Open Example</h4>
+    </div>
+    <div class="modal-body" id="dialog-body"><p>You have a modified version of this example. Do you want to open this example with your edits?</p></div>
+    <div class="modal-footer"><a id="open-example-dialog-replace" class="btn btn_color_blue companion_btn" data-dismiss="modal">
+        No, open this example and discard my edits</a>
+        <a id="open-example-dialog-continue" class="btn btn_color_blue" data-dismiss="modal">Yes</a>
+    </div>
+    </div>
+</div>
+</div>
+
+
+<div class="clearfix"></div>
+<div align="center" class="feedbackblock"><iframe id="doc_survey"></iframe></div>
+<script src="../../includes/shared/scripts/docsurvey.js"></script>
+
+<script>initDocSurvey();</script></section>
+
+
+</div>
+</div>
+</div><!--END.MAIN_CONTENT_CONTAINER-->
+
+</div><!--END.ENTIRE_PAGE-->
+</body>
+</html>

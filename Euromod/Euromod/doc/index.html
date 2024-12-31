@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage">
+
+<head>
+<meta xmlns="http://www.w3.org/1999/xhtml" charset="utf-8"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>Euromod Connector Toolbox</title>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "ItemList",
+          "name": "Subcategories",
+
+        "itemListElement":
+        [
+        "getting-started-with-EuromodConnector-toolbox",
+        "EuromodClass",
+        "CountryClass",
+        "TaxSystemClass",
+        "SimulationClass"
+        ],
+        "itemListOrder": "http://schema.org/ItemListOrderAscending"
+        }
+        </script><link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+  <meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="cat"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="cat"></meta>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" name="description" itemprop="description" 
+      content="Euromod Connector Toolbox is the Matlab connector, built to facilitate and simplify the usage of the EUROMOD microsimulation model for research purposes."></meta>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="includes/product/scripts/jquery/jquery-latest.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/site6.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/site6_offcanvas_v2.css" rel="stylesheet" type="text/css"></link>
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/shared/scripts/l10n.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/shared/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/shared/scripts/f1help.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/shared/scripts/mw.imageanimation.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/shared/scripts/jquery.highlight.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/underscore-min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/examples.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/use_platform_screenshots.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/suggest.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/shared/scripts/overload.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/shared/scripts/helpservices.js"></script>
+
+
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/bootstrap.min.js" type="text/javascript"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="includes/product/scripts/global.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/doc_center_base.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/doc_center_installed.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="includes/product/css/doc_center_print.css" rel="stylesheet" type="text/css" media="print"></link>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="includes/shared/equationrenderer/release/MathRenderer.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript">
+   $(document).ready(function(){
+   
+     if (typeof requestLeftNavItems === "function") {
+     requestLeftNavItems("EuromodConnector", "../");
+     }
+   
+       if (location.hash == "#get-started-with-euromod-connector-toolbox") {
+          $("li.get-started-with-euromod-connector-toolbox&gt;h3").click()
+       }
+   
+       if (location.hash == "#euromod-class") {
+          $("li.euromod-class&gt;h3").click()
+       }
+   
+       if (location.hash == "#country-class") {
+          $("li.country-class&gt;h3").click()
+       }
+   
+       if (location.hash == "#tax-system-class") {
+          $("li.tax-system-class&gt;h3").click()
+       }   
+
+       if (location.hash == "#simulation-class") {
+          $("li.simulation-class&gt;h3").click()
+       }  
+
+   });
+   </script>
+</head>
+<!--
+<div xmlns="http://www.w3.org/1999/xhtml" id="doc_header_spacer" class="header"></div>
+<div xmlns="http://www.w3.org/1999/xhtml" class="section_header level_3"><div class="container-fluid">
+   <div class="row" id="mobile_search_row">
+      <div class="col-sm-6 col-md-7 has_horizontal_local_nav" id="section_header_title">
+      <div class="section_header_content"><div class="section_header_title">
+         <h1><a href="https://www.mathworks.com/support.html?s_cid=doc_ftr">Documentation</a></h1></div>
+      </div></div>
+      <div class="col-xs-12 col-sm-6 col-md-5" id="mobile_search">
+      <div class="search_nested_content_container">
+         <form id="docsearch_form" name="docsearch_form" method="get" data-release="R2023a" data-language="en" action="../templates/searchresults.html">
+         <div class="input-group tokenized_search_field"><label class="sr-only">Search Help</label>
+               <input type="text" class="form-control conjoined_search" autocomplete="off" name="qdoc" placeholder="Search Help" id="docsearch"></input>
+            <div class="input-group-btn">
+               <button type="submit" name="submitsearch" id="submitsearch" class="btn icon-search btn_search_adjacent btn_search icon_16" 
+               tabindex="-1"></button></div>
+         </div></form>
+      </div>
+      <button class="btn icon-remove btn_search pull-right icon_32 visible-xs" data-toggle="collapse" href="#mobile_search" 
+         aria-expanded="false" aria-controls="mobile_search">
+      </button>
+      </div>
+      <div class="visible-xs" id="search_actuator"><button class="btn icon-search btn_search pull-right icon_16" data-toggle="collapse" 
+         href="#mobile_search" aria-expanded="false" aria-controls="mobile_search">
+      </button></div>
+   </div>
+</div></div>
+-->
+
+
+<body id="responsive_offcanvas">
+
+<div class="row-offcanvas row-offcanvas-left">
+
+<!--START.row-offcanvas-->
+
+<!--START.HORIZONTAL.UPPER_BAR-->  
+<div xmlns="http://www.w3.org/1999/xhtml"><div class="horizontal_nav"><div class="horizontal_nav_container">
+   <div class="offcanvas_horizontal_nav"><div class="container-fluid"><div class="row">
+      <div class="col-sm-12 hidden-xs"><nav class="navbar navbar-default" role="navigation" id="subnav">
+         <div><ul class="nav navbar-nav crux_browse">
+            <li id="crux_nav_documentation" class="crux_resource active"><a>All</a></li>
+            <li id="crux_nav_example" class="crux_resource"><a href="euromod/Examples.html">Examples</a></li>
+            <li id="crux_nav_function" class="crux_resource"><a href="euromod/ref/functionlist.html?type=function">Functions</a></li>
+            <li id="crux_nav_app" class="crux_resource"><a href="euromod/ref/functionlist.html?type=app">Apps</a></li>
+            <li role="presentation" class="dropdown" id="topnav_more" style="display:none;">
+               <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> More <span class="caret"></span></a>
+               <ul class="dropdown-menu"></ul>
+            </li>
+         </ul></div>
+      </nav></div>
+      <div class="visible-xs"><div class="container-fluid"><div class="row"><div class="col-xs-9">
+         <div class="mobile_crux_nav_trigger"><div class="btn-group">
+         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" 
+            aria-expanded="false">Resources<span class="icon-arrow-down icon_16"></span></button><ul class="dropdown-menu">
+            <li id="crux_nav_mobile_documentation" class="crux_resource active"><a>All</a></li>
+            <li id="crux_nav_mobile_example" class="crux_resource"><a href="euromod/Examples.html">Examples</a></li>
+            <li id="crux_nav_mobile_function" class="crux_resource"><a href="euromod/ref/functionlist.html?type=function">Functions</a></li>
+            <li id="crux_nav_mobile_app" class="crux_resource"><a href="euromod/ref/functionlist.html?type=app">Apps</a></li>
+         </ul></div></div></div><div class="col-xs-3"><div class="translate_placeholder"></div></div></div></div>
+      </div>
+   </div></div></div>
+</div></div></div>
+<!--END.HORIZONTAL.UPPER_BAR-->  
+
+<!--START.ENTIRE_PAGE-->  
+<div id="content_container" itemprop="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-12">
+
+<section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" lang="en">
+
+<!--START.ITEM_LIST-->
+<!--href="https://www.mathworks.com/help/releases/R2023a/pdf_doc/EuromodConnector/index.html"-->
+<div id="pgtype-landingpage">
+   <h1 itemprop="title content" class="R2023a">What is <i>euromod</i>?</h1>
+<div class="doc_topic_desc" itemprop="content purpose">EUROMOD - a tax-benefit microsimulation model for the EU.</div>
+   <div class="row add_margin_20">
+      <div class="col-sm-4 col-sm-push-8 add_border_left">
+         <ul class="list-unstyled visible-xs">
+         <li><a href="euromod/ReleaseNotes.html" id="rnlink-visible-xs">Release Notes</a></li>
+         <li><a href="Documentation.pdf">PDF Documentation</a></li>
+         </ul>
+         <ul class="list-unstyled hidden-xs">
+         <li class="icon-releasenotes add_icon_color_darkblue"><a href="euromod/ReleaseNotes.html" id="rnlink-hidden-xs"><strong>Release Notes</strong></a></li>
+         <li class="icon-file-pdf add_icon_color_darkblue"><a href="Documentation.pdf"><strong>PDF Documentation</strong></a></li>
+         </ul>
+      </div>
+      <div class="col-sm-8 col-sm-pull-4">
+         <p>Euromod Connector Toolbox&#x2122; is built to facilitate and simplify the usage of the 
+            EUROMOD microsimulation model for research and analysis purposes.</p>
+
+         <p>EUROMOD is a tax-benefit microsimulation model for the European Union that enables researchers and policy analysts to calculate,
+            in a comparable manner, the effects of taxes and benefits on household incomes and work incentives for the population of each country 
+            and for the EU as a whole. It is a static microsimulation model that applies user-defined tax and benefit policy rules to harmonised 
+            microdata on individuals and households, and calculates the effects of these rules on household income.
+         </p>     
+         <p>
+            For more information, please visit the 
+            <a href="https://euromod-web.jrc.ec.europa.eu/">EUROMOD</a> official webpage and the
+            <a href = "https://euromod-web.jrc.ec.europa.eu/resources/model-documentation">
+            EUROMOD Documentation</a> webpage.
+         </p>
+      </div>
+   </div>
+
+   <h3><a href="euromod/Examples.html">Examples </a></h3>
+      <p class="category_desc">Run simulations of Euromod tax-benefit policy-systems</p>
+   <h3><a href="euromod/UserGuide.html">User Guide</a></h3>
+      <p class="category_desc">Documentation about the Euromod Connector toolbox</p>
+   <h3><a href="euromod/APIreference.html">API reference</a></h3>
+      <p class="category_desc">Description of main public classes and methods</p>
+   <h3><a href="euromod/License.html">License</a></h3>
+      <p class="category_desc">EUPL v. 1.2 © the European Union 2007, 2016</p>                     
+   
+</div><div class="clearfix"></div> <!--END.ITEM_LIST-->
+
+<div align="center" class="feedbackblock"><iframe id="doc_survey"></iframe></div><script src="includes/shared/scripts/docsurvey.js"></script>
+
+<script>initDocSurvey();</script></section>
+
+</div>
+</div>
+</div>
+</div><!--END.ENTIRE_PAGE--> 
+
+</div>
+</body>
+</html>

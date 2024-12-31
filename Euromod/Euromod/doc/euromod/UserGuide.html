@@ -1,0 +1,990 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage">
+<head>
+<meta xmlns="http://www.w3.org/1999/xhtml" charset="utf-8"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>Euromod Connector Toolbox</title>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "ItemList",
+          "name": "Subcategories",
+
+        "itemListElement":
+        [
+        "getting-started-with-EuromodConnector-toolbox",
+        "EuromodClass",
+        "CountryClass",
+        "TaxSystemClass",
+        "SimulationClass"
+        ],
+        "itemListOrder": "http://schema.org/ItemListOrderAscending"
+        }
+        </script><link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+  <meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="cat"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="cat"></meta>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" name="description" itemprop="description" 
+      content="Euromod Connector Toolbox is the Matlab connector, built to facilitate and simplify the usage of the EUROMOD microsimulation model for research purposes."></meta>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/product/scripts/jquery/jquery-latest.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_offcanvas_v2.css" rel="stylesheet" type="text/css"></link>
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/l10n.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/f1help.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/mw.imageanimation.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/jquery.highlight.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/underscore-min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/examples.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/use_platform_screenshots.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/suggest.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/overload.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/helpservices.js"></script>
+
+
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/bootstrap.min.js" type="text/javascript"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/global.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_base.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_installed.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_print.css" rel="stylesheet" type="text/css" media="print"></link>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/shared/equationrenderer/release/MathRenderer.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript">
+   $(document).ready(function(){
+   
+     if (typeof requestLeftNavItems === "function") {
+     requestLeftNavItems("EuromodConnector", "../");
+     }
+   
+       if (location.hash == "#get-started-with-euromod-connector-toolbox") {
+          $("li.get-started-with-euromod-connector-toolbox&gt;h3").click()
+       }
+   
+       if (location.hash == "#euromod-class") {
+          $("li.euromod-class&gt;h3").click()
+       }
+   
+       if (location.hash == "#country-class") {
+          $("li.country-class&gt;h3").click()
+       }
+   
+       if (location.hash == "#tax-system-class") {
+          $("li.tax-system-class&gt;h3").click()
+       }   
+
+       if (location.hash == "#simulation-class") {
+          $("li.simulation-class&gt;h3").click()
+       }  
+
+   });
+   </script>
+</head>
+<body id="responsive_offcanvas">
+
+   <!--BEGIN.ENTIRE_PAGE-->
+<div class="row-offcanvas row-offcanvas-left">
+      
+   <!--BEGIN.HORIZONTAL_UPPER_BAR-->
+   <div xmlns="http://www.w3.org/1999/xhtml">
+       <div class="horizontal_nav"><div class="horizontal_nav_container"><div class="offcanvas_horizontal_nav"><div class="container-fluid"><div class="row">
+       <div class="col-sm-12 hidden-xs">
+           <nav class="navbar navbar-default" role="navigation" id="subnav">
+               <div>
+                   <ul class="nav navbar-nav crux_browse">
+                       <li id="crux_nav_documentation" class="crux_resource active">
+                           <a href="../index.html">All</a></li>
+                       <li id="crux_nav_example" class="crux_resource">
+                           <a href="Examples.html">Examples</a></li>
+                       <li id="crux_nav_function" class="crux_resource">
+                           <a href="ref/functionlist.html">Functions</a></li>
+                       <li id="crux_nav_app" class="crux_resource">
+                           <a href="ref/functionlist.html">Apps</a></li>
+                       <li role="presentation" class="dropdown" id="topnav_more" style="display:none;">
+                           <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                More <span class="caret"></span></a>
+                                <ul class="dropdown-menu"></ul></li>
+                   </ul></div></nav>
+       </div>
+       <div class="visible-xs"><div class="container-fluid"><div class="row">
+           <div class="col-xs-9"><div class="mobile_crux_nav_trigger"><div class="btn-group">
+           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources<span class="icon-arrow-down icon_16"></span></button>
+           <ul class="dropdown-menu">
+               <li id="crux_nav_mobile_documentation" class="crux_resource active"><a href="../index.html">All</a></li>
+               <li id="crux_nav_mobile_example" class="crux_resource"><a href="examples.html?category=getting-started-with-EuromodConnector-toolbox">Examples</a></li>
+               <li id="crux_nav_mobile_function" class="crux_resource"><a href="APIreference.html?type=function&amp;getting-started-with-EuromodConnector-toolbox">Functions</a></li>
+               <li id="crux_nav_mobile_app" class="crux_resource"><a href="APIreference.html?type=app&amp;getting-started-with-EuromodConnector-toolbox">Apps</a></li>
+           </ul></div></div></div><div class="col-xs-3"><div class="translate_placeholder"></div></div>
+       </div></div></div>
+   </div></div></div></div></div>
+   </div><!--END.HORIZONTAL_UPPER_BAR-->
+
+<!--START.ENTIRE_PAGE-->  
+<div id="content_container" itemprop="content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-xs-12">
+
+<section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" lang="en">
+
+<!--START.ITEM_LIST-->
+<div id="pgtype-landingpage">
+   <div class="expandableContent" id="expandableExamples">
+      <p class="switch"><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true3">collapse all</a>
+      </p>
+      <h1 itemprop="title content">User Guide</h1>
+   <div class="row add_margin_20">
+      <div class="col-sm-4 col-sm-push-8 add_border_left">
+         <ul class="list-unstyled visible-xs">
+         <li><a href="ReleaseNotes.html" id="rnlink-visible-xs">Release Notes</a></li>
+         <li><a href="../Documentation.pdf">PDF Documentation</a></li>
+         </ul>
+         <ul class="list-unstyled hidden-xs">
+         <li class="icon-releasenotes add_icon_color_darkblue"><a href="ReleaseNotes.html" id="rnlink-hidden-xs"><strong>Release Notes</strong></a></li>
+         <li class="icon-file-pdf add_icon_color_darkblue"><a href="../Documentation.pdf"><strong>PDF Documentation</strong></a></li>
+         </ul>
+      </div>
+      <div class="col-sm-8 col-sm-pull-4">
+         <p>The Euromod Conector is a Matlab toolbox providing tools for running simulations 
+            and interacting with the tax-benefit microsimulation model <a href="https://euromod-web.jrc.ec.europa.eu/">EUROMOD</a>.</p>
+      </div>
+   </div>
+   <!--BEGIN.SECTION 1-->
+   <!--BEGIN.PANEL_GROUP-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-1">
+      <div class="panel panel-default ">
+          <div role="tab" data-toggle="collapse" 
+          id="expand_panel_heading-BLOCK-1" 
+          data-target="#expand_panel_body-BLOCK-1" 
+          aria-controls="expand_panel_body-BLOCK-1" 
+          class="panel-heading add_cursor_pointer" aria-expanded="true">
+           <h3 class="panel-title" id="BLOCK-1">
+            Installation<br/>
+           </h3><span class="icon-arrow-open-down icon_24"></span>
+           <span class="icon-arrow-open-right icon_24"></span>
+          </div>
+      <div role="tabpanel" id="expand_panel_body-BLOCK-1" 
+      aria-labelledby="expand_panel_heading-BLOCK-1" 
+      class="panel-collapse collapse in">
+      <!--BEGIN.PANEL_BODY-->
+      <div class="panel-body">
+          <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+              <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+              <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+              </div></div></div>
+   <div>
+      <p>
+      </p>
+      <div class="ref_sect">
+         <h3 id="BLOCK-1-sub1">Requirements</h3>
+         <p>
+            In order to run the model, we require two components: 
+            1) the model (coded policy rules), and 2) the input 
+            microdata with the variables that respect the EUROMOD 
+            naming conventions. For more information, please, 
+            read the sections "Model" and "Input microdata" on the 
+            <a href="https://euromod-web.jrc.ec.europa.eu/download-euromod">Download Euromod</a> web page. 
+         </p>
+      </div>
+   </div>
+   <!--END.PANEL_BODY-->
+   <!--END.PANEL_GROUP-->
+   </div></div></div></div><!--END.SECTION 1-->
+
+   <!--BEGIN.SECTION 2-->
+   <!--BEGIN.PANEL_GROUP-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-2">
+      <div class="panel panel-default ">
+          <div role="tab" data-toggle="collapse" 
+          id="expand_panel_heading-BLOCK-2" 
+          data-target="#expand_panel_body-BLOCK-2" 
+          aria-controls="expand_panel_body-BLOCK-2" 
+          class="panel-heading add_cursor_pointer" aria-expanded="true">
+           <h3 class="panel-title" id="BLOCK-2">
+            Running and navigating the model<br/>
+           </h3><span class="icon-arrow-open-down icon_24"></span>
+           <span class="icon-arrow-open-right icon_24"></span>
+          </div>
+      <div role="tabpanel" id="expand_panel_body-BLOCK-2" 
+      aria-labelledby="expand_panel_heading-BLOCK-2" 
+      class="panel-collapse collapse in">
+      <!--BEGIN.PANEL_BODY-->
+      <div class="panel-body">
+          <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+              <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+              <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+              </div></div></div>
+   <div>
+      <p>
+         The euromod toolbox is object oriented and evolves around using the 
+         <a href="cla/Model.html">Model</a> class 
+         that loads a representation of the EUROMOD model. Create an object of the Model 
+         class by passing the path to the EUROMOD project:
+      </p>
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+mod = euromod(<span class="string">"C:\EUROMOD_RELEASES_I6.0+"</span>);
+mod     </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>1×1 <a href="cla/Euromod.html"><tt>Model</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+     
+  extensions: [11×1 Extension]
+   countries: [28×1 Country]
+   modelpath: "C:\EUROMOD_RELEASES_I6.0+"
+         </pre></div></div></div><div class="procedure"></div>
+         <p>
+            Note that every object that is related to the EUROMOD project comes 
+            with an informative description. Here we can see that the model has 
+            3 relevant attributes to the user:
+            <ul style="list-style-type:circle;">
+               <li>countries</li>
+               <li>extensions</li>
+               <li>modelpath</li>
+            </ul>
+         </p>
+         <p>
+            The <a href="cla/Euromod.html#OBJ_Properties-1">countries</a> and <a href="cla/Euromod.html#OBJ_Properties-2">extensions</a> attributes contain elements of the respective 
+            objects. If we take a look at <tt>countries</tt>:
+         </p>
+          
+          <div class="code_responsive"><div class="programlisting">
+          <div class="codeinput"><pre>
+mod.countries </pre></div></div></div>
+          <div class="code_responsive"><div class="programlisting">
+          <div class="codeoutput"><pre>28×1 <a href="cla/Country.html"><tt>Country</tt></a><span class="emphasis"><mod> array:</mod></span>
+      
+       1: AT
+       2: BE
+       3: BG
+       4: CY
+       5: CZ
+       6: DE
+       7: DK
+       8: EE
+       9: EL
+      10: ES
+      11: FI
+      12: FR
+      13: HR
+      14: HU
+      15: IE
+      16: IT
+      17: LT
+      18: LU
+      19: LV
+      20: MT
+      21: NL
+      22: PL
+      23: PT
+      24: RO
+      25: se
+      26: SI
+      27: SK
+      28: SL
+          </pre></div></div></div><div class="procedure"></div>
+
+      <p>
+         The <tt>countries</tt> property is a class array storing the 
+         <a href="cla/Country.html">Country</a> objects and nesting the 
+         country-specific tax-benefit policies and systems. 
+         We see indeed that the euromod model contains 28 countries.
+      </p>
+      <p>
+         Note that the properties in a class array can be accessed by indexing the property with the element position,
+         by the property name or by the ID.
+      </p>
+      <p>
+         Let us take have a look at Sweden:
+      </p>
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>)  </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput"><pre>1×1 <a href="cla/Country.html"><tt>Country</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+     
+        datasets: [27×1 Dataset]
+      extensions: [12×1 Extension]
+local_extensions: COVID
+            name: "SE"
+          parent: [1×1 Model]
+        policies: [26×1 Policy]
+         systems: [18×1 System]
+         </pre></div></div></div><div class="procedure"></div>
+
+      <p>
+         Here we see again an informative representation of the <tt>Country</tt> object, 
+         which contains several properties that can be accessed. In order to simulate a 
+         system we run a specific <tt>System</tt> object. We can obtain the systems for Sweden as follows:
+      </p>
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+mod.SE.systems     </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput"><pre>18×1 <a href="cla/System.html"><tt>System</tt></a><span class="emphasis"><mod> array:</mod></span>
+     
+      1: SE_2006
+      2: SE_2007
+      3: SE_2008
+      4: SE_2009
+      5: SE_2010
+      6: SE_2011
+      7: SE_2012
+      8: SE_2013
+      9: SE_2014
+     10: SE_2015
+     11: SE_2016
+     12: SE_2017
+     13: SE_2018
+     14: SE_2019
+     15: SE_2020
+     16: SE_2021
+     17: SE_2022
+     18: SE_2023
+         </pre></div></div></div><div class="procedure"></div>
+   </div><!--END.SECTION 2-->
+
+   <!--BEGIN.SECTION 3-->
+   <h3 id="BLOCK-2-sub1">Running a simulation</h3>
+   <div>
+      <p>
+         In order to <a href="cla/run.html">run</a> the tax system we need a dataset that 
+         fits the requirement to use.
+      </p>
+      <p>
+         See the section <a href="#BLOCK-3">Other important euromod objects</a> on what datasets are configured and how.
+      </p>
+      <p>
+         If you know already which dataset to use you can simply load the data and run the model as follows:
+      </p>
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+data = readtable(<span class="string">"SE_2021_b1.txt"</span>);
+out_baseline=mod.(<span class="string">"SE"</span>).(<span class="string">"SE_2021"</span>).run(data,<span class="string">"SE_2021_b1"</span>);
+out_baseline </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput"><pre>1×1 <a href="cla/Simulation.html"><tt>Simulation</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+     
+           outputs: {[21671×240 table]}
+          settings: [1×1 struct]
+  output_filenames: "se_2021_std"
+            errors: [0×1 string]
+ 
+ output 1 : [21671x240 table]
+    idhh   idperson   idmother   idfather   idpartner   idorighh   idorigperson   dag   dgn   dec
+     200     20001          0        0            0        200         20001       45    1     0
+     300     30001          0        0        30002        300         30001       26    1     0
+     300     30002          0        0        30001        300         30002       26    0     0
+     500     50001          0        0        50002        500         50001       37    1     0
+     500     50002          0        0        50001        500         50002       33    0     0
+     500     50003      50002    50001            0        500         50003        4    1     1
+    ...
+         </pre></div></div></div><div class="procedure"></div>
+   <p>
+      Note that the run function here takes the mandatory input argument 
+      <tt>dataset_id</tt>, which in our case is <tt>SE_2021_b1</tt>. 
+      This is necessary such that EUROMOD can apply the dataset specific 
+      logic with respect to setting default values and uprating. 
+      Run returns a <a href="cla/Simulation.html">Simulation</a> class with multiple properties. 
+      The one of interest here is outputs, which contains the outputdataset(s) of type <tt>table</tt> 
+      returned by the microsimulation model:
+   </p>          
+<!--code-->
+<div class="code_responsive"><div class="programlisting">
+   <div class="codeinput"><pre>
+out_baseline(1:10,1:10)     </pre></div></div></div>
+   <div class="code_responsive"><div class="programlisting">
+   <div class="codeoutput"><pre>10×10 <a href="https://it.mathworks.com/help/matlab/ref/table.html"><tt>table</tt></a><span class="emphasis"><mod> array:</mod></span>
+
+idhh    idperson    idmother    idfather    idpartner    idorighh    idorigperson    dag    dgn    dec
+____    ________    ________    ________    _________    ________    ____________    ___    ___    ___
+
+ 200      20001          0           0             0        200          20001       45      1      0 
+ 300      30001          0           0         30002        300          30001       26      1      0 
+ 300      30002          0           0         30001        300          30002       26      0      0 
+ 500      50001          0           0         50002        500          50001       37      1      0 
+ 500      50002          0           0         50001        500          50002       33      0      0 
+ 500      50003      50002       50001             0        500          50003        4      1      1 
+ 600      60001          0           0             0        600          60001       44      1      0 
+ 700      70001          0           0             0        700          70001       28      0      6 
+ 900      90001          0           0             0        900          90001       77      1      0 
+1300    1.3e+05          0           0       1.3e+05       1300        1.3e+05       54      0      0 
+   </pre></div></div></div><div class="procedure"></div>
+
+   </div><!--END.SECTION 3-->
+
+   <!--BEGIN.SECTION 4-->
+   <h3 id="BLOCK-2-sub2">Navigating the model</h3>
+   <div>
+      <p>
+         The <tt>Model</tt> object actually contains a full representation of the model that 
+         can be accessed using it’s properties. The implementation in Matlab mimicks the 
+         hierarchical structure of the EUROMOD User Interface. A full description of the 
+         available types can be found in the <a href="APIreference.html">API reference</a>.
+      </p>
+
+      <h4 id="BLOCK-2-sub2-sub1">The spine</h4>
+      <div>
+         <p>
+            The spine of EUROMOD is what represents the series of calculations with respect to 
+            taxes and benefits. The spine consists out of three hierarchically ordered elements:</p>
+            <ul>
+               <li>
+                  Policy</li>
+                  <li>
+                     Function</li>
+                     <li>
+                        Parameter</li>
+            </ul>
+         <p>
+            The connector mimmicks this hierarchical implementation through
+            an object-oriented representation. The three hierarchical elements
+            are defined on the <a href="cla/Country.html">Country</a> level and implemented on the <a href="cla/System.html">System</a> level.
+         </p>    
+         <p>
+            Let us take a look at the policies, which are a property of the <tt>Country</tt> object:
+         </p>     
+      </div>
+
+      <!--code-->
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).policies </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput"><pre>26×1 <a href="cla/Policy.html"><tt>Policy</tt></a><span class="emphasis"><mod> array:</mod></span>
+    1: setdefault_se    |                            | DEF: SET DEFAULT
+    2: uprate_se        |                            | DEF: UPRATING FACTORS
+    3: ConstDef_se      |                            | DEF: CONSTANTS
+    4: IlsDef_se        |                            | DEF: INCOME CONCEPTS (standardized)
+    5: IlsUDBdef_se     |                            | DEF: INCOME CONCEPTS (UDB)
+    6: ildef_se         |                            | DEF: INCOME CONCEPTS (non-standardized)
+    7: random_se        |                            | DEF: Random assignment
+    8: TransLMA_se      |                            | DEF: Modelling labour market transitions (DO NOT SWITCH ON; ONLY WORKS WITH THE LMA ADD-ON)
+    9: tudef_se         |                            | DEF: ASSESSMENT UNITS
+   10: yem_se           |  (with switch set for MWA) | DEF: minimum wage
+   11: neg_se           |                            | DEF: recode negative self-employment income to zero
+   12: yemcomp_se       |                            | BEN: wage compensation scheme COVID-19  (ONLY WORKING WITH LMA ADD-ON)
+   13: bunct_se         |                            | BEN: unemployment benefit (contributory)
+   14: bfapl_se         |  (with switch set for PBE) | BEN: Parental leave benefit 
+   15: bpa_se           |  (with switch set for PBE) | BEN: Special leave days other parent (10 days)
+   16: tscee_se         |                            | SIC: Employee Social Insurance contribution
+   17: tscer_se         |                            | SIC: Employer Social Insurance contribution
+   18: tscse_se         |                            | SIC: Self-employed Social Insurance contribution
+   19: tin_se           |                            | TAX: Personal Income tax
+   20: tinkt_se         |                            | TAX: Tax on Capital Income
+   21: bch_se           |                            | BEN: Child benefit
+   22: bho_se           |                            | BEN: Housing allowance
+   23: bhope_se         |                            | BEN: Housing allowance for pensioners
+   24: bsamt_se         |                            | BEN: Social Assistance (means-tested)
+   25: output_std_se    |                            | DEF: STANDARD OUTPUT INDIVIDUAL LEVEL
+   26: output_std_hh_se |                            | DEF: STANDARD OUTPUT HOUSEHOLD LEVEL
+         </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      As one can see the <tt>policies</tt> property is a class array therefore its elements, 
+      which are of type <a href="cla/Policy.html">Policy</a> here, are accessible by indexing:
+   </p>          
+<!--code-->
+<div class="code_responsive"><div class="programlisting">
+   <div class="codeinput"><pre>
+mod.countries(<span class="string">'SE'</span>).policies(13)    </pre></div></div></div>
+   <div class="code_responsive"><div class="programlisting">
+   <div class="codeoutput"><pre>1×1 <a href="cla/Policy.html"><tt>Policy</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+
+   comment: "BEN: unemployment benefit (contributory)"
+ functions: [16×1 Function]
+   private: "no"
+extensions: [0×1 Extension]
+        ID: "01f1c7ff-3b6d-4191-bc71-bb86db5603d6"
+      name: "bunct_se"
+     order: "13"
+    parent: [1×1 Country]
+spineOrder: "13"
+    </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      The implementation of a policy is accessible through the <a href="cla/System.html">System</a> class:
+   </p>
+   <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).systems(<span class="string">"SE_2021"</span>).policies </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>26×1 <a href="cla/PolicyInSystem.html"><tt>PolicyInSystem</tt></a><span class="emphasis"><mod> array:</mod></span>
+    1: setdefault_se    | on                            | DEF: SET DEFAULT
+    2: uprate_se        | on                            | DEF: UPRATING FACTORS
+    3: ConstDef_se      | on                            | DEF: CONSTANTS
+    4: IlsDef_se        | on                            | DEF: INCOME CONCEPTS (standardized)
+    5: IlsUDBdef_se     | on                            | DEF: INCOME CONCEPTS (UDB)
+    6: ildef_se         | on                            | DEF: INCOME CONCEPTS (non-standardized)
+    7: random_se        | on                            | DEF: Random assignment
+    8: TransLMA_se      | off                           | DEF: Modelling labour market transitions (DO NOT SWITCH ON; ONLY WORKS WITH THE LMA ADD-ON)
+    9: tudef_se         | on                            | DEF: ASSESSMENT UNITS
+   10: yem_se           | off (with switch set for MWA) | DEF: minimum wage
+   11: neg_se           | on                            | DEF: recode negative self-employment income to zero
+   12: yemcomp_se       | on                            | BEN: wage compensation scheme COVID-19  (ONLY WORKING WITH LMA ADD-ON)
+   13: bunct_se         | off                           | BEN: unemployment benefit (contributory)
+   14: bfapl_se         | off (with switch set for PBE) | BEN: Parental leave benefit 
+   15: bpa_se           | off (with switch set for PBE) | BEN: Special leave days other parent (10 days)
+   16: tscee_se         | on                            | SIC: Employee Social Insurance contribution
+   17: tscer_se         | on                            | SIC: Employer Social Insurance contribution
+   18: tscse_se         | on                            | SIC: Self-employed Social Insurance contribution
+   19: tin_se           | on                            | TAX: Personal Income tax
+   20: tinkt_se         | on                            | TAX: Tax on Capital Income
+   21: bch_se           | on                            | BEN: Child benefit
+   22: bho_se           | on                            | BEN: Housing allowance
+   23: bhope_se         | on                            | BEN: Housing allowance for pensioners
+   24: bsamt_se         | on                            | BEN: Social Assistance (means-tested)
+   25: output_std_se    | on                            | DEF: STANDARD OUTPUT INDIVIDUAL LEVEL
+   26: output_std_hh_se | off                           | DEF: STANDARD OUTPUT HOUSEHOLD LEVEL
+             </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      Here we see that some policies are turned <tt>off</tt> by default. Note that the 
+      behaviour of the policies can be controlled from the connector. We can for 
+      example switch the policy <tt>bunct_se</tt> to <tt>on</tt>. Let us first look at the policy:
+   </p>
+
+   <!--code-->
+<div class="code_responsive"><div class="programlisting">
+   <div class="codeinput"><pre>
+mod.countries(<span class="string">'SE'</span>).systems(<span class="string">'SE_2021'</span>).policies(13)    </pre></div></div></div>
+   <div class="code_responsive"><div class="programlisting">
+   <div class="codeoutput"><pre>1×1 <a href="cla/PolicyInSystem.html"><tt>PolicyInSystem</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+
+    polID: "01f1c7ff-3b6d-4191-bc71-bb86db5603d6"
+    Switch: "off"
+     sysID: "bde78132-3f44-4d2e-a1ea-4849f88c2776"
+   comment: "BEN: unemployment benefit (contributory)"
+ functions: [16×1 FunctionInSystem]
+   private: "no"
+extensions: [0×1 Extension]
+        ID: "bde78132-3f44-4d2e-a1ea-4849f88c277601f1c7ff-3b6d-4191-bc71-bb86db5603d6"
+      name: "bunct_se"
+     order: "13"
+    parent: [1×1 System]
+spineOrder: "13"
+    </pre></div></div></div><div class="procedure"></div>
+
+    <p>
+      We see here the property <tt>Switch</tt> that is part of the <a href="PolicyInSystem">PolicyInSystem</a> class. 
+      This property, and similarly the other properties of the object, is modifiable. The changes that you will make
+      will be passed to the EUROMOD software when simulating.
+    </p>
+    <p>
+      Note that currently, the Matlab connector does not support the save option. 
+      Therefore, changes implemented during a Matlab session cannot be saved.
+    </p>
+    <p>
+      To apply permanent changes to the model, we recommend using the 
+      <a href="https://euromod-web.jrc.ec.europa.eu/download-euromod">User Interface</a> of EUROMOD.
+    </p>
+    <p>
+      Note that the Matlab connector is not checking what kind of modifications you make to 
+      the model. Changing values of attributes like ID are definitely not
+      recommended.
+    </p>
+
+    <p>
+      Here  we see that the average benefit, which is represented by <i>ils_ben</i>,
+      is indeed larger by switching on the extension of the <i>bunct_se</i> policy: 
+    </p>
+   <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).systems(<span class="string">"SE_2021"</span>).policies(14).Switch=<span class="string">"on"</span> 
+S=mod.countries(<span class="string">"SE"</span>).systems(<span class="string">"SE_2021"</span>).run(data,<span class="string">"SE_2021_b1"</span>) 
+mean(out_baseline.outputs{1}{:,<span class="string">"ils_ben"</span>}) - mean(S.outputs{1}{:,<span class="string">"ils_ben"</span>}) </pre></div></div></div>
+   <div class="code_responsive"><div class="programlisting">
+   <div class="codeoutput"><pre>
+ 0.0
+         </pre></div></div></div><div class="procedure"></div>
+    <p>
+      As mentioned before, the connector mimicks the hierarchical structure of 
+      the UI. Hence, the definition of <tt>functions</tt> and <tt>parameters</tt>
+      are defined on the <tt>Country</tt> level, and their actual implementation 
+      are also accessible via the <tt>Tax System</tt>. Note that also here, 
+      the values of a <tt>Parameter</tt> and the <tt>Switch</tt> of a <tt>Function</tt> 
+      can be manipulated through the Matlab Connector without saving the 
+      changes permanently.
+    </p>
+    <p>
+      Display the functions defined in the <i>bho_se</i> policy:
+    </p>
+    <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).policies(23).functions </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>19×1 <a href="cla/Function.html"><tt>Function</tt></a><span class="emphasis"><mod> array:</mod></span>
+    1: DefVar   | Temporary variables for Housing Allowance for pensioners
+    2: Elig     | Living with partner
+    3: ArithOp  | Wealth to be included in the means
+    4: Elig     | Living without partner
+    5: ArithOp  | Wealth to be included in the means
+    6: Allocate | Allocation of wealth to the partners
+    7: Elig     | Elderly or disabled adult (i.e. head or partner)
+    8: BenCalc  | "Reserved amount (""income disregard"")"
+    9: BenCalc  | Change in definition of Income Means for for Housing Allowance for pensioners (preliminary) since 2014
+   10: DefIl    | Income Means for Housing Allowance for pensioners
+   11: BenCalc  | Income of children is not take into account in the means
+   12: BenCalc  | Maximum housing allowance
+   13: BenCalc  | 
+   14: BenCalc  | Maximum housing allowance
+   15: BenCalc  | Maximum housing allowance
+   16: Allocate | Allocation of income to the partners
+   17: BenCalc  | Final housing allowance for pensioners
+   18: Allocate | Sharing housing cost
+   19: BenCalc  | Housing allowance for pensioners
+            </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      Display the functions defined in the <i>bho_se</i> policy and implemented in system <i>SE_2021</i>:
+   </p>
+      <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).systems(<span class="string">"SE_2021"</span>).policies(23).functions </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>19×1 <a href="cla/FunctionInSystem.html"><tt>FunctionInSystem</tt></a><span class="emphasis"><mod> array:</mod></span>
+    1: DefVar   | on   | Temporary variables for Housing Allowance for pensioners
+    2: Elig     | on   | Living with partner
+    3: ArithOp  | on   | Wealth to be included in the means
+    4: Elig     | on   | Living without partner
+    5: ArithOp  | on   | Wealth to be included in the means
+    6: Allocate | on   | Allocation of wealth to the partners
+    7: Elig     | on   | Elderly or disabled adult (i.e. head or partner)
+    8: BenCalc  | on   | "Reserved amount (""income disregard"")"
+    9: BenCalc  | on   | Change in definition of Income Means for for Housing Allowance for pensioners (preliminary) since 2014
+   10: DefIl    | on   | Income Means for Housing Allowance for pensioners
+   11: BenCalc  | on   | Income of children is not take into account in the means
+   12: BenCalc  | on   | Maximum housing allowance
+   13: BenCalc  | off  | 
+   14: BenCalc  | off  | Maximum housing allowance
+   15: BenCalc  | on   | Maximum housing allowance
+   16: Allocate | on   | Allocation of income to the partners
+   17: BenCalc  | on   | Final housing allowance for pensioners
+   18: Allocate | on   | Sharing housing cost
+   19: BenCalc  | on   | Housing allowance for pensioners
+            </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      "Overview of the parameters defined in the <i>bho_se</i> policy: 
+   </p>
+      <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).policies(23).functions(1).parameters </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>1×1 <a href="cla/Parameter.html"><tt>Parameter</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+   comment: ""
+extensions: [0×1 Extension]
+     funID: "7eb7c6ef-a589-4725-bcce-3071684b38bb"
+     group: "1"
+        ID: "cecb57a5-273b-4ab0-b5cc-70dea318f4eb"
+      name: "i_means_bhope_prel"
+     order: "1"
+    parent: [1×1 Function]
+spineOrder: "23.1.1"
+            </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      "Overview of the parameters defined in the <i>bho_se</i> policy and implemented in system <i>SE_2021</i>: 
+   </p>
+   <!--code-->
+<div class="code_responsive"><div class="programlisting">
+   <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).systems(<span class="string">"SE_2021"</span>).policies(23).functions(1).parameters </pre></div></div></div>
+   <div class="code_responsive"><div class="programlisting">
+   <div class="codeoutput"><pre>1×1 <a href="cla/ParameterInSystem .html"><tt>ParameterInSystem </tt></a><span class="emphasis"><mod> with properties:</mod></span>
+      parID: "cecb57a5-273b-4ab0-b5cc-70dea318f4eb"
+      value: "0"
+      sysID: "bde78132-3f44-4d2e-a1ea-4849f88c2776"
+    comment: ""
+ extensions: [0×1 Extension]
+      funID: "7eb7c6ef-a589-4725-bcce-3071684b38bb"
+      group: "1"
+         ID: "bde78132-3f44-4d2e-a1ea-4849f88c2776cecb57a5-273b-4ab0-b5cc-70dea318f4eb"
+       name: "i_means_bhope_prel"
+      order: "1"
+     parent: [1×1 FunctionInSystem]
+ spineOrder: "23.1.1"
+         </pre></div></div></div><div class="procedure"></div>
+
+   </div><!--END.SECTION 4-->
+
+   <!--END.PANEL_BODY-->
+   <!--END.PANEL_GROUP-->
+   </div></div></div></div>
+
+   <!--BEGIN.SECTION 5-->
+   <!--BEGIN.PANEL_GROUP-->
+   <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-3">
+      <div class="panel panel-default ">
+          <div role="tab" data-toggle="collapse" 
+          id="expand_panel_heading-BLOCK-3" 
+          data-target="#expand_panel_body-BLOCK-3" 
+          aria-controls="expand_panel_body-BLOCK-3" 
+          class="panel-heading add_cursor_pointer" aria-expanded="true">
+           <h3 class="panel-title" id="BLOCK-3">
+            Other Important EUROMOD Objects<br/>
+           </h3><span class="icon-arrow-open-down icon_24"></span>
+           <span class="icon-arrow-open-right icon_24"></span>
+          </div>
+      <div role="tabpanel" id="expand_panel_body-BLOCK-3" 
+      aria-labelledby="expand_panel_heading-BLOCK-3" 
+      class="panel-collapse collapse in">
+      <!--BEGIN.PANEL_BODY-->
+      <div class="panel-body">
+          <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+              <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+              <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+              </div></div></div>
+   <div>
+      <p>
+         Central to the EUROMOD project, next to the coding of the <tt>policies</tt> is 
+         the microdata. How datasets should be treated by the model is configured 
+         in the model already. The property <tt>datasets</tt> is a <tt>class</tt> array
+         with properties accessible and modifiable just like the spine-elements.
+      </p>
+
+      <!--code-->
+      <div class="code_responsive"><div class="programlisting">
+         <div class="codeinput"><pre>
+mod.SE.datasets </pre></div></div></div>
+         <div class="code_responsive"><div class="programlisting">
+         <div class="codeoutput"><pre>27×1 <a href="cla/Dataset.html"><tt>Dataset</tt></a><span class="emphasis"><mod> array:</mod></span>
+     
+       1: SE_2007_a4
+       2: SE_2008_a3
+       3: training_data
+       4: SE_2010_a1
+       5: SE_2012_a2
+       6: SE_2015_a1
+       7: SE_2009_hhot
+       8: SE_2010_hhot
+       9: SE_2011_hhot
+      10: SE_2012_hhot
+      11: SE_2013_hhot
+      12: SE_2014_hhot
+      13: SE_2015_hhot
+      14: SE_2016_hhot
+      15: SE_2017_hhot
+      16: SE_2016_a1
+      17: SE_2018_hhot
+      18: SE_2019_hhot
+      19: SE_2018_a2
+      20: SE_2017_a3
+      21: SE_2020_hhot
+      22: SE_2019_a1
+      23: SE_2020_b1
+      24: SE_2021_hhot
+      25: SE_2022_hhot
+      26: SE_2021_b1
+      27: SE_2023_hhot
+         </pre></div></div></div><div class="procedure"></div>
+   <p>
+      In the previous section we used <i>SE_2021_b1</i>. Let us have a look at it:
+   </p>          
+<!--code-->
+<div class="code_responsive"><div class="programlisting">
+   <div class="codeinput"><pre>
+mod.SE.datasets(<span class="string">"SE_2021_b1"</span>)     </pre></div></div></div>
+   <div class="code_responsive"><div class="programlisting">
+   <div class="codeoutput"><pre>1×1 <a href="cla/Dataset.html"><tt>Dataset</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+
+   coicopVersion: ""
+         comment: ""
+        currency: "national"
+     decimalSign: "."
+              ID: "c7b651ed-b311-4e39-80b4-18ca19957ce7"
+listStringOutVar: ""
+            name: "SE_2021_b1"
+          parent: [1×1 Country]
+         private: "no"
+  readXVariables: "no"
+useCommonDefault: "no"
+  yearCollection: "2021"
+         yearInc: "2020"
+    </pre></div></div></div><div class="procedure"></div>
+
+    <p>
+      Similarly to the properties in the <a href="cla/Policy.html">Policy</a>, 
+      <a href="cla/Function.html">Function</a> and 
+      <a href="cla/Parameter.html">Parameter</a> objects, the properties of the 
+      <tt>Dataset</tt> can be modified here.
+    </p>
+    <p>
+      We can further check what datasets are implemented for a given system, 
+      for example <i>SE_2021</i>, as follows:
+    </p>
+    <!--code-->
+    <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.SE.SE_2021.datasets </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>5×1 <a href="cla/DatasetInSystem.html"><tt>DatasetInSystem</tt></a><span class="emphasis"><mod> array:</mod></span>
+  
+   1: training_data | 
+   2: SE_2019_a1    | 
+   3: SE_2020_b1    | 
+   4: SE_2021_hhot  | 
+   5: SE_2021_b1    | best match
+      </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      Another important concept in EUROMOD are <tt>extensions</tt> that are 
+      defined globally on the <a href="cla/Euromod.html">Model</a> level:
+   </p>
+   <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.extensions </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>11×1 <a href="cla/Extension.html"><tt>Extension</tt></a><span class="emphasis"><mod> array:</mod></span>
+  
+   1: BTA      | Benefit Take-up Adjustments
+   2: TCA      | Tax Compliance Adjustments
+   3: FYA      | Full Year Adjustments
+   4: UAA      | Uprating by Average Adjustment
+   5: EPS      | Extended Policy Simulation
+   6: PBE      | Parental leave benefits
+   7: MWA      | Minimum Wage Adjustments
+   8: HHoT_un  | HHoT unemployment extension
+   9: WEB      | EUROMOD JRC-Interface
+  10: HHoT_ext | HHoT - Extended Simulation
+  11: HHoT_ncp | HHoT - Non Compulsory Payments
+      </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      Or locally on the <a href="cla/Country.html">Country</a> level:
+   </p>
+   <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).extensions </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>12×1 <a href="cla/Extension.html"><tt>Extension</tt></a><span class="emphasis"><mod> array:</mod></span>
+  
+   1: COVID    | COVID benefit
+   2: BTA      | Benefit Take-up Adjustments
+   3: TCA      | Tax Compliance Adjustments
+   4: FYA      | Full Year Adjustments
+   5: UAA      | Uprating by Average Adjustment
+   6: EPS      | Extended Policy Simulation
+   7: PBE      | Parental leave benefits
+   8: MWA      | Minimum Wage Adjustments
+   9: HHoT_un  | HHoT unemployment extension
+  10: WEB      | EUROMOD JRC-Interface
+  11: HHoT_ext | HHoT - Extended Simulation
+  12: HHoT_ncp | HHoT - Non Compulsory Payments
+      </pre></div></div></div><div class="procedure"></div>
+
+   <p>
+      The <tt>extensions</tt> property is a <tt>class</tt> array. 
+      If we want to access the information stored in the <i>Minimum Wage Adjustments</i> 
+      extension for example, we can simply use the following command:
+   </p>
+   <!--code-->
+   <div class="code_responsive"><div class="programlisting">
+      <div class="codeinput"><pre>
+mod.countries(<span class="string">"SE"</span>).extensions(<span class="string">"Minimum Wage Adjustments"</span>) </pre></div></div></div>
+      <div class="code_responsive"><div class="programlisting">
+      <div class="codeoutput"><pre>1×1 <a href="cla/Extension.html"><tt>Extension</tt></a><span class="emphasis"><mod> with properties:</mod></span>
+   
+       ID: "557c232a-9ce6-4808-b52f-ca5e02fe8cf4"
+     name: "Minimum Wage Adjustments"
+   parent: [1×1 Country]
+shortName: "MWA"
+         </pre></div></div></div><div class="procedure"></div>
+
+   </div><!--END.SECTION 5-->
+
+   <!--END.PANEL_BODY-->
+   <!--END.PANEL_GROUP-->
+</div></div></div></div>
+
+
+</div></div><div class="clearfix"></div> <!--END.ITEM_LIST-->
+
+<div align="center" class="feedbackblock"><iframe id="doc_survey"></iframe></div><script src="../includes/shared/scripts/docsurvey.js"></script>
+
+<script>initDocSurvey();</script></section>
+
+<!--BEGIN.REFERENCES-->
+<div class="bibliography"><h2 id="BLOCK-REFERENCES">References</h2><div id="OBJ_References" class="bibliomixed">
+   <p>[1] <span><a href="https://euromod-web.jrc.ec.europa.eu/resources/model-documentation"> Documentation EUROMOD</a> - Tax-benefit microsimulation model for the European Union.</span></p></div>
+</div><!--END.REFERENCES-->
+
+<!--BEGIN.EXTENDED_CAPABILITIES-->
+<div class="ref_sect"><h2 id="BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</h2>
+<div class="expand_collapse" id="accordion_BLOCK-EXTENDED_CAPABILITIES" role="tablist" aria-multiselectable="true">
+   <span id="OBJ_ATS1" class="anchor_target"></span>
+   <span id="OBJ" class="anchor_target"></span>
+   <h3 class="expand_trigger collapsed" id="OBJ_codegen" aria-expanded="false" data-toggle="collapse" data-target="#expand_body_OBJ_codegen" aria-controls="expand_body_OBJ_codegen">
+       <span class="icon-arrow-open-down"></span>
+       <span class="icon-arrow-open-right"></span>C/C++ Code Generation<br/> 
+       <span class=" remove_bold add_font_color_general">Generate C and C++ code using MATLAB&#174; Coder&#8482;.</span>
+   </h3></div>
+</div><!--END.EXTENDED_CAPABILITIES-->
+
+<!--BEGIN.SEE_ALSO-->
+<div class="ref_sect"><h2 id="BLOCK-SEE_ALSO">See Also</h2>
+   <ul class="list-unstyled margined_10">
+   <li>
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/Euromod.html"><span itemprop="name">
+               <code class="function">Model</code></span></a>
+       </span> | 
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/Country.html"><span itemprop="name">
+               <code class="function">Country</code></span></a>
+       </span> | 
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/System.html"><span itemprop="name">
+               <code class="function">System</code></span></a>
+       </span> | 
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/Policy.html"><span itemprop="name">
+               <code class="function">Policy</code></span></a>
+       </span> | 
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/Dataset.html"><span itemprop="name">
+               <code class="function">Dataset</code></span></a>
+       </span> | 
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/Extension.html"><span itemprop="name">
+               <code class="function">Extension</code></span></a>
+       </span> | 
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/info.html"><span itemprop="name">
+               <code class="function">info</code></span></a>
+       </span> | 
+       <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+           <a itemprop="url" href="cla/run.html"><span itemprop="name">
+               <code class="function">run</code></span></a>
+       </span>
+   </li></ul>
+   </div>
+   <!--END.SEE_ALSO-->
+
+<div class="release_introduced"><h4>Introduced in R2023a</h4></div>
+
+</div>
+</div>
+</div>
+</div><!--END.ENTIRE_PAGE--> 
+
+</div>
+</body>
+</html>

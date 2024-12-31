@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage">
+<head>
+<meta xmlns="http://www.w3.org/1999/xhtml" charset="utf-8"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>Euromod Connector Toolbox Release Notes</title>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+
+  <meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="rn"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="rn"></meta>
+
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/product/scripts/jquery/jquery-latest.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/site6_offcanvas_v2.css" rel="stylesheet" type="text/css"></link>
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/l10n.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/docscripts_rn.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/f1help.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/mw.imageanimation.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/jquery.highlight.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/underscore-min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/examples.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/use_platform_screenshots.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/suggest.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/overload.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/shared/scripts/helpservices.js"></script>
+
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/bootstrap.min.js" type="text/javascript"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../includes/product/scripts/global.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_base.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_releasenotes.css" rel="stylesheet" type="text/css"></link>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript">
+        $(document).ready(function(){
+        if (typeof requestLeftNavItems === "function") {
+        requestLeftNavItems("euromod", "../");
+        }
+        });
+      </script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_installed.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../includes/product/css/doc_center_print.css" rel="stylesheet" type="text/css" media="print"></link>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../includes/shared/equationrenderer/release/MathRenderer.js"></script>
+</head>
+
+
+<body id="responsive_offcanvas">
+<div xmlns="http://www.w3.org/1999/xhtml" id="doc_header_spacer" class="header"></div>
+
+<!--START.HORIZONTAL.UPPER_BAR-->
+<div xmlns="http://www.w3.org/1999/xhtml" class="section_header level_3"><div class="container-fluid"><div class="row" id="mobile_search_row">
+  <div class="col-sm-6 col-md-7 has_horizontal_local_nav" id="section_header_title"><div class="section_header_content"><div class="section_header_title">
+      <h1><a href="../documentation-center.html">Documentation</a></h1>
+  </div></div></div>
+  <div class="col-xs-12 col-sm-6 col-md-5" id="mobile_search">
+    <div class="search_nested_content_container"><form id="docsearch_form" name="docsearch_form" method="get" data-release="R2023a" data-language="en" 
+          action="../templates/searchresults.html"><div class="input-group tokenized_search_field">
+      <label class="sr-only">Search Help</label>
+      <input type="text" class="form-control conjoined_search" autocomplete="off" name="qdoc" placeholder="Search Help" id="docsearch"> </input>
+      <div class="input-group-btn"><button type="submit" name="submitsearch" id="submitsearch" class="btn icon-search btn_search_adjacent btn_search icon_16" tabindex="-1"></button>
+      </div>
+    </div></form></div>
+    <button class="btn icon-remove btn_search pull-right icon_32 visible-xs" data-toggle="collapse" href="#mobile_search" 
+            aria-expanded="false" aria-controls="mobile_search"></button>
+  </div>
+  
+  <div class="visible-xs" id="search_actuator">
+    <button class="btn icon-search btn_search pull-right icon_16" data-toggle="collapse" href="#mobile_search" 
+            aria-expanded="false" aria-controls="mobile_search"></button>
+  </div>
+</div></div></div><!--END.HORIZONTAL.UPPER_BAR-->
+
+<!--START.MAIN_CONTENT-->
+<div class="row-offcanvas row-offcanvas-left">
+
+<!--START.NAVIGATION-->
+<div xmlns="http://www.w3.org/1999/xhtml" class="sidebar-offcanvas" id="sidebar">
+<nav class="offcanvas_nav" role="navigation">
+<div class="offcanvas_actuator" data-toggle="offcanvas" data-target="#sidebar" id="nav_toggle">
+  <button type="button" class="btn">
+    <span class="sr-only">Off-Canvas Navigation Menu Toggle Off-Canvas Navigation Menu Toggle</span>
+    <span class="icon-menu"></span>
+  </button>
+  <span class="offcanvas_actuator_label" id="translation_icon-menu" tabindex="-1" aria-hidden="true"></span>
+</div>
+
+<!--START.NAVIGATION wrapper-->
+<div class="nav_list_wrapper" id="nav_list_wrapper"><nav class="offcanvas_nav" role="navigation">
+  <ul class="nav_breadcrumb" id="ul_left_nav_ancestors">
+    <li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb">
+      <a href="../documentation-center.html?s_tid=CRUX_lftnav" itemprop="url"><span itemprop="title">Documentation Home</span></a></li>
+    <li itemscope="" itemtype="http://www.data-vocabulary.org/Breadcrumb" itemprop="breadcrumb"><a href="../relnotes/index.html?s_tid=CRUX_lftnav" itemprop="url">
+      <span itemprop="title">Release Notes</span></a></li>
+    <li><a href="index.html?s_tid=CRUX_lftnav">Euromod Connector Toolbox</a></li>
+  </ul>
+  
+  <script type="text/javascript" src="../includes/shared/scripts/releasenotes.js"></script><script type="text/javascript">
+    var shortname = "EuromodConnector";
+    var basecode = "EuromodConnector";
+    var allRnReleases = ["R2018b","R2019a","R2019b","R2023a"];
+    </script>
+  <!--START.FORM-->
+  <form name="rnform" class="release_notes_search" action="release-notes.html" method="get">
+    <div class="add_margin_15">
+      <div><h4 class="add_bottom_rule add_margin_15">Category</h4></div>
+      <div id="rn-nav-categories" style="max-height:350px;overflow-y:auto;"><ul class="nav_toc"></ul></div>
+    </div>
+    <div class="row"><div class="col-xs-12"><div class="form-group">
+      <label for="rntext">Text Filter</label><input type="text" class="form-control" name="rntext"></input>
+    </div></div></div>
+    <div class="row"><div class="col-xs-12"><h4 class="add_bottom_rule add_margin_15">Release Range:</h4></div></div>
+    <div class="row">
+      <div class="col-xs-6"><div class="form-group"><label for="startrelease" class="sr-only">Starting Release</label>
+        <select name="startrelease" id="startrelease" class="form-control" onchange="document.forms.rnform.submit();"></select>
+      </div></div>
+      <div class="col-xs-6"><div class="form-group"><label for="endrelease" class="sr-only">Ending Release</label>
+        <select name="endrelease" id="endrelease" class="form-control" onchange="document.forms.rnform.submit();"></select>
+      </div></div>
+    </div>
+    <div class="row"><div class="col-xs-12"><h4 class="add_bottom_rule add_margin_15">Compatibility Considerations
+      <span class="compatibility_consideration" title="Compatibility Considerations"></span></h4></div>
+    </div>
+    <div class="row"><div class="col-xs-12"><div class="form-group">
+      <div class="checkbox"><label>
+      <input type="checkbox" name="rntype" value="incompatibility" onchange="document.forms.rnform.submit();"></input>Incompatibilities Only</label>
+      </div>
+      <a style="display:none" href="../matlab/matlab_prog/matlab-code-compatibility-report.html" 
+         class="alert_icon icon-alert-info-reverse icon_alert_color" id="link_incompat" target="_blank">How to generate Code Compatibility Report</a>
+    </div></div></div>
+    <input type="hidden" name="groupby" id="groupby" value="release"></input>
+    <input type="hidden" name="sortby" id="sortby" value="descending"></input>
+    <input type="hidden" name="searchHighlight" id="searchHighlight"></input>
+  </form><!--END.FORM-->
+</nav></div><!--END.NAVIGATION wrapper-->
+</nav>
+<script src="../includes/product/scripts/offcanvas_v2.js"></script>
+</div><!--END.NAVIGATION-->
+
+<!--START.NAVIGATION-->
+<div class="offcanvas_content_container">
+
+<!--BEGIN.HORIZONTAL_UPPER_BAR-->
+<div xmlns="http://www.w3.org/1999/xhtml" class="sticky_header_container"><div class="horizontal_nav"><div class="horizontal_nav_container">
+  <div class="offcanvas_horizontal_nav"><div class="container-fluid"><div class="row">
+    
+    <div class="col-sm-12 hidden-xs">
+    <nav class="navbar navbar-default" role="navigation" id="subnav"><div>
+      <ul class="nav navbar-nav crux_browse">
+      <li id="crux_nav_documentation" class="crux_resource"><a href="index.html">All</a></li>
+      <li id="crux_nav_example" class="crux_resource"><a href="../examples.html">Examples</a></li>
+      <li id="crux_nav_function" class="crux_resource"><a href="referencelist.html?type=function">Functions</a></li>
+      <li id="crux_nav_app" class="crux_resource"><a href="referencelist.html?type=app">Apps</a></li>
+      <li role="presentation" class="dropdown" id="topnav_more" style="display:none;">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> More 
+          <span class="caret"></span></a><ul class="dropdown-menu"></ul></li>
+      </ul></div></nav></div>
+      
+    <div class="visible-xs"><div class="container-fluid"><div class="row">
+      <div class="col-xs-9"><div class="mobile_crux_nav_trigger"><div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" 
+        aria-expanded="false">Resources<span class="icon-arrow-down icon_16"></span></button>
+        <ul class="dropdown-menu">
+          <li id="crux_nav_mobile_documentation" class="crux_resource"><a href="index.html">All</a></li>
+          <li id="crux_nav_mobile_example" class="crux_resource"><a href="../examples.html">Examples</a></li>
+          <li id="crux_nav_mobile_function" class="crux_resource"><a href="referencelist.html?type=function">Functions</a></li>
+          <li id="crux_nav_mobile_app" class="crux_resource"><a href="referencelist.html?type=app">Apps</a></li>
+        </ul>
+      </div></div></div><div class="col-xs-3"><div class="translate_placeholder"></div></div>
+    </div></div></div>
+  </div></div></div>
+</div></div></div><!--END.HORIZONTAL_UPPER_BAR-->
+    
+
+<!--BEGIN.BOTTOM-->
+<div class="content_container" id="content_container" itemprop="content"><div class="container-fluid"><div class="row"><div class="col-xs-12">
+<section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" lang="en">
+  
+<!--BEGIN.product_release_notes-->
+<div id="product_release_notes">
+  <h1 itemprop="content title" class="bottom_ruled R2023a">Euromod Connector Toolbox Release Notes</h1>
+  <div class="row">
+    <div class="col-xs-6"><ul class="list-inline">
+      <li><a href="https://www.mathworks.com/support/bugreports/?product=EuromodConnector&amp;release=R2023a">Bug Reports</a></li>
+      <li class="list_inline_spacer">|</li><li><a href="https://www.mathworks.com/support/bugreports/?product=EuromodConnector&amp;release=R2023a&amp;release_filter=Fixed+in">Bug Fixes</a></li>
+    </ul></div>
+  <div class="col-xs-6"><p class="switch"><a href="javascript:void(0);" id="expandAllPage" class="switch">expand all in page</a></p></div>
+  </div>
+  <div id="nugget-container" class="nugget_container" style="display:none;"><span class="nugget_label">Your Selections</span>
+    <div id="nugget-box" class="nugget_box"><span class="nuggets"><span class="nugget" style="display:none;" id="nugget-incompat">
+      <a href="javascript:void(0);" class="icon-remove"><span class="label">Incompatibilities Only</span></a></span></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6"><ul class="list-inline">
+      <li id="num-notes-container" style="display:none;"><strong>Found <span id="num-notes"></span> notes</strong></li>
+      <li class="list_inline_spacer">|</li>
+      <li id="release-range">Release Range: <span id="start-release"></span> to <span id="end-release"></span></li></ul>
+    </div>
+    <div class="col-xs-12 col-sm-6"><div class="form-inline pull-right pull_left_xs"><div class="form-group">
+      <label for="selectsort">Sort by:</label>
+      <select id="selectsort" class="form-control add_indent_5" onchange="handleSort(this.options[this.selectedIndex].value)">
+        <option value="release-descending">Release: Latest to Earliest</option>
+        <option value="release-ascending">Release: Earliest to Latest</option>
+      </select>
+    </div></div></div>
+  </div>
+  <div class="expandableContent"><div id="content"><div id="notes"></div></div></div>
+</div><!--END.product_release_notes-->
+
+<div class="clearfix"></div>
+<div align="center" class="feedbackblock"><iframe id="doc_survey"></iframe></div><script src="../includes/shared/scripts/docsurvey.js"></script>
+
+<script>initDocSurvey();</script></section>
+
+</div></div></div></div><!--END.BOTTOM-->
+
+<!--BEGIN.CLASS body_trail_container-->
+<div xmlns="http://www.w3.org/1999/xhtml" class="body_trail_container">
+<!--BEGIN.CLASS container-fluid-->
+<div class="container-fluid"><div class="row"><div class="col-xs-12">
+<div class="row">
+  <div class="col-xs-12 col-sm-4"><h5><a href="index.html?s_cid=doc_ftr">Euromod Connector Toolbox Documentation</a></h5>
+  <ul class="list-unstyled hidden-xs"><li><a href="examples.html?s_cid=doc_ftr">Examples</a></li>
+    <li><a href="referencelist.html?type=function&amp;s_cid=doc_ftr">Functions and Other Reference</a></li>
+    <li><a href="release-notes.html?s_cid=doc_ftr">Release Notes</a></li>
+    <li><a href="https://www.mathworks.com/help/releases/R2023a/pdf_doc/EuromodConnector/index.html?s_cid=doc_ftr">PDF Documentation</a></li>
+  </ul>
+  </div>
+  <div class="col-xs-12 col-sm-4"><h5><a href="https://www.mathworks.com/support.html?s_cid=doc_ftr">Support</a></h5>
+    <ul class="list-unstyled hidden-xs"><li><a href="https://www.mathworks.com/matlabcentral/answers/index?s_cid=doc_ftr">MATLAB Answers</a></li>
+      <li><a href="https://www.mathworks.com/support/install-matlab.html?s_cid=doc_ftr">Installation Help</a></li>
+      <li><a href="https://www.mathworks.com/support/bugreports/?s_cid=doc_ftr">Bug Reports</a></li>
+      <li><a href="https://www.mathworks.com/support/requirements/product-requirements-platform-availability-list.html?s_cid=doc_ftr">Product Requirements</a></li>
+      <li><a href="https://www.mathworks.com/downloads/?s_cid=doc_ftr">Software Downloads</a></li>
+    </ul>
+  </div>
+</div>
+</div></div></div><!--END.CLASS container-fluid-->
+</div><!--END.CLASS body_trail_container-->
+
+<footer xmlns="http://www.w3.org/1999/xhtml" id="footer" class="bs-footer">
+<div class="container-fluid"><div class="footer"><div class="row"><div class="col-xs-12">
+<p class="copyright">© 1994-2020 The MathWorks, Inc.</p>
+<ul class="footernav">
+  <li class="footernav_help"><a href="MATLAB:web(matlab.internal.licenseAgreement)">Terms of Use</a></li>
+  <li class="footernav_patents"><a href="MATLAB:web([matlabroot '/patents.txt'])">Patents</a></li>
+  <li class="footernav_trademarks"><a href="MATLAB:web([matlabroot '/trademarks.txt'])">Trademarks</a></li>
+  <li class="footernav_piracy"><a href="MATLAB:web([docroot '/acknowledgments.html'])">Acknowledgments</a></li>
+</ul>
+</div></div></div></div>
+</footer>
+
+
+</div><!--close row-offcanvas-->
+</div><!--END.MAIN_CONTENT-->
+</body>
+</html>

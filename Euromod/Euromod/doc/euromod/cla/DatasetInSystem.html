@@ -1,0 +1,915 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" itemscope itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage">
+<head>
+<meta xmlns="http://www.w3.org/1999/xhtml" charset="utf-8"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<title>DatasetInSystem</title>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement":
+    [{
+        "@type": "ListItem",
+        "position": 1,
+
+        "item": {
+        "@id": "index.html",
+        "name": "DatasetInSystem class"
+        }
+    } 
+    ,
+    {
+        "@type": "ListItem",
+        "position": 2,
+
+        "item": {
+        "@id": "CountryClass.html",
+        "name": "DatasetInSystem"
+        }
+    }
+    ,
+    {
+        "@type": "ListItem",
+        "position": 3,
+
+        "item": {
+        "@id": "TaxSystemClass.html",
+        "name": "TaxSystem"
+        }
+    }]
+}</script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "ItemList",
+    "name": "VisibleBreadcrumbs",
+
+    "itemListElement":
+        [
+        "getting-started-with-EuromodConnector-toolbox"
+        ],
+    "itemListOrder": "http://schema.org/ItemListOrderAscending"
+}</script>
+<script xmlns="http://www.w3.org/1999/xhtml" type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "ItemList",
+    "name": "ExtendedCapabilities",
+
+    "itemListElement":
+    [
+    {
+        "@type": "ListItem",
+        "position": 1,
+        "item": 
+    {
+        "@context": "http://schema.org",
+        "@type": "PropertyValue",
+            "name": "codegen",
+            "value": "limited"
+    }
+    }
+    ]
+}</script>
+        <meta xmlns="http://www.w3.org/1999/xhtml" name="chunktype" content="refpage"></meta><meta xmlns="http://www.w3.org/1999/xhtml" name="refentity" itemprop="refentity" content="function:Euromod"></meta><link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" http-equiv="Content-Script-Type" content="text/javascript"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="toctype" itemprop="pagetype" content="fcn"></meta>
+<meta xmlns="http://www.w3.org/1999/xhtml" name="infotype" itemprop="infotype" content="ref/function"></meta>
+
+<meta xmlns="http://www.w3.org/1999/xhtml" name="description" itemprop="description" content="This MATLAB class loads the EUROMOD systems."></meta><script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../../includes/product/scripts/jquery/jquery-latest.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_lg.css" rel="stylesheet" media="screen and (min-width: 1200px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_md.css" rel="stylesheet" media="screen and (min-width: 992px) and (max-width: 1199px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_sm+xs.css" rel="stylesheet" media="screen and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_sm.css" rel="stylesheet" media="screen and (min-width: 768px) and (max-width: 991px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_xs.css" rel="stylesheet" media="screen and (max-width: 767px)"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/site6_offcanvas_v2.css" rel="stylesheet" type="text/css"></link>
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/l10n.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/f1help.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/docscripts.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/mw.imageanimation.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/jquery.highlight.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/underscore-min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/examples.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/use_platform_screenshots.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/suggest.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/overload.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/shared/scripts/helpservices.js"></script>
+
+
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/jquery/jquery.mobile.custom.min.js"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/bootstrap.min.js" type="text/javascript"></script>
+<script xmlns="http://www.w3.org/1999/xhtml" src="../../includes/product/scripts/global.js"></script>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/doc_center_base.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/doc_center_installed.css" rel="stylesheet" type="text/css"></link>
+<link xmlns="http://www.w3.org/1999/xhtml" href="../../includes/product/css/doc_center_print.css" rel="stylesheet" type="text/css" media="print"></link>
+<script xmlns="http://www.w3.org/1999/xhtml" type="text/javascript" src="../../includes/shared/equationrenderer/release/MathRenderer.js"></script>
+</head>
+
+<body id="responsive_offcanvas">
+
+<!--BEGIN.ENTIRE_PAGE-->
+<div class="row-offcanvas row-offcanvas-left">
+       
+    <!--BEGIN.HORIZONTAL_UPPER_BAR-->
+    <div xmlns="http://www.w3.org/1999/xhtml">
+    <div class="horizontal_nav"><div class="horizontal_nav_container"><div class="offcanvas_horizontal_nav"><div class="container-fluid"><div class="row">
+        <div class="col-sm-12 hidden-xs"><nav class="navbar navbar-default" role="navigation" id="subnav"><div><ul class="nav navbar-nav crux_browse">
+            <li id="crux_nav_documentation" class="crux_resource">
+                <a href="../../index.html">All</a></li>
+            <li id="crux_nav_example" class="crux_resource">
+                <a href="../Examples.html">Examples</a></li>
+            <li id="crux_nav_function" class="crux_resource active">
+                <a href="../ref/functionlist.html">Functions</a></li>
+            <li id="crux_nav_app" class="crux_resource">
+                <a href="../ref/functionlist.html">Apps</a></li>
+            <li role="presentation" class="dropdown" id="topnav_more" style="display:none;">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> More</a><ul class="dropdown-menu"></ul></li>
+        </ul></div></nav></div>
+        <div class="visible-xs"><div class="container-fluid"><div class="row">
+            <div class="col-xs-9"><div class="mobile_crux_nav_trigger"><div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Resources</button>
+            <ul class="dropdown-menu">
+                <li id="crux_nav_mobile_documentation" class="crux_resource active"><a href="../../index.html">All</a></li>
+                <li id="crux_nav_mobile_example" class="crux_resource"><a href="../Examples.html">Examples</a></li>
+                <li id="crux_nav_mobile_function" class="crux_resource"><a href="../ref/functionlist.html">Functions</a></li>
+                <li id="crux_nav_mobile_app" class="crux_resource"><a href="../ref/functionlist.html">Apps</a></li>
+            </ul></div></div></div><div class="col-xs-3"><div class="translate_placeholder"></div></div>
+        </div></div></div>
+    </div></div></div></div></div>
+    </div><!--END.HORIZONTAL_UPPER_BAR-->
+
+<!--BEGIN.MAIN_CONTENT_CONTAINER-->
+<div id="content_container" itemprop="content"><div class="container-fluid"><div class="row"><div class="col-xs-12">
+<section xmlns="http://www.w3.org/1999/xhtml" id="doc_center_content" lang="en">
+    
+<!--BEGIN.MAIN_CONTENT-->
+<div id="pgtype-ref-function"></div>
+
+<!--BEGIN.NAME_OF_FUNCTION-->
+<div class="function_ref"><span id="OBJ" class="anchor_target"></span>
+    <h1 class="r2023a notranslate" itemprop="title"><span class="refname">DatasetInSystem</span></h1>
+        <div class="doc_topic_desc"><div class="purpose_container"><p itemprop="purpose">datasets available in a <a href="https://euromod-web.jrc.ec.europa.eu/">EUROMOD</a> system</p>
+            <div class="switch"><a href="javascript:void(0);" id="expandAllPage" data-allexpanded="true1">collapse all in page</a>
+        </div></div></div>
+</div>
+    <!--SYNTAX-->
+    <span id="classEuromod.SyntaxAnchorTarget" class="anchor_target"></span>
+        <div class="ref_sect"><h2 id="BLOCK-SYNTAX">Syntax</h2>
+            <div class="syntax_signature"><div class="syntax_signature_module"><div class="code_responsive">
+            <code class="synopsis"><a href="#BLOCK-SYNTAX-sub1" class="intrnllnk">D = DatasetInSystem(System)</a></code></div>
+            </div></div>
+        </div><div class="clear"></div>
+    <!--DESCRIPTION-->
+    <span id="classEuromod.DescriptionAnchorTarget" class="anchor_target"></span>
+    <h2 id="BLOCK-DESCRIPTION">Description</h2><div class="descriptions">
+        <div class="description_module">
+        <div class="description_element">
+            <p class="syntax_example"><a href="DatasetInSystem.html#BLOCK-EXAMPLES-sub1" class="intrnllnk">example</a></p>
+        <div class="code_responsive">
+            <p><span id="BLOCK-SYNTAX-sub1" itemprop="syntax">                
+                <code class="synopsis"><a href="#BLOCK-OUTPUT_ARGUMENTS-sub1" class="intrnllnk">
+                <code class="argument">D</code></a> = DatasetInSystem(<a href="#requiredinputargument_1" class="intrnllnk"><code class="argument">System</code></a>)
+                </code></span> create a class array with the <tt>System</tt> default datasets.
+            </p>
+            <p>
+                This class contains the datasets modelled in a EUROMOD system.
+                The class elements can be accessed by indexing the class array with 
+                an integer, or a string value of any class property (e.g. <tt>name</tt>, <tt>ID</tt>, 
+                <tt>bestMatch</tt>, etc.).
+            </p>
+            <p>
+                This class is stored in the property <a href="System.html#BLOCK-PROPERTIES-datasets">datasets</a> of the <a href="System.html">System</a>
+                class.
+            </p>
+            <p>
+                This class inherits methods and properties from the superclass <a href="Dataset.html">Dataset</a>.
+            </p>
+        </div>
+        </div></div>
+    </div><div class="clear"></div>
+    <!--EXAMPLE-->
+    <div class="examples"><h2 id="BLOCK-EXAMPLES">Examples</h2>
+    <div class="expandableContent" id="expandableExamples"><p class="switch"><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true3">collapse all</a></p>
+    <!--BEGIN.PANEL_GROUP-->
+    <!--BEGIN.EXAMPLE 1-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true" id="expand_panel_heading-BLOCK-EXAMPLES-sub1">
+    <div class="panel panel-default ">
+        <div role="tab" data-toggle="collapse" id="expand_panel_heading-BLOCK-EXAMPLES-sub1" data-target="#expand_panel_body-BLOCK-EXAMPLES-sub1" aria-controls="expand_panel_body-BLOCK-EXAMPLES-sub1" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <h3 class="panel-title" id="BLOCK-EXAMPLES-sub1">Load System datasets<br/></h3>
+        </div>
+    <div role="tabpanel" id="expand_panel_body-BLOCK-EXAMPLES-sub1" aria-labelledby="expand_panel_heading-BLOCK-EXAMPLES-sub1" class="panel-collapse collapse in">
+    <!--BEGIN.PANEL_BODY-->
+    <div class="panel-body">
+        <div class="pull-right examples_short_list" style="width:250px; margin-left: 10px; margin-bottom: 10px;">
+            <div data-pane="metadata" style="margin-bottom: 0px;" class="panel metadata_container">
+            <div class="panel-body metadata_content" style="padding-top:0px; padding-bottom:0px;">
+            <div class="row"><div class="col-xs-12">
+                <a class="btn btn_secondary btn-block" href="matlab:openExample('Euromod.SimulateTaxBenefitSystemExample')">Open Live Script</a>
+        </div></div></div></div></div>
+    <script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "DigitalDocument",
+          "headline": "Simulate Tax-Benefit System",
+          "description": "Run the simulation of the EUROMOD for a given system-system model.",
+          "thumbnailURL": "../../includes/product/images/doc_center/DefaultImage.png",
+          "genre": "Live Script",
+          "isBasedOn": {
+          "@type": "Product",
+          "name": "MATLAB"
+
+        },
+          "isPartOf": {
+          "@type": "CreativeWork",
+          "url": "Model.html"
+
+        },
+          "identifier": "Euromod.SimulateTaxBenefitSystemExample",
+          "name": "SimulateTaxBenefitSystemExample",
+          "url": "Model.html#BLOCK-EXAMPLES-sub1"
+
+        }</script><script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "PropertyValue",
+          "name": "open_command",
+          "value": "matlab:openExample('Euromod/SimulateTaxBenefitSystemExample')"
+
+        }</script><script type="application/ld+json">
+        {
+        "@context": "http://schema.org",
+        "@type": "ItemList",
+          "name": "ExampleSourceFiles",
+
+        "itemListElement":
+        [
+        "SimulateTaxBenefitSystemExample.mlx"
+        ],
+        "itemListOrder": "http://schema.org/ItemListOrderAscending"
+        }
+        </script>
+        
+    <p class="shortdesc"><tt>DatasetInSystem</tt> loads all the datasets configured in a <tt>System</tt> by default.</p>
+    
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeinput"><pre>
+mod = euromod(<span class="string">"C:\EUROMOD_RELEASES_I6.0+"</span>);
+D=DatasetInSystem(mod.countries(<span class="string">"AT"</span>).systems(end));
+D  </pre></div></div></div>
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeoutput"><pre>4×1 <a href="DatasetInSystem.html"><tt>DatasetInSystem</tt></a><span class="emphasis"> array:</span>
+
+        1: training_data | 
+        2: AT_2020_b2    | 
+        3: AT_2021_b1    | best match
+        4: AT_2023_hhot  | 
+    </pre></div></div></div><div class="procedure"></div>
+
+    <p class="shortdesc">Display a specific dataset in the <tt>System</tt>.</p>
+    
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeinput"><pre>
+D(<span class="string">"AT_2021_b1"</span>)  </pre></div></div></div>
+    <div class="code_responsive"><div class="programlisting">
+    <div class="codeoutput"><pre>1×1 <a href="DatasetInSystem.html"><tt>DatasetInSystem</tt></a><span class="emphasis"> with properties:</span>
+
+       bestMatch: "yes"
+          dataID: "b781f486-9a8a-4704-a9bd-51e5cccec985"
+           sysID: "064cf5eb-73bd-4fae-a421-ed9781e418c9"
+   coicopVersion: ""
+         comment: ""
+        currency: "euro"
+     decimalSign: "."
+              ID: "064cf5eb-73bd-4fae-a421-ed9781e418c9b781f486-9a8a-4704-a9bd-51e5cccec985"
+listStringOutVar: ""
+            name: "AT_2021_b1"
+          parent: [1×1 System]
+         private: "no"
+  readXVariables: "no"
+useCommonDefault: "no"
+  yearCollection: "2021"
+         yearInc: "2020"
+    </pre></div></div></div><div class="procedure"></div>
+    
+    <!--END.PANEL_BODY-->
+    <!--END.PANEL_GROUP-->
+    </div></div></div></div> <!--END.EXAMPLE 1-->
+    
+    <div itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/Example" itemprop="example" class="em_example">
+    <meta itemprop="exampleid" content="Euromod-Example1"></meta>
+    <meta itemprop="exampletitle" content="Load model datasets"></meta>
+    </div>
+</div></div> <!--END.EXAMPLE-->
+
+<!--START.INPUT_ARGUMENTS-->
+<div class="ref_sect"><h2 id="BLOCK-INPUT_ARGUMENTS">Input Arguments</h2>
+    <div class="expandableContent"><p class="switch "><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true">collapse all</a></p>
+    <div class="panel-group" id="BLOCK-INPUT_ARGUMENTS_panel-group" role="tablist" aria-multiselectable="true">
+    <div class="ref_sect"><div class="expandableContent">
+    <div class="panel-group" id="OBJ_IA-tablist_panel-group" role="tablist" aria-multiselectable="true">
+    <!--INPUT.#1-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <span id="requiredinputargument_1" class="anchor_target"></span><span id="OBJ_IA-span" class="anchor_target"></span>
+        <div itemscope="" itemprop="inputargument" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-INPUT_ARGUMENTS-sub1">
+            <div role="tab" data-toggle="collapse" id="expand_panel_heading_BLOCK-INPUT_ARGUMENTS-sub1" data-target="#expand_panel_body_BLOCK-INPUT_ARGUMENTS-sub1" aria-controls="expand_panel_body_BLOCK-INPUT_ARGUMENTS-sub1" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <span id="inputarg_NR1" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-INPUT_ARGUMENTS-sub1">
+                <code itemprop="name">System</code> &#8212; 
+                    <span itemprop="purpose"><tt>System</tt> class</span><br/> <span class="add_font_color_general remove_bold">
+                    <span class="example_desc">
+                    <span itemprop="inputvalue"><code class="literal">class</code></span> 
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" id="expand_panel_body_BLOCK-INPUT_ARGUMENTS-sub1" aria-labelledby="expand_panel_heading_BLOCK-INPUT_ARGUMENTS-sub1" class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>A specific system from the <a href="System.html">System</a> class array.</p><p></p>
+            <p class="datatypelist"><strong>Data Types: </strong>
+                <code itemprop="datatype">class</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    </div></div></div></div></div>
+</div> <!--END.INPUT_ARGUMENTS-->
+
+<!--BEGIN.PROPERTIES-->
+<div class="ref_sect"><h2 id="BLOCK-PROPERTIES">Properties</h2>
+    <div class="expandableContent"><p class="switch "><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true">collapse all</a></p>
+    <div class="panel-group" id="OBJ_Properties_panel-group" role="tablist" aria-multiselectable="true">
+        <span id="defaultproperties" class="anchor_target"></span><span id="BLOCK-PROPERTIES-span" class="anchor_target"></span>
+    <div class="ref_sect"><div class="expandableContent">
+    <div class="panel-group" id="BLOCK-PROPERTIES-tablist_panel-group" role="tablist" aria-multiselectable="true">
+    <!--PROPERTY.#bestMatch-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-bestMatch">
+            <div role="tab" data-toggle="collapse" id="expand_panel_heading-BLOCK-PROPERTIES-bestMatch" 
+            data-target="#expand_panel_body-BLOCK-PROPERTIES-bestMatch" 
+            aria-controls="expand_panel_body-BLOCK-PROPERTIES-bestMatch" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-bestMatch">
+                <code itemprop="name">bestMatch</code> &#8212; 
+                    <span itemprop="purpose">Best match datasets</span><br/> 
+                    <span class="add_font_color_general remove_bold">
+                        <span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span> 
+                        </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" id="expand_panel_body-BLOCK-PROPERTIES-bestMatch" 
+            aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-bestMatch" 
+            class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>If yes, the current dataset is a best match for the specific system.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).bestMatch</code></p>
+            </div></div>
+        </div></div>
+    </div>
+        <!--PROPERTY.#1-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-coicopVersion">
+            <div role="tab" data-toggle="collapse" id="expand_panel_heading-BLOCK-PROPERTIES-coicopVersion" data-target="#expand_panel_body-BLOCK-PROPERTIES-coicopVersion" aria-controls="expand_panel_body-BLOCK-PROPERTIES-coicopVersion" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-coicopVersion">
+                <code itemprop="name">coicopVersion</code> &#8212; 
+                    <span itemprop="purpose">COICOP version</span><br/> 
+                    <span class="add_font_color_general remove_bold">
+                        <span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span> 
+                        </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" id="expand_panel_body-BLOCK-PROPERTIES-coicopVersion" aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-coicopVersion" class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the COICOP version.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).coicopVersion</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#2-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-comment">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-comment" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-comment" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-comment" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-comment">
+                <code itemprop="name">comment</code> &#8212; 
+                    <span itemprop="purpose">DatasetInSystem comment</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-comment" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-comment" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the comment about the dataset.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).comment</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#3-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-currency">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-currency" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-currency" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-currency" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-currency">
+                <code itemprop="name">currency</code> &#8212; 
+                    <span itemprop="purpose">Currency of values</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-currency" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-currency" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the currency of the monetary values in the dataset.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).currency</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#3a-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-dataID">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-dataID" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-dataID" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-dataID" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-dataID">
+                <code itemprop="name">dataID</code> &#8212; 
+                    <span itemprop="purpose">Identifier number</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-dataID" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-dataID" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the identifier number of the dataset at the system level.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).dataID</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#4-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-decimalSign">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-decimalSign" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-decimalSign" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-decimalSign" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-decimalSign">
+                <code itemprop="name">decimalSign</code> &#8212; 
+                    <span itemprop="purpose">Decimal delimiter</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-decimalSign" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-decimalSign" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the decimal delimiter of float values.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).decimalSign</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#5-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-ID">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-ID" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-ID" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-ID" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-ID">
+                <code itemprop="name">ID</code> &#8212; 
+                    <span itemprop="purpose">Identifier number</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-ID" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-ID" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the dataset identifier number.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).ID</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#6-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-listStringOutVar">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-listStringOutVar" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-listStringOutVar" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-listStringOutVar" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-listStringOutVar">
+                <code itemprop="name">listStringOutVar</code> &#8212; 
+                    <span itemprop="purpose">Names of variables</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-listStringOutVar" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-listStringOutVar" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the names of variables.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).listStringOutVar</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#7-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-name">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-name" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-name" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-name" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-name">
+                <code itemprop="name">name</code> &#8212; 
+                    <span itemprop="purpose">Name of the dataset</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-name" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-name" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the name of the dataset.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).name</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#8-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-parent">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-parent" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-parent" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-parent" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-parent">
+                <code itemprop="name">parent</code> &#8212; 
+                    <span itemprop="purpose">System class.</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">class</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-parent" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-parent" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the specific <a href="System.html">System</a> class.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).parent</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#9-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-private">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-private" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-private" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-private" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-private">
+                <code itemprop="name">private</code> &#8212; 
+                    <span itemprop="purpose">Access type</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-private" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-private" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the access type of the dataset.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).private</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#10-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-readXVariables">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-readXVariables" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-readXVariables" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-readXVariables" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-readXVariables">
+                <code itemprop="name">readXVariables</code> &#8212; 
+                    <span itemprop="purpose">Read variables</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-readXVariables" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-readXVariables" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the loaded variables.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).readXVariables</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#10a-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-sysID">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-sysID" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-sysID" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-sysID" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-sysID">
+                <code itemprop="name">sysID</code> &#8212; 
+                    <span itemprop="purpose">Identifier number</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-sysID" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-sysID" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the identifier number of the reference system.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).sysID</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#11-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-useCommonDefault">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-useCommonDefault" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-useCommonDefault" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-useCommonDefault" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-useCommonDefault">
+                <code itemprop="name">useCommonDefault</code> &#8212; 
+                    <span itemprop="purpose">Use default</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-useCommonDefault" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-useCommonDefault" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the use default.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).useCommonDefault</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#12-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-yearCollection">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-yearCollection" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-yearCollection" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-yearCollection" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-yearCollection">
+                <code itemprop="name">yearCollection</code> &#8212; 
+                    <span itemprop="purpose">Year of DatasetInSystem</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-yearCollection" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-yearCollection" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the year of the dataset collection.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).yearCollection</code></p>
+            </div></div>
+        </div></div>
+    </div>
+    <!--PROPERTY.#13-->
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div itemscope="" itemprop="property" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/NameValuePairInputArgument" itemid="BLOCK-PROPERTIES-yearInc">
+            <div role="tab" 
+                 data-toggle="collapse" 
+                 id="expand_panel_heading-BLOCK-PROPERTIES-yearInc" 
+                 data-target="#expand_panel_body-BLOCK-PROPERTIES-yearInc" 
+                 aria-controls="expand_panel_body-BLOCK-PROPERTIES-yearInc" 
+                 class="panel-heading add_cursor_pointer" 
+                 aria-expanded="true">
+            <span id="properties_IndexStyle" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-PROPERTIES-yearInc">
+                <code itemprop="name">yearInc</code> &#8212; 
+                    <span itemprop="purpose">Year of variables</span><br/> 
+                    <span class="add_font_color_general remove_bold"><span class="example_desc">
+                        <span itemprop="inputvalue"><code class="literal">string scalar</code></span>
+                    </span></span>
+            </h3><span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+            </div>
+            <div role="tabpanel" 
+                 id="expand_panel_body-BLOCK-PROPERTIES-yearInc" 
+                 aria-labelledby="expand_panel_heading-BLOCK-PROPERTIES-yearInc" 
+                 class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>Returns the reference year for the income variables.</p><p></p>
+            <p class="datatypelist"><strong>Example: </strong>
+                <code itemprop="datatype">D(end).yearInc</code></p>
+            </div></div>
+        </div></div>
+    </div>
+
+<!--BEGIN.OUTPUT_ARGUMENTS-->
+<div class="ref_sect"><h2 id="BLOCK-OUTPUT_ARGUMENTS">Output Arguments</h2>
+<div class="expandableContent"><p class="switch "><a href="javascript:void(0);" class="expandAllLink" data-allexpanded="true">collapse all</a></p>
+    <div class="panel-group" id="BLOCK-OUTPUT_ARGUMENTS_panel-group" role="tablist" aria-multiselectable="true">
+    <div class="panel-group" role="tablist" aria-multiselectable="true"><div class="panel panel-default ">
+        <div role="tab" data-toggle="collapse" id="expand_panel_heading_BLOCK-OUTPUT_ARGUMENTS-sub1" data-target="#expand_panel_body_BLOCK-OUTPUT_ARGUMENTS-sub1" aria-controls="expand_panel_body_BLOCK-OUTPUT_ARGUMENTS-sub1" class="panel-heading add_cursor_pointer" aria-expanded="true">
+            <span id="outputarg_ind" class="anchor_target"></span>
+            <h3 class="panel-title" id="BLOCK-OUTPUT_ARGUMENTS-sub1">
+                <code class="name">D</code> &#8212; DatasetInSystem class<br/> 
+                <span class="add_font_color_general remove_bold"><span class="example_desc">class array</span></span>
+            </h3>
+            <span class="icon-arrow-open-down icon_24"></span><span class="icon-arrow-open-right icon_24"></span>
+        </div>
+        <div role="tabpanel" id="expand_panel_body_BLOCK-OUTPUT_ARGUMENTS-sub1" aria-labelledby="expand_panel_heading_BLOCK-OUTPUT_ARGUMENTS-sub1" 
+            class="panel-collapse collapse in">
+            <div class="panel-body">
+            <p>A class array with the <tt>System</tt> default datasets.</p><p></p>
+            </div>
+        </div></div>
+    </div></div></div>
+</div> <!--END.OUTPUT_ARGUMENTS-->
+
+<!--BEGIN.REFERENCES-->
+<div class="bibliography"><h2 id="BLOCK-REFERENCES">References</h2><div id="OBJ_References" class="bibliomixed">
+    <p>[1] <span><a href="https://euromod-web.jrc.ec.europa.eu/resources/model-documentation"> Documentation EUROMOD</a> - Tax-benefit microsimulation model for the European Union.</span></p></div>
+</div><!--END.REFERENCES-->
+
+<!--BEGIN.EXTENDED_CAPABILITIES-->
+<div class="ref_sect"><h2 id="BLOCK-EXTENDED_CAPABILITIES">Extended Capabilities</h2>
+<div class="expand_collapse" id="accordion-BLOCK-EXTENDED_CAPABILITIES" role="tablist" aria-multiselectable="true">
+    <span id="OBJ_ATS1" class="anchor_target"></span>
+    <span id="OBJ" class="anchor_target"></span>
+    <h3 class="expand_trigger collapsed" id="OBJ_codegen" aria-expanded="false" data-toggle="collapse" data-target="#expand_body_OBJ_codegen" aria-controls="expand_body_OBJ_codegen">
+        <span class="icon-arrow-open-down"></span>
+        <span class="icon-arrow-open-right"></span>C/C++ Code Generation<br/> 
+        <span class=" remove_bold add_font_color_general">Generate C and C++ code using MATLAB&#174; Coder&#8482;.</span>
+    </h3></div>
+</div><!--END.EXTENDED_CAPABILITIES-->
+
+<!--BEGIN.SEE_ALSO-->
+<div class="ref_sect"><h2 id="BLOCK-SEE_ALSO">See Also</h2>
+    <ul class="list-unstyled margined_10">
+    <li>
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="Model.html"><span itemprop="name">
+                <code class="function">Model</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="System.html"><span itemprop="name">
+                <code class="function">System</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="Dataset.html"><span itemprop="name">
+                <code class="function">Dataset</code></span></a>
+        </span> | 
+        <span itemscope="" itemtype="http://www.mathworks.com/help/schema/MathWorksDocPage/SeeAlso" itemprop="seealso">
+            <a itemprop="url" href="System.html#BLOCK-PROPERTIES-bestmatchDatasets"><span itemprop="name">
+                <code class="function">bestmatchDatasets</code></span></a>
+        </span> 
+    </li></ul>
+    </div>
+    <!--END.SEE_ALSO-->
+
+<div class="release_introduced"><h4>Introduced in R2023a</h4></div>
+    
+<!--END.NAME_OF_FUNCTION--> 
+</div></div><!--END.MAIN_CONTENT--> 
+
+<div class="modal fade" id="open-example-dialog" tabindex="-1" role="dialog" aria-labelledby="openExampleDialogLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Open Example</h4>
+    </div>
+    <div class="modal-body" id="dialog-body"><p>You have a modified version of this example. Do you want to open this example with your edits?</p></div>
+    <div class="modal-footer"><a id="open-example-dialog-replace" class="btn btn_color_blue companion_btn" data-dismiss="modal">
+        No, open this example and discard my edits</a>
+        <a id="open-example-dialog-continue" class="btn btn_color_blue" data-dismiss="modal">Yes</a>
+    </div>
+    </div>
+</div>
+</div>
+
+
+<div class="clearfix"></div>
+<div align="center" class="feedbackblock"><iframe id="doc_survey"></iframe></div>
+<script src="../../includes/shared/scripts/docsurvey.js"></script>
+
+<script>initDocSurvey();</script></section>
+
+</div>
+</div>
+</div>
+</div><!--END.MAIN_CONTENT_CONTAINER-->
+
+</div><!--END.ENTIRE_PAGE-->
+</body>
+</html>
