@@ -1,6 +1,9 @@
-function doc(topic)
+function doc(varargin)
 
-    my_topics = {
+if nargin == 0
+    allTopics={};
+else
+    allTopics = {
         'Model', 'doc/euromod/cla/Euromod.html'
         'Country', 'doc/euromod/cla/Country.html'
         'Dataset', 'doc/euromod/cla/Dataset.html'
@@ -18,19 +21,19 @@ function doc(topic)
         'System', 'doc/euromod/cla/System.html'
         'info', 'doc/euromod/cla/info.html'
         'run', 'doc/euromod/cla/run.html'
-    };
+        };
+end
 
-    for i = 1 : size(my_topics, 1)
-        if strcmpi(topic, my_topics{i, 1})      
-            web(my_topics{i, 2}, '-helpbrowser');
-            return;
-        end
+for i = 1 : size(allTopics, 1)
+    if strcmpi(varargin{:}, allTopics{i, 1})
+        web(allTopics{i, 2}, '-helpbrowser');
+        return;
     end
+end
 
-    % Fall back to MATLAB's doc. Note that our doc shadows MATLAB's doc.
-    docs = which('doc', '-all');
-    old_dir = cd();
-    c = onCleanup(@() cd(old_dir));
-    cd(fileparts(docs{2}));
-    doc(topic); 
+docs = which('doc', '-all');
+cleanDir = cd();
+c = onCleanup(@() cd(cleanDir));
+cd(fileparts(docs{2}));
+doc(varargin{:});
 end

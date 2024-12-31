@@ -1,32 +1,36 @@
 classdef Parameter < Core
-    % Parameter - A class with the parameters set up in a function.
+    % Parameter - Parameters set up in a function of the EUROMOD policy-system.
     %
     % Syntax:
     %
     %     F = Parameter(Function);
     %
     % Description:
-    %     This class contains the function-specific parameters. It is
-    %     stored in the property 'parameters' of the Function class.
+    %     This class contains the parameters specific to a EUROMOD policy
+    %     function. The class elements can be accessed by indexing the class
+    %     array with an integer, or a string value of any class property
+    %     (e.g. name, ID, order, etc.).
     %
-    %     This class contains subclasses of type Extension.
+    %     This class is stored in the property |parameters| of the
+    %     |Function| class.
     %
-    %     This class serves also as a superclass for the ParameterInSystem
-    %     subclass.
+    %     This class stores classes of type |Extension|.
+    %
+    %     This class is the superclass of the |ParameterInSystem| class.
     %
     % Parameter Arguments:
     %     Function     - A class containing the country-specific policy.
     %
     % Parameter Properties:
-    %     comment    - Comment specific to the parameter.
-    %     extensions - Extension class with parameter extensions.
-    %     funID      - Identifier number of the function at country level.
-    %     group      - Parameter group value.
-    %     ID         - Identifier number of the parameter.
-    %     name       - Name of the parameter.
-    %     order      - Order of the parameter in the specific spine.
-    %     parent     - A class of the policy-specific function.
-    %     spineOrder - Order of the parameter in the spine.
+    %     comment    - (1,1) string. Comment specific to the parameter.
+    %     extensions - (N,1) class.  Extension class array with parameter extensions.
+    %     funID      - (1,1) string. Identifier number of the parent Function.
+    %     group      - (1,1) string. Group value of the parameter.
+    %     ID         - (1,1) string. Identifier number of the parameter.
+    %     name       - (1,1) string. Name of the parameter.
+    %     order      - (1,1) string. Order of the parameter in the spine.
+    %     parent     - (1,1) class.  The parent class |Function|.
+    %     spineOrder - (1,1) string. Order of the parameter in the policy spine.
     %
     % Example:
     %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
@@ -199,10 +203,14 @@ classdef Parameter < Core
             [obj,out]=obj.getPieceOfInfo(IDs,parentID,TAG,"order");
 
             % set index
-            Order = str2double(string({out(:).Order}));
-            [~,idxArr]=sort(Order);
-            obj.indexArr=idxArr;
-            obj.index=idxArr;
+            if isempty(out)
+                return;
+            else
+                Order = str2double(string({out(:).Order}));
+                [~,idxArr]=sort(Order);
+                obj.indexArr=idxArr;
+                obj.index=idxArr;
+            end
         end
         %==================================================================
         function [values,keys]=getOtherProperties(obj,name,index)
@@ -240,7 +248,9 @@ classdef Parameter < Core
             idxID=ismember(keys,'ID');
             if any(idxID) && isa(obj,'ParameterInSystem')
                 tagID=char(EM_XmlHandler.TAGS.('SYS_ID'));
-                values(idxID,:)=append(values(ismember(keys,tagID),:),values(idxID,:));
+                if any(ismember(keys,tagID))
+                    values(idxID,:)=append(values(ismember(keys,tagID),:),values(idxID,:));
+                end
             end
 
             keys = append(lower(extractBefore(keys,2))',extractAfter(keys,1)');

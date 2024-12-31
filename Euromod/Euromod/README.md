@@ -1,4 +1,9 @@
 # About Euromod
+
+![Static Badge](https://img.shields.io/badge/BitBucket-version_1.1.2-green?style=plastic&color=green&link=https%3A%2F%2Fcitnet.tech.ec.europa.eu%2FCITnet%2Fstash%2Fprojects%2FEUROMODJRC%2Frepos%2Fconnectors%2Fbrowse%2FMatlabIntegration%3Fat%3Drefs%252Fheads%252Fdevelop)
+![Static Badge](https://img.shields.io/badge/Matlab-File_Exchange-red?style=plastic&labelColor=blue&color=red&link=https%3A%2F%2Fit.mathworks.com%2Fmatlabcentral%2Ffileexchange%2F174595-euromod%3Fs_tid%3Dsrchtitle)
+![Static Badge](https://img.shields.io/badge/EUROMOD-blue?style=plastic&labelColor=blue&link=https%3A%2F%2Feuromod-web.jrc.ec.europa.eu%2F)
+
 _euromod_ is an object oriented toolbox providing user-friendly tools for easily navigating and running simulations of the tax-benefit
 microsimulation model [EUROMOD](https://euromod-web.jrc.ec.europa.eu "https://euromod-web.jrc.ec.europa.eu").
 
@@ -58,7 +63,7 @@ at
              systems: [17×1 System]
 ```
 
-Similarly, we can get information about a policy, for example the _income tax_, configured for Austria:
+Similarly, we can get information about a policy configured for Austria:
 ```
 % pol = at.policies(1);
 % pol = at.policies('setdefault_at');
@@ -79,7 +84,7 @@ pol
 ```
 
 **Note:** Indexing a class array with the value of a string-type
-class property, returns all the elements that match the exact expression.
+class property, returns all the elements that match the exact expression. Below is an example for the _income tax_:
 ```
 % at.policies('tin_at');
 % at.policies.tin_at;
@@ -190,7 +195,7 @@ sim
 		  errors: [0×1 string]
 output_filenames: "at_2021_std"
 ```
-The table-type simulation results are stored under the
+The table-type simulation results are stored in
 the property `outputs` as a cell array.
 
 
@@ -207,4 +212,4 @@ Download the latest release from
 
 
 # License
-©[EUPL-EUROPEAN UNION PUBLIC LICENCE v. 1.2. The European Union 2007, 2016.](License.txt)
+©[EUPL-EUROPEAN UNION PUBLIC LICENCE v. 1.2. The European Union 2007, 2016.](Licence.txt)

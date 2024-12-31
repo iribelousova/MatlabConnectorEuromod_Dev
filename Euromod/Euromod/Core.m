@@ -11,7 +11,6 @@ classdef (Abstract) Core < utils.redefinesparen %utils.customdisplay & handle & 
     %
     %  Core Methods (Access=public):
     %     info                     - Get information about an object.
-    %     run                      - Run Euromod simulation.
     %
     %  Core Methods (Access=protected,Hidden):
     %     getOtherProperties_Type1 - Retrieve infos from the main object
@@ -52,7 +51,7 @@ classdef (Abstract) Core < utils.redefinesparen %utils.customdisplay & handle & 
             %             
             % Input Arguments:
             %   obj   - class. Can be any of the Country, Policy, System or
-            %           Dataset classes or a their subclass.
+            %           Dataset classes or their subclasses.
             %   Prop  - (1,1) string. Property name of the obj.
             %           This input argument is required when obj is the 
             %           Country class (accepting 'datasets' or 'systems' as 

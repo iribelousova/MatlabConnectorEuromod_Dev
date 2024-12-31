@@ -1,108 +1,94 @@
 % Euromod Toolbox
-% Version 0.1 (R2023a) 30-Nov-2024
-%
+% Version 11.1.0 23-Dec-2024
+% 
 % Methods.
-% setParameter               - Set new value for system parameter.
-% info                       - Get info about the object.
-% run                        - Simulate the tax-benefit system.
-%
-%
+%     euromod             - Get the Model class with the EUROMOD project.
+%     info                - Get info about an object.
+%     run                 - Simulate a tax-benefit system.
+% 
+% 
 % Model class.
-%   model_path               - Path to the EUROMOD project.
-%   countries                - Container with Country objects.
-%   extensions               - Container with Model extensions.
-%
-%
+%     countries           - Class array with Model countries.
+%     extensions          - Class array with Model extensions.
+%     modelpath           - Path to the EUROMOD project.
+% 
+% 
 % Country class.
-%   name                     - Two-letters country code.
-%   parent                   - The base Model object.
-%   datasets                 - Container with Dataset objects.
-%   extensions               - Container with country + model Extension 
-%                              objects. 
-%   local_extensions         - Container with country Extension objects. 
-%   policies                 - Container with Policy objects.
-%   systems                  - Container with System objects.
-%
-%
+%     datasets            - Class array with Country datasets.
+%     extensions          - Class array with Country + Model extensions 
+%     local_extensions    - Class array with Country extensions. 
+%     name                - Two-letters country code.
+%     parent              - The base Model class.
+%     policies            - Class array with Country policies.
+%     systems             - Class array with Country systems.
+% 
+% 
 % Dataset Class.
-%   ID                  - Dataset identifier number.
-%   coicopVersion       - COICOP version.
-%   comment             - Comment about the dataset.
-%   currency            - Currency of the monetary values in the dataset.
-%   decimalSign         - Decimal sign.
-%   name                - Name of the dataset.
-%   parent              - The country-specific class.
-%   private             - Access type.
-%   readXVariables      - Read variables.
-%   useCommonDefault    - Use default.
-%   yearCollection      - Year of the dataset collection.
-%   yearInc             - Reference year for the income variables.
-%
-%
+%     coicopVersion       - COICOP version.
+%     comment             - Comment about the dataset.
+%     currency            - Currency of the monetary values in the dataset.
+%     decimalSign         - Decimal sign.
+%     ID                  - Dataset identifier number.
+%     name                - Name of the dataset.
+%     parent              - The Country parent class.
+%     private             - Access type.
+%     readXVariables      - Read variables.
+%     useCommonDefault    - Use default.
+%     yearCollection      - Year of the dataset collection.
+%     yearInc             - Reference year for the income variables.
+% 
+% 
 % DatasetInSystem Class.
-%   ID                  - Dataset identifier number.
-%   coicopVersion       - COICOP version.
-%   comment             - Comment about the dataset.
-%   currency            - Currency of the monetary values in the dataset.
-%   decimalSign         - Decimal sign.
-%   name                - Name of the dataset.
-%   parent              - The country-specific class.
-%   private             - Access type.
-%   readXVariables      - Read variables.
-%   useCommonDefault    - Use default.
-%   yearCollection      - Year of the dataset collection.
-%   yearInc             - Reference year for the income variables.
-%   bestMatch           - If yes, the current dataset is a best match for 
+%     bestMatch           - If yes, the current dataset is a best match for 
 %                         the specific system.
-%   dataID              - Identifier number of the reference dataset at the 
+%     coicopVersion       - COICOP version.
+%     comment             - Comment about the dataset.
+%     currency            - Currency of the monetary values in the dataset.
+%     dataID              - Identifier number of the reference dataset at the 
 %                         country level.
-%   sysID               - Identifier number of the reference system.
-%
-%
+%     decimalSign         - Decimal sign.
+%     ID                  - Dataset identifier number.
+%     name                - Name of the dataset.
+%     parent              - The country-specific class.
+%     private             - Access type.
+%     readXVariables      - Read variables.
+%     sysID               - Identifier number of the parent system.
+%     useCommonDefault    - Use default.
+%     yearCollection      - Year of the dataset collection.
+%     yearInc             - Reference year for the income variables.
+% 
+% 
 % Extension Class.
-%   name                - Long name of the extension.
-%   parent              - The model base class.
-%   shortName           - Short name of the extension.
-%
-%
+%     ID                  - Extension identifier number.
+%     name                - Long name of the extension.
+%     parent              - The Model base class.
+%     shortName           - Short name of the extension.
+% 
+% 
 % ExtensionSwitch Class.
-%   name                - Long name of the extension.
-%   parent              - The class loading the extension. 
-%   shortName           - Short name of the extension.
-%   value               - Value of the switch as configured in EUROOMOD.
-%   data_name           - Name of the applicable dataset.
-%   extension_name      - Short name of the extension.
-%   sys_name            - Name of the applicable system.
-%
-%
+%     dataID              - Identifier number of dataset
+%     data_name           - Name of dataset
+%     extensionID         - Identifier number of extension
+%     extension_name      - Short name of extension
+%     sysID               - Identifier number of system
+%     sys_name            - Name of system
+%     value               - Switch value of extension
+% 
+% 
 % Function Class.
-%   ID                  - Identifier number of the function.
-%   name                - Name of the function.
-%   comment             - Comment specific to the function.
-%   parent              - The policy-specific class.
-%   private             - Access type.
-%   polID               - Identifier number of the respective policy.
-%   order               - Order of the function in the specific spine.
-%   spineOrder          - Order of the function in the spine.
-%   extensions          - Container with country extensions.
-%   parameters          - Container with Parameter objects in a country.
-%
-%
+%     comment             - Comment specific to the function.
+%     extensions          - Class array with function extensions.
+%     ID                  - Identifier number of the function.
+%     name                - Name of the function.
+%     order               - Order of the function in the specific spine.
+%     parameters          - Class array with parameters set up in a country.
+%     parent              - The Policy parent class.
+%     polID               - Identifier number of the parent policy.
+%     private             - Access type.
+%     spineOrder          - Order of the function in the spine.
+% 
+% 
 % FunctionInSystem Class.
-%   ID                  - Identifier number of the function.
-%   name                - Name of the function.
-%   comment             - Comment specific to the function.
-%   parent              - The policy-specific class.
-%   private             - Access type.
-%   sysID               - Identifier number of the respective system.
-%   polID               - Identifier number of the respective policy.
-%   funID               - Identifier number of the respective function in 
-%                         country class.
-%   Switch              - Policy switch action.
-%   order               - Order of the function in the specific spine.
-%   spineOrder          - Order of the function in the spine.
-%   extensions          - Container of Extension objects in a system.
-%   parameters          - Container with ParameterInSystem objects.
-%
-%
-% Copyright 1990-2022 The MathWorks, Inc.
+%     comment             - Comment specific to the function.
+%     extensions          - Class array with function extensions.
+%     funID               - Identifier number of the function country level.

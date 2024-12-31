@@ -1,30 +1,32 @@
 classdef ReferencePolicy < PolicyHandle
-    % ReferencePolicy - A class with the reference policy rules modeled
-    % in a country.
+    % ReferencePolicy - Reference policies modeled in a EUROMOD country.
     %
     % Syntax:
     %
     %     R = ReferencePolicy(Country);
     %
     % Description:
-    %     This class contains the information about all the country
-    %     reference policies. It is stored in the property policies of
-    %     the Country class.
+    %     This class contains the reference policies implemented in a EUROMOD
+    %     country model. The class elements can be accessed by indexing the class
+    %     array with an integer, or a string value of any class property
+    %     (e.g. name, ID, order, etc.).
     %
-    %     This class contains subclasses of type ExtensionSwitch.
+    %     This class is stored in the property |policies| of the |Country| class.
+    %
+    %     This class stores classes of type |Extension|.
     %
     % ReferencePolicy Arguments:
     %     Country    - A class containing the EUROMOD country-specific
     %                  tax-benefit model.
     %
     % ReferencePolicy Properties:
-    %     extensions - ExtensionSwitch class with the reference policy extensions.
-    %     ID         - Identifier number of the reference policy.
-    %     name       - Name of the reference policy.
-    %     order      - Order of the reference policy in the specific spine.
-    %     parent     - The country-specific class.
-    %     refPolID   - Identifier number of the policy at the Country level.
-    %     spineOrder - Order of the reference policy in the spine.
+    %     extensions - (N,1) class.  Extension class array with the reference policy extensions.
+    %     ID         - (1,1) string. Identifier number of the reference policy.
+    %     name       - (1,1) string. Name of the reference policy.
+    %     order      - (1,1) string. Order of the reference policy in the specific spine.
+    %     parent     - (1,1) class.  The parent class |Country|.
+    %     refPolID   - (1,1) string. Identifier number of the policy at the Country level.
+    %     spineOrder - (1,1) string. Order of the reference policy in the spine.
     %
     %  Example:
     %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');

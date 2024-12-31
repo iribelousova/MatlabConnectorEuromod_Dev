@@ -160,11 +160,15 @@ classdef PolicyHandle < Core
             obj.policyArray=out;
 
             % set index
-            Order=string({out(:).Order});
-            Order = str2double(Order);
-            [~,idxArr]=sort(Order);
-            obj.indexArr=idxArr;
-            obj.index=idxArr;
+            if isempty(out)
+                return;
+            else
+                Order=string({out(:).Order});
+                Order = str2double(Order);
+                [~,idxArr]=sort(Order);
+                obj.indexArr=idxArr;
+                obj.index=idxArr;
+            end
 
         end
         %==================================================================

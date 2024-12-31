@@ -1,25 +1,28 @@
 classdef Extension < Core
-    % Extension - EUROMOD extensions.
+    % Extension - Class array with EUROMOD extensions.
     %
     % Syntax:
     %
     %     E = Extension(Parent);
     %
     % Description:
-    %     This class instantiates the EUROMOD extensions (Model and/or ...
-    %     Country extensions). Class instances are automatically generated
-    %     and stored in the attribute extensions of the base class Model
-    %     (including the Model extensions only), as well as of the Country
-    %     class (including both the Model and Country-specific extensions).
+    %     This class contains the default EUROMOD extensions. The extensions
+    %     can be at the model level if |Parent| is the |Model| class or at the
+    %     country level if |Parent| is the |Country| class. The class elements
+    %     can be accessed by indexing the class array with an integer, or a
+    %     string value of any class property (e.g. name, ID, or shortName).
+    %
+    %     This class is stored in the property |extensions| of the |Model| base
+    %     class and other model subclasses.
     %
     % Extension Arguments:
-    %     Parent    - The Model base class or the Country class.
+    %     Parent    - (1,1) class. The Model base class or the Country class.
     %
     %  Extension Properties:
-    %     ID        - Identifier number of the extension.
-    %     name      - Long name of the extension.
-    %     parent    - The model base class or the Country class.
-    %     shortName - Short name of the extension.
+    %     ID        - (1,1) string. Identifier number of the extension.
+    %     name      - (1,1) string. Long name of the extension.
+    %     parent    - (1,1) class.  The model base class or the Country class.
+    %     shortName - (1,1) string. Short name of the extension.
     %
     %  Example:
     %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');

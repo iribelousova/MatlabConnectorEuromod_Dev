@@ -1,34 +1,36 @@
 classdef Policy < PolicyHandle
-    % Policy - A class with the policy rules modeled in a country.
+    % Policy - Tax-benefit policy rules modeled in a EUROMOD country.
     %
     % Syntax:
     %
     %     P = Policy(Country);
     %
     % Description:
-    %     This class contains the information about all the country policies.
-    %     It is stored in the property policies of the Country class.
+    %     This class contains policies implemented in a EUROMOD country model.
+    %     The class elements can be accessed by indexing the class array with
+    %     an integer, or a string value of any class property
+    %     (e.g. name, ID, order, etc.).
     %
-    %     This class contains subclasses of type ExtensionSwitch and
-    %     Function.
+    %     This class is stored in the property |policies| of the |Country| class.
     %
-    %     This class serves also as a superclass for the PolicyInSystem
-    %     subclass.
+    %     This class stores classes of type |Extension| and |Function|.
+    %
+    %     This class is the superclass of the PolicyInSystem class.
     %
     % Policy Arguments:
     %     Country    - A class containing the EUROMOD country-specific
     %                  tax-benefit model.
     %
     % Policy Properties:
-    %     comment    - Comment specific to the policy.
-    %     extensions - ExtensionSwitch class with the policy extensions.
-    %     functions  - Function class with the policy functions.
-    %     ID         - Identifier number of the policy.
-    %     name       - Name of the policy.
-    %     order      - Order of the policy in the specific spine.
-    %     parent     - The country-specific class.
-    %     private    - Access type.
-    %     spineOrder - Order of the policy in the spine.
+    %     comment    - (1,1) string. Comment specific to the policy.
+    %     extensions - (N,1) class.  Extension class array with the policy extensions.
+    %     functions  - (N,1) class.  Function class array with the policy functions.
+    %     ID         - (1,1) string. Identifier number of the policy.
+    %     name       - (1,1) string. Name of the policy.
+    %     order      - (1,1) string. Order of the policy in the spine.
+    %     parent     - (1,1) class.  The parent class |Country|.
+    %     private    - (1,1) string. Access type.
+    %     spineOrder - (1,1) string. Order of the policy in the spine.
     %
     %  Example:
     %         mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
@@ -100,7 +102,7 @@ classdef Policy < PolicyHandle
         %==================================================================
         function x=get.functions(varargin)
             % functions - Get the policy Function class array.
-            
+
             obj=varargin{1};
 
             % Reference policies do not have the 'functions' property.

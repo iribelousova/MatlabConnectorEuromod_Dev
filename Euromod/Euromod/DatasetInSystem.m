@@ -1,36 +1,41 @@
 classdef DatasetInSystem < Dataset
-    % DatasetInSystem - Datasets available in a system model.
+    % DatasetInSystem - Datasets available in a EUROMOD tax-benefit system.
     %
     % Syntax:
     %
     %     D = DatasetInSystem(System);
     %
     % Description:
-    %     This class contains the relevant information about the system-
-    %     specific datasets.
+    %     This class contains the datasets modelled in a EUROMOD system.
+    %     The class elements can be accessed by indexing the class array with
+    %     an integer, or a string value of any class property (e.g. name, ID,
+    %     bestMatch, etc.).
     %
-    %     This class is a subclass of the Dataset class.
+    %     This class is stored in the property |datasets| of the |System|
+    %     class.
+    %
+    %     This class inherits methods and properties from the superclass |Dataset|.
     %
     % Dataset Arguments:
-    %     System          - A country-specific class.
+    %     System          - (1,1) class. A system-specific class.
     %
     %  Dataset Properties:
-    %     bestMatch        - If yes, the current dataset is a best match for the specific system.
-    %     coicopVersion    - COICOP version.
-    %     comment          - Comment about the dataset.
-    %     currency         - Currency of the monetary values in the dataset.
-    %     dataID           - Identifier number of the reference dataset at the country level.
-    %     decimalSign      - Decimal delimiter.
-    %     ID               - Dataset identifier number.
-    %     listStringOutVar - Names of
-    %     name             - Name of the dataset.
-    %     parent           - The system-specific class.
-    %     private          - Access type.
-    %     readXVariables   - Read variables.
-    %     sysID            - Identifier number of the reference system.
-    %     useCommonDefault - Use default.
-    %     yearCollection   - Year of the dataset collection.
-    %     yearInc          - Reference year for the income variables.
+    %     bestMatch        - (1,1) string. If yes, the current dataset is a best match for the specific system.
+    %     coicopVersion    - (1,1) string. COICOP version.
+    %     comment          - (1,1) string. Comment about the dataset.
+    %     currency         - (1,1) string. Currency of the monetary values in the dataset.
+    %     dataID           - (1,1) string. Identifier number of the dataset at the country level.
+    %     decimalSign      - (1,1) string. Decimal delimiter.
+    %     ID               - (1,1) string. Dataset identifier number.
+    %     listStringOutVar - (1,1) string. Names of variables.
+    %     name             - (1,1) string. Name of the dataset.
+    %     parent           - (1,1) class.  The System parent class.
+    %     private          - (1,1) string. Access type.
+    %     readXVariables   - (1,1) string. Read variables.
+    %     sysID            - (1,1) string. Identifier number of the parent System class.
+    %     useCommonDefault - (1,1) string. Use default.
+    %     yearCollection   - (1,1) string. Year of the dataset collection.
+    %     yearInc          - (1,1) string. Reference year for the income variables.
     %
     %  Example:
     %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
@@ -118,7 +123,7 @@ classdef DatasetInSystem < Dataset
             tagID='ID';
             parentID=obj.parent.(tagID);
 
-            [obj,out]=obj.getPieceOfInfo(IDs,parentID,TAG,"order");
+            [obj,~]=obj.getPieceOfInfo(IDs,parentID,TAG,"order");
 
             obj.indexArr=1:numel(obj.Info.PieceOfInfo);
             obj.index=obj.indexArr;

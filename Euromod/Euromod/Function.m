@@ -1,43 +1,45 @@
 classdef Function < Core
-    % Function - A class with the functions implemented in a country policy.
-    %
-    % Syntax:
-    %
-    %     F = Function(Policy);
-    %
-    % Description:
-    %     This class contains the policy-specific functions. It is
-    %     stored in the property 'functions' of the Policy class.
-    %
-    %     This class contains subclasses of type PolicyInSystem and
-    %     DatasetInSystem.
-    %
-    %     This class serves also as a superclass for the FunctionyInSystem
-    %     subclass.
-    %
-    % Function Arguments:
-    %     Policy     - A class containing the country-specific policy.
-    %
-    % Function Properties:
-    %     comment    - Comment specific to the function.
-    %     extensions - Extension class with function extensions.
-    %     ID         - Identifier number of the function.
-    %     name       - Name of the function.
-    %     order      - Order of the function in the specific spine.
-    %     parameters - Parameter class with function parameters.
-    %     parent     - A class of the country-specific policy.
-    %     polID      - Identifier number of the policy.
-    %     private    - Access type.
-    %     spineOrder - Order of the function in the spine.
-    %
-    %  Example:
-    %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
-    %     % Display the default functions for policy "uprate_at":
-    %     mod.('AT').policies(2).functions
-    %     % Display the functions "Uprate" for policy "uprate_at":
-    %     mod.('AT').policies(2).functions("Uprate")
-    %
-    % See also Model, Country, Policy, FunctionInSystem, info, run.
+    % Function - Class array of functions defined in a tax-benefit policy.
+%
+% Syntax:
+%
+%     F = Function(Policy);
+%
+% Description:
+%     This class contains functions implemented in a specific tax-
+%     benefit policy. The class elements can be accessed by indexing the 
+%     class array with an integer, or a string value of any class property
+%     (e.g. the name, the ID, the order, etc.).
+%
+%     This class is stored in the property |functions| of the |Policy| class. 
+%
+%     This class stores classes of type |Extension| and |Parameter|.
+%
+%     This class is the superclass of the |FunctionyInSystem| class.
+%
+% Input Arguments:
+%     Policy     - (1,1) class. A specific tax-benefit policy.
+%
+% Properties:
+%     comment    - (1,1) string. Comment specific to the function.
+%     extensions - (N,1) class.  Extension class array with function extensions.
+%     ID         - (1,1) string. Identifier number of the function.
+%     name       - (1,1) string. Name of the function.
+%     order      - (1,1) string. Order of the function in the spine.
+%     parameters - (N,1) class.  Parameter class array with function parameters.
+%     parent     - (1,1) class.  The parent class |Policy|.
+%     polID      - (1,1) string. Identifier number of the parent class.
+%     private    - (1,1) string. Access type.
+%     spineOrder - (1,1) string. Order of the function in the policy spine.
+%
+% Examples:
+%     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
+%     % Display the default functions for policy "uprate_at":
+%     mod.('AT').policies(2).functions
+%     % Display the functions "Uprate" for policy "uprate_at":
+%     mod.('AT').policies(2).functions("Uprate")
+%
+% See also Model, Country, Policy, FunctionInSystem, info, run.
 
     properties (Access=public)
         comment (1,1) string % Comment specific to the function.
@@ -237,10 +239,14 @@ classdef Function < Core
             [obj,out]=obj.getPieceOfInfo(IDs,parentID,TAG,"order");
 
             % set index
-            Order = str2double(string({out(:).Order}));
-            [~,idxArr]=sort(Order);
-            obj.indexArr=idxArr;
-            obj.index=idxArr;
+            if isempty(out)
+                return;
+            else
+                Order = str2double(string({out(:).Order}));
+                [~,idxArr]=sort(Order);
+                obj.indexArr=idxArr;
+                obj.index=idxArr;
+            end
 
         end
         %==================================================================
@@ -278,7 +284,9 @@ classdef Function < Core
             idxID=ismember(keys,'ID');
             if any(idxID) && isa(obj,'FunctionInSystem')
                 tagID=char(EM_XmlHandler.TAGS.('SYS_ID'));
-                values(idxID,:)=append(values(ismember(keys,tagID),:),values(idxID,:));
+                if any(ismember(keys,tagID))
+                    values(idxID,:)=append(values(ismember(keys,tagID),:),values(idxID,:));
+                end
             end
 
             keys = append(lower(extractBefore(keys,2))',extractAfter(keys,1)');

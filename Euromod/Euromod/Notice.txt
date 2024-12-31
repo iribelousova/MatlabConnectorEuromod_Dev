@@ -1,0 +1,32 @@
+Euromod Connectors - Matlab integration
+
+version: 1.0  
+========================================================================================
+
+Copyright (C) European Union 2024
+
+This program is free software: you can redistribute it and/or modify it under the terms of the European Union Public Licence, either version 1.2 of the License, or (at your option) any later version.
+You may not use this work except in compliance with the Licence.
+
+You may obtain a copy of the Licence at: https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+
+Unless required by applicable law or agreed to in writing, software distributed under the Licence is distributed on an "AS IS" basis, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+
+See the Licence for the specific language governing permissions and limitations under the Licence.
+
+----------------
+
+This product uses software developed by third parties which are provided to you under their licences:
+
+========================================================================================
+Euromod model
+----------------
+https://euromod-web.jrc.ec.europa.eu/download-euromod
+
+Copyright European Union
+Creative Commons Attribution 4.0 International (CC BY 4.0) licence (https://creativecommons.org/licenses/by/4.0/legalcode.en)
+
+
+
+
+

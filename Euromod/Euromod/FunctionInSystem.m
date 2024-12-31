@@ -1,37 +1,41 @@
 classdef FunctionInSystem < Function
-    % FunctionInSystem - A class with the functions implemented in a policy 
-    % for a specific system.
+    % FunctionInSystem - Functions of a EUROMOD policy in a specific
+    % tax-benefit system.
     %
     % Syntax:
     %
     %     F = FunctionInSystem(PolicyInSystem);
     %
     % Description:
-    %     This class contains the policy-specific functions in a given 
-    %     system. It is stored in the property 'functions' of the 
-    %     PolicyInSystem class.
+    %     This class contains the functions implemented in a specific EUROMOD
+    %     policy-system. The class elements can be accessed by indexing the
+    %     class array with an integer, or a string value of any class property
+    %     (e.g. name, ID, order, etc.).
     %
-    %     This class contains subclasses of type ParameterInSystem.
+    %     This class is stored in the property |functions| of the
+    %     |PolicyInSystem| class.
     %
-    %     This class is a subclass of the Function class.
+    %     This class  stores classes of type |ParameterInSystem| and |Extension|.
+    %
+    %     This class inherits methods and properties from the superclass |Function|.
     %
     % FunctionInSystem Arguments:
     %     PolicyInSystem - A class containing a system-specific policy.
     %
     % FunctionInSystem Properties:
-    %     comment    - Comment specific to the function.
-    %     extensions - ExtensionSwitch class with function extensions.
-    %     funID      - Identifier number of the reference function at country level.
-    %     ID         - Identifier number of the function.
-    %     name       - Name of the function.
-    %     order      - Order of the function in the specific spine.
-    %     parameters - Parameter class with function parameters.
-    %     parent     - A class of the country-specific policy.
-    %     polID      - Identifier number of the policy.
-    %     private    - Access type.
-    %     spineOrder - Order of the function in the spine.
-    %     sysID      - Identifier number of the system.
-    %     Switch     - Policy switch action.
+    %     comment    - (1,1) string. Comment specific to the function.
+    %     extensions - (N,1) class.  Extension class array with function extensions.
+    %     funID      - (1,1) string. Identifier number of the function at country level.
+    %     ID         - (1,1) string. Identifier number of the function.
+    %     name       - (1,1) string. Name of the function.
+    %     order      - (1,1) string. Order of the function in the specific spine.
+    %     parameters - (N,1) class.  Parameter class array with function parameters.
+    %     parent     - (1,1) class.  The parent class |PolicyInSystem|.
+    %     polID      - (1,1) string. Identifier number of the parent PolicyInSystem class.
+    %     private    - (1,1) string. Access type.
+    %     spineOrder - (1,1) string. Order of the function in the spine.
+    %     Switch     - (1,1) string. Switch value of the extension.
+    %     sysID      - (1,1) string. Identifier number of the parent System.
     %
     %  Example:
     %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
@@ -42,7 +46,7 @@ classdef FunctionInSystem < Function
     %
     % See also Model, Country, System, PolicyInSystem, Function, info, run.
 
-    properties (Access=public)         
+    properties (Access=public)
         funID (1,1) string % Identifier number of the reference function at country level.
         Switch (1,1) string % Policy switch action.
         sysID (1,1) string % Identifier number of the reference policy.
@@ -74,7 +78,7 @@ classdef FunctionInSystem < Function
     methods
         %==================================================================
         function obj = FunctionInSystem(PolicyInSystem)
-            % FunctionInSystem - A class with the system-policy-specific  
+            % FunctionInSystem - A class with the system-policy-specific
             % functions.
 
             obj = obj@Function;
@@ -112,8 +116,8 @@ classdef FunctionInSystem < Function
         function obj = load(obj, parent)
             % load - Load the FunctionInSystem class array objects.
 
-            % load super class 
-            obj = obj.load@Function(parent);             
+            % load super class
+            obj = obj.load@Function(parent);
         end
     end
 end

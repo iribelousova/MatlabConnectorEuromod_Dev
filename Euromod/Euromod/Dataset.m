@@ -1,36 +1,34 @@
 classdef Dataset < Core
-    % Dataset - Datasets available in a country model.
+    % Dataset - Datasets available in a EUROMOD country model.
     %
     % Syntax:
     %
     %     D = Dataset(Country);
     %
     % Description:
-    %     This class contains the relevant information about the country-
-    %     specific datasets.
+    %     This class contains the datasets implemented in a country model.
     %
-    %     This class is also implemented as a superclass for the
-    %     DatasetInSystem class.
+    %     This class is the superclass of the |DatasetInSystem| class.
     %
-    % Dataset Arguments:
-    %     Country          - A country-specific class.
+    % Input Arguments:
+    %     Country          - (1,1) class.  A specific country model.
     %
-    %  Dataset Properties:
-    %     coicopVersion    - COICOP version.
-    %     comment          - Comment about the dataset.
-    %     currency         - Currency of the monetary values in the dataset.
-    %     decimalSign      - Decimal delimiter.
-    %     ID               - Dataset identifier number.
-    %     listStringOutVar - Names of
-    %     name             - Name of the dataset.
-    %     parent           - The country-specific class.
-    %     private          - Access type.
-    %     readXVariables   - Read variables.
-    %     useCommonDefault - Use default.
-    %     yearCollection   - Year of the dataset collection.
-    %     yearInc          - Reference year for the income variables.
+    % Properties:
+    %     coicopVersion    - (1,1) string. COICOP version.
+    %     comment          - (1,1) string. Comment about the dataset.
+    %     currency         - (1,1) string. Currency of the monetary values in the dataset.
+    %     decimalSign      - (1,1) string. Decimal delimiter.
+    %     ID               - (1,1) string. Dataset identifier number.
+    %     listStringOutVar - (N,1) string. Names of variables.
+    %     name             - (1,1) string. Name of the dataset.
+    %     parent           - (1,1) class.  The parent class |Country|.
+    %     private          - (1,1) string. Access type.
+    %     readXVariables   - (1,1) string. Read variables.
+    %     useCommonDefault - (1,1) string. Use default.
+    %     yearCollection   - (1,1) string. Year of the dataset collection.
+    %     yearInc          - (1,1) string. Reference year for the income variables.
     %
-    %  Example:
+    %  Examples:
     %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
     %     mod.('AT').datasets % displays the default datasets for Austria.
     %     mod.('AT').datasets(3) % displays the specific dataset for Austria.
@@ -53,13 +51,13 @@ classdef Dataset < Core
         yearInc (1,1) string % Reference year for the income variables.
     end
 
-    properties (Access=public,Hidden=true) 
+    properties (Access=public,Hidden=true)
         indexArr (:,1) double % Index array of the class.
         index (:,1) double % Index of the element in the class.
         % Info - Contains information from the c# objects.
-        % In the Dataset class, the 'Handler' field stores the 
+        % In the Dataset class, the 'Handler' field stores the
         % 'CountryInfoHandler.GetTypeInfo' % output. In the The DatasetInSystem
-        % class, it also contains the 'PieceOfInfo.Handler' field which 
+        % class, it also contains the 'PieceOfInfo.Handler' field which
         % stores the 'CountryInfoHandler.GetPieceOfInfo' output.
         Info struct
     end

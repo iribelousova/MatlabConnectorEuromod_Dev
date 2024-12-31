@@ -1,38 +1,43 @@
 classdef System < Core
-    % System - A class with the EUROMOD tax-benefit systems.
+    % System - The EUROMOD tax-benefit systems implemented in a country.
     %
     % Syntax:
     %
     %     C = System(Country);
     %
     % Description:
-    %     This class represents the EUROMOD tax systems. An instance of this
-    %     class is generated when loading the EUROMOD base model. It is
-    %     stored in the property systems of the Country.
+    %     This class contains the EUROMOD tax-benefit systems of a specific
+    %     country. The class elements can be accessed by indexing the class
+    %     array with an integer, or a string value of any class property
+    %     (e.g. name, ID, year, etc.).
     %
-    %     This class contains subclasses of type PolicyInSystem and
-    %     DatasetInSystem.
+    %     This class is stored in the property |systems| of the |Country| class.
     %
-    % System Arguments:
-    %     Country           - A class containing the EUROMOD country-specific
-    %                         tax-benefit model.
+    %     This class stores classes of type |DatasetInSystem| and |PolicyInSystem|.
     %
-    % System Properties:
-    %     bestmatchDatasets - DatasetInSystem class with system best-match datasets.
-    %     comment           - Comment specific to the system.
-    %     currencyOutput    - Currency of the simulation results.
-    %     currencyParam     - Currency of the monetary parameters in the system.
-    %     datasets          - DatasetInSystem class with system datasets.
-    %     ID                - Identifier number of the system.
-    %     headDefInc        - Main income definition.
-    %     name              - Name of the system.
-    %     parent            - The country-specific class.
-    %     policies          - PolicyInSystem class with system policies.
-    %     private           - Access type.
-    %     order             - Order of a system in the spine.
-    %     year              - Year of a system.
+    % Input Arguments:
+    %     Country           - (1,1) class. A specific EUROMOD country model.
     %
-    %  Example:
+    % Properties:
+    %     bestmatchDatasets - (N,1) class.  DatasetInSystem class array with system best-match datasets.
+    %     comment           - (1,1) string. Comment specific to the system.
+    %     currencyOutput    - (1,1) string. Currency of the simulation results.
+    %     currencyParam     - (1,1) string. Currency of the monetary parameters in the system.
+    %     datasets          - (N,1) class.  DatasetInSystem class array with system datasets.
+    %     ID                - (1,1) string. Identifier number of the system.
+    %     headDefInc        - (1,1) string. Main income definition.
+    %     name              - (1,1) string. Name of the system.
+    %     parent            - (1,1) class.  The parent class |Country|.
+    %     policies          - (N,1) class.  PolicyInSystem class array with system policies.
+    %     private           - (1,1) string. Access type.
+    %     order             - (1,1) string. Order of the system in the spine.
+    %     year              - (1,1) string. Year of the system.
+    %
+    % Methods:
+    %     info          - Returns information about a system.
+    %     run           - Runs simulation of a EUROMOD tax-benefit system.
+    %
+    % Example:
     %     mod = euromod('C:\EUROMOD_RELEASES_I6.0+');
     %     mod.('AT').systems % displays the default systems for Austria
     %     mod.('AT').systems('AT_2020') % displays the specific System for Austria.
@@ -175,54 +180,54 @@ classdef System < Core
             % X = run(System,data,data_id) returns
             % a Simulation class with results from the simulation of a
             % EUROMOD tax-benefit system.
-            % X = run(___,Name,Value) configure simulation options using  
+            % X = run(___,Name,Value) configure simulation options using
             % one or more name-value input arguments.
-            %             
+            %
             % Input Arguments:
             %   obj        - class. The Country class of Euromod Connector.
-            %   data       - table. Input dataset passed to the EUROMOD 
+            %   data       - table. Input dataset passed to the EUROMOD
             %                model.
-            %   data_id - (1,1) string. Name of the dataset. 
+            %   data_id - (1,1) string. Name of the dataset.
             %
             % Name-Value Input Arguments:
-            %   addons               - (1,:) string. Addons to be integrated 
-            %                          in the spine. The first element is 
-            %                          the name of the addon and the second 
-            %                          element is the name of the system 
-            %                          in the Addon to be integrated. 
+            %   addons               - (1,:) string. Addons to be integrated
+            %                          in the spine. The first element is
+            %                          the name of the addon and the second
+            %                          element is the name of the system
+            %                          in the Addon to be integrated.
             %                          Default is [].
             %                          Example: ["MWA","false"]
             %   constantsToOverwrite - (:,1) cell. Constants to overwrite
             %                          in the simulation. Each cell row is
             %                          a (1,2) string where the first
             %                          element is a (1,2) string with the
-            %                          name and the group of the constant, 
+            %                          name and the group of the constant,
             %                          and the second element is the new
-            %                          value. 
+            %                          value.
             %                          Default is [].
             %                          Example: {["$tinna_rate2",""],'0.4'}
-            %   euro                 - logical. If true, the monetary 
-            %                          variables will be converted to euro 
-            %                          for the simulation. 
+            %   euro                 - logical. If true, the monetary
+            %                          variables will be converted to euro
+            %                          for the simulation.
             %                          Default is false.
-            %   nowarnings           - logical. If true, the warning 
-            %                          messages resulting from the 
-            %                          simulations will be suppressed. 
+            %   nowarnings           - logical. If true, the warning
+            %                          messages resulting from the
+            %                          simulations will be suppressed.
             %                          Default is false.
             %   outputpath           - (1,1) string. When the output path
-            %                          is provided, there will be anoutput 
+            %                          is provided, there will be anoutput
             %                          file generated. Default is "".
-            %   public_compoments_only-logical. If true, the the model will 
-            %                          be on with only the public 
+            %   public_compoments_only-logical. If true, the the model will
+            %                          be on with only the public
             %                          compoments. Default is false.
-            %   switches             - (1,:) string. Extensions to be 
-            %                          switched on or of. The first element 
-            %                          is the short name of the extension. 
+            %   switches             - (1,:) string. Extensions to be
+            %                          switched on or of. The first element
+            %                          is the short name of the extension.
             %                          The second element is a "on" or
             %                          "off" value.
             %                          Default is [].
-            %   verbose              - logical. If true then information on 
-            %                          the output will be printed. 
+            %   verbose              - logical. If true then information on
+            %                          the output will be printed.
             %                          Default is true.
             %
             % Example:
@@ -233,14 +238,14 @@ classdef System < Core
                 obj
                 data (:,:) table
                 data_id (1,1) string
-            
-                NameValueArgs.addons (1,:) string 
-                NameValueArgs.constantsToOverwrite (1,:) cell 
+
+                NameValueArgs.addons (1,:) string
+                NameValueArgs.constantsToOverwrite (1,:) cell
                 NameValueArgs.euro logical = false
                 NameValueArgs.nowarnings logical = false
-                NameValueArgs.outputpath (1,1) string 
+                NameValueArgs.outputpath (1,1) string
                 NameValueArgs.public_components_only logical = false
-                NameValueArgs.switches (1,:) string          
+                NameValueArgs.switches (1,:) string
                 NameValueArgs.verbose logical = true
             end
 
@@ -272,7 +277,7 @@ classdef System < Core
         end
     end
     methods (Hidden)
-         %==================================================================
+        %==================================================================
         function varargout = size(obj,varargin)
             [varargout{1:nargout}] = size(obj.index,varargin{:});
         end

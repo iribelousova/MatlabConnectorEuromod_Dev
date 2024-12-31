@@ -6,26 +6,27 @@ function out=euromod(varargin)
 %     mod = euromod(model_path);
 % 
 % Description:
-%     This class loads the base class Model with the microsimulation model 
+%     Instantiates a base class |Model| with the microsimulation model 
 %     EUROMOD.
 % 
 % Input Arguments:
 %     model_path - (1,1) string. Path to the EUROMOD project.
 % 
-% Outout Arguments:
-%     mod - class. Base class Model.
+% Output Arguments:
+%     mod - (1,1) class. The EUROMOD base class |Model|.
 % 
-% See also Model, Country, System, Policy, info, run.
-
-if nargin ==0
-    out=Model;
-    return;
-end
+% See also Model, Country, System, Policy, Function, Parameter, Simulation, 
+% info, run.
 
 NET.addAssembly(fullfile(utils.configuration.DLL_PATH, utils.configuration.DLL_XmlHandler));
 NET.addAssembly(fullfile(utils.configuration.DLL_PATH, utils.configuration.DLL_Common));
 NET.addAssembly(fullfile(utils.configuration.DLL_PATH, utils.configuration.DLL_Executable));
-          
+ 
+if nargin ==0
+    out=Model;
+    return;
+end
+        
 out=Model(varargin{:});
 
 end
